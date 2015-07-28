@@ -5,6 +5,13 @@ betfaiR
 
 This package isn't complete and only has a little functionality at the moment, primarily the easier things, and little to nothing that would enable a user to place a bet or analyse market data.  I will definitely add this functionality in time, but when I am unsure.
 
+#### Installation
+
+```R
+# install devtools
+devtools::install_github("durtal/betfaiR")
+```
+
 #### Usage
 
 The primary function in **betfaiR** is `betfair`, which takes three arguments, your username, your password, and an application key (see [here](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get a key).
