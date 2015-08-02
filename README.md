@@ -49,7 +49,7 @@ bf
 ##    $venues(filter = marketFilter())
 ```
 
-So, if you are familiar with Betfair's API, you will realise the available methods at the moment are quite restricted, nothing about markets, or placing a bet.
+So, if you are familiar with Betfair's API, you will realise the available methods at the moment are quite restricted, nothing about markets, or placing a bet.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
 
 Some of the available methods have a `filter` parameter, which can be used to filter data, this is then added into the body of the request sent to Betfair.  The `marketFilter` function helps you build a filter object, providing all the available parameters that can be filtered by (this hasn't been tested exhaustively but should work).  For example to find horse racing events:
 
