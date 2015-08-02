@@ -17,7 +17,7 @@ devtools::install_github("durtal/betfaiR")
 The primary function in **betfaiR** is `betfair`, which takes three arguments, your username, your password, and an application key (see [here](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get a key).
 
 ```R
-bf <- betfair(usr = "USERNAME", pwd = "PASSWRORD", key = "APP_KEY")
+bf <- betfair(usr = "USERNAME", pwd = "PASSWORD", key = "APP_KEY")
 ```
 
 The `betfair` function returns an environment with various methods, you can inspect you session token (required by Betfair for all methods) via the following:
@@ -27,25 +27,26 @@ bf$session()
 ## Session Token: "some_session_token"
 ```
 
-You can login in again, if something went wrong the first time:
+There is a login in method returned into the `bf` environment, allowing users to login in again if something went wrong initially, this function stores the new details in an hidden object within the environment, and updates the session token.
 
 ```R
 bf$login(usr = "USERNAME2", pwd = "PASSWORD", key = "APP_KEY")
 ```
 
-The view the available methods, simply print `bf`
+The view the available methods, simply print the environment `bf`
 
 ```R
 bf
 ## < betfaiR API>
 ## Methods available:
-##  $competitions(filter = list())
-##  $countries(filter = list())
-##  $events(filter = list())
-##  $eventTypes(filter = list())
-##  $login(usr, pwd, key)
-##  $session()
-##  $venues(filter = list())
+##    $competitions(filter = marketFilter())
+##    $countries(filter = marketFilter())
+##    $events(filter = marketFilter())
+##    $eventTypes(filter = marketFilter())
+##    $login(usr, pwd, key)
+##    $marketTypes(filter = marketFilter())
+##    $session()
+##    $venues(filter = marketFilter())
 ```
 
 So, if you are familiar with Betfair's API, you will realise the available methods at the moment are quite restricted, nothing about markets, or placing a bet.
