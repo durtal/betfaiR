@@ -19,13 +19,13 @@
 #'
 #' @section Methods:
 #' \describe{
-#'      \item{\code{competitions(filter = list())}}{ Retrieve data about the
+#'      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
 #'      different competitions with current markets, see \link{competitions}.}
-#'      \item{\code{countries(filter = list())}}{ Retrieve data about the different countries
+#'      \item{\code{countries(filter = marketFilter())}}{ Retrieve data about the different countries
 #'      hosting events, see \link{countries}.}
-#'      \item{\code{events(filter = list())}}{ Retrieve data about the different events, see
+#'      \item{\code{events(filter = marketFilter())}}{ Retrieve data about the different events, see
 #'      \link{events}.}
-#'      \item{\code{eventTypes(filter = list())}}{ Retrieve data about the different event types,
+#'      \item{\code{eventTypes(filter = marketFilter())}}{ Retrieve data about the different event types,
 #'      ie. sports, see \link{eventTypes}.}
 #'      \item{\code{login(usr, pwd, key)}}{ Login in, a session token will be
 #'      returned, over-writing the previous token when \code{betfair(usr, pwd, key)}
@@ -37,7 +37,7 @@
 #'      \item{\code{marketCatalogue(filter = list(), marketProjection = NULL, sort = NULL,
 #'      maxResults = 50, keepRules = FALSE)}}{ Retrieve data about the different types
 #'      of markets, see \link{marketCatalogue}.}
-#'      \item{\code{marketTypes(filter = list())}}{ Retrieve data about the different types of
+#'      \item{\code{marketTypes(filter = marketFilter())}}{ Retrieve data about the different types of
 #'      markets, see \link{marketTypes}.}
 #'      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
 #'      handicap = NULL, side = "BACK", limitOrder = NULL, limitOnCloseOrder = NULL,
@@ -45,7 +45,7 @@
 #'      and selectionId (see \link{marketBook}),}
 #'      \item{\code{session()}}{ Print details about the session, including login
 #'      in details and session token.}
-#'      \item{\code{venues(filter = list())}}{ Retrieve data about the venues hosting racing,
+#'      \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
 #'      see \link{venues}.}
 #' }
 #'
@@ -70,7 +70,7 @@ betfair <- function(usr, pwd, key) {
 
     self <- local({
 
-        competitions <- function(filter = list()) {
+        competitions <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "competitions")
             req <- betfair_request(req)
@@ -86,7 +86,7 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        countries <- function(filter = list()) {
+        countries <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "countries")
             req <- betfair_request(req)
@@ -102,7 +102,7 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        events <- function(filter = list()) {
+        events <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "events")
             req <- betfair_request(req)
@@ -118,7 +118,7 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        eventTypes <- function(filter = list()) {
+        eventTypes <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "eventTypes")
             req <- betfair_request(req)
@@ -181,21 +181,21 @@ betfair <- function(usr, pwd, key) {
 #             return(res)
 #         }
 
-#         marketTypes <- function(filter = list()) {
-#             # build request object
-#             req <- base_request(filter, "marketTypes")
-#             req <- betfair_request(req)
-#             # post request
-#             res <- betfair_POST(body = req, ssoid$ssoid)
-#             # convert response
-#             res <- httr::content(res)
-#             # handle errors
-#             res <- betfair_check(res, method = "marketTypes")
-#             # parse response
-#             res <- betfair_parse(res)
-#
-#             return(res)
-#         }
+        marketTypes <- function(filter = marketFilter()) {
+            # build request object
+            req <- base_request(filter, "marketTypes")
+            req <- betfair_request(req)
+            # post request
+            res <- betfair_POST(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- betfair_check(res, method = "marketTypes")
+            # parse response
+            res <- betfair_parse(res)
+
+            return(res)
+        }
 
 #         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
 #                                 handicap = NULL, side = "BACK", limitOrder = NULL,
@@ -222,7 +222,7 @@ betfair <- function(usr, pwd, key) {
             cat("Session Token:\t", ssoid$resp$token)
         }
 
-        venues <- function(filter = list()) {
+        venues <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "venues")
             req <- betfair_request(req)
@@ -260,6 +260,6 @@ print.betfaiR <- function(x, ...) {
 format_function <- function(fun, name = deparse(substitute(fun))) {
     header <- utils::head(deparse(args(fun), 100L), -1)
     header <- sub("^[ ]*", "   ", header)
-    header[1] <- sub("^[ ]*function ?", paste0("  $", name, ""), header[1])
+    header[1] <- sub("^[ ]*function ?", paste0("    $", name, ""), header[1])
     header
 }

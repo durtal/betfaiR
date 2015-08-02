@@ -30,13 +30,13 @@ building the list.
 \section{Methods}{
 
 \describe{
-     \item{\code{competitions(filter = list())}}{ Retrieve data about the
+     \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
      different competitions with current markets, see \link{competitions}.}
-     \item{\code{countries(filter = list())}}{ Retrieve data about the different countries
+     \item{\code{countries(filter = marketFilter())}}{ Retrieve data about the different countries
      hosting events, see \link{countries}.}
-     \item{\code{events(filter = list())}}{ Retrieve data about the different events, see
+     \item{\code{events(filter = marketFilter())}}{ Retrieve data about the different events, see
      \link{events}.}
-     \item{\code{eventTypes(filter = list())}}{ Retrieve data about the different event types,
+     \item{\code{eventTypes(filter = marketFilter())}}{ Retrieve data about the different event types,
      ie. sports, see \link{eventTypes}.}
      \item{\code{login(usr, pwd, key)}}{ Login in, a session token will be
      returned, over-writing the previous token when \code{betfair(usr, pwd, key)}
@@ -48,7 +48,7 @@ building the list.
      \item{\code{marketCatalogue(filter = list(), marketProjection = NULL, sort = NULL,
      maxResults = 50, keepRules = FALSE)}}{ Retrieve data about the different types
      of markets, see \link{marketCatalogue}.}
-     \item{\code{marketTypes(filter = list())}}{ Retrieve data about the different types of
+     \item{\code{marketTypes(filter = marketFilter())}}{ Retrieve data about the different types of
      markets, see \link{marketTypes}.}
      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
      handicap = NULL, side = "BACK", limitOrder = NULL, limitOnCloseOrder = NULL,
@@ -56,7 +56,7 @@ building the list.
      and selectionId (see \link{marketBook}),}
      \item{\code{session()}}{ Print details about the session, including login
      in details and session token.}
-     \item{\code{venues(filter = list())}}{ Retrieve data about the venues hosting racing,
+     \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
      see \link{venues}.}
 }
 }
