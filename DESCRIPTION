@@ -11,4 +11,5 @@ LazyData: TRUE
 Imports:
     httr,
     jsonlite,
-    plyr
+    plyr,
+    stringr
