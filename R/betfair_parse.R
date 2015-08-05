@@ -104,58 +104,103 @@ betfair_parse.marketBook <- function(res) {
 }
 
 #' @export
-betfair_parse.marketCatalogue <- function(res, keepRules = FALSE) {
+betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
+                                          keepRules = FALSE) {
 
-    res <- lapply(res$result, function(x) {
+    if("RUNNER_DESCRIPTION" %in% marketProjection) {
 
-        responseList <- list()
-
-        basic <- data.frame(marketId = x$marketId,
-                            marketName = x$marketName,
-                            totalMatched = x$totalMatched, stringsAsFactors = FALSE)
-        responseList$basic <- basic
-        if(!is.null(x$marketStartTime)){
-            responseList$basic$marketStartTime <- x$marketStartTime
-        }
-        if(!is.null(x$description)) {
-            description <- data.frame(x$description, stringsAsFactors = FALSE)
-            if(!keepRules) description$rules <- NULL
-            responseList$description <- description
-        }
-        if(!is.null(x$competition)) {
-            competition <- data.frame(x$competition, stringsAsFactors = FALSE)
-            responseList$competition <- competition
-        }
-        if(!is.null(x$eventType)) {
-            eventType <- data.frame(x$eventType, stringsAsFactors = FALSE)
-            responseList$eventType <- eventType
-        }
-        if(!is.null(x$event)) {
-            event <- data.frame(x$event, stringsAsFactors = FALSE)
-            responseList$event <- event
-        }
-        if(!is.null(x$runners)) {
-            runners <- lapply(x$runners, function(rnr) {
-                tmp <- rnr
-                if(!is.null(rnr$metadata)) {
-                    tmp$metadata <- NULL
-                    basic <- data.frame(tmp, stringsAsFactors = FALSE)
-                    meta <- data.frame(rnr$metadata[!sapply(rnr$metadata, is.null)], stringsAsFactors = FALSE)
-                    basic <- cbind(basic, meta)
-                    return(basic)
-                } else {
-                    basic <- data.frame(rnr[!sapply(rnr, is.null)], stringsAsFactors = FALSE)
-                    return(basic)
-                }
-            })
+        out <- lapply(res$result, function(x) {
+            runners <- x$runners
+            runners <- lapply(runners, data.frame, stringsAsFactors = FALSE)
             runners <- do.call(plyr::rbind.fill, runners)
-            responseList$runners <- runners
-        }
-        return(responseList)
-    })
+            x$runners <- NULL
+            market <- data.frame(x, stringsAsFactors = FALSE)
+            names(market) <- gsub("[[:alpha:]]*\\.", "", names(market))
+            outList <- list(market = market,
+                            runners = runners)
+            if(!keepRules) {
+                market$rules <- NULL
+            } else {
+                rules <- tidyRules(market$rules)
+                market$rules <- NULL
+                outList$rules <- rules
+            }
+            return(outList)
+        })
+
+        class(out) <- c("list", "marketCatalogue_runners")
+
+    } else {
+        out <- lapply(res$result, function(x) {
+            market <- data.frame(x, stringsAsFactors = FALSE)
+            names(market) <- gsub("[[:alpha:]]*\\.", "", names(market))
+            outList <- list(market = market)
+            if(!keepRules) {
+                market$rules <- NULL
+            } else {
+                rules <- tidyRules(market$rules)
+                market$rules <- NULL
+                outList$rules <- rules
+            }
+            return(outList)
+        })
+
+        class(out) <- c("list", "marketCatalogue_simple")
+
+    }
+
+#     res <- lapply(res$result, function(x) {
+#
+#         responseList <- list()
+#
+#         basic <- data.frame(marketId = x$marketId,
+#                             marketName = x$marketName,
+#                             totalMatched = x$totalMatched, stringsAsFactors = FALSE)
+#         responseList$basic <- basic
+#         if(!is.null(x$marketStartTime)){
+#             responseList$basic$marketStartTime <- x$marketStartTime
+#         }
+#         if(!is.null(x$description)) {
+#             description <- data.frame(x$description, stringsAsFactors = FALSE)
+#             if(!keepRules) description$rules <- NULL
+#             responseList$description <- description
+#         }
+#         if(!is.null(x$competition)) {
+#             competition <- data.frame(x$competition, stringsAsFactors = FALSE)
+#             responseList$competition <- competition
+#         }
+#         if(!is.null(x$eventType)) {
+#             eventType <- data.frame(x$eventType, stringsAsFactors = FALSE)
+#             responseList$eventType <- eventType
+#         }
+#         if(!is.null(x$event)) {
+#             event <- data.frame(x$event, stringsAsFactors = FALSE)
+#             responseList$event <- event
+#         }
+#         if(!is.null(x$runners)) {
+#             runners <- lapply(x$runners, function(rnr) {
+#                 tmp <- rnr
+#                 if(!is.null(rnr$metadata)) {
+#                     tmp$metadata <- NULL
+#                     basic <- data.frame(tmp, stringsAsFactors = FALSE)
+#                     meta <- data.frame(rnr$metadata[!sapply(rnr$metadata, is.null)], stringsAsFactors = FALSE)
+#                     basic <- cbind(basic, meta)
+#                     return(basic)
+#                 } else {
+#                     basic <- data.frame(rnr[!sapply(rnr, is.null)], stringsAsFactors = FALSE)
+#                     return(basic)
+#                 }
+#             })
+#             runners <- do.call(plyr::rbind.fill, runners)
+#             responseList$runners <- runners
+#         }
+#         return(responseList)
+#     })
 #     res <- do.call(plyr::rbind.fill, res)
 #     names(res) <- tolower(names(res))
-    return(res)
+
+
+    return(out)
 }
 
 #' @export
@@ -181,4 +226,13 @@ basic_parse <- function(res) {
 
     names(res) <- gsub(pattern = "\\.", replacement = "_", x = names(res))
     return(res)
+}
+
+tidyRules <- function(rules) {
+
+    rules <- stringr::str_replace_all(rules, "<br>", "\n")
+    rules <- stringr::str_replace_all(rules, "<b>|</b>", "")
+    rules <- stringr::str_replace_all(rules, "<(.*?)>", "")
+    rules <- stringr::str_replace_all(rules, "\n\n\n\n", "\n\n")
+    return(rules)
 }

@@ -65,7 +65,7 @@
 #' @export
 betfair <- function(usr, pwd, key) {
 
-    # login for get session token
+    # login for session token
     ssoid <- betfair_login(usr = usr, pwd = pwd, key = key)
 
     self <- local({
@@ -138,48 +138,48 @@ betfair <- function(usr, pwd, key) {
             ssoid <<- loginBetfair(usr = usr, pwd = pwd, key = key)
         }
 
-#         marketBook <- function(marketIds = list(),
-#                                priceProjection = NULL,
-#                                orderProjection = NULL,
-#                                matchProjection = NULL) {
-#             # build request object
-#             req <- base_request(filter = list(), method = "marketBook")
-#             req <- betfair_request(req, marketIds = marketIds,
-#                                    priceProjection = priceProjection,
-#                                    orderProjection = orderProjection,
-#                                    matchProjection = matchProjection)
-#             # post request
-#             res <- betfair_POST(body = req, headers = ssoid$ssoid)
-#             # convert response
-#             res <- httr::content(res)
-#             # handle errors
-#             res <- betfair_check(res, method = "marketBook")
-#             # parse response
-#             res <- betfair_parse(res)
-#
-#             return(res)
-#         }
+        marketBook <- function(marketIds = list(),
+                               priceProjection = NULL,
+                               orderProjection = NULL,
+                               matchProjection = NULL) {
+            # build request object
+            req <- base_request(filter = list(), method = "marketBook")
+            req <- betfair_request(req, marketIds = marketIds,
+                                   priceProjection = priceProjection,
+                                   orderProjection = orderProjection,
+                                   matchProjection = matchProjection)
+            # post request
+            res <- betfair_POST(body = req, headers = ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- betfair_check(res, method = "marketBook")
+            # parse response
+            res <- betfair_parse(res)
 
-#         marketCatalogue <- function(filter = list(),
-#                                     marketProjection = NULL,
-#                                     sort = NULL,
-#                                     maxResults = 1,
-#                                     keepRules = FALSE) {
-#             # build request object
-#             req <- base_request(filter, "marketCatalogue")
-#             req <- betfair_request(x = req, marketProjection = marketProjection,
-#                                sort = sort, maxResults = maxResults)
-#             # post request
-#             res <- betfair_POST(body = req, ssoid$ssoid)
-#             # convert response
-#             res <- httr::content(res)
-#             # handle errors
-#             res <- betfair_check(res, method = "marketCatalogue")
-#             # parse response
-#             res <- betfair_parse(res, keepRules = keepRules)
-#
-#             return(res)
-#         }
+            return(res)
+        }
+
+        marketCatalogue <- function(filter = marketFilter(),
+                                    marketProjection = NULL,
+                                    sort = NULL, maxResults = 1,
+                                    keepRules = FALSE) {
+            # build request object
+            req <- base_request(filter, "marketCatalogue")
+            req <- betfair_request(x = req, marketProjection = marketProjection,
+                                   sort = sort, maxResults = maxResults)
+            # post request
+            res <- betfair_POST(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- betfair_check(res, method = "marketCatalogue")
+            # parse response
+            # res <- betfair_parse(res, marketProjection = marketProjection,
+                                 # keepRules = keepRules)
+
+            return(res)
+        }
 
         marketTypes <- function(filter = marketFilter()) {
             # build request object
@@ -247,7 +247,7 @@ betfair <- function(usr, pwd, key) {
 #' @export
 print.betfaiR <- function(x, ...) {
     ns <- ls(x)
-    title <- paste0("< ", class(x)[1], " API>\nMethods available:")
+    title <- paste0("<", class(x)[1], " API>\nMethods available:")
     cat(title, "\n")
     lapply(ns, function(fn) {
         if(is.function(x[[fn]])) {
