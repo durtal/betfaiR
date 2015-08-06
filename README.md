@@ -44,8 +44,8 @@ bf
 ##    $events(filter = marketFilter())
 ##    $eventTypes(filter = marketFilter())
 ##    $login(usr, pwd, key)
-##    $marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL, matchProjection = NULL) 
-##    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE) 
+##    $marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL, matchProjection = NULL)
+##    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
 ##    $marketTypes(filter = marketFilter())
 ##    $session()
 ##    $venues(filter = marketFilter())
@@ -53,7 +53,7 @@ bf
 
 So, if you are familiar with Betfair's API, you will realise the available methods at the moment are quite restricted, little about markets, or placing a bet.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
 
-Both `marketCatalogue` and `marketBook` can be used, but they won't parse the response from betfair like the other methods, which `betfaiR` converts to nice dataframes.  Instead they return what can be a pretty unwieldy list, sometimes with multiple nested lists, I hope to provide some help in sorting/presenting the data so it's easy(er) to use, analyse in time, check out the [`betfair_parse`](https://github.com/durtal/betfaiR/blob/master/R/betfair_parse.R) functions. 
+Both `marketCatalogue` and `marketBook` can be used, but they won't parse the response from betfair like the other methods, which `betfaiR` converts to nice dataframes.  Instead they return what can be a pretty unwieldy list, sometimes with multiple nested lists, I hope to provide some help in sorting/presenting the data so it's easy(er) to use, analyse in time, check out the [`betfair_parse`](https://github.com/durtal/betfaiR/blob/master/R/betfair_parse.R) functions.
 
 Some of the available methods have a `filter` parameter, which can be used to filter data, this is then added into the body of the request sent to Betfair.  The `marketFilter` function helps you build a filter object, providing all the available parameters that can be filtered by (this hasn't been tested exhaustively but should work).  For example to find horse racing events:
 
@@ -62,3 +62,9 @@ racing <- bf$events(filter = marketFilter(eventTypeIds = 7))
 ```
 
 The `racing` object is now a dataframe of horse racing events, providing data that includes the event Id, event name, countryCode, timezone, venue, date, and the number of markets.
+
+### PASSWORD and KEY
+
+The appendix, _API key best practices_, in the [api packages vignette](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html) from the [httr](https://github.com/hadley/httr) package provides some pertinent advice for the storing of you PASSWORD and KEY.  
+
+The advice is to store your PASSWORD and KEY, or any other variables that should be kept safe, in an environment variable, this is to prevent accidentally sharing your credentials, either by sharing an .Rhistory file, or sharing a workspace.
