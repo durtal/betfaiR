@@ -149,57 +149,6 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
 
     }
 
-#     res <- lapply(res$result, function(x) {
-#
-#         responseList <- list()
-#
-#         basic <- data.frame(marketId = x$marketId,
-#                             marketName = x$marketName,
-#                             totalMatched = x$totalMatched, stringsAsFactors = FALSE)
-#         responseList$basic <- basic
-#         if(!is.null(x$marketStartTime)){
-#             responseList$basic$marketStartTime <- x$marketStartTime
-#         }
-#         if(!is.null(x$description)) {
-#             description <- data.frame(x$description, stringsAsFactors = FALSE)
-#             if(!keepRules) description$rules <- NULL
-#             responseList$description <- description
-#         }
-#         if(!is.null(x$competition)) {
-#             competition <- data.frame(x$competition, stringsAsFactors = FALSE)
-#             responseList$competition <- competition
-#         }
-#         if(!is.null(x$eventType)) {
-#             eventType <- data.frame(x$eventType, stringsAsFactors = FALSE)
-#             responseList$eventType <- eventType
-#         }
-#         if(!is.null(x$event)) {
-#             event <- data.frame(x$event, stringsAsFactors = FALSE)
-#             responseList$event <- event
-#         }
-#         if(!is.null(x$runners)) {
-#             runners <- lapply(x$runners, function(rnr) {
-#                 tmp <- rnr
-#                 if(!is.null(rnr$metadata)) {
-#                     tmp$metadata <- NULL
-#                     basic <- data.frame(tmp, stringsAsFactors = FALSE)
-#                     meta <- data.frame(rnr$metadata[!sapply(rnr$metadata, is.null)], stringsAsFactors = FALSE)
-#                     basic <- cbind(basic, meta)
-#                     return(basic)
-#                 } else {
-#                     basic <- data.frame(rnr[!sapply(rnr, is.null)], stringsAsFactors = FALSE)
-#                     return(basic)
-#                 }
-#             })
-#             runners <- do.call(plyr::rbind.fill, runners)
-#             responseList$runners <- runners
-#         }
-#         return(responseList)
-#     })
-#     res <- do.call(plyr::rbind.fill, res)
-#     names(res) <- tolower(names(res))
-
-
     return(out)
 }
 
