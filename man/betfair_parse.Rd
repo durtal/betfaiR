@@ -7,6 +7,12 @@
 betfair_parse(res, ...)
 }
 \description{
-convert response
+convert response from the various \link{betfair} methods, tries
+to convert response into useful format, ie. dataframes with zero nested elements
+}
+\details{
+due to the various methods returning different responses varying in
+detail and complexity (testing all combinations is tricky), so this function
+may not be that reliable at the moment
 }
 
