@@ -78,3 +78,15 @@ print.marketCatalogue_runners <- function(x) {
         cat(rep("-", w/2))
     })
 }
+
+#' @export
+print.marketCatalogue_simple <- function(x) {
+
+    lapply(x, function(i) {
+        cat("\nMarket ID:\t\t", i$market$marketId)
+        cat("\nMarket Name:\t\t", i$market$marketName)
+        cat("\nTotal Matched:\t\t", i$market$totalMatched, "\n")
+        w <- options()$width
+        cat(rep("-", w/2))
+    })
+}
