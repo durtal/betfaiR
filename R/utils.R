@@ -58,3 +58,23 @@ prepare_order <- function(marketId, selectionId, orderType = "LIMIT",
     }
     return(orderList)
 }
+
+#' @export
+print.marketCatalogue_runners <- function(x) {
+
+    lapply(x, function(i) {
+        cat("\nMarket ID:\t\t", i$market$marketId)
+        cat("\nMarket Name:\t\t", i$market$marketName)
+        cat("\nTotal Matched:\t\t", i$market$totalMatched)
+        cat("\nNo of Runners:\t\t", nrow(i$runners))
+        if(nrow(i$runners) < 5) {
+            cat("\n\nFirst ", nrow(i$runners), " Runners:\n")
+            print(head(i$runners), row.names = FALSE)
+        } else {
+            cat("\n\nFirst 5 runners:\n")
+            print(head(i$runners, 5), row.names = FALSE)
+        }
+        w <- options()$width
+        cat(rep("-", w/2))
+    })
+}
