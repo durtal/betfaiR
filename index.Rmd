@@ -1,0 +1,5 @@
+---
+title: "Intro"
+---
+
+The `betfaiR` package will eventually provide R users access to the Betfair API.
