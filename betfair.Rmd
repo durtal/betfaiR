@@ -4,8 +4,33 @@ title: "betfair"
 
 `betfair` is the **primary** function in the `betfaiR` package.  It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - `r Sys.Date()` - this is not _all_ methods).
 
-### Usage
+### usage
 
 ```{r eval=FALSE}
 bf <- betfair(usr = username, pwd = password, key = api_key)
 ```
+
+### arguments
+
+param | details
+------|--------
+`usr` | Betfair username
+`pwd` | Betfair password
+`key` | Betfair API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key)
+
+### return
+
+The function returns an environment with various methods for retrieving exchange data, the methods are listed below:
+
+method | details | help
+-------|---------|-----
+`competitions` | Retrieve data about the different competitions with current markets |
+`countries` | Retrieve data about the different countries hosting events |
+`events` | Retrieve data about the different events |
+`eventTypes` | Retrieve data about the different event types, ie. sports |
+`login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used |
+`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market |
+`marketCatalogue` | Retrieve data about the different types of markets |
+`marketTypes` | Retrieve data about the different types of markets |
+`session` | Print details about the session, including login in details and session token |
+`venues` | Retrieve data about the venues hosting racing |

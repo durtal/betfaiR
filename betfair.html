@@ -139,8 +139,88 @@ img {
 
 <p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-09-10 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
-<h3>Usage</h3>
+<h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username, <span class="dt">pwd =</span> password, <span class="dt">key =</span> api_key)</code></pre>
+</div>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>usr</code></td>
+<td align="left">Betfair username</td>
+</tr>
+<tr class="even">
+<td align="left"><code>pwd</code></td>
+<td align="left">Betfair password</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>key</code></td>
+<td align="left">Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="return" class="section level3">
+<h3>return</h3>
+<p>The function returns an environment with various methods for retrieving exchange data, the methods are listed below:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">method</th>
+<th align="left">details</th>
+<th align="left">help</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>competitions</code></td>
+<td align="left">Retrieve data about the different competitions with current markets</td>
+</tr>
+<tr class="even">
+<td align="left"><code>countries</code></td>
+<td align="left">Retrieve data about the different countries hosting events</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>events</code></td>
+<td align="left">Retrieve data about the different events</td>
+</tr>
+<tr class="even">
+<td align="left"><code>eventTypes</code></td>
+<td align="left">Retrieve data about the different event types, ie. sports</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>login</code></td>
+<td align="left">Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used</td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketBook</code></td>
+<td align="left">Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>marketCatalogue</code></td>
+<td align="left">Retrieve data about the different types of markets</td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketTypes</code></td>
+<td align="left">Retrieve data about the different types of markets</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>session</code></td>
+<td align="left">Print details about the session, including login in details and session token</td>
+</tr>
+<tr class="even">
+<td align="left"><code>venues</code></td>
+<td align="left">Retrieve data about the venues hosting racing</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
