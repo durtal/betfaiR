@@ -1,0 +1,39 @@
+---
+title: "venues"
+---
+
+Having logged in using the [`betfair`](betfair.html) function, the environment contains the `venues` method.  Which can be used to get the venues associated with the various horse racing and greyhound markets.
+
+### usage
+
+```
+bf$venues(filter = marketFilter())
+```
+
+### arguments
+
+param | details
+------|--------
+`filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.  If nothing is entered, **all** venues are returned
+
+### return
+
+The function returns a dataframe of venues associated with the markets selected by the `filter` parameter, the dataframe contains the following:
+
+variable | details
+---------|--------
+`venue` | horse racing or greyhound venue (racecourse or racetrack)
+`marketCount` | number of markets associated with the venue
+
+### examples
+
+```
+# login
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
+
+# return all venues
+bf$venues()
+
+# return all venues from Great Britain
+bf$venues(filter = marketFilter(marketCountries = "GB"))
+```

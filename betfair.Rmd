@@ -6,7 +6,7 @@ title: "betfair"
 
 ### usage
 
-```{r eval=FALSE}
+```
 bf <- betfair(usr = username, pwd = password, key = api_key)
 ```
 
@@ -18,19 +18,63 @@ param | details
 `pwd` | Betfair password
 `key` | Betfair API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key)
 
+Usernames, passwords and API Keys **SHOULD NOT** be shared, there is the danger in R that you inadvertently save these either by saving your workspace on exiting or in your .Rhistory.  The `httr` package (on which this package relies) has a very good appendix in one of its vignettes on ways to keep data like this more secure, you can read the vignette [here](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html), but the relevant section is repeated in the appendix at the bottom of this page.
+
 ### return
 
-The function returns an environment with various methods for retrieving exchange data, the methods are listed below:
+The function returns an environment (stored as `bf` in the usage section) with various methods for retrieving exchange data.  To view the available methods you can print the environment:
 
-method | details | help
--------|---------|-----
-`competitions` | Retrieve data about the different competitions with current markets |
-`countries` | Retrieve data about the different countries hosting events |
-`events` | Retrieve data about the different events |
-`eventTypes` | Retrieve data about the different event types, ie. sports |
-`login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used |
-`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market |
-`marketCatalogue` | Retrieve data about the different types of markets |
-`marketTypes` | Retrieve data about the different types of markets |
-`session` | Print details about the session, including login in details and session token |
-`venues` | Retrieve data about the venues hosting racing |
+```
+bf
+##  <betfaiR API>
+##  Methods available:
+##      $competitions(filter = marketFilter())
+##      $countries(filter = marketFilter())
+##      $events(filter = marketFilter())
+##      $eventTypes(filter = marketFilter())
+##      $login(usr, pwd, key)
+##      $marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL, matchProjection = NULL)
+##      $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
+##      $marketTypes(filter = marketFilter())
+##      $session()
+##      $venues(filter = marketFilter())
+```
+
+method | details | available | help
+-------|---------|-----------|------
+`competitions` | Retrieve data about the different competitions with current markets | `TRUE` | [competitions](methods_competitions.html)
+`countries` | Retrieve data about the different countries hosting events | `TRUE` |
+`events` | Retrieve data about the different events | `TRUE` |
+`eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` |
+`login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` |
+`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `TRUE` |
+`marketCatalogue` | Retrieve data about the different types of markets | `FALSE` |
+`marketTypes` | Retrieve data about the different types of markets | `FALSE` |
+`placeOrders` |  | `FALSE` |
+`session` | Print details about the session, including login in details and session token | `TRUE` |
+`venues` | Retrieve data about the venues hosting racing | `TRUE` | [venues](methods_venues.html)
+
+### appendix
+#### username, password and API key best practices
+
+The `betfaiR` package requires a valid Betfair username, password, and API key - see the Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key) for how to get an API key.
+
+* Identify your home directory. Not sure? Enter `normalizePath("~/")` in the R console.
+* Create a new text file.  If in RStudio, do _File > New File > Text file_
+* Create the following lines:
+```
+BETFAIR_USR=yourusername
+BETFAIR_PWD=yourpassword
+BETFAIR_KEY=yourAPIkey
+```
+* Make sure the last line in the file is empty (if it isn't R will **silently** fail to load the file).  If you're using an editor that shows line numbers there should be four lines, 3 containing the three variables above, and a fourth empty one.
+* Save the file in your home directory with the filename `.Renviron`.  If questioned, YES you do want to use a filename that begins with a dot `.`.  Note that by default [dotfiles](http://linux.about.com/cs/linux101/g/dot_file.htm) are usually hidden.  But within RStudio, the file browser will make `.Renviron` visible and therefore easy to edit in the future.
+* Restart R.  `.Renviron` is processed only [at the start of an R session](http://stat.ethz.ch/R-manual/R-patched/library/base/html/Startup.html).
+* Use `Sys.getenv()` to access your username, password, and API key.  For example you would use them like so with the `betfair` function:
+```
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
+```
+
+FAQ:  Why define this environment variable via `.Renviron` instead of in `.bash_profile` or `.bashrc`?
+
+Because there are many combinations of OS and ways of running R where the `.Renviron` approach _just works_ and the bash stuff does not.  When R is a child process of, say, Emacs or RStudio, you can't always count on environment variables being passed to R.  Put them in an R-specific start-up file and save yourself some grief.

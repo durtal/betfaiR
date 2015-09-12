@@ -10,7 +10,7 @@
 
 
 
-<title>intro</title>
+<title>venues</title>
 
 <script src="libs/jquery-1.11.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -150,13 +150,65 @@ img {
 </nav>
 
 <div id="header">
-<h1 class="title">intro</h1>
+<h1 class="title">venues</h1>
 </div>
 
 
-<p>The <code>betfaiR</code> package will eventually provide R users full access to the Betfair API, retrieving data and placing bets.</p>
-<p>The <strong>primary</strong> function of the package is <a href="betfair.html"><code>betfair</code></a> which requires users to enter their login details, including an API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key). The function returns an environment with various methods for querying and retrieving data from Betfair.</p>
-<p>This is not to say that it is the only way to use this package, all the functions that <code>betfair</code> uses are available, but <code>betfair</code> aims to keep the workspace free of unnecessary variables as queries are developed and saved.</p>
+<p>Having logged in using the <a href="betfair.html"><code>betfair</code></a> function, the environment contains the <code>venues</code> method. Which can be used to get the venues associated with the various horse racing and greyhound markets.</p>
+<div id="usage" class="section level3">
+<h3>usage</h3>
+<pre><code>bf$venues(filter = marketFilter())</code></pre>
+</div>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>filter</code></td>
+<td align="left">select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair. If nothing is entered, <strong>all</strong> venues are returned</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="return" class="section level3">
+<h3>return</h3>
+<p>The function returns a dataframe of venues associated with the markets selected by the <code>filter</code> parameter, the dataframe contains the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>venue</code></td>
+<td align="left">horse racing or greyhound venue (racecourse or racetrack)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketCount</code></td>
+<td align="left">number of markets associated with the venue</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples" class="section level3">
+<h3>examples</h3>
+<pre><code># login
+bf &lt;- betfair(usr = Sys.getenv(&quot;BETFAIR_USR&quot;), pwd = Sys.getenv(&quot;BETFAIR_PWD&quot;), key = Sys.getenv(&quot;BETFAIR_KEY&quot;))
+
+# return all venues
+bf$venues()
+
+# return all venues from Great Britain
+bf$venues(filter = marketFilter(marketCountries = &quot;GB&quot;))</code></pre>
+</div>
 
 
 </div>

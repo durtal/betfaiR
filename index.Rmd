@@ -1,5 +1,9 @@
 ---
-title: "Intro"
+title: "intro"
 ---
 
-The `betfaiR` package will eventually provide R users access to the Betfair API.
+The `betfaiR` package will eventually provide R users full access to the Betfair API, retrieving data and placing bets.  
+
+The **primary** function of the package is [`betfair`](betfair.html) which requires users to enter their login details, including an API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key).  The function returns an environment with various methods for querying and retrieving data from Betfair.
+
+This is not to say that it is the only way to use this package, all the functions that `betfair` uses are available, but `betfair` aims to keep the workspace free of unnecessary variables as queries are developed and saved.
