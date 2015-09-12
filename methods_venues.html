@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>venues</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<style type="text/css">
+
+	/* padding for bootstrap navbar */
+	body {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	@media (max-width: 979px) {
+		body {
+			padding-top: 0;
+		}
+	}
+
+	/* offset scroll position for anchor links (for fixed navbar) */
+	@media (min-width: 980px) {
+		.section h2 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+		.section h3 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	/* don't use link color in navbar */
+	.dropdown-menu>li>a {
+		color: black;
+	}
+
+	/* some padding for disqus */
+	#disqus_thread {
+		margin-top: 45px;
+	}
+
+</style>
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+<h1>betfaiR</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#betfaiR-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://github.com/durtal" class="navbar-brand">durtal@github</a>
+        </div>
+        <div class="collapse navbar-collapse" id="betfaiR-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
+                        Primary Funs <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Environment</li>
+                        <li>
+                            <a href="betfair.html">betfair</a>
+                        </li>
+                        <li class="dropdown-header">Misc</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter()</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
+                        Methods <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="methods_competitions.html">competitions</a>
+                        </li>
+                        <li>
+                            <a href="methods_countries.html">countries</a>
+                        </li>
+                        <li>
+                            <a href="methods_events.html">events</a>
+                        </li>
+                        <li>
+                            <a href="methods_eventTypes.html">eventTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketCatalogue.html">marketCatalogue</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_venues.html">venues</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+<h1 class="title">venues</h1>
+</div>
+
+
+<p>Having logged in using the <a href="betfair.html"><code>betfair</code></a> function, the environment contains the <code>venues</code> method. Which can be used to get the venues associated with the various horse racing and greyhound markets.</p>
+<div id="usage" class="section level3">
+<h3>usage</h3>
+<pre><code>bf$venues(filter = marketFilter())</code></pre>
+</div>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>filter</code></td>
+<td align="left">select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair. If nothing is entered, <strong>all</strong> venues are returned</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="return" class="section level3">
+<h3>return</h3>
+<p>The function returns a dataframe of venues associated with the markets selected by the <code>filter</code> parameter, the dataframe contains the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>venue</code></td>
+<td align="left">horse racing or greyhound venue (racecourse or racetrack)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketCount</code></td>
+<td align="left">number of markets associated with the venue</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples" class="section level3">
+<h3>examples</h3>
+<pre><code># login
+bf &lt;- betfair(usr = Sys.getenv(&quot;BETFAIR_USR&quot;), pwd = Sys.getenv(&quot;BETFAIR_PWD&quot;), key = Sys.getenv(&quot;BETFAIR_KEY&quot;))
+
+# return all venues
+bf$venues()
+
+# return all venues from Great Britain
+bf$venues(filter = marketFilter(marketCountries = &quot;GB&quot;))</code></pre>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

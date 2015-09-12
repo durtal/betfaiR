@@ -11,7 +11,7 @@ The `marketFilter` function is used to build an object to filter and select the 
 
 See examples.
 
-```
+```{r eval=FALSE}
 m <- marketFilter(bspOnly = NULL, competitionIds = NULL, eventIds = NULL, eventTypeIds = NULL,
                   exchangeIds = NULL, inPlayOnly = NULL, marketBettingTypes = NULL,
                   marketCountries = NULL, marketIds = NULL, from = NULL, to = NULL,
@@ -42,7 +42,7 @@ param | type | details
 
 ### examples
 
-```{r}
+```{r eval=FALSE}
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
               pwd = Sys.getenv("BETFAIR_PWD"),
@@ -52,9 +52,7 @@ bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
 obj <- marketFilter(eventTypeIds = 1)
 # use obj in query
 res <- bf$competitions(filter = obj)
-head(res)
 
 # or use marketFilter inside a method
 res <- bf$competitions(filter = marketFilter(eventTypeIds = 1, marketCountries = "GB"))
-head(res)
 ```

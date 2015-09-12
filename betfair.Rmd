@@ -6,7 +6,7 @@ title: "betfair"
 
 ### usage
 
-```
+```{r eval=FALSE}
 bf <- betfair(usr = username, pwd = password, key = api_key)
 ```
 
@@ -43,14 +43,14 @@ bf
 method | details | available | help
 -------|---------|-----------|------
 `competitions` | Retrieve data about the different competitions with current markets | `TRUE` | [competitions](methods_competitions.html)
-`countries` | Retrieve data about the different countries hosting events | `TRUE` |
-`events` | Retrieve data about the different events | `TRUE` |
-`eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` |
+`countries` | Retrieve data about the different countries hosting events | `TRUE` | [countries](methods_countries.html)
+`events` | Retrieve data about the different events | `TRUE` | [events](methods_events.html)
+`eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` | [eventTypes](methods_eventTypes.html)
 `login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` |
 `marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `TRUE` |
-`marketCatalogue` | Retrieve data about the different types of markets | `FALSE` |
-`marketTypes` | Retrieve data about the different types of markets | `FALSE` |
-`placeOrders` |  | `FALSE` |
+`marketCatalogue` | Retrieve data about the different types of markets | `FALSE` | [marketCatalogue](methods_marketCatalogue.html)
+`marketTypes` | Retrieve data about the different types of markets | `FALSE` | [marketTypes](methods_marketTypes.html)
+`placeOrders` |  | `FALSE` | 
 `session` | Print details about the session, including login in details and session token | `TRUE` |
 `venues` | Retrieve data about the venues hosting racing | `TRUE` | [venues](methods_venues.html)
 

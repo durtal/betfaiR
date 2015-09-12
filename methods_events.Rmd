@@ -1,3 +1,49 @@
 ---
 title: "events"
 ---
+
+Having logged in using the [`betfair`](betfair.html) function, the environment contains the `events` method.  This method can be used to get events and the number of markets for each event, when the event start, as well as other data that may be of interest.
+
+### usage
+
+```{r eval=FALSE}
+bf$events(filter = marketFilter())
+```
+
+### arguments
+
+param | details
+------|---------
+`filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.  If nothing is entered, **all** competitions are returned
+
+### return
+
+The function returns a dataframe of events (eg. Manchester United vs Arsenal), with data about the number of markets, start time, etc, a full list below:
+
+variable | details
+---------|--------
+`event_id` | the event id
+`event_name` | the event name (eg. Manchester United vs Arsenal)
+`event_countryCode` | the ISO-2 code, ISO-2 codes are available on [wiki](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), examples include _GB_, _IE_, _US_, etc
+`event_timezone` | the timezone in which the event is happening
+`event_venue` | the event venue (if applicable)
+`event_openDate` | the scheduled start of the event (format "YYYY-MM-DDT00:00:00.000Z")
+`marketCount` | number of markets associated with this country
+
+### examples
+
+```{r eval=FALSE}
+# login
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
+
+# return all countries
+bf$events()
+
+# return all horse racing events
+bf$events(filter = marketFilter(eventTypeIds = 7))
+
+# return all horse racing events whose start date is beyond next week
+bf$events(filter = marketFilter(eventTypeIds = 7, from = Sys.Date() + 7))
+```

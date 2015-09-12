@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>betfair</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<style type="text/css">
+
+	/* padding for bootstrap navbar */
+	body {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	@media (max-width: 979px) {
+		body {
+			padding-top: 0;
+		}
+	}
+
+	/* offset scroll position for anchor links (for fixed navbar) */
+	@media (min-width: 980px) {
+		.section h2 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+		.section h3 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	/* don't use link color in navbar */
+	.dropdown-menu>li>a {
+		color: black;
+	}
+
+	/* some padding for disqus */
+	#disqus_thread {
+		margin-top: 45px;
+	}
+
+</style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+<h1>betfaiR</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#betfaiR-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://github.com/durtal" class="navbar-brand">durtal@github</a>
+        </div>
+        <div class="collapse navbar-collapse" id="betfaiR-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
+                        Primary Funs <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Environment</li>
+                        <li>
+                            <a href="betfair.html">betfair</a>
+                        </li>
+                        <li class="dropdown-header">Misc</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter()</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
+                        Methods <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="methods_competitions.html">competitions</a>
+                        </li>
+                        <li>
+                            <a href="methods_countries.html">countries</a>
+                        </li>
+                        <li>
+                            <a href="methods_events.html">events</a>
+                        </li>
+                        <li>
+                            <a href="methods_eventTypes.html">eventTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketCatalogue.html">marketCatalogue</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_venues.html">venues</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+<h1 class="title">betfair</h1>
+</div>
+
+
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-09-12 - this is not <em>all</em> methods).</p>
+<div id="usage" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username, <span class="dt">pwd =</span> password, <span class="dt">key =</span> api_key)</code></pre>
+</div>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>usr</code></td>
+<td align="left">Betfair username</td>
+</tr>
+<tr class="even">
+<td align="left"><code>pwd</code></td>
+<td align="left">Betfair password</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>key</code></td>
+<td align="left">Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
+</tr>
+</tbody>
+</table>
+<p>Usernames, passwords and API Keys <strong>SHOULD NOT</strong> be shared, there is the danger in R that you inadvertently save these either by saving your workspace on exiting or in your .Rhistory. The <code>httr</code> package (on which this package relies) has a very good appendix in one of its vignettes on ways to keep data like this more secure, you can read the vignette <a href="https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html">here</a>, but the relevant section is repeated in the appendix at the bottom of this page.</p>
+</div>
+<div id="return" class="section level3">
+<h3>return</h3>
+<p>The function returns an environment (stored as <code>bf</code> in the usage section) with various methods for retrieving exchange data. To view the available methods you can print the environment:</p>
+<pre><code>bf
+##  &lt;betfaiR API&gt;
+##  Methods available:
+##      $competitions(filter = marketFilter())
+##      $countries(filter = marketFilter())
+##      $events(filter = marketFilter())
+##      $eventTypes(filter = marketFilter())
+##      $login(usr, pwd, key)
+##      $marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL, matchProjection = NULL)
+##      $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
+##      $marketTypes(filter = marketFilter())
+##      $session()
+##      $venues(filter = marketFilter())</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">method</th>
+<th align="left">details</th>
+<th align="left">available</th>
+<th align="left">help</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>competitions</code></td>
+<td align="left">Retrieve data about the different competitions with current markets</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="methods_competitions.html">competitions</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>countries</code></td>
+<td align="left">Retrieve data about the different countries hosting events</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="methods_countries.html">countries</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>events</code></td>
+<td align="left">Retrieve data about the different events</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="methods_events.html">events</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>eventTypes</code></td>
+<td align="left">Retrieve data about the different event types, ie. sports</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="methods_eventTypes.html">eventTypes</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>login</code></td>
+<td align="left">Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketBook</code></td>
+<td align="left">Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>marketCatalogue</code></td>
+<td align="left">Retrieve data about the different types of markets</td>
+<td align="left"><code>FALSE</code></td>
+<td align="left"><a href="methods_marketCatalogue.html">marketCatalogue</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketTypes</code></td>
+<td align="left">Retrieve data about the different types of markets</td>
+<td align="left"><code>FALSE</code></td>
+<td align="left"><a href="methods_marketTypes.html">marketTypes</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>placeOrders</code></td>
+<td align="left"></td>
+<td align="left"><code>FALSE</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>session</code></td>
+<td align="left">Print details about the session, including login in details and session token</td>
+<td align="left"><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>venues</code></td>
+<td align="left">Retrieve data about the venues hosting racing</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="methods_venues.html">venues</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="appendix" class="section level3">
+<h3>appendix</h3>
+<div id="username-password-and-api-key-best-practices" class="section level4">
+<h4>username, password and API key best practices</h4>
+<p>The <code>betfaiR</code> package requires a valid Betfair username, password, and API key - see the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key) for how to get an API key.</p>
+<ul>
+<li>Identify your home directory. Not sure? Enter <code>normalizePath(&quot;~/&quot;)</code> in the R console.</li>
+<li>Create a new text file. If in RStudio, do <em>File &gt; New File &gt; Text file</em></li>
+<li><p>Create the following lines:</p>
+<pre><code>BETFAIR_USR=yourusername
+BETFAIR_PWD=yourpassword
+BETFAIR_KEY=yourAPIkey</code></pre></li>
+<li>Make sure the last line in the file is empty (if it isn’t R will <strong>silently</strong> fail to load the file). If you’re using an editor that shows line numbers there should be four lines, 3 containing the three variables above, and a fourth empty one.</li>
+<li>Save the file in your home directory with the filename <code>.Renviron</code>. If questioned, YES you do want to use a filename that begins with a dot <code>.</code>. Note that by default <a href="http://linux.about.com/cs/linux101/g/dot_file.htm">dotfiles</a> are usually hidden. But within RStudio, the file browser will make <code>.Renviron</code> visible and therefore easy to edit in the future.</li>
+<li>Restart R. <code>.Renviron</code> is processed only <a href="http://stat.ethz.ch/R-manual/R-patched/library/base/html/Startup.html">at the start of an R session</a>.</li>
+<li><p>Use <code>Sys.getenv()</code> to access your username, password, and API key. For example you would use them like so with the <code>betfair</code> function:</p>
+<pre><code>bf &lt;- betfair(usr = Sys.getenv(&quot;BETFAIR_USR&quot;), pwd = Sys.getenv(&quot;BETFAIR_PWD&quot;), key = Sys.getenv(&quot;BETFAIR_KEY&quot;))</code></pre></li>
+</ul>
+<p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>
+<p>Because there are many combinations of OS and ways of running R where the <code>.Renviron</code> approach <em>just works</em> and the bash stuff does not. When R is a child process of, say, Emacs or RStudio, you can’t always count on environment variables being passed to R. Put them in an R-specific start-up file and save yourself some grief.</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>
