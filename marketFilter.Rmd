@@ -2,6 +2,9 @@
 title: "marketFilter"
 ---
 
+```{r echo=FALSE, message = FALSE, warning = FALSE}
+library(betfaiR)
+```
 The `marketFilter` function is used to build an object to filter and select the desired markets.  This function is used in a number of methods, including [`competitions`](methods_competitions.html), [`countries`](methods_countries.html), [`events`](methods_events.html), [`eventTypes`](methods_eventTypes.html), [`marketCatalogue`](methods_marketCatalogue.html), and [`marketTypes`](methods_marketTypes.html).
 
 ### usage
@@ -36,3 +39,22 @@ param | type | details
 `turnInPlayEnabled` | `boolean` | restrict to markets that will turn in play `TRUE`, or will not turn in play `FALSE`.  If not specified returns both
 `venues` | `string` | restrict markets by the venue.  Currently, as of Jun 11, 2015, only Horse Racing and Greyhound markets have venues.
 `withOrders` | | restrict to markets that you have one or more orders in place, see section **OrderStatus** in [BettingEnums](betting_enums.html) or the relevant section of Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#OrderStatus)
+
+### examples
+
+```{r}
+# login
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
+
+# build filter object, for all football markets
+obj <- marketFilter(eventTypeIds = 1)
+# use obj in query
+res <- bf$competitions(filter = obj)
+head(res)
+
+# or use marketFilter inside a method
+res <- bf$competitions(filter = marketFilter(eventTypeIds = 1, marketCountries = "GB"))
+head(res)
+```
