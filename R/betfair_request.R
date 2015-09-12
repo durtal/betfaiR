@@ -193,6 +193,9 @@ build_request <- function(req) {
         return(setNames(list(), character(0)))
     } else {
         req <- lapply(req, request_helper)
+        if("textQuery" %in% names(req)) {
+            req$textQuery <- unlist(req$textQuery)
+        }
         return(req)
     }
 }

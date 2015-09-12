@@ -155,7 +155,7 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "marketBook")
             # parse response
-            res <- betfair_parse(res)
+            # res <- betfair_parse(res)
 
             return(res)
         }
