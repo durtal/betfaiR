@@ -164,6 +164,14 @@ betfair <- function(usr, pwd, key) {
                                     marketProjection = NULL,
                                     sort = NULL, maxResults = 1,
                                     keepRules = FALSE) {
+
+            marketProjection <- intersect(toupper(marketProjection), c("COMPETITION",
+                                                                       "EVENT",
+                                                                       "EVENT_TYPE",
+                                                                       "MARKET_START_TIME",
+                                                                       "MARKET_DESCRIPTION",
+                                                                       "RUNNER_DESCRIPTION",
+                                                                       "RUNNER_METADATA"))
             # build request object
             req <- base_request(filter, "marketCatalogue")
             req <- betfair_request(x = req, marketProjection = marketProjection,
@@ -175,8 +183,8 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "marketCatalogue")
             # parse response
-            # res <- betfair_parse(res, marketProjection = marketProjection,
-                                 # keepRules = keepRules)
+            res <- betfair_parse(res, marketProjection = marketProjection,
+                                 keepRules = keepRules)
 
             return(res)
         }
