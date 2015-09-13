@@ -216,6 +216,7 @@ img {
 <th align="left">param</th>
 <th align="left">type</th>
 <th align="left">details</th>
+<th align="left">example</th>
 </tr>
 </thead>
 <tbody>
@@ -223,81 +224,96 @@ img {
 <td align="left"><code>bspOnly</code></td>
 <td align="left"><code>boolean</code></td>
 <td align="left">restrict to BSP (Betfair Starting Price) markets only <code>TRUE</code>, or non-BSP markets <code>FALSE</code>. If not specified then returns both BSP and non-BSP markets</td>
+<td align="left"><code>TRUE</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>competitionIds</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">restrict markets by the competitions associated with the competition id</td>
+<td align="left"><code>&quot;123456&quot;</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>eventIds</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">restrict markets by the event id</td>
+<td align="left"><code>&quot;767956&quot;</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>eventTypeIds</code></td>
 <td align="left"><code>numeric</code></td>
 <td align="left">restrict markets by event type, ie. Football, Hockey, Horse Racing, etc</td>
+<td align="left"><code>&quot;1&quot;</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>exchangeIds</code></td>
-<td align="left"></td>
+<td align="left"><code>string</code></td>
 <td align="left">restrict markets by the exchange where the market operates. As of Jun 11, 2015, <strong>not available</strong></td>
 </tr>
 <tr class="even">
 <td align="left"><code>inPlayOnly</code></td>
 <td align="left"><code>boolean</code></td>
 <td align="left">restrict to markets that are currently in play <code>TRUE</code>, or not currently in play <code>FALSE</code>. If not specified then returns both.</td>
+<td align="left"><code>TRUE</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>marketBettingTypes</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">restrict to markets that match the betting type or the market, ie. Odds, Asian Handicap Singles, Asian Handicap Doubles. See section <strong>marketBettingTypes</strong> in <a href="betting_enums.html">BettingEnums</a> or the relevant section of Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#MarketBettingType">help pages</a></td>
+<td align="left"><code>&quot;ODDS&quot;</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>marketCountries</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">restrict to markets that are in the specified country or countries</td>
+<td align="left"><code>&quot;GB&quot;</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>marketIds</code></td>
 <td align="left"><code>numeric</code></td>
 <td align="left">restrict to markets by market Id</td>
+<td align="left"><code>&quot;1.2345678&quot;</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>from</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">start time <strong>after</strong> specified date, format date as “YYYY-MM-DD” or with a time “YYYY-MM-DD 00:00:00”</td>
+<td align="left"><code>&quot;2015-09-23&quot;</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>to</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">start time <strong>before</strong> specified date, format date as “YYYY-MM-DD” or with a time “YYYY-MM-DD 00:00:00”</td>
+<td align="left"><code>&quot;2015-09-24&quot;</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>marketTypeCodes</code></td>
 <td align="left"><code>numeric</code></td>
 <td align="left">restrict to markets that match the type of the market, ie. MATCH_ODDS, HALF_TIME_SCORE. You should use this instead of relying on the market name as the market type codes are the same in all locales.</td>
+<td align="left"><code>&quot;MATCH_ODDS&quot;</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>textQuery</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">restrict markets by any text associated with the market such as Name, Event, Competition, etc. You can include a wildcard (*) character, as long as it is not the first character</td>
+<td align="left"><code>&quot;Capital One Cup&quot;</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>turnInPlayEnabled</code></td>
 <td align="left"><code>boolean</code></td>
 <td align="left">restrict to markets that will turn in play <code>TRUE</code>, or will not turn in play <code>FALSE</code>. If not specified returns both</td>
+<td align="left"><code>TRUE</code></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>venues</code></td>
 <td align="left"><code>string</code></td>
 <td align="left">restrict markets by the venue. Currently, as of Jun 11, 2015, only Horse Racing and Greyhound markets have venues.</td>
+<td align="left"><code>&quot;Haydock&quot;</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>withOrders</code></td>
-<td align="left"></td>
+<td align="left"><code>string</code></td>
 <td align="left">restrict to markets that you have one or more orders in place, see section <strong>OrderStatus</strong> in <a href="betting_enums.html">BettingEnums</a> or the relevant section of Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#OrderStatus">help pages</a></td>
+<td align="left"><code>&quot;EXECUTABLE&quot;</code></td>
 </tr>
 </tbody>
 </table>

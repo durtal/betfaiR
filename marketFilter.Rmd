@@ -21,24 +21,24 @@ m <- marketFilter(bspOnly = NULL, competitionIds = NULL, eventIds = NULL, eventT
 
 ### arguments
 
-param | type | details
-------|------|---------
-`bspOnly` | `boolean` | restrict to BSP (Betfair Starting Price) markets only `TRUE`, or non-BSP markets `FALSE`.  If not specified then returns both BSP and non-BSP markets
-`competitionIds` | `string` | restrict markets by the competitions associated with the competition id
-`eventIds` | `string` | restrict markets by the event id
-`eventTypeIds` | `numeric` | restrict markets by event type, ie. Football, Hockey, Horse Racing, etc
-`exchangeIds` | | restrict markets by the exchange where the market operates.  As of Jun 11, 2015, **not available**
-`inPlayOnly` | `boolean` | restrict to markets that are currently in play `TRUE`, or not currently in play `FALSE`.  If not specified then returns both.
-`marketBettingTypes` | `string` | restrict to markets that match the betting type or the market, ie. Odds, Asian Handicap Singles, Asian Handicap Doubles.  See section **marketBettingTypes** in [BettingEnums](betting_enums.html) or the relevant section of Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#MarketBettingType)
-`marketCountries` | `string` | restrict to markets that are in the specified country or countries
-`marketIds` | `numeric` | restrict to markets by market Id
-`from` | `string` | start time **after** specified date, format date as "YYYY-MM-DD" or with a time "YYYY-MM-DD 00:00:00"
-`to` | `string` | start time **before** specified date, format date as "YYYY-MM-DD" or with a time "YYYY-MM-DD 00:00:00"
-`marketTypeCodes` | `numeric` | restrict to markets that match the type of the market, ie. MATCH_ODDS, HALF_TIME_SCORE.  You should use this instead of relying on the market name as the market type codes are the same in all locales.
-`textQuery` | `string` | restrict markets by any text associated with the market such as Name, Event, Competition, etc.  You can include a wildcard (\*) character, as long as it is not the first character
-`turnInPlayEnabled` | `boolean` | restrict to markets that will turn in play `TRUE`, or will not turn in play `FALSE`.  If not specified returns both
-`venues` | `string` | restrict markets by the venue.  Currently, as of Jun 11, 2015, only Horse Racing and Greyhound markets have venues.
-`withOrders` | | restrict to markets that you have one or more orders in place, see section **OrderStatus** in [BettingEnums](betting_enums.html) or the relevant section of Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#OrderStatus)
+param | type | details | example
+------|------|---------|--------
+`bspOnly` | `boolean` | restrict to BSP (Betfair Starting Price) markets only `TRUE`, or non-BSP markets `FALSE`.  If not specified then returns both BSP and non-BSP markets | `TRUE`
+`competitionIds` | `string` | restrict markets by the competitions associated with the competition id | `"123456"`
+`eventIds` | `string` | restrict markets by the event id | `"767956"`
+`eventTypeIds` | `numeric` | restrict markets by event type, ie. Football, Hockey, Horse Racing, etc | `"1"`
+`exchangeIds` | `string` | restrict markets by the exchange where the market operates.  As of Jun 11, 2015, **not available** |
+`inPlayOnly` | `boolean` | restrict to markets that are currently in play `TRUE`, or not currently in play `FALSE`.  If not specified then returns both. | `TRUE`
+`marketBettingTypes` | `string` | restrict to markets that match the betting type or the market, ie. Odds, Asian Handicap Singles, Asian Handicap Doubles.  See section **marketBettingTypes** in [BettingEnums](betting_enums.html) or the relevant section of Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#MarketBettingType) | `"ODDS"`
+`marketCountries` | `string` | restrict to markets that are in the specified country or countries | `"GB"`
+`marketIds` | `numeric` | restrict to markets by market Id | `"1.2345678"`
+`from` | `string` | start time **after** specified date, format date as "YYYY-MM-DD" or with a time "YYYY-MM-DD 00:00:00" | `"2015-09-23"`
+`to` | `string` | start time **before** specified date, format date as "YYYY-MM-DD" or with a time "YYYY-MM-DD 00:00:00" | `"2015-09-24"`
+`marketTypeCodes` | `numeric` | restrict to markets that match the type of the market, ie. MATCH_ODDS, HALF_TIME_SCORE.  You should use this instead of relying on the market name as the market type codes are the same in all locales. | `"MATCH_ODDS"`
+`textQuery` | `string` | restrict markets by any text associated with the market such as Name, Event, Competition, etc.  You can include a wildcard (\*) character, as long as it is not the first character | `"Capital One Cup"`
+`turnInPlayEnabled` | `boolean` | restrict to markets that will turn in play `TRUE`, or will not turn in play `FALSE`.  If not specified returns both | `TRUE`
+`venues` | `string` | restrict markets by the venue.  Currently, as of Jun 11, 2015, only Horse Racing and Greyhound markets have venues. | `"Haydock"`
+`withOrders` | `string` | restrict to markets that you have one or more orders in place, see section **OrderStatus** in [BettingEnums](betting_enums.html) or the relevant section of Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#OrderStatus) | `"EXECUTABLE"`
 
 ### examples
 
