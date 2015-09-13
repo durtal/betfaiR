@@ -29,14 +29,18 @@ variable | details
 
 ### examples
 
-```
+```{r}
+library(betfaiR)
 # login
-bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
 
 # return all competitions
-bf$competitions()
+tmp <- bf$competitions()
+head(tmp)
 
 # return all football competitions
-bf$competitions(filter = marketFilter(eventTypeIds = 1))
-
+tmp <- bf$competitions(filter = marketFilter(eventTypeIds = 1))
+head(tmp)
 ```

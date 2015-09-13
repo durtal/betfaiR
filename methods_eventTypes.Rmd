@@ -28,18 +28,22 @@ variable | details
 
 ### examples
 
-```{r eval=FALSE}
+```{r}
+library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
               pwd = Sys.getenv("BETFAIR_PWD"),
               key = Sys.getenv("BETFAIR_KEY"))
 
 # return all countries
-bf$eventTypes()
+tmp <- bf$eventTypes()
+head(tmp)
 
 # return all horse racing events
-bf$eventTypes(filter = marketFilter(marketCountries = "GB"))
+tmp <- bf$eventTypes(filter = marketFilter(marketCountries = "GB"))
+head(tmp)
 
 # return all horse racing events whose start date is beyond next week
-bf$eventTypes(filter = marketFilter(eventTypeIds = 7, from = Sys.Date() + 7))
+tmp <- bf$eventTypes(filter = marketFilter(eventTypeIds = 7, from = Sys.Date() + 7))
+head(tmp)
 ```

@@ -71,8 +71,13 @@ BETFAIR_KEY=yourAPIkey
 * Save the file in your home directory with the filename `.Renviron`.  If questioned, YES you do want to use a filename that begins with a dot `.`.  Note that by default [dotfiles](http://linux.about.com/cs/linux101/g/dot_file.htm) are usually hidden.  But within RStudio, the file browser will make `.Renviron` visible and therefore easy to edit in the future.
 * Restart R.  `.Renviron` is processed only [at the start of an R session](http://stat.ethz.ch/R-manual/R-patched/library/base/html/Startup.html).
 * Use `Sys.getenv()` to access your username, password, and API key.  For example you would use them like so with the `betfair` function:
-```
+
+```{r}
+# load library
+library(betfaiR)
+# login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
+bf
 ```
 
 FAQ:  Why define this environment variable via `.Renviron` instead of in `.bash_profile` or `.bashrc`?

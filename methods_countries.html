@@ -138,7 +138,7 @@ img {
                         </li>
                         <li class="dropdown-header">Misc</li>
                         <li>
-                            <a href="marketFilter.html">marketFilter()</a>
+                            <a href="marketFilter.html">marketFilter</a>
                         </li>
                     </ul>
                 </li>
@@ -244,16 +244,32 @@ img {
 </div>
 <div id="examples" class="section level3">
 <h3>examples</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># login</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<span class="co"># login</span>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
               <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 
 <span class="co"># return all countries</span>
-bf$<span class="kw">countries</span>()
-
-<span class="co"># return all countries with horse racing markets</span>
-bf$<span class="kw">countries</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))</code></pre>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">countries</span>()
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##   countryCode marketCount
+## 1          GB        2475
+## 2          IE         102
+## 3          US        1136
+## 4          CA         250
+## 5          SE         618
+## 6          RO         131</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all countries with horse racing markets</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">countries</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##   countryCode marketCount
+## 1          IE          44
+## 2          GB         117
+## 3          FR          24
+## 4          US         179
+## 5          UY          10
+## 6          ZA          18</code></pre>
 </div>
 
 

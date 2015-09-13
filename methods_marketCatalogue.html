@@ -138,7 +138,7 @@ img {
                         </li>
                         <li class="dropdown-header">Misc</li>
                         <li>
-                            <a href="marketFilter.html">marketFilter()</a>
+                            <a href="marketFilter.html">marketFilter</a>
                         </li>
                     </ul>
                 </li>
@@ -198,7 +198,7 @@ img {
 </div>
 
 
-<p><strong>This method needs a lot of work. At the moment it returns the response from Betfair, while other methods parse the response into neat dataframes.</strong></p>
+<p><strong>This method still might require some work, especially in parsing the response from Betfair.</strong></p>
 <p>Having logged in using the <a href="betfair.html"><code>betfair</code></a> function, the environment contains the <code>marketCatalogue</code> method, which can be used to get market data. You use <code>marketCatalogue</code> to retrieve the name of the market, the names of selections, and other information about the market. <em>Market Data Request Limits apply</em>.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
@@ -224,7 +224,7 @@ img {
 </tr>
 <tr class="even">
 <td align="left"><code>marketProjection</code></td>
-<td align="left">the type and amount of data returned about the market, see section <strong>Market Projection</strong> in <a href="betting_enums.html">Betting Enums</a> or visit the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection">help pages</a></td>
+<td align="left">the type and amount of data returned about the market, see section <strong>Market Projection</strong> in <a href="betting_enums.html">Betting Enums</a> or visit the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection">help pages</a> for more details. The different options are “COMPETITION”, “EVENT”, “EVENT_TYPE”, “MARKET_START_TIME”, “MARKET_DESCRIPTION”, “RUNNER_DESCRIPTION”, and “RUNNER_METADATA”.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>sort</code></td>
@@ -243,7 +243,203 @@ img {
 </div>
 <div id="return" class="section level3">
 <h3>return</h3>
-<p>At the moment this function doesn’t parse the response from Betfair into neat dataframes like some of the other simpler methods. This is due to the response being a nested structure and converting to a dataframe isn’t easy, especially given the huge variety of markets available.</p>
+<p>A list with at least one dataframe about the market(s) filtered using the <code>filter</code> parameter (and the <a href="marketFilter.html"><code>marketFilter</code></a> function) and the <code>maxResults</code> paramater. Each market will have at most 4 dataframes in its list, all the variables are explained below, along with the <code>marketProjection</code> option that sees that variable returned. The list returned can be printed, allowing quick glance at markets before users can drill down into selections etc.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">marketProjection</th>
+<th align="left">dataframe</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>marketId</code></td>
+<td align="left">returned by default</td>
+<td align="left">market</td>
+<td align="left">id of the market</td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketName</code></td>
+<td align="left">returned by default</td>
+<td align="left">market</td>
+<td align="left">name of the market</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>totalMatched</code></td>
+<td align="left">returned by default</td>
+<td align="left">market</td>
+<td align="left">amount of money already traded in the market</td>
+</tr>
+<tr class="even">
+<td align="left"><code>startTime</code></td>
+<td align="left">“MARKET_START_TIME”</td>
+<td align="left">market</td>
+<td align="left">when the market opened</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>eventTypeId</code></td>
+<td align="left">“EVENT_TYPE”</td>
+<td align="left">market</td>
+<td align="left">event type id (eg. 7 = Horse Racing, 1 = Football, etc)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>eventTypeName</code></td>
+<td align="left">“EVENT_TYPE”</td>
+<td align="left">market</td>
+<td align="left">event type name (eg. Horse Racing, Football, etc)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>persistenceEnabled</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">can bets be kept after the market goes in play</td>
+</tr>
+<tr class="even">
+<td align="left"><code>bspMarket</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">does the market offer BSP</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>marketTime</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+</tr>
+<tr class="even">
+<td align="left"><code>suspendTime</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>bettingType</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">type of bet, eg. ODDS</td>
+</tr>
+<tr class="even">
+<td align="left"><code>turnInPlayEnabled</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">does the market go in play</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>marketType</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">SPORT or NONSPORT</td>
+</tr>
+<tr class="even">
+<td align="left"><code>regulator</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">typically “GILBRALTAR REGULATOR”</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>marketBaseRate</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+</tr>
+<tr class="even">
+<td align="left"><code>discountAllowed</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>wallet</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+<td align="left">UK or Aus wallet</td>
+</tr>
+<tr class="even">
+<td align="left"><code>rulesHasDate</code></td>
+<td align="left">“MARKET_DESCRIPTION”</td>
+<td align="left">description</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>id</code></td>
+<td align="left">“EVENT”</td>
+<td align="left">event</td>
+<td align="left">event id</td>
+</tr>
+<tr class="even">
+<td align="left"><code>name</code></td>
+<td align="left">“EVENT”</td>
+<td align="left">event</td>
+<td align="left">event name</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>countryCode</code></td>
+<td align="left">“EVENT”</td>
+<td align="left">event</td>
+<td align="left">event country code</td>
+</tr>
+<tr class="even">
+<td align="left"><code>timezone</code></td>
+<td align="left">“EVENT”</td>
+<td align="left">event</td>
+<td align="left">event timezone</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>openDate</code></td>
+<td align="left">“EVENT”</td>
+<td align="left">event</td>
+<td align="left">event opened</td>
+</tr>
+<tr class="even">
+<td align="left"><code>selectionId</code></td>
+<td align="left">“RUNNER_DESCRIPTION” or “RUNNER_METADATA”</td>
+<td align="left">runners</td>
+<td align="left">selection id</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>runnerName</code></td>
+<td align="left">“RUNNER_DESCRIPTION” or “RUNNER_METADATA”</td>
+<td align="left">runners</td>
+<td align="left">runner name</td>
+</tr>
+<tr class="even">
+<td align="left"><code>handicap</code></td>
+<td align="left">“RUNNER_DESCRIPTION” or “RUNNER_METADATA”</td>
+<td align="left">runners</td>
+<td align="left">handicap of selection</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>sortPriority</code></td>
+<td align="left">“RUNNER_DESCRIPTION” or “RUNNER_METADATA”</td>
+<td align="left">runners</td>
+<td align="left">ordered by amount matched</td>
+</tr>
+<tr class="even">
+<td align="left"><code>runnerId</code></td>
+<td align="left">“RUNNER_DESCRIPTION” or “RUNNER_METADATA”</td>
+<td align="left">runners</td>
+<td align="left">runner id (same as selection id)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>runners</code> dataframe above will likely include a lot of other data if “RUNNER_METADATA” is used, for horse racing this will include things like Weight carried, jockey, trainer, owner, etc.</p>
+</div>
+<div id="examples" class="section level3">
+<h3>examples</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<span class="co"># login</span>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
+
+<span class="co"># get market data on just one market</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>()
+tmp</code></pre>
+<pre><code>## 
+## Market ID:        1.101193124
+## Market Name:      Next Conservative Leader
+## totalMatched:         40980.56 
+## 
+## Event:
+## 
+##  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *</code></pre>
 </div>
 
 

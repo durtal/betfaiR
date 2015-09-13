@@ -32,18 +32,22 @@ variable | details
 
 ### examples
 
-```{r eval=FALSE}
+```{r}
+library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
               pwd = Sys.getenv("BETFAIR_PWD"),
               key = Sys.getenv("BETFAIR_KEY"))
 
 # return all countries
-bf$events()
+tmp <- bf$events()
+head(tmp)
 
 # return all horse racing events
-bf$events(filter = marketFilter(eventTypeIds = 7))
+tmp <- bf$events(filter = marketFilter(eventTypeIds = 7))
+head(tmp)
 
 # return all horse racing events whose start date is beyond next week
-bf$events(filter = marketFilter(eventTypeIds = 7, from = Sys.Date() + 7))
+tmp <- bf$events(filter = marketFilter(eventTypeIds = 7, from = Sys.Date() + 7))
+head(tmp)
 ```

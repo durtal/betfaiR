@@ -138,7 +138,7 @@ img {
                         </li>
                         <li class="dropdown-header">Misc</li>
                         <li>
-                            <a href="marketFilter.html">marketFilter()</a>
+                            <a href="marketFilter.html">marketFilter</a>
                         </li>
                     </ul>
                 </li>
@@ -248,19 +248,37 @@ img {
 </div>
 <div id="examples" class="section level3">
 <h3>examples</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># login</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<span class="co"># login</span>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
               <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 
 <span class="co"># return all countries</span>
-bf$<span class="kw">eventTypes</span>()
-
-<span class="co"># return all horse racing events</span>
-bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
-
-<span class="co"># return all horse racing events whose start date is beyond next week</span>
-bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))</code></pre>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##   eventType_id eventType_name marketCount
+## 1       468328       Handball          53
+## 2            1         Soccer       15348
+## 3            2         Tennis         809
+## 4      2378961       Politics          33
+## 5         6231 Financial Bets           5
+## 6            3           Golf          22</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##   eventType_id eventType_name marketCount
+## 1            1         Soccer        1907
+## 2            2         Tennis           7
+## 3         6231 Financial Bets           3
+## 4      2378961       Politics          15
+## 5            3           Golf           3
+## 6            4        Cricket          39</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##   eventType_id eventType_name marketCount
+## 1            7   Horse Racing          36</code></pre>
 </div>
 
 

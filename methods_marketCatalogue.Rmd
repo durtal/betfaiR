@@ -2,7 +2,7 @@
 title: "marketCatalogue"
 ---
 
-**This method needs a lot of work.  At the moment it returns the response from Betfair, while other methods parse the response into neat dataframes.**
+**This method still might require some work, especially in parsing the response from Betfair.**
 
 Having logged in using the [`betfair`](betfair.html) function, the environment contains the `marketCatalogue` method, which can be used to get market data.  You use `marketCatalogue` to retrieve the name of the market, the names of selections, and other information about the market.  _Market Data Request Limits apply_.
 
@@ -21,11 +21,58 @@ bf$marketCatalogue(filter = marketFilter(),
 param | details
 ------|--------
 `filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.
-`marketProjection` | the type and amount of data returned about the market, see section **Market Projection** in [Betting Enums](betting_enums.html) or visit the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection)
+`marketProjection` | the type and amount of data returned about the market, see section **Market Projection** in [Betting Enums](betting_enums.html) or visit the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection) for more details.  The different options are "COMPETITION", "EVENT", "EVENT_TYPE", "MARKET_START_TIME", "MARKET_DESCRIPTION", "RUNNER_DESCRIPTION", and "RUNNER_METADATA".
 `sort` | the order of the results, see section **sort** in [Betting Enums](betting_enums.html) or the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketSort)
 `maxResults` | limit on the number of results returned, default = 1
 `keepRules` | when **MARKET_DESCRIPTION** is entered into the `marketProjection` paramater it returns a large amount of text containing the rules of the market, by default these are discarded, change `keepRules = TRUE` to return the rules.
 
 ### return
 
-At the moment this function doesn't parse the response from Betfair into neat dataframes like some of the other simpler methods.  This is due to the response being a nested structure and converting to a dataframe isn't easy, especially given the huge variety of markets available.
+A list with at least one dataframe about the market(s)  filtered using the `filter` parameter (and the [`marketFilter`](marketFilter.html) function) and the `maxResults` paramater.  Each market will have at most 4 dataframes in its list, all the variables are explained below, along with the `marketProjection` option that sees that variable returned.  The list returned can be printed, allowing quick glance at markets before users can drill down into selections etc.
+
+variable | marketProjection | dataframe | details
+---------|------------------|-----------|--------
+`marketId` | returned by default | market | id of the market
+`marketName` | returned by default | market | name of the market
+`totalMatched` | returned by default | market | amount of money already traded in the market
+`startTime` | "MARKET_START_TIME" | market | when the market opened
+`eventTypeId` | "EVENT_TYPE" | market | event type id (eg. 7 = Horse Racing, 1 = Football, etc)
+`eventTypeName` | "EVENT_TYPE" | market | event type name (eg. Horse Racing, Football, etc)
+`persistenceEnabled` | "MARKET_DESCRIPTION" | description | can bets be kept after the market goes in play
+`bspMarket` | "MARKET_DESCRIPTION" | description | does the market offer BSP
+`marketTime` | "MARKET_DESCRIPTION" | description |
+`suspendTime` | "MARKET_DESCRIPTION" | description |
+`bettingType` | "MARKET_DESCRIPTION" | description | type of bet, eg. ODDS
+`turnInPlayEnabled` | "MARKET_DESCRIPTION" | description | does the market go in play
+`marketType` | "MARKET_DESCRIPTION" | description | SPORT or NONSPORT
+`regulator` | "MARKET_DESCRIPTION" | description | typically "GILBRALTAR REGULATOR"
+`marketBaseRate` | "MARKET_DESCRIPTION" | description |
+`discountAllowed` | "MARKET_DESCRIPTION" | description |
+`wallet` | "MARKET_DESCRIPTION" | description | UK or Aus wallet
+`rulesHasDate` | "MARKET_DESCRIPTION" | description |
+`id` | "EVENT" | event | event id
+`name` | "EVENT" | event | event name
+`countryCode` | "EVENT" | event | event country code
+`timezone` | "EVENT" | event | event timezone
+`openDate` | "EVENT" | event | event opened
+`selectionId` | "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | selection id
+`runnerName` |  "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | runner name
+`handicap` |  "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | handicap of selection
+`sortPriority` |  "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | ordered by amount matched
+`runnerId` |  "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | runner id (same as selection id)
+
+The `runners` dataframe above will likely include a lot of other data if "RUNNER_METADATA" is used, for horse racing this will include things like Weight carried, jockey, trainer, owner, etc.
+
+### examples
+
+```{r}
+library(betfaiR)
+# login
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
+
+# get market data on just one market
+tmp <- bf$marketCatalogue()
+tmp
+```
