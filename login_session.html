@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>login and session</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<style type="text/css">
+
+	/* padding for bootstrap navbar */
+	body {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	@media (max-width: 979px) {
+		body {
+			padding-top: 0;
+		}
+	}
+
+	/* offset scroll position for anchor links (for fixed navbar) */
+	@media (min-width: 980px) {
+		.section h2 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+		.section h3 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	/* don't use link color in navbar */
+	.dropdown-menu>li>a {
+		color: black;
+	}
+
+	/* some padding for disqus */
+	#disqus_thread {
+		margin-top: 45px;
+	}
+
+</style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+<h1>betfaiR</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#betfaiR-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://github.com/durtal" class="navbar-brand">durtal@github</a>
+        </div>
+        <div class="collapse navbar-collapse" id="betfaiR-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
+                        Primary Funs <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Environment</li>
+                        <li>
+                            <a href="betfair.html">betfair</a>
+                        </li>
+                        <li class="dropdown-header">Misc</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter()</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
+                        Methods <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="methods_competitions.html">competitions</a>
+                        </li>
+                        <li>
+                            <a href="methods_countries.html">countries</a>
+                        </li>
+                        <li>
+                            <a href="methods_events.html">events</a>
+                        </li>
+                        <li>
+                            <a href="methods_eventTypes.html">eventTypes</a>
+                        </li>
+                        <li>
+                            <a href="login_session.html">login + session</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketCatalogue.html">marketCatalogue</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_venues.html">venues</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
+                        Misc <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="betting_enums.html">Betting Enums</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+<h1 class="title">login and session</h1>
+</div>
+
+
+<p>The environment returned by the <a href="betfair.html"><code>betfair</code></a> function contains a number of methods for querying the Betfair API-NG. Two important methods that may require attention are <code>session</code> and <code>login</code>.</p>
+<p>So login as shown below…</p>
+<pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+<p>If everything went smoothly Betfair will have issued you with a session token. To check this is the case, use the <code>session</code> method:</p>
+<pre class="sourceCode r"><code class="sourceCode r">bf$<span class="kw">session</span>()</code></pre>
+<p>The above will print your current session token, if you have been assigned one. If you entered invalid credentials, then the <code>login</code> method allows you to login again with valid credentials:</p>
+<pre class="sourceCode r"><code class="sourceCode r">bf$<span class="kw">login</span>(<span class="dt">usr =</span> username, <span class="dt">pwd =</span> password, <span class="dt">key =</span> API_key)</code></pre>
+<p>You do not need to write to a new object, or overwrite the environment you initially created (in the case above the <code>bf</code> object), the <code>login</code> method will simply overwrite the credentials in the <code>bf</code> environment.</p>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

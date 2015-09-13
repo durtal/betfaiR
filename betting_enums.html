@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>betting enums</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<style type="text/css">
+
+	/* padding for bootstrap navbar */
+	body {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	@media (max-width: 979px) {
+		body {
+			padding-top: 0;
+		}
+	}
+
+	/* offset scroll position for anchor links (for fixed navbar) */
+	@media (min-width: 980px) {
+		.section h2 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+		.section h3 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	/* don't use link color in navbar */
+	.dropdown-menu>li>a {
+		color: black;
+	}
+
+	/* some padding for disqus */
+	#disqus_thread {
+		margin-top: 45px;
+	}
+
+</style>
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+<h1>betfaiR</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#betfaiR-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://github.com/durtal" class="navbar-brand">durtal@github</a>
+        </div>
+        <div class="collapse navbar-collapse" id="betfaiR-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
+                        Primary Funs <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">Environment</li>
+                        <li>
+                            <a href="betfair.html">betfair</a>
+                        </li>
+                        <li class="dropdown-header">Misc</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter()</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
+                        Methods <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="methods_competitions.html">competitions</a>
+                        </li>
+                        <li>
+                            <a href="methods_countries.html">countries</a>
+                        </li>
+                        <li>
+                            <a href="methods_events.html">events</a>
+                        </li>
+                        <li>
+                            <a href="methods_eventTypes.html">eventTypes</a>
+                        </li>
+                        <li>
+                            <a href="login_session.html">login + session</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketCatalogue.html">marketCatalogue</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_venues.html">venues</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
+                        Misc <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="betting_enums.html">Betting Enums</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+<h1 class="title">betting enums</h1>
+</div>
+
+
+<div id="marketprojection" class="section level3">
+<h3>MarketProjection</h3>
+<ul>
+<li>COMPETITION
+<ul>
+<li>If not selected then the competition will not be returned with marketCatalogue.</li>
+</ul></li>
+<li>EVENT
+<ul>
+<li>If not selected then the event will not be returned with marketCatalogue.</li>
+</ul></li>
+<li>EVENT_TYPE
+<ul>
+<li>If not selected then the eventType will not be returned with marketCatalogue.</li>
+</ul></li>
+<li>MARKET_START_TIME
+<ul>
+<li>If not selected then the start time will not be returned with marketCatalogue.</li>
+</ul></li>
+<li>MARKET_DESCRIPTION
+<ul>
+<li>If not selected then the description will not be returned with marketCatalogue.</li>
+</ul></li>
+<li>RUNNER_DESCRIPTION
+<ul>
+<li>If not selected then the runners will not be returned with marketCatalogue.</li>
+</ul></li>
+<li>RUNNER_METADATA
+<ul>
+<li>If not selected then the runner metadata will not be returned with marketCatalogue. If selected then RUNNER_DESCRIPTION will also be returned regardless of whether it is included as a market projection.</li>
+</ul></li>
+</ul>
+</div>
+<div id="pricedata" class="section level3">
+<h3>PriceData</h3>
+<ul>
+<li>SP_AVAILABLE
+<ul>
+<li>Amount available for the BSP auction.</li>
+</ul></li>
+<li>SP_TRADED
+<ul>
+<li>Amount traded in the BSP auction.</li>
+</ul></li>
+<li>EX_BEST_OFFERS
+<ul>
+<li>Only the best prices available for each runner, to requested price depth.</li>
+</ul></li>
+<li>EX_ALL_OFFERS
+<ul>
+<li>EX_ALL_OFFERS trumps EX_BEST_OFFERS if both settings are present.</li>
+</ul></li>
+<li>EX_TRADED
+<ul>
+<li>Amount traded on the exchange.</li>
+</ul></li>
+</ul>
+</div>
+<div id="matchprojection" class="section level3">
+<h3>MatchProjection</h3>
+<ul>
+<li>NO_ROLLUP
+<ul>
+<li>No rollup, return raw fragments.</li>
+</ul></li>
+<li>ROLLED_UP_BY_PRICE
+<ul>
+<li>Rollup matched amounts by distinct matched prices per side.</li>
+</ul></li>
+<li>ROLLED_UP_BY_AVG_PRICE
+<ul>
+<li>Rollup matched amounts by average matched price per side.</li>
+</ul></li>
+</ul>
+</div>
+<div id="orderprojection" class="section level3">
+<h3>OrderProjection</h3>
+<ul>
+<li>ALL
+<ul>
+<li>EXECUTABLE and EXECUTION_COMPLETE orders.</li>
+</ul></li>
+<li>EXECUTABLE
+<ul>
+<li>An order that has a remaining unmatched portion.</li>
+</ul></li>
+<li>EXECUTION_COMPLETE
+<ul>
+<li>An order that does not have any remaining unmatched portion.</li>
+</ul></li>
+</ul>
+</div>
+<div id="marketstatus" class="section level3">
+<h3>MarketStatus</h3>
+<ul>
+<li>INACTIVE
+<ul>
+<li>The market has been created but isn’t yet available.</li>
+</ul></li>
+<li>OPEN
+<ul>
+<li>The market is open for betting.</li>
+</ul></li>
+<li>SUSPENDED
+<ul>
+<li>The market is suspended and not available for betting.</li>
+</ul></li>
+<li>CLOSED
+<ul>
+<li>The market has been settled and is no longer available for betting.</li>
+</ul></li>
+</ul>
+</div>
+<div id="runnerstatus" class="section level3">
+<h3>RunnerStatus</h3>
+<ul>
+<li>ACTIVE
+<ul>
+<li>ACTIVE</li>
+</ul></li>
+<li>WINNER
+<ul>
+<li>WINNER</li>
+</ul></li>
+<li>LOSER
+<ul>
+<li>LOSER</li>
+</ul></li>
+<li>REMOVED_VACANT
+<ul>
+<li>REMOVED_VACANT applies to Greyhounds. Greyhound markets always return a fixed number of runners (traps). If a dog has been removed, the trap is shown as vacant.</li>
+</ul></li>
+<li>REMOVED
+<ul>
+<li>REMOVED</li>
+</ul></li>
+<li>HIDDEN
+<ul>
+<li>The selection is hidden from the market. This occurs in Horse Racing markets were runners is hidden when it is doesnâ€™t hold an official entry following an entry stage. This could be because the horse was never entered or because they have been scratched from a race at a declaration stage. All matched customer bet prices are set to 1.0 even if there are later supplementary stages. Should it appear likely that a specific runner may actually be supplemented into the race this runner will be reinstated with all matched customer bets set back to the original prices.</li>
+</ul></li>
+</ul>
+</div>
+<div id="timegranularity" class="section level3">
+<h3>TimeGranularity</h3>
+<ul>
+<li>DAYS</li>
+<li>HOURS</li>
+<li>MINUTES</li>
+</ul>
+</div>
+<div id="side" class="section level3">
+<h3>Side</h3>
+<ul>
+<li>BACK
+<ul>
+<li>To back a team, horse or outcome is to bet on the selection to win.</li>
+</ul></li>
+<li>LAY
+<ul>
+<li>To lay a team, horse, or outcome is to bet on the selection to lose.</li>
+</ul></li>
+</ul>
+</div>
+<div id="orderstatus" class="section level3">
+<h3>OrderStatus</h3>
+<ul>
+<li>EXECUTION_COMPLETE
+<ul>
+<li>An order that does not have any remaining unmatched portion.</li>
+</ul></li>
+<li>EXECUTABLE
+<ul>
+<li>An order that has a remaining unmatched portion.</li>
+</ul></li>
+</ul>
+</div>
+<div id="orderby" class="section level3">
+<h3>OrderBy</h3>
+<ul>
+<li>BY_BET
+<ul>
+<li><strong>Deprecated</strong>. Use BY_PLACE_TIME instead. Order by placed time, then bet id.</li>
+</ul></li>
+<li>BY_MARKET
+<ul>
+<li>Order by market id, then placed time, then bet id.</li>
+</ul></li>
+<li>BY_MATCH_TIME
+<ul>
+<li>Order by time of last matched fragment (if any), then placed time, then bet id. Filters out orders which have no matched date. The dateRange filter (if specified) is applied to the matched date.</li>
+</ul></li>
+<li>BY_PLACE_TIME
+<ul>
+<li>Order by placed time, then bet id. This is an alias of to be deprecated BY_BET. The dateRange filter (if specified) is applied to the placed date.</li>
+</ul></li>
+<li>BY_SETTLED_TIME
+<ul>
+<li>Order by time of last settled fragment (if any due to partial market settlement), then by last match time, then placed time, then bet id. Filters out orders which have not been settled. The dateRange filter (if specified) is applied to the settled date.</li>
+</ul></li>
+<li>BY_VOID_TIME
+<ul>
+<li>Order by time of last voided fragment (if any), then by last match time, then placed time, then bet id. Filters out orders which have not been voided. The dateRange filter (if specified) is applied to the voided date.</li>
+</ul></li>
+</ul>
+</div>
+<div id="sortdir" class="section level3">
+<h3>SortDir</h3>
+<ul>
+<li>EARLIEST_TO_LATEST
+<ul>
+<li>Order from earliest value to latest e.g. lowest betId is first in the results.</li>
+</ul></li>
+<li>LATEST_TO_EARLIEST
+<ul>
+<li>Order from the latest value to the earliest e.g. highest betId is first in the results.</li>
+</ul></li>
+</ul>
+</div>
+<div id="ordertype" class="section level3">
+<h3>OrderType</h3>
+<ul>
+<li>LIMIT
+<ul>
+<li>A normal exchange limit order for immediate execution.</li>
+</ul></li>
+<li>LIMIT_ON_CLOSE
+<ul>
+<li>Limit order for the auction (SP).</li>
+</ul></li>
+<li>MARKET_ON_CLOSE
+<ul>
+<li>Market order for the auction (SP).</li>
+</ul></li>
+</ul>
+</div>
+<div id="marketsort" class="section level3">
+<h3>MarketSort</h3>
+<ul>
+<li>MINIMUM_TRADED
+<ul>
+<li>Minimum traded volume</li>
+</ul></li>
+<li>MAXIMUM_TRADED
+<ul>
+<li>Maximum traded volume</li>
+</ul></li>
+<li>MINIMUM_AVAILABLE
+<ul>
+<li>Minimum available to match</li>
+</ul></li>
+<li>MAXIMUM_AVAILABLE
+<ul>
+<li>Maximum available to match</li>
+</ul></li>
+<li>FIRST_TO_START
+<ul>
+<li>The closest markets based on their expected start time.</li>
+</ul></li>
+<li>LAST_TO_START
+<ul>
+<li>The most distant markets based on their expected start time.</li>
+</ul></li>
+</ul>
+</div>
+<div id="marketbettingtype" class="section level3">
+<h3>MarketBettingType</h3>
+<ul>
+<li>ODDS
+<ul>
+<li>Odds Market</li>
+</ul></li>
+<li>LINE
+<ul>
+<li>Line Market</li>
+</ul></li>
+<li>RANGE
+<ul>
+<li>Range Market</li>
+</ul></li>
+<li>ASIAN_HANDICAP_DOUBLE_LINE
+<ul>
+<li>Asian Handicap Market</li>
+</ul></li>
+<li>ASIAN_HANDICAP_SINGLE_LINE
+<ul>
+<li>Asian Single Line Market</li>
+</ul></li>
+<li>FIXED_ODDS
+<ul>
+<li>Sportsbook Odds Market. This type is deprecated and will be removed in future releases, when Sportsbook markets will be represented as ODDS market but with a different product type.</li>
+</ul></li>
+</ul>
+</div>
+<div id="executionreportstatus" class="section level3">
+<h3>ExecutionReportStatus</h3>
+<ul>
+<li>SUCCESS
+<ul>
+<li>Order processed successfully</li>
+</ul></li>
+<li>FAILURE
+<ul>
+<li>Order failed.</li>
+</ul></li>
+<li>PROCESSED_WITH_ERRORS
+<ul>
+<li>The order itself has been accepted, but at least one (possibly all) actions have generated errors. This error only occurs for replaceOrders, cancelOrders and updateOrders operations. The placeOrders operation will not return PROCESSED_WITH_ERRORS status as it is an atomic operation.</li>
+</ul></li>
+<li>TIMEOUT
+<ul>
+<li>Order timed out.</li>
+</ul></li>
+</ul>
+</div>
+<div id="executionreporterrorcode" class="section level3">
+<h3>ExecutionReportErrorCode</h3>
+<ul>
+<li>ERROR_IN_MATCHER
+<ul>
+<li>The matcher is not healthy</li>
+</ul></li>
+<li>PROCESSED_WITH_ERRORS
+<ul>
+<li>The order itself has been accepted, but at least one (possibly all) actions have generated errors</li>
+</ul></li>
+<li>BET_ACTION_ERROR
+<ul>
+<li>There is an error with an action that has caused the entire order to be rejected. Check the instructionReports errorCode for the reason for the rejection of the order.</li>
+</ul></li>
+<li>INVALID_ACCOUNT_STATE
+<ul>
+<li>Order rejected due to the account’s status (suspended, inactive, dup cards)</li>
+</ul></li>
+<li>INVALID_WALLET_STATUS
+<ul>
+<li>Order rejected due to the account’s wallet’s status</li>
+</ul></li>
+<li>INSUFFICIENT_FUNDS
+<ul>
+<li>Account has exceeded its exposure limit or available to bet limit</li>
+</ul></li>
+<li>LOSS_LIMIT_EXCEEDED
+<ul>
+<li>The account has exceed the self imposed loss limit</li>
+</ul></li>
+<li>MARKET_SUSPENDED
+<ul>
+<li>Market is suspended</li>
+</ul></li>
+<li>MARKET_NOT_OPEN_FOR_BETTING
+<ul>
+<li>Market is not open for betting. It is either not yet active, suspended or closed awaiting settlement.</li>
+</ul></li>
+<li>DUPLICATE_TRANSACTION
+<ul>
+<li>Duplicate customer reference data submitted - Please note: There is a time window associated with the de-duplication of duplicate submissions which is 60 second</li>
+</ul></li>
+<li>INVALID_ORDER
+<ul>
+<li>Order cannot be accepted by the matcher due to the combination of actions. For example, bets being edited are not on the same market, or order includes both edits and placement</li>
+</ul></li>
+<li>INVALID_MARKET_ID
+<ul>
+<li>Market doesn’t exist</li>
+</ul></li>
+<li>PERMISSION_DENIED
+<ul>
+<li>Business rules do not allow order to be placed. You are either attempting to place the order using a Delayed Application Key or from a restricted jurisdiction (i.e. USA)</li>
+</ul></li>
+<li>DUPLICATE_BETIDS
+<ul>
+<li>duplicate bet ids found</li>
+</ul></li>
+<li>NO_ACTION_REQUIRED
+<ul>
+<li>Order hasn’t been passed to matcher as system detected there will be no state change</li>
+</ul></li>
+<li>SERVICE_UNAVAILABLE
+<ul>
+<li>The requested service is unavailable</li>
+</ul></li>
+<li>REJECTED_BY_REGULATOR
+<ul>
+<li>The regulator rejected the order. On the Italian Exchange this error will occur if more than 50 bets are sent in a single placeOrders request.</li>
+</ul></li>
+</ul>
+</div>
+<div id="persistencetype" class="section level3">
+<h3>PersistenceType</h3>
+<ul>
+<li>LAPSE
+<ul>
+<li>Lapse the order when the market is turned in-play</li>
+</ul></li>
+<li>PERSIST
+<ul>
+<li>Persist the order to in-play. The bet will be place automatically into the in-play market at the start of the event.</li>
+</ul></li>
+<li>MARKET_ON_CLOSE
+<ul>
+<li>Put the order into the auction (SP) at turn-in-play</li>
+</ul></li>
+</ul>
+</div>
+<div id="instructionreportstatus" class="section level3">
+<h3>InstructionReportStatus</h3>
+<ul>
+<li>SUCCESS</li>
+<li>FAILURE</li>
+<li>TIMEOUT</li>
+</ul>
+</div>
+<div id="instructionreporterrorcode" class="section level3">
+<h3>InstructionReportErrorCode</h3>
+<ul>
+<li>INVALID_BET_SIZE
+<ul>
+<li>bet size is invalid for your currency or your regulator</li>
+</ul></li>
+<li>INVALID_RUNNER
+<ul>
+<li>Runner does not exist, includes vacant traps in greyhound racing</li>
+</ul></li>
+<li>BET_TAKEN_OR_LAPSED
+<ul>
+<li>Bet cannot be cancelled or modified as it has already been taken or has lapsed Includes attempts to cancel/modify market on close BSP bets and cancelling limit on close BSP bets</li>
+</ul></li>
+<li>BET_IN_PROGRESS
+<ul>
+<li>No result was received from the matcher in a timeout configured for the system</li>
+</ul></li>
+<li>RUNNER_REMOVED
+<ul>
+<li>Runner has been removed from the event</li>
+</ul></li>
+<li>MARKET_NOT_OPEN_FOR_BETTING
+<ul>
+<li>Attempt to edit a bet on a market that has closed.</li>
+</ul></li>
+<li>LOSS_LIMIT_EXCEEDED
+<ul>
+<li>The action has caused the account to exceed the self imposed loss limit</li>
+</ul></li>
+<li>MARKET_NOT_OPEN_FOR_BSP_BETTING
+<ul>
+<li>Market now closed to bsp betting. Turned in-play or has been reconciled</li>
+</ul></li>
+<li>INVALID_PRICE_EDIT
+<ul>
+<li>Attempt to edit down the price of a bsp limit on close lay bet, or edit up the price of a limit on close back bet</li>
+</ul></li>
+<li>INVALID_ODDS
+<ul>
+<li>Odds not on price ladder - either edit or placement</li>
+</ul></li>
+<li>INSUFFICIENT_FUNDS
+<ul>
+<li>Insufficient funds available to cover the bet action. Either the exposure limit or available to bet limit would be exceeded</li>
+</ul></li>
+<li>INVALID_PERSISTENCE_TYPE
+<ul>
+<li>Invalid persistence type for this market, e.g. KEEP for a non bsp market</li>
+</ul></li>
+<li>ERROR_IN_MATCHER
+<ul>
+<li>A problem with the matcher prevented this action completing successfully</li>
+</ul></li>
+<li>INVALID_BACK_LAY_COMBINATION
+<ul>
+<li>The order contains a back and a lay for the same runner at overlapping prices. This would guarantee a self match. This also applies to BSP limit on close bets</li>
+</ul></li>
+<li>ERROR_IN_ORDER
+<ul>
+<li>The action failed because the parent order failed</li>
+</ul></li>
+<li>INVALID_BID_TYPE
+<ul>
+<li>Bid type is mandatory</li>
+</ul></li>
+<li>INVALID_BET_ID
+<ul>
+<li>Bet for id supplied has not been found</li>
+</ul></li>
+<li>CANCELLED_NOT_PLACED
+<ul>
+<li>Bet cancelled but replacement bet was not placed</li>
+</ul></li>
+<li>RELATED_ACTION_FAILED
+<ul>
+<li>Action failed due to the failure of a action on which this action is dependent</li>
+</ul></li>
+<li>NO_ACTION_REQUIRED
+<ul>
+<li>the action does not result in any state change. eg changing a persistence to it’s current value</li>
+</ul></li>
+</ul>
+</div>
+<div id="rollupmodel" class="section level3">
+<h3>RollupModel</h3>
+<ul>
+<li>STAKE
+<ul>
+<li>The volumes will be rolled up to the minimum value which is &gt;= rollupLimit.</li>
+</ul></li>
+<li>PAYOUT
+<ul>
+<li>The volumes will be rolled up to the minimum value where the payout( price * volume ) is &gt;= rollupLimit.</li>
+</ul></li>
+<li>MANAGED_LIABILITY
+<ul>
+<li>The volumes will be rolled up to the minimum value which is &gt;= rollupLimit, until a lay price threshold. There after, the volumes will be rolled up to the minimum value such that the liability &gt;= a minimum liability. Not supported as yet.</li>
+</ul></li>
+<li>NONE
+<ul>
+<li>No rollup will be applied. However the volumes will be filtered by currency specific minimum stake unless overridden specifically for the channel.</li>
+</ul></li>
+</ul>
+</div>
+<div id="groupby" class="section level3">
+<h3>GroupBy</h3>
+<ul>
+<li>EVENT_TYPE
+<ul>
+<li>A roll up of settled P&amp;L, commission paid and number of bet orders, on a specified event type</li>
+</ul></li>
+<li>EVENT
+<ul>
+<li>A roll up of settled P&amp;L, commission paid and number of bet orders, on a specified event</li>
+</ul></li>
+<li>MARKET
+<ul>
+<li>A roll up of settled P&amp;L, commission paid and number of bet orders, on a specified market</li>
+</ul></li>
+<li>SIDE
+<ul>
+<li>An averaged roll up of settled P&amp;L, and number of bets, on the specified side of a specified selection within a specified market, that are either settled or voided</li>
+</ul></li>
+<li>BET
+<ul>
+<li>The P&amp;L, commission paid, side and regulatory information etc, about each individual bet order</li>
+</ul></li>
+</ul>
+</div>
+<div id="betstatus" class="section level3">
+<h3>BetStatus</h3>
+<ul>
+<li>SETTLED
+<ul>
+<li>A matched bet that was settled normally</li>
+</ul></li>
+<li>VOIDED
+<ul>
+<li>A matched bet that was subsequently voided by Betfair, before, during or after settlement</li>
+</ul></li>
+<li>LAPSED
+<ul>
+<li>Unmatched bet that was cancelled by Betfair (for example at turn in play).</li>
+</ul></li>
+<li>CANCELLED
+<ul>
+<li>Unmatched bet that was cancelled by an explicit customer action.</li>
+</ul></li>
+</ul>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+---
+title: "login and session"
+---
+
+The environment returned by the [`betfair`](betfair.html) function contains a number of methods for querying the Betfair API-NG.  Two important methods that may require attention are `session` and `login`.
+
+So login as shown below...
+
+```{r eval=FALSE}
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
+```
+
+If everything went smoothly Betfair will have issued you with a session token.  To check this is the case, use the `session` method:
+
+```{r eval=FALSE}
+bf$session()
+```
+
+The above will print your current session token, if you have been assigned one.  If you entered invalid credentials, then the `login` method allows you to login again with valid credentials:
+
+```{r eval=FALSE}
+bf$login(usr = username, pwd = password, key = API_key)
+```
+
+You do not need to write to a new object, or overwrite the environment you initially created (in the case above the `bf` object), the `login` method will simply overwrite the credentials in the `bf` environment.
