@@ -71,7 +71,7 @@ betfair_request.marketTypes <- function(x) {
 
 #' @export
 betfair_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
-                                        maxResults = 1) {
+                                            maxResults = 1) {
 
     req <- standard_request(method = "listMarketCatalogue")
 
