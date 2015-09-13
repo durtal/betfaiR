@@ -46,18 +46,18 @@ method | details | available | help
 `countries` | Retrieve data about the different countries hosting events | `TRUE` | [countries](methods_countries.html)
 `events` | Retrieve data about the different events | `TRUE` | [events](methods_events.html)
 `eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` | [eventTypes](methods_eventTypes.html)
-`login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` |
-`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `TRUE` |
+`login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` | [login](login_session.html)
+`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `TRUE` | _not available_
 `marketCatalogue` | Retrieve data about the different types of markets | `FALSE` | [marketCatalogue](methods_marketCatalogue.html)
-`marketTypes` | Retrieve data about the different types of markets | `FALSE` | [marketTypes](methods_marketTypes.html)
-`placeOrders` |  | `FALSE` | 
-`session` | Print details about the session, including login in details and session token | `TRUE` |
-`venues` | Retrieve data about the venues hosting racing | `TRUE` | [venues](methods_venues.html)
+`marketTypes` | Retrieve counts for the different market types | `FALSE` | [marketTypes](methods_marketTypes.html)
+`placeOrders` |  | `FALSE` | _not available_
+`session` | Prints session token | `TRUE` | [session](login_session.html)
+`venues` | Retrieve data about the venues hosting racing (horse and greyhound) | `TRUE` | [venues](methods_venues.html)
 
 ### appendix
 #### username, password and API key best practices
 
-The `betfaiR` package requires a valid Betfair username, password, and API key - see the Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key) for how to get an API key.
+The `betfaiR` package requires a valid Betfair username, password, and API key - see the Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key.  The steps below show how to securely store your credentials as environment variables, preventing them from being shared inadvertently via .Rhistory or .RData files.
 
 * Identify your home directory. Not sure? Enter `normalizePath("~/")` in the R console.
 * Create a new text file.  If in RStudio, do _File > New File > Text file_

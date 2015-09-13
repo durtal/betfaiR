@@ -160,6 +160,9 @@ img {
                             <a href="methods_eventTypes.html">eventTypes</a>
                         </li>
                         <li>
+                            <a href="login_session.html">login + session</a>
+                        </li>
+                        <li>
                             <a href="methods_marketCatalogue.html">marketCatalogue</a>
                         </li>
                         <li>
@@ -169,6 +172,21 @@ img {
                             <a href="methods_venues.html">venues</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
+                        Misc <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="betting_enums.html">Betting Enums</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
                 </li>
             </ul>
         </div>
@@ -180,7 +198,7 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-09-12 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-09-13 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username, <span class="dt">pwd =</span> password, <span class="dt">key =</span> api_key)</code></pre>
@@ -265,11 +283,13 @@ img {
 <td align="left"><code>login</code></td>
 <td align="left">Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used</td>
 <td align="left"><code>TRUE</code></td>
+<td align="left"><a href="login_session.html">login</a></td>
 </tr>
 <tr class="even">
 <td align="left"><code>marketBook</code></td>
 <td align="left">Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market</td>
 <td align="left"><code>TRUE</code></td>
+<td align="left"><em>not available</em></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>marketCatalogue</code></td>
@@ -279,7 +299,7 @@ img {
 </tr>
 <tr class="even">
 <td align="left"><code>marketTypes</code></td>
-<td align="left">Retrieve data about the different types of markets</td>
+<td align="left">Retrieve counts for the different market types</td>
 <td align="left"><code>FALSE</code></td>
 <td align="left"><a href="methods_marketTypes.html">marketTypes</a></td>
 </tr>
@@ -287,15 +307,17 @@ img {
 <td align="left"><code>placeOrders</code></td>
 <td align="left"></td>
 <td align="left"><code>FALSE</code></td>
+<td align="left"><em>not available</em></td>
 </tr>
 <tr class="even">
 <td align="left"><code>session</code></td>
-<td align="left">Print details about the session, including login in details and session token</td>
+<td align="left">Prints session token</td>
 <td align="left"><code>TRUE</code></td>
+<td align="left"><a href="login_session.html">session</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>venues</code></td>
-<td align="left">Retrieve data about the venues hosting racing</td>
+<td align="left">Retrieve data about the venues hosting racing (horse and greyhound)</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_venues.html">venues</a></td>
 </tr>
@@ -306,7 +328,7 @@ img {
 <h3>appendix</h3>
 <div id="username-password-and-api-key-best-practices" class="section level4">
 <h4>username, password and API key best practices</h4>
-<p>The <code>betfaiR</code> package requires a valid Betfair username, password, and API key - see the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key) for how to get an API key.</p>
+<p>The <code>betfaiR</code> package requires a valid Betfair username, password, and API key - see the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key. The steps below show how to securely store your credentials as environment variables, preventing them from being shared inadvertently via .Rhistory or .RData files.</p>
 <ul>
 <li>Identify your home directory. Not sure? Enter <code>normalizePath(&quot;~/&quot;)</code> in the R console.</li>
 <li>Create a new text file. If in RStudio, do <em>File &gt; New File &gt; Text file</em></li>

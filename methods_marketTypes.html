@@ -60,6 +60,32 @@
 </style>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -134,6 +160,9 @@ img {
                             <a href="methods_eventTypes.html">eventTypes</a>
                         </li>
                         <li>
+                            <a href="login_session.html">login + session</a>
+                        </li>
+                        <li>
                             <a href="methods_marketCatalogue.html">marketCatalogue</a>
                         </li>
                         <li>
@@ -143,6 +172,21 @@ img {
                             <a href="methods_venues.html">venues</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
+                        Misc <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="betting_enums.html">Betting Enums</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
                 </li>
             </ul>
         </div>
@@ -154,7 +198,66 @@ img {
 </div>
 
 
+<p>Having logged in using the <a href="betfair.html"><code>betfair</code></a> function, the environment contains the <code>marketTypes</code> method. This method can be used to get the various types of markets (eg. WINNER, HANDICAP, OVER_UNDER_25, etc), and the number of markets.</p>
+<div id="usage" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>())</code></pre>
+</div>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>filter</code></td>
+<td align="left">select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair. If nothing is entered, <strong>all</strong> marketTypes are returned</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="return" class="section level3">
+<h3>return</h3>
+<p>The function returns a dataframe of market Types and the number of markets associated with that type.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">variable</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>marketType</code></td>
+<td align="left">the type of market (eg. WINNER, HANDICAP, OVER_UNDER_25)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>marketCount</code></td>
+<td align="left">the number of markets currently available associated with this market type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples" class="section level3">
+<h3>examples</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># login</span>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 
+<span class="co"># return all countries</span>
+bf$<span class="kw">marketTypes</span>()
+
+<span class="co"># return all horse racing events</span>
+bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
+
+<span class="co"># return all horse racing events whose start date is beyond next week</span>
+bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))</code></pre>
+</div>
 
 
 </div>

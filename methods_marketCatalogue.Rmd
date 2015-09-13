@@ -1,3 +1,31 @@
 ---
 title: "marketCatalogue"
 ---
+
+**This method needs a lot of work.  At the moment it returns the response from Betfair, while other methods parse the response into neat dataframes.**
+
+Having logged in using the [`betfair`](betfair.html) function, the environment contains the `marketCatalogue` method, which can be used to get market data.  You use `marketCatalogue` to retrieve the name of the market, the names of selections, and other information about the market.  _Market Data Request Limits apply_.
+
+### usage
+
+```{r eval=FALSE}
+bf$marketCatalogue(filter = marketFilter(),
+                   marketProjection = NULL,
+                   sort = NULL,
+                   maxResults = 1,
+                   keepRules = FALSE)
+```
+
+### arguments
+
+param | details
+------|--------
+`filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.
+`marketProjection` | the type and amount of data returned about the market, see section **Market Projection** in [Betting Enums](betting_enums.html) or visit the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection)
+`sort` | the order of the results, see section **sort** in [Betting Enums](betting_enums.html) or the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketSort)
+`maxResults` | limit on the number of results returned, default = 1
+`keepRules` | when **MARKET_DESCRIPTION** is entered into the `marketProjection` paramater it returns a large amount of text containing the rules of the market, by default these are discarded, change `keepRules = TRUE` to return the rules.
+
+### return
+
+At the moment this function doesn't parse the response from Betfair into neat dataframes like some of the other simpler methods.  This is due to the response being a nested structure and converting to a dataframe isn't easy, especially given the huge variety of markets available.
