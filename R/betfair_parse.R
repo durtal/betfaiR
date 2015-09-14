@@ -152,47 +152,6 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
         class(out) <- c("list", "marketCatalogue")
         return(out)
     })
-#     if("RUNNER_DESCRIPTION" %in% marketProjection) {
-#
-#         out <- lapply(res$result, function(x) {
-#             runners <- x$runners
-#             runners <- lapply(runners, data.frame, stringsAsFactors = FALSE)
-#             runners <- do.call(plyr::rbind.fill, runners)
-#             x$runners <- NULL
-#             market <- data.frame(x, stringsAsFactors = FALSE)
-#             names(market) <- gsub("[[:alpha:]]*\\.", "", names(market))
-#             outList <- list(market = market,
-#                             runners = runners)
-#             if(!keepRules) {
-#                 market$rules <- NULL
-#             } else {
-#                 rules <- tidyRules(market$rules)
-#                 market$rules <- NULL
-#                 outList$rules <- rules
-#             }
-#             return(outList)
-#         })
-#
-#         class(out) <- c("list", "marketCatalogue_runners")
-#
-#     } else {
-#         out <- lapply(res$result, function(x) {
-#             market <- data.frame(x, stringsAsFactors = FALSE)
-#             names(market) <- gsub("[[:alpha:]]*\\.", "", names(market))
-#             outList <- list(market = market)
-#             if(!keepRules) {
-#                 market$rules <- NULL
-#             } else {
-#                 rules <- tidyRules(market$rules)
-#                 market$rules <- NULL
-#                 outList$rules <- rules
-#             }
-#             return(outList)
-#         })
-#
-#         class(out) <- c("list", "marketCatalogue_simple")
-#
-#     }
 
     class(out) <- c("list", "marketCatalogue_list")
     return(out)
