@@ -258,18 +258,18 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   eventType_id eventType_name marketCount
-## 1            1         Soccer       13786
-## 2       468328       Handball          37
-## 3            2         Tennis         370
+## 1            1         Soccer       14734
+## 2       468328       Handball          49
+## 3            2         Tennis         337
 ## 4            3           Golf         127
-## 5            4        Cricket         196
-## 6            5    Rugby Union         250</code></pre>
+## 5            4        Cricket         193
+## 6            5    Rugby Union         268</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   eventType_id eventType_name marketCount
-## 1            1         Soccer        1396
-## 2            2         Tennis          12
+## 1            1         Soccer        1711
+## 2            2         Tennis          11
 ## 3         6231 Financial Bets           3
 ## 4      2378961       Politics          15
 ## 5            3           Golf           2
@@ -278,7 +278,7 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>(<span cl
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   eventType_id eventType_name marketCount
-## 1            7   Horse Racing          38</code></pre>
+## 1            7   Horse Racing          43</code></pre>
 </div>
 
 

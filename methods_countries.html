@@ -254,22 +254,22 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">countries</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   countryCode marketCount
-## 1          GB        2398
-## 2          IE         244
-## 3          US         985
-## 4          CA         182
-## 5          SE         437
-## 6          RO         113</code></pre>
+## 1          GB        2465
+## 2          IE         223
+## 3          US        1016
+## 4          CA         174
+## 5          SE         548
+## 6          RO         223</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all countries with horse racing markets</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">countries</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   countryCode marketCount
-## 1          IE          47
-## 2          GB         282
-## 3          ZA          10
-## 4          FR          20
-## 5          US         139
-## 6          CL          13</code></pre>
+## 1          IE          25
+## 2          GB         123
+## 3          CL          12
+## 4          FR          22
+## 5          US         131
+## 6          ZA          16</code></pre>
 </div>
 
 

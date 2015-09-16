@@ -290,20 +290,20 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##   event_id           event_name event_countryCode event_timezone
-## 1 27539282   Aut (FRA) 16th Sep                FR            CET
-## 2 27540728  Sand (RFC) 16th Sep                GB  Europe/London
-## 3 27540729  List (AvB) 16th Sep                IE  Europe/London
-## 4 27504970       Ascot 17th Oct                GB  Europe/London
-## 5  3453086     Stewards Enquiry                GB  Europe/London
-## 6 27540721 Yarm (Dist) 16th Sep                GB  Europe/London
-##   event_venue           event_openDate marketCount
-## 1     Auteuil 2015-09-16T14:10:00.000Z          16
-## 2     Sandown 2015-09-16T12:45:00.000Z           2
-## 3    Listowel 2015-09-16T13:10:00.000Z           8
-## 4        &lt;NA&gt; 2015-10-17T11:45:00.000Z           3
-## 5        &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
-## 6    Yarmouth 2015-09-16T12:55:00.000Z           1</code></pre>
+<pre><code>##   event_id         event_name event_countryCode event_timezone event_venue
+## 1 27539282 Aut (FRA) 16th Sep                FR            CET     Auteuil
+## 2 27533661      Newb 28th Nov                GB  Europe/London     Newbury
+## 3 27540835      List 17th Sep                IE  Europe/London    Listowel
+## 4 27504970     Ascot 17th Oct                GB  Europe/London        &lt;NA&gt;
+## 5 27541204      Ascot 3rd Oct                GB  Europe/London        &lt;NA&gt;
+## 6  3453086   Stewards Enquiry                GB  Europe/London        &lt;NA&gt;
+##             event_openDate marketCount
+## 1 2015-09-16T14:10:00.000Z           2
+## 2 2015-11-28T15:00:00.000Z           1
+## 3 2015-09-17T13:15:00.000Z          23
+## 4 2015-10-17T11:45:00.000Z           3
+## 5 2015-10-03T14:45:00.000Z           1
+## 6 2014-01-01T00:00:00.000Z           1</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
@@ -312,15 +312,15 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class=
 ## 2 27467672 Meydan (UAE) 26th Mar                AE     Asia/Dubai
 ## 3 27533631         Hayd 21st Nov                GB  Europe/London
 ## 4 27504970        Ascot 17th Oct                GB  Europe/London
-## 5 27299863   Keenl (US) 31st Oct                US     US/Eastern
-## 6 27509313            Epsom 2016                GB  Europe/London
+## 5 27541204         Ascot 3rd Oct                GB  Europe/London
+## 6 27299863   Keenl (US) 31st Oct                US     US/Eastern
 ##   event_venue           event_openDate marketCount
 ## 1     Newbury 2015-11-28T15:00:00.000Z           1
 ## 2        &lt;NA&gt; 2016-03-26T13:00:00.000Z           1
 ## 3        &lt;NA&gt; 2015-11-21T15:00:00.000Z           1
 ## 4        &lt;NA&gt; 2015-10-17T11:45:00.000Z           3
-## 5        &lt;NA&gt; 2015-10-31T17:00:00.000Z           3
-## 6        &lt;NA&gt; 2016-06-04T15:00:00.000Z           2</code></pre>
+## 5        &lt;NA&gt; 2015-10-03T14:45:00.000Z           1
+## 6        &lt;NA&gt; 2015-10-31T17:00:00.000Z           3</code></pre>
 </div>
 
 
