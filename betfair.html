@@ -198,7 +198,7 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-09-13 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-09-16 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username, <span class="dt">pwd =</span> password, <span class="dt">key =</span> api_key)</code></pre>
@@ -342,8 +342,9 @@ BETFAIR_KEY=yourAPIkey</code></pre></li>
 <li><p>Use <code>Sys.getenv()</code> to access your username, password, and API key. For example you would use them like so with the <code>betfair</code> function:</p></li>
 </ul>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load library</span>
-<span class="kw">library</span>(betfaiR)
-<span class="co"># login</span>
+<span class="kw">library</span>(betfaiR)</code></pre>
+<pre><code>## Warning: package &#39;betfaiR&#39; was built under R version 3.2.1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># login</span>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>), <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>), <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 bf</code></pre>
 <pre><code>## &lt;betfaiR API&gt;

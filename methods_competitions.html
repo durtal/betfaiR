@@ -261,23 +261,30 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <span class="co"># return all competitions</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>()
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##   competition_id      competition_name marketCount competitionRegion
-## 1         892425         Czech 3. Liga          68               CZE
-## 2        8111111 Shanghai Masters 2015          41               CHN
-## 3        6761189       French Politics           1               FRA
-## 4         857992     Chilean Primera B          61               CHL
-## 5              7   Austrian Bundesliga          35               AUT
-## 6              9            Erste Liga          76               AUT</code></pre>
+<pre><code>##   competition_id                          competition_name marketCount
+## 1        8111111                     Shanghai Masters 2015          33
+## 2         892425                             Czech 3. Liga         198
+## 3        6761189                           French Politics           1
+## 4              7                       Austrian Bundesliga          10
+## 5        7008771 New Customer Only. First Bet Exclusive 10           1
+## 6              9                                Erste Liga         150
+##   competitionRegion
+## 1               CHN
+## 2               CZE
+## 3               FRA
+## 4               AUT
+## 5               GBR
+## 6               AUT</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all football competitions</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   competition_id      competition_name marketCount competitionRegion
-## 1         892425         Czech 3. Liga          68               CZE
-## 2         857992     Chilean Primera B          61               CHL
-## 3         744098       Chilean Primera         152               CHL
-## 4        3242305 Latvian Second League          21               LVA
-## 5          97807    Czech Republic Cup           2               CZE
-## 6              7   Austrian Bundesliga          35               AUT</code></pre>
+## 1         892425         Czech 3. Liga         198               CZE
+## 2        3242305 Latvian Second League          88               LVA
+## 3              7   Austrian Bundesliga          10               AUT
+## 4        7946082  Ukrainian U21 League          74               UKR
+## 5              9            Erste Liga         150               AUT
+## 6        5614746   FIFA World Cup 2018          10     International</code></pre>
 </div>
 
 

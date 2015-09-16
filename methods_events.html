@@ -273,37 +273,37 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <span class="co"># return all countries</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##   event_id                     event_name event_countryCode event_timezone
-## 1 27537569 Marquense v CSD Comunicaciones                GT  Europe/London
-## 2 27533712        Pordenone v Albinoleffe                IT  Europe/London
-## 3 27183450        ICC World Twenty20 2016                IN  Asia/Calcutta
-## 4 27357114             NFL Season 2015/16                US     US/Eastern
-## 5 27537573      CD Platense v Real Espana                HN  Europe/London
-## 6 27533717             Sudtirol v Mantova                IT  Europe/London
+<pre><code>##   event_id              event_name event_countryCode event_timezone
+## 1 27183450 ICC World Twenty20 2016                IN  Asia/Calcutta
+## 2 27357114      NFL Season 2015/16                US     US/Eastern
+## 3 27157164                 Group H                GB  Europe/London
+## 4 27157165                 Group I                GB  Europe/London
+## 5 27157160                 Group E                GB  Europe/London
+## 6 27157162                 Group F                GB  Europe/London
 ##             event_openDate marketCount event_venue
-## 1 2015-09-13T19:00:00.000Z          22        &lt;NA&gt;
-## 2 2015-09-13T15:30:00.000Z          20        &lt;NA&gt;
-## 3 2016-02-01T11:30:00.000Z           1        &lt;NA&gt;
-## 4 2015-09-11T00:30:00.000Z           4        &lt;NA&gt;
-## 5 2015-09-13T22:00:00.000Z          22        &lt;NA&gt;
-## 6 2015-09-13T16:00:00.000Z           2        &lt;NA&gt;</code></pre>
+## 1 2016-02-01T11:30:00.000Z           1        &lt;NA&gt;
+## 2 2015-09-11T00:30:00.000Z           4        &lt;NA&gt;
+## 3 2016-06-10T18:00:00.000Z           2        &lt;NA&gt;
+## 4 2016-06-10T18:00:00.000Z           2        &lt;NA&gt;
+## 5 2016-06-10T18:00:00.000Z           1        &lt;NA&gt;
+## 6 2016-06-10T18:00:00.000Z           2        &lt;NA&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##   event_id            event_name event_countryCode event_timezone
-## 1 27538323   Bath (AvB) 13th Sep                GB  Europe/London
-## 2 27504970        Ascot 17th Oct                GB  Europe/London
-## 3 27538057 Emerald (US) 13th Sep                US     US/Pacific
-## 4  3453086      Stewards Enquiry                GB  Europe/London
-## 5 27538330  FfosL (RFC) 13th Sep                GB  Europe/London
-## 6 27493874         Newm 26th Sep                GB  Europe/London
-##     event_venue           event_openDate marketCount
-## 1          Bath 2015-09-13T12:50:00.000Z           1
-## 2          &lt;NA&gt; 2015-10-17T11:45:00.000Z           3
-## 3 Emerald Downs 2015-09-13T21:02:00.000Z          22
-## 4          &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
-## 5      Ffos Las 2015-09-13T13:10:00.000Z           1
-## 6          &lt;NA&gt; 2015-09-26T14:00:00.000Z           3</code></pre>
+<pre><code>##   event_id           event_name event_countryCode event_timezone
+## 1 27539282   Aut (FRA) 16th Sep                FR            CET
+## 2 27540728  Sand (RFC) 16th Sep                GB  Europe/London
+## 3 27540729  List (AvB) 16th Sep                IE  Europe/London
+## 4 27504970       Ascot 17th Oct                GB  Europe/London
+## 5  3453086     Stewards Enquiry                GB  Europe/London
+## 6 27540721 Yarm (Dist) 16th Sep                GB  Europe/London
+##   event_venue           event_openDate marketCount
+## 1     Auteuil 2015-09-16T14:10:00.000Z          16
+## 2     Sandown 2015-09-16T12:45:00.000Z           2
+## 3    Listowel 2015-09-16T13:10:00.000Z           8
+## 4        &lt;NA&gt; 2015-10-17T11:45:00.000Z           3
+## 5        &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
+## 6    Yarmouth 2015-09-16T12:55:00.000Z           1</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
@@ -320,7 +320,7 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class=
 ## 3        &lt;NA&gt; 2015-11-21T15:00:00.000Z           1
 ## 4        &lt;NA&gt; 2015-10-17T11:45:00.000Z           3
 ## 5        &lt;NA&gt; 2015-10-31T17:00:00.000Z           3
-## 6        &lt;NA&gt; 2016-06-04T15:00:00.000Z           1</code></pre>
+## 6        &lt;NA&gt; 2016-06-04T15:00:00.000Z           2</code></pre>
 </div>
 
 

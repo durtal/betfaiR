@@ -75,4 +75,11 @@ bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
 # get market data on just one market
 tmp <- bf$marketCatalogue()
 tmp
+
+# get market data with details about the event and the runners
+tmp <- bf$marketCatalogue(marketProjection = c("EVENT", "runner_metadata"))
+tmp
+
+# to access the runners data
+tmp[[1]]$runners
 ```

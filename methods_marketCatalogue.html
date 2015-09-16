@@ -435,11 +435,91 @@ tmp</code></pre>
 <pre><code>## 
 ## Market ID:        1.101193124
 ## Market Name:      Next Conservative Leader
-## totalMatched:         40980.56 
+## totalMatched:         41919.04 
 ## 
 ## Event:
 ## 
 ##  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
+tmp</code></pre>
+<pre><code>## 
+## Market ID:        1.101193124
+## Market Name:      Next Conservative Leader
+## totalMatched:         41919.04 
+## 
+## Event:
+##        id               name countryCode      timezone
+##  27210582 Next Party Leaders          GB Europe/London
+##                  openDate
+##  2014-11-13T09:00:00.000Z
+## 
+## Runners:  53 
+##  selectionId       runnerName handicap sortPriority runnerId
+##      4551167  George Osborne         0            1  4551167
+##      4551155   Boris Johnson         0            2  4551155
+##      4551190     Theresa May         0            3  4551190
+##      8498834      Sajid Javid        0            4  8498834
+##      4551185 Phillip Hammond         0            5  4551185
+##      4551179    Michael Gove         0            6  4551179
+## 
+##  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to access the runners data</span>
+tmp[[<span class="dv">1</span>]]$runners</code></pre>
+<pre><code>##    selectionId         runnerName handicap sortPriority runnerId
+## 1      4551167    George Osborne         0            1  4551167
+## 2      4551155     Boris Johnson         0            2  4551155
+## 3      4551190       Theresa May         0            3  4551190
+## 4      8498834        Sajid Javid        0            4  8498834
+## 5      4551185   Phillip Hammond         0            5  4551185
+## 6      4551179      Michael Gove         0            6  4551179
+## 7      4551170       Jeremy Hunt         0            7  4551170
+## 8      4519457       Grant Shapps        0            8  4519457
+## 9      4551160     Daniel Hannan         0            9  4551160
+## 10     4551161       David Davis         0           10  4551161
+## 11     9475671          Liz Truss        0           11  9475671
+## 12     7020284       Adam Afriyie        0           12  7020284
+## 13     4551186       Priti Patel         0           13  4551186
+## 14     4519456      Owen Paterson        0           14  4519456
+## 15     4551176          Liam Fox         0           15  4551176
+## 16     4551171      Jesse Norman         0           16  4551171
+## 17     4551187      Rory Stewart         0           17  4551187
+## 18     4551178      Maria Miller         0           18  4551178
+## 19     4551193     Zac Goldsmith         0           19  4551193
+## 20     5914388    Jacob Rees-Mogg        0           20  5914388
+## 21     4551174  Justine Greening         0           21  4551174
+## 22     4551192     William Hague         0           22  4551192
+## 23     4551158    Chris Grayling         0           23  4551158
+## 24     4551166     Francis Maude         0           24  4551166
+## 25     4551191  Theresa Villiers         0           25  4551191
+## 26     4551159      Damian Green         0           26  4551159
+## 27     4551177   Malcolm Rifkind         0           27  4551177
+## 28     5633952        Mark Harper        0           28  5633952
+## 29     4551172       John Bercow         0           29  4551172
+## 30     4551173      John Redwood         0           30  4551173
+## 31     4551181    Nadine Dorries         0           31  4551181
+## 32     4551152       Alan Duncan         0           32  4551152
+## 33     4551169 Iain Duncan Smith         0           33  4551169
+## 34     4551183     Oliver Letwin         0           34  4551183
+## 35     4551163    Dominic Grieve         0           35  4551163
+## 36     4551164         Ed Vaizey         0           36  4551164
+## 37     4551165      Eric Pickles         0           37  4551165
+## 38     4551175    Kenneth Clarke         0           38  4551175
+## 39     4551180  Michael Portillo         0           39  4551180
+## 40     4551157       Chloe Smith         0           40  4551157
+## 41     4551162    David Willetts         0           41  4551162
+## 42     5597442    Louise Bagshawe        0           42  5597442
+## 43     6762719     Kwasi Kwarteng        0           43  6762719
+## 44     4551189  Sir George Young         0           44  4551189
+## 45     4551168        Greg Clark         0           45  4551168
+## 46     4551154   Andrew Mitchell         0           46  4551154
+## 47     4551182      Nick Herbert         0           47  4551182
+## 48     4551188      Shaun Bailey         0           48  4551188
+## 49     4551153    Andrew Lansley         0           49  4551153
+## 50     4551156  Caroline Spelman         0           50  4551156
+## 51     4551184   Peter Ainsworth         0           51  4551184
+## 52     9505186       Graham Brady        0           52  9505186
+## 53     9505187     Robert Halfron        0           53  9505187</code></pre>
 </div>
 
 
