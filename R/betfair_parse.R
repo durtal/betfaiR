@@ -7,6 +7,8 @@
 #' detail and complexity (testing all combinations is tricky), so this function
 #' may not be that reliable at the moment
 #'
+#' @param res response to be parsed into dataframes
+#'
 #' @export
 betfair_parse <- function(res, ...) {
     UseMethod(generic = "betfair_parse", object = res)

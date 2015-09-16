@@ -6,6 +6,9 @@
 \usage{
 betfair_parse(res, ...)
 }
+\arguments{
+\item{res}{response to be parsed into dataframes}
+}
 \description{
 convert response from the various \link{betfair} methods, tries
 to convert response into useful format, ie. dataframes with zero nested elements

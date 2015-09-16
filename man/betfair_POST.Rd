@@ -15,6 +15,6 @@ params}
 \description{
 POST request to Betfair's Exchange API, requires users to prepare
 a request using \link{base_request}, \link{betfair_request} and to have login in
-credentials from \link{loginBetfair}.
+credentials from \link{betfair_login}.
 }
 

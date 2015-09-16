@@ -58,25 +58,3 @@ prepare_order <- function(marketId, selectionId, orderType = "LIMIT",
     }
     return(orderList)
 }
-
-#' @export
-print.marketCatalogue_list <- function(x) {
-
-    lapply(x, function(i) {
-
-        cat("\nMarket ID:\t\t", i$market$marketId)
-        cat("\nMarket Name:\t\t", i$market$marketName)
-        cat("\ntotalMatched:\t\t", i$market$totalMatched, "\n\nEvent:\n")
-
-        if(!is.null(i$event)) {
-            print(i$event, row.names = FALSE)
-        }
-
-        if(!is.null(i$runners)) {
-            cat("\nRunners:\t", nrow(i$runners), "\n")
-            print(head(i$runners), row.names = FALSE)
-        }
-        w <- options()$width
-        cat("\n", rep("*", w/2), "\n")
-    })
-}
