@@ -21,7 +21,7 @@ bf$marketCatalogue(filter = marketFilter(),
 param | details
 ------|--------
 `filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.
-`marketProjection` | the type and amount of data returned about the market, see section **Market Projection** in [Betting Enums](betting_enums.html) or visit the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection) for more details.  The different options are "COMPETITION", "EVENT", "EVENT_TYPE", "MARKET_START_TIME", "MARKET_DESCRIPTION", "RUNNER_DESCRIPTION", and "RUNNER_METADATA".
+`marketProjection` | the type and amount of data returned about the market, see section **Market Projection** in [Betting Enums](betting_enums.html) or visit the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection) for more details.  The different options are "COMPETITION", "EVENT", "EVENT_TYPE", "MARKET_START_TIME", "MARKET_DESCRIPTION", "RUNNER_DESCRIPTION", and "RUNNER_METADATA", these needn't be entered in caps, however if any are misspelt they will be discarded.
 `sort` | the order of the results, see section **sort** in [Betting Enums](betting_enums.html) or the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketSort)
 `maxResults` | limit on the number of results returned, default = 1
 `keepRules` | when **MARKET_DESCRIPTION** is entered into the `marketProjection` paramater it returns a large amount of text containing the rules of the market, by default these are discarded, change `keepRules = TRUE` to return the rules.
@@ -61,7 +61,7 @@ variable | marketProjection | dataframe | details
 `sortPriority` |  "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | ordered by amount matched
 `runnerId` |  "RUNNER_DESCRIPTION" or "RUNNER_METADATA" | runners | runner id (same as selection id)
 
-The `runners` dataframe above will likely include a lot of other data if "RUNNER_METADATA" is used, for horse racing this will include things like Weight carried, jockey, trainer, owner, etc.
+The `runners` dataframe above will likely include a lot of other data if "RUNNER_METADATA" is used, for horse racing this will include things like Weight carried, jockey, trainer, owner, etc.  The list returned comes with `print` and `summary` methods, the `print` method will run through the markets returned and print basic data including market name, id, and matched.  The `summary` method will run through the markets and print additional data about the market, including the first 6 (or fewer) runners/selections in the market.
 
 ### examples
 
@@ -78,7 +78,7 @@ tmp
 
 # get market data with details about the event and the runners
 tmp <- bf$marketCatalogue(marketProjection = c("EVENT", "runner_metadata"))
-tmp
+summary(tmp)
 
 # to access the runners data
 tmp[[1]]$runners

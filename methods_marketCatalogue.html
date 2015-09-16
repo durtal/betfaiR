@@ -224,7 +224,7 @@ img {
 </tr>
 <tr class="even">
 <td align="left"><code>marketProjection</code></td>
-<td align="left">the type and amount of data returned about the market, see section <strong>Market Projection</strong> in <a href="betting_enums.html">Betting Enums</a> or visit the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection">help pages</a> for more details. The different options are “COMPETITION”, “EVENT”, “EVENT_TYPE”, “MARKET_START_TIME”, “MARKET_DESCRIPTION”, “RUNNER_DESCRIPTION”, and “RUNNER_METADATA”.</td>
+<td align="left">the type and amount of data returned about the market, see section <strong>Market Projection</strong> in <a href="betting_enums.html">Betting Enums</a> or visit the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection">help pages</a> for more details. The different options are “COMPETITION”, “EVENT”, “EVENT_TYPE”, “MARKET_START_TIME”, “MARKET_DESCRIPTION”, “RUNNER_DESCRIPTION”, and “RUNNER_METADATA”, these needn’t be entered in caps, however if any are misspelt they will be discarded.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>sort</code></td>
@@ -419,7 +419,7 @@ img {
 </tr>
 </tbody>
 </table>
-<p>The <code>runners</code> dataframe above will likely include a lot of other data if “RUNNER_METADATA” is used, for horse racing this will include things like Weight carried, jockey, trainer, owner, etc.</p>
+<p>The <code>runners</code> dataframe above will likely include a lot of other data if “RUNNER_METADATA” is used, for horse racing this will include things like Weight carried, jockey, trainer, owner, etc. The list returned comes with <code>print</code> and <code>summary</code> methods, the <code>print</code> method will run through the markets returned and print basic data including market name, id, and matched. The <code>summary</code> method will run through the markets and print additional data about the market, including the first 6 (or fewer) runners/selections in the market.</p>
 </div>
 <div id="examples" class="section level3">
 <h3>examples</h3>
@@ -435,24 +435,19 @@ tmp</code></pre>
 <pre><code>## 
 ## Market ID:        1.101193124
 ## Market Name:      Next Conservative Leader
-## totalMatched:         41919.04 
-## 
-## Event:
+## totalMatched:         41925.04
 ## 
 ##  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
-tmp</code></pre>
+<span class="kw">summary</span>(tmp)</code></pre>
 <pre><code>## 
 ## Market ID:        1.101193124
 ## Market Name:      Next Conservative Leader
-## totalMatched:         41919.04 
+## Matched:      41925.04
 ## 
-## Event:
-##        id               name countryCode      timezone
-##  27210582 Next Party Leaders          GB Europe/London
-##                  openDate
-##  2014-11-13T09:00:00.000Z
+## Event ID:         27210582
+## Event Name:       Next Party Leaders
 ## 
 ## Runners:  53 
 ##  selectionId       runnerName handicap sortPriority runnerId
