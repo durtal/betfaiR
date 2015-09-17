@@ -7,3 +7,15 @@ The `betfaiR` package will eventually provide R users full access to the Betfair
 The **primary** function of the package is [`betfair`](betfair.html) which requires users to enter their login details, including an API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key).  The function returns an environment with various methods for querying and retrieving data from Betfair.
 
 This is not to say that it is the only way to use this package, all the functions that `betfair` uses are available, but `betfair` aims to keep the workspace free of unnecessary variables as queries are developed and saved.
+
+The `betfair` function logs in, and for each of the methods the following functions are called:
+
+step | function | arguments | details | return
+-----|----------|-----------|---------|-------
+**1** | `betfair_login` | _usr_, _pwd_, _key_ | login function with betfair username, password, and key | list with a session token
+**2** | `base_request` | _filter_, _method_ | builds a basic request object | list with class that matches _method_ param
+**3** | `betfair_request` | _x_, _..._ | fleshes out the request object | json object ready to be included in a POST request
+**4** | `betfair_POST` | _body_ | betfair POST, includes the request object returned in step **3**, and the session token returned in **1** | response object
+**5** | `httr::content` | _response_ | response object to be parsed into a list | list with data
+**6** | `betfair_check` | _response_, _method_ | check the response is valid, log errors if not, apply class _method_ to list ahead of step **7** | list
+**7** | `betfair_parse` | _response_ | parses the response object | list of dataframes or dataframe
