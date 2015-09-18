@@ -60,6 +60,32 @@
 </style>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -218,14 +244,30 @@ img {
 </div>
 <div id="examples" class="section level3">
 <h3>examples</h3>
-<pre><code># login
-bf &lt;- betfair(usr = Sys.getenv(&quot;BETFAIR_USR&quot;), pwd = Sys.getenv(&quot;BETFAIR_PWD&quot;), key = Sys.getenv(&quot;BETFAIR_KEY&quot;))
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<span class="co"># login</span>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>), <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>), <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 
-# return all venues
-bf$venues()
-
-# return all venues from Great Britain
-bf$venues(filter = marketFilter(marketCountries = &quot;GB&quot;))</code></pre>
+<span class="co"># return all venues</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">venues</span>()
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##                venue marketCount
+## 1 Presque Isle Downs          12
+## 2      Penn National          14
+## 3    Louisiana Downs           8
+## 4       Charles Town          16
+## 5            Kinsley          42
+## 6            Swindon          42</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all venues from Great Britain</span>
+tmp &lt;-<span class="st"> </span>bf$<span class="kw">venues</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
+<span class="kw">head</span>(tmp)</code></pre>
+<pre><code>##          venue marketCount
+## 1      Kinsley          42
+## 2      Swindon          42
+## 3          Ayr          28
+## 4 Newton Abbot          17
+## 5         Hove          42
+## 6      Newbury          31</code></pre>
 </div>
 
 

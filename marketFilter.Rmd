@@ -42,7 +42,8 @@ param | type | details | example
 
 ### examples
 
-```{r eval=FALSE}
+```{r}
+library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
               pwd = Sys.getenv("BETFAIR_PWD"),
@@ -52,7 +53,9 @@ bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
 obj <- marketFilter(eventTypeIds = 1)
 # use obj in query
 res <- bf$competitions(filter = obj)
+head(res)
 
 # or use marketFilter inside a method
 res <- bf$competitions(filter = marketFilter(eventTypeIds = 1, marketCountries = "GB"))
+head(res)
 ```

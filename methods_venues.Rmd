@@ -27,13 +27,16 @@ variable | details
 
 ### examples
 
-```
+```{r}
+library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
 
 # return all venues
-bf$venues()
+tmp <- bf$venues()
+head(tmp)
 
 # return all venues from Great Britain
-bf$venues(filter = marketFilter(marketCountries = "GB"))
+tmp <- bf$venues(filter = marketFilter(marketCountries = "GB"))
+head(tmp)
 ```

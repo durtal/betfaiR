@@ -320,7 +320,8 @@ img {
 </div>
 <div id="examples" class="section level3">
 <h3>examples</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># login</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<span class="co"># login</span>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
               <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
@@ -329,9 +330,24 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 obj &lt;-<span class="st"> </span><span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>)
 <span class="co"># use obj in query</span>
 res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> obj)
-
-<span class="co"># or use marketFilter inside a method</span>
-res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>, <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))</code></pre>
+<span class="kw">head</span>(res)</code></pre>
+<pre><code>##   competition_id     competition_name marketCount competitionRegion
+## 1         892425        Czech 3. Liga          22               CZE
+## 2         876442       Polish 2. Liga          44               POL
+## 3              7  Austrian Bundesliga         158               AUT
+## 4              9           Erste Liga         160               AUT
+## 5        5614746  FIFA World Cup 2018          10     International
+## 6             11 Dutch Jupiler League         278               NLD</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or use marketFilter inside a method</span>
+res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>, <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
+<span class="kw">head</span>(res)</code></pre>
+<pre><code>##   competition_id     competition_name marketCount competitionRegion
+## 1             35           League One         640               GBR
+## 2          30558       English FA Cup           1               GBR
+## 3           2134      Capital One Cup         272               GBR
+## 4         409743         Scottish Cup          34               GBR
+## 5             39      National League         283               GBR
+## 6         252549 Welsh Premier League         116               GBR</code></pre>
 </div>
 
 
