@@ -12,6 +12,10 @@ This package isn't complete and only has a little functionality at the moment, p
 devtools::install_github("durtal/betfaiR")
 ```
 
+#### Help
+
+There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues).
+
 #### Usage
 
 The primary function in **betfaiR** is `betfair`, which takes three arguments, your username, your password, and an application key (see [here](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get a key).
