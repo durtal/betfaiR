@@ -151,7 +151,7 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
             runners <- do.call(plyr::rbind.fill, runners)
             out$runners <- runners
         }
-        class(out) <- c("list", "marketCatalogue")
+        class(out) <- c("list", "marketCatalogue_simple")
         return(out)
     })
 
