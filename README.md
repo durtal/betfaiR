@@ -72,3 +72,9 @@ The `racing` object is now a dataframe of horse racing events, providing data th
 The appendix **_API key best practices_** in the [api packages vignette](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html) from the [httr](https://github.com/hadley/httr) package provides some pertinent advice for the storing of you PASSWORD and KEY.  
 
 The advice is to store your PASSWORD and KEY, or any other variables that should be kept safe, in an environment variable, this is to prevent accidentally sharing your credentials, either by sharing an .Rhistory file, or sharing a workspace.
+
+### example
+
+The plot below is data collected from betfair using the `marketCatalogue` and `marketBook` methods.  The `marketBook` method is still incomplete, it returns the json object as a list, so is unparsed.  Data was collected at minute intervals from when the game kicked off, via a simple for loop and then plotted.
+
+![](manchester-derby.jpeg)

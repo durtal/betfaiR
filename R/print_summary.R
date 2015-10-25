@@ -4,7 +4,7 @@ print.marketCatalogue_list <- function(x) {
     plyr::l_ply(x, .fun = function(i) {
         cat("\nMarket ID:\t\t", i$market$marketId)
         cat("\nMarket Name:\t\t", i$market$marketName)
-        cat("\nMatched:\t\t\t", i$market$totalMatched)
+        cat("\nMatched:\t\t", i$market$totalMatched)
 
         w <- options()$width
         cat("\n\n", rep("*", w/2), "\n")
@@ -18,7 +18,7 @@ summary.marketCatalogue_list <- function(x) {
     plyr::l_ply(x, .fun = function(i) {
         cat("\nMarket ID:\t\t", i$market$marketId)
         cat("\nMarket Name:\t\t", i$market$marketName)
-        cat("\nMatched:\t\t\t", i$market$totalMatched)
+        cat("\nMatched:\t\t", i$market$totalMatched)
 
         if(!is.null(i$event)) {
             cat("\n\nEvent ID:\t\t", i$event$id)
