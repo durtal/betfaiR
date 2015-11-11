@@ -262,29 +262,29 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##   competition_id                          competition_name marketCount
-## 1        8111111                     Shanghai Masters 2015          33
+## 1         892425                             Czech 3. Liga           2
 ## 2        6761189                           French Politics           1
-## 3              7                       Austrian Bundesliga          10
-## 4              9                                Erste Liga         150
+## 3        8421274                    ITF Men Heraklion 2015           8
+## 4        8291551         British Basketball League 2015/16           5
 ## 5        7008771 New Customer Only. First Bet Exclusive 10           1
-## 6        5614746                       FIFA World Cup 2018          10
+## 6        5614746                       FIFA World Cup 2018        1356
 ##   competitionRegion
-## 1               CHN
+## 1               CZE
 ## 2               FRA
-## 3               AUT
-## 4               AUT
+## 3               GRC
+## 4     International
 ## 5               GBR
 ## 6     International</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all football competitions</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##   competition_id          competition_name marketCount competitionRegion
-## 1              7       Austrian Bundesliga          10               AUT
-## 2              9                Erste Liga         150               AUT
-## 3        5614746       FIFA World Cup 2018          10     International
-## 4             11      Dutch Jupiler League         242               NLD
-## 5         863848 Euro Champ Qualifiers (W)         134               GBR
-## 6             13                Campeonato         450               BRA</code></pre>
+<pre><code>##   competition_id     competition_name marketCount competitionRegion
+## 1         892425        Czech 3. Liga           2               CZE
+## 2          97807   Czech Republic Cup          34               CZE
+## 3        5614746  FIFA World Cup 2018        1356     International
+## 4             13           Campeonato          56               BRA
+## 5         194215 Turkish Super League           1               TUR
+## 6             15    Bulgarian Premier           1               BGR</code></pre>
 </div>
 
 

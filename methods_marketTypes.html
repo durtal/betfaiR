@@ -254,28 +254,28 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##            marketType marketCount
-## 1            NONSPORT          57
-## 2              WINNER          57
-## 3            STEWARDS           2
-## 4             SPECIAL         138
-## 5     SEASON_SPECIALS          53
-## 6 GRAND_SLAM_SPECIALS           1</code></pre>
+## 1            NONSPORT          59
+## 2            STEWARDS           2
+## 3             SPECIAL          90
+## 4              WINNER          52
+## 5 GRAND_SLAM_SPECIALS           1
+## 6     SEASON_SPECIALS          55</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##      marketType marketCount
-## 1      STEWARDS           2
-## 2       SPECIAL           4
-## 3           WIN         134
-## 4         PLACE         134
-## 5      EACH_WAY          38
-## 6 RACE_WIN_DIST           4</code></pre>
+<pre><code>##     marketType marketCount
+## 1     STEWARDS           2
+## 2      SPECIAL           4
+## 3          WIN         100
+## 4        PLACE          96
+## 5     EACH_WAY          35
+## 6 ANTEPOST_WIN          40</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>##     marketType marketCount
-## 1 ANTEPOST_WIN          43
-## 2      SPECIAL           1</code></pre>
+## 1      SPECIAL           2
+## 2 ANTEPOST_WIN          31</code></pre>
 </div>
 
 

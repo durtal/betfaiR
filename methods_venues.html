@@ -251,23 +251,23 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <span class="co"># return all venues</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">venues</span>()
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##                venue marketCount
-## 1 Presque Isle Downs          12
-## 2      Penn National          14
-## 3    Louisiana Downs           8
-## 4       Charles Town          16
-## 5            Kinsley          42
-## 6            Swindon          42</code></pre>
+<pre><code>##           venue marketCount
+## 1    San Isidro           4
+## 2 Turf Paradise           8
+## 3  Peterborough           6
+## 4     Hawthorne           8
+## 5       Romford           6
+## 6 Penn National          16</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all venues from Great Britain</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">venues</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>##          venue marketCount
-## 1      Kinsley          42
-## 2      Swindon          42
-## 3          Ayr          28
-## 4 Newton Abbot          17
-## 5         Hove          42
-## 6      Newbury          31</code></pre>
+<pre><code>##             venue marketCount
+## 1    Peterborough           6
+## 2         Romford           6
+## 3       Southwell          24
+## 4         Taunton          21
+## 5          Ludlow          18
+## 6 Chelmsford City          24</code></pre>
 </div>
 
 

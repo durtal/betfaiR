@@ -433,23 +433,19 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>()
 tmp</code></pre>
 <pre><code>## 
-## Market ID:        1.101193124
-## Market Name:      Next Conservative Leader
-## Matched:          41925.04
+## Market ID:    1.101193124
+## Market Name:  Next Conservative Leader
+## Matched:  48934.34
 ## 
 ##  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre>
 <pre><code>## 
-## Market ID:        1.101193124
-## Market Name:      Next Conservative Leader
-## Matched:          41925.04
-## 
-## Event ID:         27210582
-## Event Name:       Next Party Leaders
-## 
-## Runners:  53 
+## MarketID:    1.101193124 Event ID:   27210582 
+## Market Name: Next Conservative Leader    Event Name: Next Party Leaders 
+## Matched: 48934.34
+## Runners:  54 
 ##  selectionId       runnerName handicap sortPriority runnerId
 ##      4551167  George Osborne         0            1  4551167
 ##      4551155   Boris Johnson         0            2  4551155
@@ -514,7 +510,8 @@ tmp[[<span class="dv">1</span>]]$runners</code></pre>
 ## 50     4551156  Caroline Spelman         0           50  4551156
 ## 51     4551184   Peter Ainsworth         0           51  4551184
 ## 52     9505186       Graham Brady        0           52  9505186
-## 53     9505187     Robert Halfron        0           53  9505187</code></pre>
+## 53     9505187     Robert Halfron        0           53  9505187
+## 54     9653158       Nicky Morgan        0           54  9653158</code></pre>
 </div>
 
 
