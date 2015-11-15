@@ -14,20 +14,20 @@ print.marketCatalogue_simple <- function(x) {
 #' @export
 summary.marketCatalogue_simple <- function(x) {
 
-    id <- paste0("\nMarketID:\t", x$market$marketId)
+    id <- paste0("\nMarket ID:\t", x$market$marketId)
     name <- paste0("\nMarket Name:\t", x$market$marketName)
     matched <- paste0("\nMatched:\t", x$market$totalMatched)
 
     if(!is.null(x$event)) {
 
-        id <- paste0(id, "\tEvent ID:\t", x$event$id)
-        name <- paste0(name, "\tEvent Name:\t", x$event$name)
+        id <- paste0(id, "\nEvent ID:\t", x$event$id)
+        name <- paste0(name, "\nEvent Name:\t", x$event$name)
     }
 
     cat(id, name, matched)
 
     if(!is.null(x$runners)) {
-        cat("\nRunners:\t", nrow(x$runners), "\n")
+        cat("\n\nRunners:\t", nrow(x$runners), "\n")
         print(head(x$runners), row.names = FALSE)
     }
 

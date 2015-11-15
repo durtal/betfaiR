@@ -116,7 +116,7 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
 
     out <- lapply(res$result, function(x) {
 
-        out <- list()
+        out <- structure(list(), class = c("list", "marketCatalogue_simple"))
         out$market <- data.frame(marketId = x$marketId,
                                  marketName = x$marketName,
                                  totalMatched = x$totalMatched,
@@ -151,9 +151,9 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
             runners <- do.call(plyr::rbind.fill, runners)
             out$runners <- runners
         }
-        class(out) <- c("list", "marketCatalogue_simple")
         return(out)
     })
+    out$raw_response <- res$result
 
     class(out) <- c("list", "marketCatalogue_list")
     return(out)

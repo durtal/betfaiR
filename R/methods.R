@@ -339,7 +339,7 @@ NULL
 #'
 #' \strong{BEST PRACTICE}: those seeking to use \code{marketBook} to obtain price,
 #' volume, unmatched orders and matched position in a single operation should
-#' provide and \code{orderProjection} of \strong{EXECUTABLE} in their \code{marketBook}
+#' provide an \code{orderProjection} of \strong{EXECUTABLE} in their \code{marketBook}
 #' request and receive all unmatched orders and the aggregated matched volume from
 #' all orders.  The level of matched volume aggregation (\code{matchProjection})
 #' should be \strong{ROLLED_UP_BY_AVG_PRICE} or \strong{ROLLED_UP_BY_PRICE}, the
