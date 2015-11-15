@@ -6,7 +6,7 @@ print.marketCatalogue_simple <- function(x) {
     cat("\nMatched:\t", x$market$totalMatched)
 
     w <- options()$width
-    cat("\n\n", rep("*", w/2))
+    cat("\n", rep("-", w/2))
 
 }
 
@@ -32,7 +32,7 @@ summary.marketCatalogue_simple <- function(x) {
     }
 
     w <- options()$width
-    cat("\n", rep("*", w/2))
+    cat("\n", rep("-", w/2))
 }
 
 #' @export
