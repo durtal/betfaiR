@@ -55,3 +55,57 @@ summary.marketCatalogue_list <- function(x) {
 
     })
 }
+
+#' @export
+print.marketBook_simple <- function(x) {
+
+    marketId <- paste0("\nMarket ID:\t", x$market$marketId)
+    totalMatched <- paste0("\nMatched:\t", x$market$totalMatched)
+    totalAvailable <- paste0("\nAvailable:\t", x$market$totalAvailable)
+
+    cat(marketId, totalMatched, totalAvailable)
+
+    w <- options()$width
+    cat("\n", rep("-", w/2))
+
+}
+
+#' @export
+summary.marketBook_simple <- function(x) {
+
+    marketId <- paste0("\nMarket ID:\t", x$market$marketId)
+    totalMatched <- paste0("\nMatched:\t", x$market$totalMatched)
+    totalAvailable <- paste0("\nAvailable:\t", x$market$totalAvailable)
+
+    cat(marketId, totalMatched, totalAvailable)
+
+    if(!is.null(x$runners)) {
+        runners_basic <- plyr::ldply(x$runners, .fun = function(x) {
+            x$basic
+        })
+        cat("\nRunners:\n")
+        print(runners_basic, row.names = FALSE)
+    }
+
+}
+
+#' @export
+print.marketBook_list <- function(x) {
+
+    plyr::l_ply(x, .fun = function(i) {
+
+        print(i)
+
+    })
+}
+
+
+#' @export
+summary.marketBook_list <- function(x) {
+
+    plyr::l_ply(x, .fun = function(i) {
+
+        summary(i)
+
+    })
+}

@@ -93,7 +93,7 @@ betfair_parse.marketBook <- function(res) {
         if("runners" %in% names(x)) {
             runners <- lapply(x$runners, function(rnr) {
                 basic <- !sapply(rnr, is.list)
-                rnr_out <- structure(list(), class = c("list", "marketBook_runners"))
+                rnr_out <- structure(list(), class = c("list", "marketBook_runner"))
                 rnr_out$basic <- data.frame(rnr[basic],
                                             stringsAsFactors = FALSE)
                 if("sp" %in% names(rnr) & length(rnr$sp) > 0) {
@@ -140,9 +140,11 @@ betfair_parse.marketBook <- function(res) {
                 return(rnr_out)
             })
             out$runners <- runners
+            names(out$runners) <- sapply(out$runners, function(x) x$basic$selectionId)
         }
         return(out)
     })
+    class(out) <- c("list", "marketBook_list")
     return(out)
 }
 
