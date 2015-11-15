@@ -84,31 +84,69 @@ betfair_parse.eventTypes <- function(res) {
 #' @export
 betfair_parse.marketBook <- function(res) {
 
-    res <- lapply(res$result, function(x) {
+    out <- lapply(res$result, function(x) {
 
-        tmp <- x
-        tmp$runners <- NULL
-        basic <- data.frame(tmp, stringsAsFactors = FALSE)
-        test <- lapply(x$runners, function(rnr) {
-            ex <- rnr$ex
-            rnr$ex <- NULL
-            basic <- data.frame(rnr, stringsAsFactors = FALSE)
-            if(basic$status != "LOSER") {
-                priceData <- lapply(ex, data.frame, stringsAsFactors = FALSE)
-                priceData <- do.call(plyr::rbind.fill, priceData)
-                priceData <- cbind(data.frame(bet = c("back", "lay")), priceData)
-                basic <- cbind(basic, priceData)
-            }
-            return(basic)
-        })
-        runners <- do.call(plyr::rbind.fill, test)
-
-        basic <- cbind(basic, runners)
-        return(basic)
+        out <- structure(list(), class = c("list", "marketBook_simple"))
+        out$raw <- x
+        out$market <- data.frame(x[!sapply(x, is.list)],
+                                 stringsAsFactors = FALSE)
+        if("runners" %in% names(x)) {
+            runners <- lapply(x$runners, function(rnr) {
+                basic <- !sapply(rnr, is.list)
+                rnr_out <- structure(list(), class = c("list", "marketBook_runners"))
+                rnr_out$basic <- data.frame(rnr[basic],
+                                            stringsAsFactors = FALSE)
+                if("sp" %in% names(rnr) & length(rnr$sp) > 0) {
+                    rnr_out$sp <- structure(list(), class = c("list", "matchBook_runner_sp"))
+                    if(length(rnr$sp$nearPrice) > 0) {
+                        rnr_out$sp$nearPrice <- rnr$sp$nearPrice
+                    }
+                    if(length(rnr$sp$farPrice) > 0) {
+                        rnr_out$sp$farPrice <- rnr$sp$farPrice
+                    }
+                    if(length(rnr$sp$layLiabilityTaken) > 0) {
+                        layTaken <- plyr::ldply(rnr$sp$layLiabilityTaken, data.frame, stringsAsFactors = FALSE)
+                        names(layTaken) <- c("spLayPrice", "spLaySize")
+                        rnr_out$sp$layTaken <- layTaken
+                    }
+                    if(length(rnr$sp$backStakeTaken) > 0) {
+                        layTaken <- plyr::ldply(rnr$sp$backStakeTaken, data.frame, stringsAsFactors = FALSE)
+                        names(layTaken) <- c("spLayPrice", "spLaySize")
+                        rnr_out$sp$layTaken <- layTaken
+                    }
+                }
+                if("ex" %in% names(rnr)) {
+                    ex <- structure(list(), class = c("list", "marketBook_runner_ex"))
+                    if("availableToBack" %in% names(rnr$ex) & length(rnr$ex$availableToBack) > 0) {
+                        ex_back <- plyr::ldply(rnr$ex$availableToBack, data.frame, stringsAsFactors = FALSE)
+                        names(ex_back) <- c("backPrice", "backSize")
+                        ex$back <- ex_back
+                    }
+                    if("availableToLay" %in% names(rnr$ex) & length(rnr$ex$availableToLay) > 0) {
+                        ex_lay <- plyr::ldply(rnr$ex$availableToLay, data.frame, stringsAsFactors = FALSE)
+                        names(ex_lay) <- c("layPrice", "laySize")
+                        ex$lay <- ex_lay
+                    }
+                    if("tradedVolume" %in% names(rnr$ex) & length(rnr$ex$tradedVolume) > 0) {
+                        traded <- plyr::ldply(rnr$ex$tradedVolume, data.frame, stringsAsFactors = FALSE)
+                        names(traded) <- c("tradedPrice", "tradedSize")
+                        ex$traded <- traded
+                    }
+                    rnr_out$ex <- ex
+                    if(length(rnr_out$ex) == 0) {
+                        rnr_out$ex <- NULL
+                    }
+                }
+                return(rnr_out)
+            })
+            out$runners <- runners
+        }
+        return(out)
     })
-    res <- do.call(plyr::rbind.fill, res)
-    return(res)
+    return(out)
 }
+
+
 
 #' @export
 betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
