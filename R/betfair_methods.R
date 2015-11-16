@@ -142,6 +142,18 @@ betfair <- function(usr, pwd, key) {
                                priceProjection = NULL,
                                orderProjection = NULL,
                                matchProjection = NULL) {
+
+            priceProjection <- intersect(toupper(priceProjection), c("SP_AVAILABLE",
+                                                                     "SP_TRADED",
+                                                                     "EX_BEST_OFFERS",
+                                                                     "EX_ALL_OFFERS",
+                                                                     "EX_TRADED"))
+            orderProjection <- intersect(toupper(orderProjection), c("ALL",
+                                                                     "EXECUTABLE",
+                                                                     "EXECUTION_COMPLETE"))
+            matchProjection <- intersect(toupper(matchProjection), c("NO_ROLLUP",
+                                                                     "ROLLED_UP_BY_PRICE",
+                                                                     "ROLLED_UP_BY_AVG_PRICE"))
             # build request object
             req <- base_request(filter = list(), method = "marketBook")
             req <- betfair_request(req, marketIds = marketIds,
