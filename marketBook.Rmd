@@ -1,0 +1,25 @@
+---
+title: "marketBook"
+---
+
+**This method still might require some work, especially in parsing the response from Betfair.**
+
+Having logged in using the [`betfair`](betfair.html) function, the environment contains the `marketBook` method, which can be used to get market data.  You can use `marketBook` to retrieve data about the market, but more importantly the price data for the various runners in the market.
+
+### usage
+
+```{r eval=FALSE}
+bf$marketBook(marketIds = list(),
+              priceProjection = NULL,
+              orderProjection = NULL,
+              matchProjection = NULL)
+```
+
+### arguments
+
+param | details
+------|--------
+`marketIds` | _string_, one or more marketIds, the number of markets returned depends on the amount of data you request via the `priceProjection`
+`priceProjection` | the projection of price data you want to receive in the response, options include **SP\_AVAILABLE**, **SP\_TRADED**, **EX\_BEST\_OFFERS**, **EX\_ALL\_OFFERS** (trumps EX\_BEST\_OFFERS), and **EX\_TRADED**, these are expained in [Betting Enums](betting_enums.html) under the Price Data header.
+`orderProjection` | the order Projection you wish to receive in the response, **ALL** all orders (entirely matched, or not), **EXECUTABLE** orders with unmatched portion, **EXECUTION\_COMPLETE** orders with no unmatched portion, see [Betting Enums](betting_enums.html) under the Order Projection header.
+`matchProjection` | if you ask for orders via `orderProjection`, this will specify the representation of the matched bets, options are **NO\_ROLLUP** returns raw fragments, **ROLLED\_UP\_BY\_PRICE** rolled up matched amounts by distinct matched prices per side, and **ROLLED\_UP\_BY\_AVG\_PRICE** rolled up by average price per side, see [Betting Enums](betting_enums.html) under Match Projection header.
