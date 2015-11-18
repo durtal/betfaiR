@@ -47,7 +47,7 @@ method | details | available | help
 `events` | Retrieve data about the different events | `TRUE` | [events](methods_events.html)
 `eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` | [eventTypes](methods_eventTypes.html)
 `login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` | [login](login_session.html)
-`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `FALSE` | _incomplete_
+`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `FALSE` | [marketBook](methods_marketBook.html)
 `marketCatalogue` | Retrieve data about the different types of markets | `TRUE` | [marketCatalogue](methods_marketCatalogue.html)
 `marketTypes` | Retrieve counts for the different market types | `TRUE` | [marketTypes](methods_marketTypes.html)
 `placeOrders` |  | `FALSE` | _not available_
