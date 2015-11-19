@@ -3,7 +3,7 @@ betfaiR
 
 **coming soon** (hopefully)
 
-This package isn't complete and only has a little functionality at the moment, primarily the easier things, and little to nothing that would enable a user to place a bet or analyse market data.  I will definitely add this functionality in time, but when I am unsure.
+This package isn't complete and only has a little functionality at the moment, primarily the easier things, still unable to use the package to place a bet.  I will definitely add this functionality in time, but when I am unsure.
 
 #### Installation
 
@@ -14,7 +14,7 @@ devtools::install_github("durtal/betfaiR")
 
 #### Help
 
-There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues).
+There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues).  Help with the package would be welcome.
 
 #### Usage
 
@@ -55,9 +55,9 @@ bf
 ##    $venues(filter = marketFilter())
 ```
 
-So, if you are familiar with Betfair's API, you will realise the available methods at the moment are quite restricted, little about markets, or placing a bet.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
+So, if you are familiar with Betfair's API, you will realise the available methods in the package might need a little bit of work.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
 
-`marketBook` can be used, but won't parse the response from betfair like the other methods, which `betfaiR` converts to nice(ish) dataframes.  Instead it returns what can be a pretty unwieldy list, sometimes with multiple nested lists, I hope to provide some help in sorting/presenting the data so it's easy(er) to use, analyse in time, check out the [`betfair_parse`](https://github.com/durtal/betfaiR/blob/master/R/betfair_parse.R) functions.
+`marketBook` can be used, but because the data returned is often heavily nested, it might not parse the response from betfair as well as other methods.  The response from `marketBook` does include the raw response if required, as an element in a list.
 
 Some of the available methods have a `filter` parameter, which can be used to filter data, this is then added into the body of the request sent to Betfair.  The `marketFilter` function helps you build a filter object, providing all the available parameters that can be filtered by (this hasn't been tested exhaustively but should work).  For example to find horse racing events:
 
