@@ -60,7 +60,7 @@ summary.marketCatalogue_list <- function(x) {
 print.marketBook_simple <- function(x) {
 
     marketId <- paste0("\nMarket ID:\t\t", x$market$marketId)
-    totalMatched <- paste0("\nMatched:\t\t", x$market$totalMatched)
+    totalMatched <- paste0("\nMatched:\t\t\t", x$market$totalMatched)
     totalAvailable <- paste0("\nAvailable:\t\t", x$market$totalAvailable)
 
     cat(marketId, totalMatched, totalAvailable)
