@@ -2,7 +2,7 @@
 print.marketCatalogue_simple <- function(x) {
 
     cat("\nMarket ID:\t\t", x$market$marketId)
-    cat("\nMarket Name:\t\t", x$market$marketName)
+    cat("\nMarket Name:\t", x$market$marketName)
     cat("\nMatched:\t\t", x$market$totalMatched)
 
     w <- options()$width
@@ -15,7 +15,7 @@ print.marketCatalogue_simple <- function(x) {
 summary.marketCatalogue_simple <- function(x) {
 
     id <- paste0("\nMarket ID:\t\t", x$market$marketId)
-    name <- paste0("\nMarket Name:\t\t", x$market$marketName)
+    name <- paste0("\nMarket Name:\t", x$market$marketName)
     matched <- paste0("\nMatched:\t\t", x$market$totalMatched)
 
     if(!is.null(x$event)) {
