@@ -436,19 +436,19 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>()
 tmp</code></pre>
 <pre><code>## 
-## Market ID:    1.101193124
-## Market Name:  Next Conservative Leader
-## Matched:  49145.52
+## Market ID:        1.101193124
+## Market Name:      Next Conservative Leader
+## Matched:      49966.84
 ##  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre>
 <pre><code>## 
-## Market ID:   1.101193124
-## Event ID:    27210582 
-## Market Name: Next Conservative Leader
-## Event Name:  Next Party Leaders 
-## Matched: 49145.52
+## Market ID:       1.101193124
+## Event ID:        27210582 
+## Market Name:     Next Conservative Leader
+## Event Name:      Next Party Leaders 
+## Matched:     49966.84
 ## 
 ## Runners:  54 
 ##  selectionId       runnerName handicap sortPriority runnerId
