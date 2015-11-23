@@ -139,9 +139,9 @@ betfair <- function(usr, pwd, key) {
         }
 
         marketBook <- function(marketIds = list(),
-                               priceProjection = NULL,
-                               orderProjection = NULL,
-                               matchProjection = NULL) {
+                               priceProjection = "EX_BEST_OFFERS",
+                               orderProjection = "EXECUTABLE",
+                               matchProjection = "NO_ROLLUP") {
 
             priceProjection <- intersect(toupper(priceProjection), c("SP_AVAILABLE",
                                                                      "SP_TRADED",
