@@ -28,7 +28,7 @@ param | details
 
 ### return
 
-A list with at least one dataframe about the market(s)  filtered using the `filter` parameter (and the [`marketFilter`](marketFilter.html) function) and the `maxResults` paramater.  Each market will have at most 4 dataframes in its list, all the variables are explained below, along with the `marketProjection` option that sees that variable returned.  The list returned can be printed, allowing quick glance at markets before users can drill down into selections etc.
+A list with at least one dataframe about the market(s) filtered using the `filter` parameter (and the [`marketFilter`](marketFilter.html) function) and the `maxResults` paramater.  Each market will have at most 4 dataframes in its list, all the variables are explained below, along with the `marketProjection` option that sees that variable returned.  The list returned can be printed, allowing quick glance at markets before users can drill down into selections etc.
 
 variable | marketProjection | dataframe | details
 ---------|------------------|-----------|--------
