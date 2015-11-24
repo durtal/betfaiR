@@ -10,9 +10,9 @@ Having logged in using the [`betfair`](betfair.html) function, the environment c
 
 ```{r eval=FALSE}
 bf$marketBook(marketIds = list(),
-              priceProjection = NULL,
-              orderProjection = NULL,
-              matchProjection = NULL)
+              priceProjection = "EX_BEST_OFFERS",
+              orderProjection = "EXECUTABLE",
+              matchProjection = "NO_ROLLUP")
 ```
 
 ### arguments
@@ -26,7 +26,7 @@ param | details
 
 ### examples
 
-```{r comment=""}
+```{r  comment="", tidy=TRUE}
 library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),

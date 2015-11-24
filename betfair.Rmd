@@ -4,9 +4,14 @@ title: "betfair"
 
 `betfair` is the **primary** function in the `betfaiR` package.  It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - `r Sys.Date()` - this is not _all_ methods).
 
+```{r echo=FALSE}
+library(betfaiR)
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
+```
+
 ### usage
 
-```{r eval=FALSE}
+```{r eval=FALSE, comment=""}
 bf <- betfair(usr = username, pwd = password, key = api_key)
 ```
 
@@ -24,20 +29,8 @@ Usernames, passwords and API Keys **SHOULD NOT** be shared, there is the danger 
 
 The function returns an environment (stored as `bf` in the usage section) with various methods for retrieving exchange data.  To view the available methods you can print the environment:
 
-```
+```{r comment=""}
 bf
-##  <betfaiR API>
-##  Methods available:
-##      $competitions(filter = marketFilter())
-##      $countries(filter = marketFilter())
-##      $events(filter = marketFilter())
-##      $eventTypes(filter = marketFilter())
-##      $login(usr, pwd, key)
-##      $marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL, matchProjection = NULL)
-##      $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
-##      $marketTypes(filter = marketFilter())
-##      $session()
-##      $venues(filter = marketFilter())
 ```
 
 method | details | available | help
@@ -72,11 +65,13 @@ BETFAIR_KEY=yourAPIkey
 * Restart R.  `.Renviron` is processed only [at the start of an R session](http://stat.ethz.ch/R-manual/R-patched/library/base/html/Startup.html).
 * Use `Sys.getenv()` to access your username, password, and API key.  For example you would use them like so with the `betfair` function:
 
-```{r}
+```{r comment=""}
 # load library
 library(betfaiR)
 # login
-bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), 
+              pwd = Sys.getenv("BETFAIR_PWD"), 
+              key = Sys.getenv("BETFAIR_KEY"))
 bf
 ```
 

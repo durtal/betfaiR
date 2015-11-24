@@ -428,95 +428,94 @@ img {
 <h3>examples</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 <span class="co"># login</span>
-bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
-              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>), <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>), 
+    <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 
 <span class="co"># get market data on just one market</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>()
 tmp</code></pre>
-<pre><code>## 
-## Market ID:        1.101193124
-## Market Name:  Next Conservative Leader
-## Matched:      49966.84
-##  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
+<pre><code>
+Market ID:       1.101193124
+Market Name:     Next Conservative Leader
+Matched:         49966.84
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre>
-<pre><code>## 
-## Market ID:       1.101193124
-## Event ID:        27210582 
-## Market Name: Next Conservative Leader
-## Event Name:      Next Party Leaders 
-## Matched:     49966.84
-## 
-## Runners:  54 
-##  selectionId       runnerName handicap sortPriority runnerId
-##      4551167  George Osborne         0            1  4551167
-##      4551155   Boris Johnson         0            2  4551155
-##      4551190     Theresa May         0            3  4551190
-##      8498834      Sajid Javid        0            4  8498834
-##      4551179    Michael Gove         0            5  4551179
-##      4551185 Phillip Hammond         0            6  4551185
-## 
-##  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
+<pre><code>
+Market ID:      1.101193124
+Event ID:       27210582 
+Market Name:    Next Conservative Leader
+Event Name:     Next Party Leaders 
+Matched:        49966.84
+
+Runners:     54 
+ selectionId       runnerName handicap sortPriority runnerId
+     4551167  George Osborne         0            1  4551167
+     4551155   Boris Johnson         0            2  4551155
+     4551190     Theresa May         0            3  4551190
+     8498834      Sajid Javid        0            4  8498834
+     4551179    Michael Gove         0            5  4551179
+     4551185 Phillip Hammond         0            6  4551185
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to access the runners data</span>
 tmp[[<span class="dv">1</span>]]$runners</code></pre>
-<pre><code>##    selectionId         runnerName handicap sortPriority runnerId
-## 1      4551167    George Osborne         0            1  4551167
-## 2      4551155     Boris Johnson         0            2  4551155
-## 3      4551190       Theresa May         0            3  4551190
-## 4      8498834        Sajid Javid        0            4  8498834
-## 5      4551179      Michael Gove         0            5  4551179
-## 6      4551185   Phillip Hammond         0            6  4551185
-## 7      4551170       Jeremy Hunt         0            7  4551170
-## 8      4551186       Priti Patel         0            8  4551186
-## 9      4551193     Zac Goldsmith         0            9  4551193
-## 10     4551158    Chris Grayling         0           10  4551158
-## 11     7020284       Adam Afriyie        0           11  7020284
-## 12     4519456      Owen Paterson        0           12  4519456
-## 13     9475671          Liz Truss        0           13  9475671
-## 14     5914388    Jacob Rees-Mogg        0           14  5914388
-## 15     9653158       Nicky Morgan        0           15  9653158
-## 16     4551160     Daniel Hannan         0           16  4551160
-## 17     4551176          Liam Fox         0           17  4551176
-## 18     4519457       Grant Shapps        0           18  4519457
-## 19     4551178      Maria Miller         0           19  4551178
-## 20     4551182      Nick Herbert         0           20  4551182
-## 21     4551171      Jesse Norman         0           21  4551171
-## 22     5597442    Louise Bagshawe        0           22  5597442
-## 23     9505186       Graham Brady        0           23  9505186
-## 24     4551156  Caroline Spelman         0           24  4551156
-## 25     6762719     Kwasi Kwarteng        0           25  6762719
-## 26     5633952        Mark Harper        0           26  5633952
-## 27     4551165      Eric Pickles         0           27  4551165
-## 28     4551161       David Davis         0           28  4551161
-## 29     4551168        Greg Clark         0           29  4551168
-## 30     4551154   Andrew Mitchell         0           30  4551154
-## 31     4551159      Damian Green         0           31  4551159
-## 32     4551152       Alan Duncan         0           32  4551152
-## 33     9505187     Robert Halfron        0           33  9505187
-## 34     4551187      Rory Stewart         0           34  4551187
-## 35     4551157       Chloe Smith         0           35  4551157
-## 36     4551175    Kenneth Clarke         0           36  4551175
-## 37     4551164         Ed Vaizey         0           37  4551164
-## 38     4551163    Dominic Grieve         0           38  4551163
-## 39     4551172       John Bercow         0           39  4551172
-## 40     4551173      John Redwood         0           40  4551173
-## 41     4551153    Andrew Lansley         0           41  4551153
-## 42     4551174  Justine Greening         0           42  4551174
-## 43     4551189  Sir George Young         0           43  4551189
-## 44     4551188      Shaun Bailey         0           44  4551188
-## 45     4551181    Nadine Dorries         0           45  4551181
-## 46     4551166     Francis Maude         0           46  4551166
-## 47     4551169 Iain Duncan Smith         0           47  4551169
-## 48     4551183     Oliver Letwin         0           48  4551183
-## 49     4551191  Theresa Villiers         0           49  4551191
-## 50     4551192     William Hague         0           50  4551192
-## 51     4551162    David Willetts         0           51  4551162
-## 52     4551180  Michael Portillo         0           52  4551180
-## 53     4551184   Peter Ainsworth         0           53  4551184
-## 54     4551177   Malcolm Rifkind         0           54  4551177</code></pre>
+<pre><code>   selectionId         runnerName handicap sortPriority runnerId
+1      4551167    George Osborne         0            1  4551167
+2      4551155     Boris Johnson         0            2  4551155
+3      4551190       Theresa May         0            3  4551190
+4      8498834        Sajid Javid        0            4  8498834
+5      4551179      Michael Gove         0            5  4551179
+6      4551185   Phillip Hammond         0            6  4551185
+7      4551170       Jeremy Hunt         0            7  4551170
+8      4551186       Priti Patel         0            8  4551186
+9      4551193     Zac Goldsmith         0            9  4551193
+10     4551158    Chris Grayling         0           10  4551158
+11     7020284       Adam Afriyie        0           11  7020284
+12     4519456      Owen Paterson        0           12  4519456
+13     9475671          Liz Truss        0           13  9475671
+14     5914388    Jacob Rees-Mogg        0           14  5914388
+15     9653158       Nicky Morgan        0           15  9653158
+16     4551160     Daniel Hannan         0           16  4551160
+17     4551176          Liam Fox         0           17  4551176
+18     4519457       Grant Shapps        0           18  4519457
+19     4551178      Maria Miller         0           19  4551178
+20     4551182      Nick Herbert         0           20  4551182
+21     4551171      Jesse Norman         0           21  4551171
+22     5597442    Louise Bagshawe        0           22  5597442
+23     9505186       Graham Brady        0           23  9505186
+24     4551156  Caroline Spelman         0           24  4551156
+25     6762719     Kwasi Kwarteng        0           25  6762719
+26     5633952        Mark Harper        0           26  5633952
+27     4551165      Eric Pickles         0           27  4551165
+28     4551161       David Davis         0           28  4551161
+29     4551168        Greg Clark         0           29  4551168
+30     4551154   Andrew Mitchell         0           30  4551154
+31     4551159      Damian Green         0           31  4551159
+32     4551152       Alan Duncan         0           32  4551152
+33     9505187     Robert Halfron        0           33  9505187
+34     4551187      Rory Stewart         0           34  4551187
+35     4551157       Chloe Smith         0           35  4551157
+36     4551175    Kenneth Clarke         0           36  4551175
+37     4551164         Ed Vaizey         0           37  4551164
+38     4551163    Dominic Grieve         0           38  4551163
+39     4551172       John Bercow         0           39  4551172
+40     4551173      John Redwood         0           40  4551173
+41     4551153    Andrew Lansley         0           41  4551153
+42     4551174  Justine Greening         0           42  4551174
+43     4551189  Sir George Young         0           43  4551189
+44     4551188      Shaun Bailey         0           44  4551188
+45     4551181    Nadine Dorries         0           45  4551181
+46     4551166     Francis Maude         0           46  4551166
+47     4551169 Iain Duncan Smith         0           47  4551169
+48     4551183     Oliver Letwin         0           48  4551183
+49     4551191  Theresa Villiers         0           49  4551191
+50     4551192     William Hague         0           50  4551192
+51     4551162    David Willetts         0           51  4551162
+52     4551180  Michael Portillo         0           52  4551180
+53     4551184   Peter Ainsworth         0           53  4551184
+54     4551177   Malcolm Rifkind         0           54  4551177</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>

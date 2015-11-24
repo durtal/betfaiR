@@ -27,7 +27,7 @@ variable | details
 
 ### examples
 
-```{r}
+```{r comment="", tidy=TRUE}
 library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))

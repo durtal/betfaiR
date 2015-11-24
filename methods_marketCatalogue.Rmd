@@ -65,7 +65,7 @@ The `runners` dataframe above will likely include a lot of other data if **RUNNE
 
 ### examples
 
-```{r}
+```{r comment="", tidy=TRUE}
 library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
