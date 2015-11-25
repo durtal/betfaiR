@@ -83,10 +83,12 @@ summary.marketBook_simple <- function(x) {
         runners_basic <- plyr::ldply(x$runners, .fun = function(x) {
             x$basic
         })
-        cat("\n\nRunners:\n")
+        cat("\nRunners:\n")
         print(runners_basic, row.names = FALSE)
     }
 
+    w <- options()$width
+    cat("\n", rep("-", w/2))
 }
 
 #' @export
