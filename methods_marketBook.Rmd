@@ -30,7 +30,7 @@ A list with 3 elements, there are two dataframes, one about the market, and one 
 
 ### examples
 
-```{r  comment="", tidy=TRUE}
+```{r  comment=""}
 library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
