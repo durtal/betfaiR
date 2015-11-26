@@ -340,8 +340,9 @@ img {
 <h3>examples</h3>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 <span class="co"># login</span>
-bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>), <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>), 
-    <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
 
 <span class="co"># build filter object, for all football markets</span>
 obj &lt;-<span class="st"> </span><span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>)
@@ -350,7 +351,7 @@ res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span 
 <span class="kw">head</span>(res)</code></pre>
 <pre><code>  competition_id            competition_name marketCount competitionRegion
 1         744098             Chilean Primera         154               CHL
-2        8530026 UEFA Womens Euro Qualifying         113               GBR
+2        8530026 UEFA Womens Euro Qualifying          96               GBR
 3          97807          Czech Republic Cup           6               CZE
 4              7         Austrian Bundesliga         168               AUT
 5        7946082        Ukrainian U21 League          22               UKR

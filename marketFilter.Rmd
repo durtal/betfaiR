@@ -42,7 +42,7 @@ param | type | details | example
 
 ### examples
 
-```{r comment="", tidy=TRUE}
+```{r comment=""}
 library(betfaiR)
 # login
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
