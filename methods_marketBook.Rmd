@@ -20,9 +20,9 @@ bf$marketBook(marketIds = list(),
 param | details
 ------|--------
 `marketIds` | _string_, one or more marketIds, the number of markets returned depends on the amount of data you request via the `priceProjection`
-`priceProjection` | the projection of price data you want to receive in the response, options include **SP\_AVAILABLE**, **SP\_TRADED**, **EX\_BEST\_OFFERS**, **EX\_ALL\_OFFERS** (trumps EX\_BEST\_OFFERS), and **EX\_TRADED**, these are expained in [Betting Enums](betting_enums.html) under the Price Data header.
-`orderProjection` | the order Projection you wish to receive in the response, **ALL** all orders (entirely matched, or not), **EXECUTABLE** orders with unmatched portion, **EXECUTION\_COMPLETE** orders with no unmatched portion, see [Betting Enums](betting_enums.html) under the Order Projection header.
-`matchProjection` | if you ask for orders via `orderProjection`, this will specify the representation of the matched bets, options are **NO\_ROLLUP** returns raw fragments, **ROLLED\_UP\_BY\_PRICE** rolled up matched amounts by distinct matched prices per side, and **ROLLED\_UP\_BY\_AVG\_PRICE** rolled up by average price per side, see [Betting Enums](betting_enums.html) under Match Projection header.
+`priceProjection` | the projection of price data you want to receive in the response, options include **SP\_AVAILABLE**, **SP\_TRADED**, **EX\_BEST\_OFFERS**, **EX\_ALL\_OFFERS** (trumps EX\_BEST\_OFFERS), and **EX\_TRADED**, these are expained in [Betting Enums](betting_enums.html#pricedata) under the Price Data header.
+`orderProjection` | the order Projection you wish to receive in the response, **ALL** all orders (entirely matched, or not), **EXECUTABLE** orders with unmatched portion, **EXECUTION\_COMPLETE** orders with no unmatched portion, see [Betting Enums](betting_enums.html#orderprojection) under the Order Projection header.
+`matchProjection` | if you ask for orders via `orderProjection`, this will specify the representation of the matched bets, options are **NO\_ROLLUP** returns raw fragments, **ROLLED\_UP\_BY\_PRICE** rolled up matched amounts by distinct matched prices per side, and **ROLLED\_UP\_BY\_AVG\_PRICE** rolled up by average price per side, see [Betting Enums](betting_enums.html#matchprojection) under Match Projection header.
 
 ### return
 

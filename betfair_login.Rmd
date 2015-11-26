@@ -1,20 +1,19 @@
 ---
-title: "betfair"
+title: "betfair_login"
 ---
 
-`betfair` is the **primary** function in the `betfaiR` package.  It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - `r Sys.Date()` - this is not _all_ methods).
-
-```{r echo=FALSE}
+```{r echo=FALSE, message = FALSE, warning = FALSE}
 library(betfaiR)
-bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
 ```
+
+The `betfair_login` function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different **methods**.
 
 ### usage
 
-```{r eval=FALSE, comment=""}
-bf <- betfair(usr = username,
-              pwd = password,
-              key = api_key)
+```{r eval=FALSE}
+bf <- betfair_login(usr = username,
+                    pwd = password,
+                    key = api_key)
 ```
 
 ### arguments
@@ -29,25 +28,16 @@ Usernames, passwords and API Keys **SHOULD NOT** be shared, there is the danger 
 
 ### return
 
-The function returns an environment (stored as `bf` in the usage section) with various methods for retrieving exchange data.  To view the available methods you can print the environment:
+The function returns a list, if everything went okay (correct credentials were provided), with a class of `betfair_login`.  The list contains 3 sub lists, `usr`, `resp` and `ssoid`:
 
-```{r comment=""}
-bf
-```
+* `usr`
+    - list containing the credentials you provided,
+* `resp`
+    - list with the response from Betfair with any errors,
+*`ssoid`
+    - list which includes you session token, it is this list which is to be used as the header in future requests made to the Exchange API.
 
-method | details | available | help
--------|---------|-----------|------
-`competitions` | Retrieve data about the different competitions with current markets | `TRUE` | [competitions](methods_competitions.html)
-`countries` | Retrieve data about the different countries hosting events | `TRUE` | [countries](methods_countries.html)
-`events` | Retrieve data about the different events | `TRUE` | [events](methods_events.html)
-`eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` | [eventTypes](methods_eventTypes.html)
-`login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` | [login](login_session.html)
-`marketBook` | Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market | `TRUE` | [marketBook](methods_marketBook.html)
-`marketCatalogue` | Retrieve data about the different types of markets | `TRUE` | [marketCatalogue](methods_marketCatalogue.html)
-`marketTypes` | Retrieve counts for the different market types | `TRUE` | [marketTypes](methods_marketTypes.html)
-`placeOrders` |  | `FALSE` | _not available_
-`session` | Prints session token | `TRUE` | [session](login_session.html)
-`venues` | Retrieve data about the venues hosting racing (horse and greyhound) | `TRUE` | [venues](methods_venues.html)
+You can print the object, which will display the credentials you passed into the function and any session token that was returned.
 
 ### appendix
 #### username, password and API key best practices

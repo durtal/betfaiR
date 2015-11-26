@@ -103,16 +103,31 @@ img {
                 </li>
                 <li class="dropdown">
                     <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
-                        Primary Funs <b class="caret"></b>
+                        Functions <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">Environment</li>
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">Misc</li>
+                        <li class="dropdown-header">Helpers</li>
                         <li>
                             <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">betfair_login</a>
+                        </li>
+                        <li>
+                            <a href="request_functions.html">requests</a>
+                        </li>
+                        <li>
+                            <a href="betfair_POST.html">betfair_POST</a>
+                        </li>
+                        <li>
+                            <a href="betfair_check.html">betfair_check</a>
+                        </li>
+                        <li>
+                            <a href="betfair_parse.html">betfair_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -192,28 +207,28 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left"><strong>1</strong></td>
-<td align="left"><code>betfair_login</code></td>
+<td align="left"><a href="betfair_login.html"><code>betfair_login</code></a></td>
 <td align="left"><em>usr</em>, <em>pwd</em>, <em>key</em></td>
 <td align="left">login function with betfair username, password, and key</td>
 <td align="left">list with a session token</td>
 </tr>
 <tr class="even">
 <td align="left"><strong>2</strong></td>
-<td align="left"><code>base_request</code></td>
+<td align="left"><a href="base_request.html"><code>base_request</code></a></td>
 <td align="left"><em>filter</em>, <em>method</em></td>
 <td align="left">builds a basic request object</td>
 <td align="left">list with class that matches <em>method</em> param</td>
 </tr>
 <tr class="odd">
 <td align="left"><strong>3</strong></td>
-<td align="left"><code>betfair_request</code></td>
+<td align="left"><a href="betfair_request.html"><code>betfair_request</code></a></td>
 <td align="left"><em>x</em>, <em>…</em></td>
 <td align="left">fleshes out the request object</td>
 <td align="left">json object ready to be included in a POST request</td>
 </tr>
 <tr class="even">
 <td align="left"><strong>4</strong></td>
-<td align="left"><code>betfair_POST</code></td>
+<td align="left"><a href="betfair_POST.html"><code>betfair_POST</code></a></td>
 <td align="left"><em>body</em></td>
 <td align="left">betfair POST, includes the request object returned in step <strong>3</strong>, and the session token returned in <strong>1</strong></td>
 <td align="left">response object</td>
@@ -227,14 +242,14 @@ img {
 </tr>
 <tr class="even">
 <td align="left"><strong>6</strong></td>
-<td align="left"><code>betfair_check</code></td>
+<td align="left"><a href="betfair_check.html"><code>betfair_check</code></a></td>
 <td align="left"><em>response</em>, <em>method</em></td>
 <td align="left">check the response is valid, log errors if not, apply class <em>method</em> to list ahead of step <strong>7</strong></td>
 <td align="left">list</td>
 </tr>
 <tr class="odd">
 <td align="left"><strong>7</strong></td>
-<td align="left"><code>betfair_parse</code></td>
+<td align="left"><a href="betfair_parse.html"><code>betfair_parse</code></a></td>
 <td align="left"><em>response</em></td>
 <td align="left">parses the response object</td>
 <td align="left">list of dataframes or dataframe</td>
