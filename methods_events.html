@@ -275,37 +275,37 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <span class="co"># return all countries</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>  event_id                  event_name event_countryCode event_timezone
-1 27183450     ICC World Twenty20 2016                IN  Asia/Calcutta
-2 27357114          NFL Season 2015/16                US     US/Eastern
-3 27603613      Vitkovice Steel v Zlin                CZ            CET
-4 27560545 PGA Tour Money List 2015/16                US  Europe/London
-5 27603589      Hamburg v Schwenninger                DE            CET
-6 27448109          The Late Late Show                US     US/Eastern
+<pre><code>  event_id                event_name event_countryCode event_timezone
+1 27612213       Benfica v Academica                PT  Europe/London
+2 27612215        Schalke v Hannover                DE  Europe/London
+3 27612208          Perugia v Modena                IT  Europe/London
+4 27183450   ICC World Twenty20 2016                IN  Asia/Calcutta
+5 27357114        NFL Season 2015/16                US     US/Eastern
+6 27612211 AZ Alkmaar v ADO Den Haag                NL  Europe/London
             event_openDate marketCount event_venue
-1 2016-02-01T11:30:00.000Z           1        &lt;NA&gt;
-2 2015-09-11T00:30:00.000Z           6        &lt;NA&gt;
-3 2015-11-24T16:00:00.000Z           3        &lt;NA&gt;
-4 2015-10-15T14:20:00.000Z           1        &lt;NA&gt;
-5 2015-11-24T18:30:00.000Z           3        &lt;NA&gt;
-6 2015-05-18T22:00:00.000Z           1        &lt;NA&gt;</code></pre>
+1 2015-12-04T20:30:00.000Z           8        &lt;NA&gt;
+2 2015-12-04T19:30:00.000Z          13        &lt;NA&gt;
+3 2015-12-04T20:00:00.000Z           8        &lt;NA&gt;
+4 2016-02-01T11:30:00.000Z           1        &lt;NA&gt;
+5 2015-09-11T00:30:00.000Z           6        &lt;NA&gt;
+6 2015-12-04T19:00:00.000Z           8        &lt;NA&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>  event_id          event_name event_countryCode event_timezone
 1 27533661       Newb 28th Nov                GB  Europe/London
-2 27609166       Ling 24th Nov                GB  Europe/London
-3 27609167      Sedge 24th Nov                GB  Europe/London
-4 27609165       Sthl 24th Nov                GB  Europe/London
-5 27608873 TPara (US) 23rd Nov                US     US/Arizona
+2 27612828 Font (FRA) 27th Nov                FR            CET
+3 27612401       Newb 28th Nov                GB  Europe/London
+4 27612403 Grey (RSA) 27th Nov                ZA            CET
+5 27612402       Newc 28th Nov                GB  Europe/London
 6  3453086    Stewards Enquiry                GB  Europe/London
-    event_venue           event_openDate marketCount
-1       Newbury 2015-11-28T15:00:00.000Z           2
-2     Lingfield 2015-11-24T13:00:00.000Z          18
-3    Sedgefield 2015-11-24T12:20:00.000Z          21
-4     Southwell 2015-11-24T12:10:00.000Z          24
-5 Turf Paradise 2015-11-23T19:55:00.000Z           2
-6          &lt;NA&gt; 2014-01-01T00:00:00.000Z           1</code></pre>
+            event_openDate marketCount   event_venue
+1 2015-11-28T14:25:00.000Z           3          &lt;NA&gt;
+2 2015-11-27T11:50:00.000Z           8 Fontainebleau
+3 2015-11-28T12:15:00.000Z           3       Newbury
+4 2015-11-27T16:05:00.000Z          16     Greyville
+5 2015-11-28T12:00:00.000Z           3     Newcastle
+6 2014-01-01T00:00:00.000Z           1          &lt;NA&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span>
 <span class="st">    </span><span class="dv">7</span>))

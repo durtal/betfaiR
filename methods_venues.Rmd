@@ -6,7 +6,7 @@ Having logged in using the [`betfair`](betfair.html) function, the environment c
 
 ### usage
 
-```
+```{r eval=FALSE}
 bf$venues(filter = marketFilter())
 ```
 
