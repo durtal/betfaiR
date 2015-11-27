@@ -6,7 +6,7 @@ print.marketCatalogue_simple <- function(x) {
     cat("\nMatched:\t\t", x$market$totalMatched)
 
     w <- options()$width
-    cat("\n", rep("-", w/2))
+    cat("\n", paste0(rep("-", w), collapse = ""))
 
 }
 
@@ -32,7 +32,7 @@ summary.marketCatalogue_simple <- function(x) {
     }
 
     w <- options()$width
-    cat("\n", rep("-", w/2))
+    cat("\n", paste0(rep("-", w), collapse = ""))
 }
 
 #' @export
@@ -60,13 +60,13 @@ summary.marketCatalogue_list <- function(x) {
 print.marketBook_simple <- function(x) {
 
     marketId <- paste0("\nMarket ID:\t\t", x$market$marketId)
-    totalMatched <- paste0("\nMatched:\t\t\t", x$market$totalMatched)
+    totalMatched <- paste0("\nMatched:\t\t", x$market$totalMatched)
     totalAvailable <- paste0("\nAvailable:\t\t", x$market$totalAvailable)
 
     cat(marketId, totalMatched, totalAvailable)
 
     w <- options()$width
-    cat("\n", rep("-", w/2))
+    cat("\n", paste0(rep("-", w), collapse = ""))
 
 }
 
@@ -83,12 +83,12 @@ summary.marketBook_simple <- function(x) {
         runners_basic <- plyr::ldply(x$runners, .fun = function(x) {
             x$basic
         })
-        cat("\nRunners:\n")
+        cat("\n\nRunners:\n")
         print(runners_basic, row.names = FALSE)
     }
 
     w <- options()$width
-    cat("\n", rep("-", w/2))
+    cat("\n", paste0(rep("-", w), collapse = ""))
 }
 
 #' @export
