@@ -273,203 +273,205 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<sp
                           <span class="dt">maxResults =</span> <span class="dv">10</span>)
 <span class="kw">summary</span>(tmp)</code></pre>
 <pre><code>
-Market ID:      1.121876951
-Event ID:       821269 
+Market ID:      1.122026536
+Event ID:       839575 
 Market Name:    Match Odds
-Event Name:     Tercera Division 
-Matched:        12207.2
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121971595
-Event ID:       801976 
+Event Name:     Paraguayan Primera 
+Matched:        5887.76
+ ---------------------------------------------------------------------------
+Market ID:      1.122025550
+Event ID:       839575 
 Market Name:    Match Odds
-Event Name:     Egyptian Premier 
-Matched:        3645.47
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686076
-Event ID:       2005 
+Event Name:     Paraguayan Primera 
+Matched:        96434.58
+ ---------------------------------------------------------------------------
+Market ID:      1.121894673
+Event ID:       321319 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        431238.03
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686385
-Event ID:       2005 
+Event Name:     Brazilian Division 2 
+Matched:        51862.01
+ ---------------------------------------------------------------------------
+Market ID:      1.122000150
+Event ID:       843454 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        89618.91
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121687019
-Event ID:       2005 
+Event Name:     Uruguayan Primera 
+Matched:        647.49
+ ---------------------------------------------------------------------------
+Market ID:      1.121895249
+Event ID:       321319 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        456086.4
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686179
-Event ID:       2005 
+Event Name:     Brazilian Division 2 
+Matched:        17101.52
+ ---------------------------------------------------------------------------
+Market ID:      1.122000095
+Event ID:       843454 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        246725.33
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121876676 
-Market Name:    Match Odds 
-Matched:        1016
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686593
-Event ID:       2005 
+Event Name:     Uruguayan Primera 
+Matched:        4926.71
+ ---------------------------------------------------------------------------
+Market ID:      1.121936091
+Event ID:       803690 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        46795.28
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121876896
-Event ID:       8530026 
+Event Name:     Ecuadorian Primera A 
+Matched:        688.86
+ ---------------------------------------------------------------------------
+Market ID:      1.122032716
+Event ID:       4802204 
 Market Name:    Match Odds
-Event Name:     UEFA Womens Euro Qualifying 
-Matched:        12193.32
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121756673
-Event ID:       2005 
+Event Name:     El Salvadoran Primera Division 
+Matched:        0
+ ---------------------------------------------------------------------------
+Market ID:      1.121903572
+Event ID:       3972877 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        86911.62
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
+Event Name:     Panama Primera Division 
+Matched:        0
+ ---------------------------------------------------------------------------
+Market ID:      1.121980621
+Event ID:       89 
+Market Name:    Match Odds
+Event Name:     J League 
+Matched:        1406.33
+ ---------------------------------------------------------------------------</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find market with most matched</span>
 ind &lt;-<span class="st"> </span><span class="kw">which.max</span>(<span class="kw">sapply</span>(tmp, function(i) i$market$totalMatched))
 market &lt;-<span class="st"> </span>tmp[[ind]]
 <span class="kw">summary</span>(market)</code></pre>
 <pre><code>
-Market ID:      1.121687019
-Event ID:       2005 
+Market ID:      1.122025550
+Event ID:       839575 
 Market Name:    Match Odds
-Event Name:     UEFA Europa League 
-Matched:        456086.4
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
+Event Name:     Paraguayan Primera 
+Matched:        96434.58
+ ---------------------------------------------------------------------------</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">market &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> market$market$marketId)
 <span class="kw">summary</span>(market)</code></pre>
 <pre><code>
-Market ID:      1.121687019 
-Matched:        478609.87 
-Available:      113481.83
+Market ID:      1.122025550 
+Matched:        114089.54 
+Available:      8774.53
 
 Runners:
      .id selectionId handicap status lastPriceTraded totalMatched
-   50335       50335        0 ACTIVE            1.75    448049.28
- 1209582     1209582        0 ACTIVE           12.50     10781.72
-   58805       58805        0 ACTIVE            2.80     19778.86
+ 5363620     5363620        0 ACTIVE            1.38     38522.33
+  328196      328196        0 ACTIVE           25.00     59763.29
+   58805       58805        0 ACTIVE            4.40     15803.91
 
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
+ ---------------------------------------------------------------------------</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># collect data on all 10 markets</span>
 markets &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> <span class="kw">sapply</span>(tmp, function(i) i$market$marketId))
 <span class="kw">summary</span>(markets)</code></pre>
 <pre><code>
-Market ID:      1.121686076 
-Matched:        534372.21 
-Available:      76022.08
+Market ID:      1.121894673 
+Matched:        56303.67 
+Available:      29514.08
 
 Runners:
      .id selectionId handicap status lastPriceTraded totalMatched
- 2939090     2939090        0 ACTIVE           12.00     56029.72
-  676467      676467        0 ACTIVE            1.52    406736.50
-   58805       58805        0 ACTIVE            3.95     71605.98
+  356589      356589        0 ACTIVE             1.1     44930.61
+ 6368159     6368159        0 ACTIVE            65.0      4851.62
+   58805       58805        0 ACTIVE            14.5      6521.43
 
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686179 
-Matched:        253316.16 
-Available:      33925.1
-
-Runners:
-     .id selectionId handicap status lastPriceTraded totalMatched
- 3631356     3631356        0 ACTIVE            2.16    207054.69
-   46980       46980        0 ACTIVE           11.50     21748.14
-   58805       58805        0 ACTIVE            2.22     24513.32
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686385 
-Matched:        105872.21 
-Available:      83153.64
+ ---------------------------------------------------------------------------
+Market ID:      1.121895249 
+Matched:        25690.67 
+Available:      16272.99
 
 Runners:
      .id selectionId handicap status lastPriceTraded totalMatched
-  110475      110475        0 ACTIVE            1.15     96287.17
- 1300930     1300930        0 ACTIVE           60.00      4079.76
-   58805       58805        0 ACTIVE            9.20      5505.27
+ 4525645     4525645        0 ACTIVE            1.44     21385.52
+ 1039199     1039199        0 ACTIVE            9.00      1957.75
+   58805       58805        0 ACTIVE            5.30      2347.39
 
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121686593 
-Matched:        50228.87 
-Available:      32329.03
+ ---------------------------------------------------------------------------
+Market ID:      1.121903572 
+Matched:        0 
+Available:      645.57
+
+Runners:
+     .id selectionId handicap status totalMatched
+ 4067827     4067827        0 ACTIVE            0
+ 7899390     7899390        0 ACTIVE            0
+   58805       58805        0 ACTIVE            0
+
+ ---------------------------------------------------------------------------
+Market ID:      1.121936091 
+Matched:        737.35 
+Available:      2405.78
+
+Runners:
+     .id selectionId handicap status lastPriceTraded totalMatched
+ 7005170     7005170        0 ACTIVE             1.5       567.96
+ 8225986     8225986        0 ACTIVE             8.4        57.97
+   58805       58805        0 ACTIVE             5.0       111.42
+
+ ---------------------------------------------------------------------------
+Market ID:      1.121980621 
+Matched:        1410.49 
+Available:      4902.7
 
 Runners:
     .id selectionId handicap status lastPriceTraded totalMatched
-  48786       48786        0 ACTIVE            4.20     11850.95
- 502303      502303        0 ACTIVE            4.20     16148.13
-  58805       58805        0 ACTIVE            1.92     22229.78
+ 441088      441088        0 ACTIVE            2.12      1088.69
+ 441083      441083        0 ACTIVE            3.65        94.81
+  58805       58805        0 ACTIVE            3.95       226.98
 
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121687019 
-Matched:        478609.87 
-Available:      112367.6
-
-Runners:
-     .id selectionId handicap status lastPriceTraded totalMatched
-   50335       50335        0 ACTIVE            1.75    448049.28
- 1209582     1209582        0 ACTIVE           12.50     10781.72
-   58805       58805        0 ACTIVE            2.80     19778.86
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121756673 
-Matched:        97780.69 
-Available:      30598.81
-
-Runners:
-    .id selectionId handicap status lastPriceTraded totalMatched
- 498560      498560        0 ACTIVE            1.37     23836.97
- 215903      215903        0 ACTIVE           18.00     49225.60
-  58805       58805        0 ACTIVE            4.50     24718.12
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121876676 
-Matched:        1144.33 
-Available:      10675.21
-
-Runners:
-      .id selectionId handicap status lastPriceTraded totalMatched
-  4835198     4835198        0 ACTIVE            1.21       796.62
- 10533628    10533628        0 ACTIVE           36.00       127.19
-    58805       58805        0 ACTIVE            7.00       220.50
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121876896 
-Matched:        15102.69 
-Available:      14049.43
+ ---------------------------------------------------------------------------
+Market ID:      1.122000095 
+Matched:        5325.04 
+Available:      5080.57
 
 Runners:
      .id selectionId handicap status lastPriceTraded totalMatched
- 5908461     5908461        0 ACTIVE           60.00       835.05
-  727766      727766        0 ACTIVE            1.13     13949.83
-   58805       58805        0 ACTIVE           10.50       317.80
+ 1222679     1222679        0 ACTIVE            2.28      2451.59
+ 3206731     3206731        0 ACTIVE            3.25      1586.72
+   58805       58805        0 ACTIVE            4.00      1286.71
 
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121876951 
-Matched:        13753.58 
-Available:      895.75
-
-Runners:
-     .id selectionId handicap status lastPriceTraded totalMatched
- 9053708     9053708        0 ACTIVE            9.00      6969.59
- 6415551     6415551        0 ACTIVE           11.00      2852.55
-   58805       58805        0 ACTIVE            1.25      3931.43
-
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Market ID:      1.121971595 
-Matched:        3642.83 
-Available:      656.84
+ ---------------------------------------------------------------------------
+Market ID:      1.122000150 
+Matched:        647.42 
+Available:      0
 
 Runners:
      .id selectionId handicap status lastPriceTraded totalMatched
- 5907009     5907009        0 ACTIVE            2.50      1591.45
- 7024303     7024303        0 ACTIVE            3.65      1510.97
-   58805       58805        0 ACTIVE            3.25       540.41
+ 5593448     5593448        0 ACTIVE            2.82       198.88
+  328691      328691        0 ACTIVE            3.00       145.50
+   58805       58805        0 ACTIVE            3.40       303.03
 
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre>
+ ---------------------------------------------------------------------------
+Market ID:      1.122025550 
+Matched:        114089.54 
+Available:      8774.53
+
+Runners:
+     .id selectionId handicap status lastPriceTraded totalMatched
+ 5363620     5363620        0 ACTIVE            1.38     38522.33
+  328196      328196        0 ACTIVE           25.00     59763.29
+   58805       58805        0 ACTIVE            4.40     15803.91
+
+ ---------------------------------------------------------------------------
+Market ID:      1.122026536 
+Matched:        5888.56 
+Available:      0
+
+Runners:
+     .id selectionId handicap status lastPriceTraded totalMatched
+ 7457440     7457440        0 ACTIVE            2.12      3042.17
+ 9329179     9329179        0 ACTIVE            3.70      1548.23
+   58805       58805        0 ACTIVE            3.75      1298.16
+
+ ---------------------------------------------------------------------------
+Market ID:      1.122032716 
+Matched:        0 
+Available:      238.36
+
+Runners:
+      .id selectionId handicap status totalMatched
+ 10152861    10152861        0 ACTIVE            0
+  8459079     8459079        0 ACTIVE            0
+    58805       58805        0 ACTIVE            0
+
+ ---------------------------------------------------------------------------</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>

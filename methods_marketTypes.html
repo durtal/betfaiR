@@ -271,22 +271,22 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>         marketType marketCount
-1          NONSPORT          65
+1          NONSPORT          67
 2          STEWARDS           2
-3           SPECIAL          89
-4 TOURNAMENT_WINNER          38
-5            UNUSED          37
-6  UNDIFFERENTIATED         164</code></pre>
+3           SPECIAL          91
+4 TOURNAMENT_WINNER          39
+5            UNUSED          38
+6  UNDIFFERENTIATED         143</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>      marketType marketCount
-1       STEWARDS           2
-2        SPECIAL           3
-3 DAILY_WIN_DIST           1
-4            WIN          99
-5   REV_FORECAST           2
-6      MATCH_BET           2</code></pre>
+<pre><code>  marketType marketCount
+1   STEWARDS           2
+2    SPECIAL           3
+3  MATCH_BET           1
+4        WIN         111
+5      PLACE          99
+6   EACH_WAY          49</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span>
 <span class="st">    </span><span class="dv">7</span>))

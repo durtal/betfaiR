@@ -307,20 +307,20 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>  event_id          event_name event_countryCode event_timezone
-1 27533661       Newb 28th Nov                GB  Europe/London
-2 27612828 Font (FRA) 27th Nov                FR            CET
-3 27612401       Newb 28th Nov                GB  Europe/London
-4 27612403 Grey (RSA) 27th Nov                ZA            CET
-5 27612402       Newc 28th Nov                GB  Europe/London
-6  3453086    Stewards Enquiry                GB  Europe/London
-            event_openDate marketCount   event_venue
-1 2015-11-28T14:25:00.000Z           3          &lt;NA&gt;
-2 2015-11-27T11:50:00.000Z           8 Fontainebleau
-3 2015-11-28T12:15:00.000Z           3       Newbury
-4 2015-11-27T16:05:00.000Z          16     Greyville
-5 2015-11-28T12:00:00.000Z           3     Newcastle
-6 2014-01-01T00:00:00.000Z           1          &lt;NA&gt;</code></pre>
+<pre><code>  event_id            event_name event_countryCode event_timezone
+1 27613410  Kenil (RSA) 28th Nov                ZA            CET
+2 27533661         Newb 28th Nov                GB  Europe/London
+3 27613411   Turf (RSA) 28th Nov                ZA            CET
+4 27613356 Fairy (Dist) 29th Nov                IE  Europe/London
+5 27612401         Newb 28th Nov                GB  Europe/London
+6 27613555        Fairy 28th Nov                IE  Europe/London
+  event_venue           event_openDate marketCount
+1  Kenilworth 2015-11-28T10:45:00.000Z          18
+2        &lt;NA&gt; 2015-11-28T14:25:00.000Z           3
+3 Turffontein 2015-11-28T10:35:00.000Z          24
+4  Fairyhouse 2015-11-29T13:40:00.000Z           1
+5     Newbury 2015-11-28T12:15:00.000Z          21
+6  Fairyhouse 2015-11-28T11:40:00.000Z          24</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span>
 <span class="st">    </span><span class="dv">7</span>))
