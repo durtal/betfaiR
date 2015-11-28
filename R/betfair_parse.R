@@ -139,6 +139,7 @@ betfair_parse.marketBook <- function(res) {
                 }
                 return(rnr_out)
             })
+            class(runners) <- "marketBook_runners"
             out$runners <- runners
             names(out$runners) <- sapply(out$runners, function(x) x$basic$selectionId)
         }

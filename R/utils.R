@@ -37,7 +37,7 @@
 #'
 #' @return returns a list with an order for Betfair
 prepare_order <- function(marketId, selectionId, orderType = "LIMIT",
-                          handicap = NULL, side = "BACK", limitOrder = NULL,
+                          handicap = "0", side = "BACK", limitOrder = NULL,
                           limitOnCloseOrder = NULL, marketOnCloseOrder = NULL) {
 
     orderList <- list("marketId" = as.character(marketId),
@@ -57,4 +57,40 @@ prepare_order <- function(marketId, selectionId, orderType = "LIMIT",
         orderList$instructions$marketOnCloseOrder <- list(marketOnCloseOrder)
     }
     return(orderList)
+}
+
+#' limitOrder
+#'
+#' @description helper function to prepare a bet, used in conjunction with \link{prepare_order}
+#'
+#' @param size the size of the bet. \strong{Note:} for a market type of EACH_WAY,
+#' the total stake is 2*size.
+#' @param price the limit price
+#' @param persistenceType what to do with the order at turn in-play, three choices,
+#'      \strong{LAPSE} - lapse the order when the market goes in play,
+#'      \strong{PERSIST} - persist the order in-play, the bet will be placed
+#'      automatically into the in-play market at the start of the event,
+#'      \strong{MARKET_ON_CLOSE} - put the order into the auction (SP) at turn
+#'      in-play.
+#'
+#' @return list with bet order
+limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
+    return(list(size = size,
+                price = price,
+                persistenceType = persistenceType))
+}
+
+#' limitOnCloseOrder
+#'
+#' @description helper function to prepare a bet, used in conjunction with \link{prepare_order}
+#'
+#' @param size the size of the bet. \strong{Note:} for a market type of EACH_WAY,
+#' the total stake is 2*size.
+#' @param price the limit price
+#'
+#' @return list with bet order
+#'
+limitOnCloseOrder <- function(size = 2, price = NULL) {
+    return(list(size = size,
+                price = price))
 }

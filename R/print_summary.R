@@ -83,8 +83,16 @@ summary.marketBook_simple <- function(x) {
         runners_basic <- plyr::ldply(x$runners, .fun = function(x) {
             x$basic
         })
-        cat("\n\nRunners:\n")
-        print(runners_basic, row.names = FALSE)
+        active <- table(runners_basic$status)
+        if(length(active)>1) {
+            active <- paste0(active[[1]], " (", active[[2]], " removed)")
+        } else if(length(active) == 1) {
+            active <- active[[1]]
+        } else {
+            active <- ""
+        }
+        cat("\n\nRunners:\t", active, "\n")
+        print(head(runners_basic), row.names = FALSE)
     }
 
     w <- options()$width
