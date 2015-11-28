@@ -34,7 +34,7 @@ The function returns a list, if everything went okay (correct credentials were p
     - list containing the credentials you provided,
 * `resp`
     - list with the response from Betfair with any errors,
-*`ssoid`
+* `ssoid`
     - list which includes you session token, it is this list which is to be used as the header in future requests made to the Exchange API.
 
 You can print the object, which will display the credentials you passed into the function and any session token that was returned.
