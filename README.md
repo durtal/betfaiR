@@ -3,7 +3,7 @@ betfaiR
 
 **coming soon** (hopefully)
 
-This package isn't complete and only has a little functionality at the moment, primarily the easier things, still unable to use the package to place a bet.  I will definitely add this functionality in time, but when I am unsure.
+This package isn't complete, still unable to use the package to place a bet.  I will definitely add this functionality in time, but when I am unsure.
 
 #### Installation
 
@@ -14,14 +14,16 @@ devtools::install_github("durtal/betfaiR")
 
 #### Help
 
-There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues).  Help with the package would be welcome.
+There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues).  Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
 
 #### Usage
 
 The primary function in **betfaiR** is `betfair`, which takes three arguments, your username, your password, and an application key (see [here](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get a key).
 
 ```R
-bf <- betfair(usr = "USERNAME", pwd = "PASSWORD", key = "APP_KEY")
+bf <- betfair(usr = "USERNAME",
+              pwd = "PASSWORD",
+              key = "APP_KEY")
 ```
 
 The `betfair` function returns an environment with various methods, you can inspect you session token (required by Betfair for all methods) via the following:
@@ -40,19 +42,18 @@ bf$login(usr = "USERNAME2", pwd = "PASSWORD", key = "APP_KEY")
 The view the available methods, simply print the environment `bf`
 
 ```R
-bf
-## < betfaiR API>
-## Methods available:
-##    $competitions(filter = marketFilter())
-##    $countries(filter = marketFilter())
-##    $events(filter = marketFilter())
-##    $eventTypes(filter = marketFilter())
-##    $login(usr, pwd, key)
-##    $marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL, matchProjection = NULL)
-##    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
-##    $marketTypes(filter = marketFilter())
-##    $session()
-##    $venues(filter = marketFilter())
+<betfaiR API>
+Methods available:
+#    $competitions(filter = marketFilter())
+#    $countries(filter = marketFilter())
+#    $events(filter = marketFilter())
+#    $eventTypes(filter = marketFilter())
+#    $login(usr, pwd, key)
+#    $marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS", orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")
+#    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
+#    $marketTypes(filter = marketFilter())
+#    $session()
+#    $venues(filter = marketFilter())
 ```
 
 So, if you are familiar with Betfair's API, you will realise the available methods in the package might need a little bit of work.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
@@ -75,6 +76,6 @@ The advice is to store your PASSWORD and KEY, or any other variables that should
 
 ### example
 
-The plot below is data collected from betfair using the `marketCatalogue` and `marketBook` methods.  The `marketBook` method is still incomplete, it returns the json object as a list, so is unparsed.  Data was collected at minute intervals from when the game kicked off, via a simple for loop and then plotted.
+The plot below is data collected from betfair using the `marketCatalogue` and `marketBook` methods.  The `marketBook` method is still a work in progress, it returns a list with data as organised as possible, but it also returns the raw response from Betfair, which is converted from json into a list.  Data was collected at minute intervals from when the game kicked off, via a simple for loop and then plotted.
 
 ![](manchester-derby.jpeg)
