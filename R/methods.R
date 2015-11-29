@@ -563,3 +563,30 @@ NULL
 #' selected by the \code{filter} parameter, only Horse Racing markets are
 #' associated with a venue.
 NULL
+
+#' placeOrders method
+#'
+#' @description \code{placeOrders} function allows bets to be placed.
+#'
+#' @name placeOrders
+#'
+#' @param marketId market id into which the bet will be placed
+#' @param selectionId selection id, the unique id for selection in the market, this
+#' will be a horse, a team, etc, these ids can be found using the \link{marketCatalogue}
+#' and \link{marketBook} functions
+#' @param orderType the type of order, \strong{LIMIT} a normal exchange order for
+#' immediate execution, \strong{LIMIT_ON_CLOSE} limit order for the auction (SP bet)
+#' \strong{MARKET_ON_CLOSE} market order for the auction (SP)
+#' @param handicap
+#' @param side \strong{BACK} or \strong{LAY}
+#' @param limitOrder list with details of the bet, required if \strong{orderType} is
+#' \strong{LIMIT}, use \link{limitOrder} function to help construct correct list
+#' @param limitOnCloseOrder list with details of the bet, required if \strong{orderType}
+#' is \strong{LIMIT_ON_CLOSE}, use \link{marketOnCloseOrder} function to help
+#' construct correct list
+#' @param marketOnCloseOrder single number, the size of your bet, which will be
+#' struck at Betfair SP
+#'
+#' @return list with details about the bet, the market the bet was made in, the prices
+#' attained, whether it was successful or failed
+NULL

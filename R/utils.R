@@ -75,6 +75,8 @@ prepare_order <- function(marketId, selectionId, orderType = "LIMIT",
 #'      in-play.
 #'
 #' @return list with bet order
+#'
+#' @export
 limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
     return(list(size = size,
                 price = price,
@@ -90,6 +92,8 @@ limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
 #' @param price the limit price
 #'
 #' @return list with bet order
+#'
+#' @export
 limitOnCloseOrder <- function(size = 2, price = NULL) {
     return(list(size = size,
                 price = price))
