@@ -119,3 +119,27 @@ summary.marketBook_list <- function(x) {
 
     })
 }
+
+#' @export
+print.betfair_orders <- function(x) {
+
+    status <- paste0("\nStatus:\t\t", out$status, "\n")
+    market <- paste0("MarketId:\t", out$marketId, "\n")
+
+    cat(status)
+    cat(market)
+}
+
+#' @export
+summary.betfair_orders <- function(x) {
+
+    status <- paste0("\nStatus:\t\t", out$status, "\n")
+    market <- paste0("MarketId:\t", out$marketId, "\n\nOrder:\n")
+
+    cat(status)
+    cat(market)
+
+    print(out$order, row.names = FALSE)
+    cat("\nInstructions:\n")
+    print(out$orderInstruction, row.names = FALSE)
+}

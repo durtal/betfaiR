@@ -217,26 +217,26 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-#         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
-#                                 handicap = NULL, side = "BACK", limitOrder = limitOrder(),
-#                                 limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
-#             # build request object
-#             req <- base_request(method = "placeOrders")
-#             betOrder <- prepare_order(marketId = marketId, orderType = orderType,
-#                                       selectionId = selectionId, side = side,
-#                                       limitOrder = limitOrder, limitOnCloseOrder = limitOnCloseOrder,
-#                                       marketOnCloseOrder = marketOnCloseOrder)
-#             req <- betfair_request(req, order = betOrder)
-# #             # post request
-# #             res <- betfair_POST(body = req, ssoid$ssoid)
-# #             # convert response
-# #             res <- httr::content(res)
-# #             # handle errors
-# #             res <- betfair_checks(res, method = "placeOrders")
-# #             # parse response
-# #             res <- betfair_parse(res)
-#             return(req)
-#         }
+        placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
+                                handicap = NULL, side = "BACK", limitOrder = limitOrder(),
+                                limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
+            # build request object
+            req <- base_request(method = "placeOrders")
+            betOrder <- prepare_order(marketId = marketId, orderType = orderType,
+                                      selectionId = selectionId, side = side,
+                                      limitOrder = limitOrder, limitOnCloseOrder = limitOnCloseOrder,
+                                      marketOnCloseOrder = marketOnCloseOrder)
+            req <- betfair_request(req, order = betOrder)
+            # post request
+            res <- betfair_POST(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- betfair_check(res, method = "placeOrders")
+            # parse response
+            res <- betfair_parse(res)
+            return(req)
+        }
 
         session <- function() {
             cat("Session Token:\t", ssoid$resp$token)

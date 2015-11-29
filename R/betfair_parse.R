@@ -185,6 +185,22 @@ betfair_parse.marketTypes <- function(res) {
 }
 
 #' @export
+betfair_parse.placeOrders <- function(res) {
+
+    out <- structure(list(), class = "betfair_orders")
+    out$status <- res$result$status
+    out$marketId <- res$result$marketId
+    if("errorCode" %in% res$result) {
+        out$errorCode <- res$result$errorCode
+    }
+    out$order <- data.frame(res$result$instructionReports[[1]][!sapply(res$result$instructionReports[[1]], is.list)])
+    out$orderInstruction <- data.frame(res$result$instructionReports[[1]]$instruction)
+    names(out$orderInstruction) <- gsub("[[:alpha:]]+\\.", "", names(out$orderInstruction))
+
+    return(out)
+}
+
+#' @export
 betfair_parse.venues <- function(res) {
 
     res <- basic_parse(res)
