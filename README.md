@@ -3,7 +3,7 @@ betfaiR
 
 **coming soon** (hopefully)
 
-This package isn't complete, still unable to use the package to place a bet.  I will definitely add this functionality in time, but when I am unsure.
+This package still requires some work, but you can use it to place a bet with the `placeOrders` method.  I don't recommend placing any huge bets with this, I am testing with small stakes, so any issues you encounter let me know.
 
 #### Installation
 
@@ -50,8 +50,10 @@ Methods available:
 #    $eventTypes(filter = marketFilter())
 #    $login(usr, pwd, key)
 #    $marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS", orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")
-#    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE)
+#    $marketCatalogue(filter = marketFilter(), marketProjection = "EVENT", sort = NULL, maxResults = 1, keepRules = FALSE)
 #    $marketTypes(filter = marketFilter())
+#    $placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL, side = "BACK", limitOrder = limitOrder(),
+#       limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
 #    $session()
 #    $venues(filter = marketFilter())
 ```
