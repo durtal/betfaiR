@@ -37,8 +37,9 @@
 #'
 #' @return returns a list with an order for Betfair
 prepare_order <- function(marketId, selectionId, orderType = "LIMIT",
-                          handicap = "0", side = "BACK", limitOrder = NULL,
-                          limitOnCloseOrder = NULL, marketOnCloseOrder = NULL) {
+                          handicap = "0", side = "BACK", limitOrder = limitOrder(),
+                          limitOnCloseOrder = limitOnCloseOrder(),
+                          marketOnCloseOrder = list()) {
 
     orderList <- list("marketId" = as.character(marketId),
                       "instructions" = data.frame("selectionId" = as.character(selectionId),
@@ -89,7 +90,6 @@ limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
 #' @param price the limit price
 #'
 #' @return list with bet order
-#'
 limitOnCloseOrder <- function(size = 2, price = NULL) {
     return(list(size = size,
                 price = price))

@@ -34,13 +34,13 @@
 #'      matchProjection = NULL)}}{ Retrieve dynamic data about markets. Data includes
 #'      prices, the status of the market, the status of the selections, the traded
 #'      volume, and the status of any orders you have in the market.}
-#'      \item{\code{marketCatalogue(filter = list(), marketProjection = NULL, sort = NULL,
+#'      \item{\code{marketCatalogue(filter = list(), marketProjection = "EVENT", sort = NULL,
 #'      maxResults = 50, keepRules = FALSE)}}{ Retrieve data about the different types
 #'      of markets, see \link{marketCatalogue}.}
 #'      \item{\code{marketTypes(filter = marketFilter())}}{ Retrieve data about the different types of
 #'      markets, see \link{marketTypes}.}
 #'      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
-#'      handicap = NULL, side = "BACK", limitOrder = NULL, limitOnCloseOrder = NULL,
+#'      handicap = NULL, side = "BACK", limitOrder = limitOrder(), limitOnCloseOrder = limitOnCloseOrder(),
 #'      marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})
 #'      and selectionId (see \link{marketBook}),}
 #'      \item{\code{session()}}{ Print details about the session, including login
@@ -173,7 +173,7 @@ betfair <- function(usr, pwd, key) {
         }
 
         marketCatalogue <- function(filter = marketFilter(),
-                                    marketProjection = NULL,
+                                    marketProjection = "EVENT",
                                     sort = NULL, maxResults = 1,
                                     keepRules = FALSE) {
 
@@ -218,8 +218,8 @@ betfair <- function(usr, pwd, key) {
         }
 
 #         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
-#                                 handicap = NULL, side = "BACK", limitOrder = NULL,
-#                                 limitOnCloseOrder = NULL, marketOnCloseOrder = NULL) {
+#                                 handicap = NULL, side = "BACK", limitOrder = limitOrder(),
+#                                 limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
 #             # build request object
 #             req <- base_request(method = "placeOrders")
 #             betOrder <- prepare_order(marketId = marketId, orderType = orderType,

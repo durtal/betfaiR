@@ -4,9 +4,9 @@
 \alias{prepare_order}
 \title{prepare bet for Betfair}
 \usage{
-prepare_order(marketId, selectionId, orderType = "LIMIT", handicap = NULL,
-  side = "BACK", limitOrder = NULL, limitOnCloseOrder = NULL,
-  marketOnCloseOrder = NULL)
+prepare_order(marketId, selectionId, orderType = "LIMIT", handicap = "0",
+  side = "BACK", limitOrder = limitOrder(),
+  limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = list())
 }
 \arguments{
 \item{marketId}{the unique market id, starts with \code{1.} for UK exchange,
