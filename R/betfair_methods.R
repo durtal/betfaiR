@@ -235,7 +235,7 @@ betfair <- function(usr, pwd, key) {
             res <- betfair_check(res, method = "placeOrders")
             # parse response
             res <- betfair_parse(res)
-            return(req)
+            return(res)
         }
 
         session <- function() {
