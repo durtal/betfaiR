@@ -70,6 +70,14 @@ betfair <- function(usr, pwd, key) {
 
     self <- local({
 
+        cancelOrders <- function(marketId = NULL, ...) {
+            # build request object
+            req <- base_request(method = "cancelOrders")
+            cancel <- cancel_orders(marketId = marketId, ...)
+            req <- betfair_request(req, marketId = marketId, instructions = cancel)
+            return(req)
+        }
+
         competitions <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "competitions")
