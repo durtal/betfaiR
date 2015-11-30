@@ -155,6 +155,9 @@ img {
                         <li>
                             <a href="betfair_parse.html">betfair_parse</a>
                         </li>
+                        <li>
+                            <a href="orders.html">bet orders</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -185,6 +188,9 @@ img {
                         </li>
                         <li>
                             <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="methods_venues.html">venues</a>
@@ -300,8 +306,10 @@ Methods available:
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
-    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE) 
+    $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketTypes(filter = marketFilter()) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
+   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
     $session() 
     $venues(filter = marketFilter()) </code></pre>
 <p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>

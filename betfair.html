@@ -155,6 +155,9 @@ img {
                         <li>
                             <a href="betfair_parse.html">betfair_parse</a>
                         </li>
+                        <li>
+                            <a href="orders.html">bet orders</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -187,6 +190,9 @@ img {
                             <a href="methods_marketTypes.html">marketTypes</a>
                         </li>
                         <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="methods_venues.html">venues</a>
                         </li>
                     </ul>
@@ -216,7 +222,7 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-11-27 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-11-29 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username,
@@ -261,8 +267,10 @@ Methods available:
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
-    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE) 
+    $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketTypes(filter = marketFilter()) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
+   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
     $session() 
     $venues(filter = marketFilter()) </code></pre>
 <table>
@@ -325,9 +333,9 @@ Methods available:
 </tr>
 <tr class="odd">
 <td align="left"><code>placeOrders</code></td>
-<td align="left"></td>
-<td align="left"><code>FALSE</code></td>
-<td align="left"><em>not available</em></td>
+<td align="left">Place a bet. <strong>This likely needs work, so please proceed cautiously, and if possible provide feedback</strong></td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="placeOrders.html">placeOrder</a></td>
 </tr>
 <tr class="even">
 <td align="left"><code>session</code></td>
@@ -376,8 +384,10 @@ Methods available:
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
-    $marketCatalogue(filter = marketFilter(), marketProjection = NULL, sort = NULL, maxResults = 1, keepRules = FALSE) 
+    $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketTypes(filter = marketFilter()) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
+   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
     $session() 
     $venues(filter = marketFilter()) </code></pre>
 <p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>
