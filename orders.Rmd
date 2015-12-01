@@ -41,7 +41,7 @@ limitOnCloseOrder(size = 2,
 
 param | details
 ------|--------
-`size` | the size of the bet, **NB**, for a market type of **EACH\_WAY** the total stake is 2*size
+`size` | the bet size, **NB**, for a market type of **EACH\_WAY** the total stake is `2 * size`
 `price` | the limit price, the price you wish to place your bet
 
 ### returns
