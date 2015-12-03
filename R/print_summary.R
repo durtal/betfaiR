@@ -123,8 +123,8 @@ summary.marketBook_list <- function(x) {
 #' @export
 print.betfair_orders <- function(x) {
 
-    status <- paste0("\nStatus:\t\t", out$status, "\n")
-    market <- paste0("MarketId:\t", out$marketId, "\n")
+    status <- paste0("\nStatus:\t\t", x$status, "\n")
+    market <- paste0("MarketId:\t", x$marketId, "\n")
 
     cat(status)
     cat(market)
