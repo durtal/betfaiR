@@ -4,7 +4,7 @@
 \alias{limitOnCloseOrder}
 \title{limitOnCloseOrder}
 \usage{
-limitOnCloseOrder(size = 2, price = NULL)
+limitOnCloseOrder(size = 2, price)
 }
 \arguments{
 \item{size}{the size of the bet. \strong{Note:} for a market type of EACH_WAY,

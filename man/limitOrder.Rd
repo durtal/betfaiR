@@ -4,7 +4,7 @@
 \alias{limitOrder}
 \title{limitOrder}
 \usage{
-limitOrder(size = 2, price = NULL, persistenceType = "LAPSE")
+limitOrder(size = 2, price, persistenceType = "LAPSE")
 }
 \arguments{
 \item{size}{the size of the bet. \strong{Note:} for a market type of EACH_WAY,
