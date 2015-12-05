@@ -4,12 +4,12 @@
 \alias{cancel_orders}
 \title{cancel_orders}
 \usage{
-cancel_orders(marketId = NULL, ...)
+cancel_orders(..., marketId = NA)
 }
 \arguments{
-\item{marketId}{market id}
-
 \item{...}{multiple cancel orders instructions, use \link{cancelInstruction}}
+
+\item{marketId}{market id}
 }
 \value{
 list

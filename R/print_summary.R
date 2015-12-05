@@ -123,8 +123,8 @@ summary.marketBook_list <- function(x) {
 #' @export
 print.betfair_orders <- function(x) {
 
-    status <- paste0("\nStatus:\t\t", out$status, "\n")
-    market <- paste0("MarketId:\t", out$marketId, "\n")
+    status <- paste0("\nStatus:\t\t", x$status, "\n")
+    market <- paste0("MarketId:\t", x$marketId, "\n")
 
     cat(status)
     cat(market)
@@ -133,13 +133,28 @@ print.betfair_orders <- function(x) {
 #' @export
 summary.betfair_orders <- function(x) {
 
-    status <- paste0("\nStatus:\t\t", out$status, "\n")
-    market <- paste0("MarketId:\t", out$marketId, "\n\nOrder:\n")
+    status <- paste0("\nStatus:\t\t", x$status, "\n")
+    market <- paste0("MarketId:\t", x$marketId, "\n\nOrder:\n")
 
     cat(status)
     cat(market)
 
-    print(out$order, row.names = FALSE)
+    print(x$order, row.names = FALSE)
     cat("\nInstructions:\n")
-    print(out$orderInstruction, row.names = FALSE)
+    print(x$orderInstruction, row.names = FALSE)
+}
+
+#' @export
+print.bf_cancel_orders <- function(x) {
+    cat("\nCancellation Status:\t", x$status)
+}
+
+#' @export
+summary.bf_cancel_orders <- function(x) {
+    cat("\nCancellation Status:\t", x$status)
+    if(length(x$instructions) > 0) {
+        cat("\n\nCancelled Orders:\n")
+        tmp <- plyr::ldply(x$instructions)
+        print(tmp, row.names = FALSE)
+    }
 }

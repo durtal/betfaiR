@@ -4,7 +4,7 @@
 \alias{cancelInstruction}
 \title{cancelInstruction}
 \usage{
-cancelInstruction(betId = NULL, size = NULL)
+cancelInstruction(betId = NA, size = NA)
 }
 \arguments{
 \item{betId}{unique betId}

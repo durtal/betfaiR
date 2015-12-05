@@ -590,3 +590,18 @@ NULL
 #' @return list with details about the bet, the market the bet was made in, the prices
 #' attained, whether it was successful or failed
 NULL
+
+#' cancelOrders method
+#'
+#' @description \code{cancelOrders} function cancels all or specific bets waiting to
+#' be matched
+#'
+#' @name cancelOrders
+#'
+#' @param ... target specific bets to cancel, use \link{cancelInstruction} to enter
+#' one or more bets, \code{cancelInstruction} requires \strong{betId}, and \strong{size}
+#' can be used to cancel part of an order
+#' @param marketId target bets in a specific market
+#'
+#' @return list with details about the cancel bets, whether the cancellation was successful
+NULL

@@ -136,12 +136,11 @@ betfair_request.venues <- function(x) {
 }
 
 #' @export
-betfair_request.cancelOrders <- function(x, marketId = NULL, instructions = NULL) {
+betfair_request.cancelOrders <- function(x, instructions = NULL) {
 
     req <- standard_request(method = "cancelOrders")
     req$params$filter <- NULL
     if(length(instructions) > 0) req$params <- instructions
-    if(!is.null(marketId)) req$params$marketId <- marketId
 
     req <- jsonlite::toJSON(req, auto_unbox = TRUE)
     return(req)

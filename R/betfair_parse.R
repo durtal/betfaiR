@@ -201,6 +201,17 @@ betfair_parse.placeOrders <- function(res) {
 }
 
 #' @export
+betfair_parse.cancelOrders <- function(res) {
+    out <- structure(list(), class = "bf_cancel_orders")
+    out$status <- res$result$status
+    if(length(res$result$marketId) > 0) out$marketId
+    out$instructions <- lapply(res$result$instructionReports, function(i) {
+        data.frame(i, stringsAsFactors = FALSE)
+    })
+    return(out)
+}
+
+#' @export
 betfair_parse.venues <- function(res) {
 
     res <- basic_parse(res)

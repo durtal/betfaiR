@@ -19,6 +19,9 @@
 #'
 #' @section Methods:
 #' \describe{
+#'      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
+#'      to cancel all existing orders, or use combination or marketId and ... to target specific orders,
+#'      see \link{cancelInstruction} to target specific order}
 #'      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
 #'      different competitions with current markets, see \link{competitions}.}
 #'      \item{\code{countries(filter = marketFilter())}}{ Retrieve data about the different countries
@@ -70,12 +73,20 @@ betfair <- function(usr, pwd, key) {
 
     self <- local({
 
-        cancelOrders <- function(marketId = NULL, ...) {
+        cancelOrders <- function(..., marketId = NA) {
             # build request object
             req <- base_request(method = "cancelOrders")
             cancel <- cancel_orders(marketId = marketId, ...)
-            req <- betfair_request(req, marketId = marketId, instructions = cancel)
-            return(req)
+            req <- betfair_request(req, instructions = cancel)
+            # post request
+            res <- betfair_POST(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- betfair_check(res, method = "cancelOrders")
+            # parse response
+            res <- betfair_parse(res)
+            return(res)
         }
 
         competitions <- function(filter = marketFilter()) {
