@@ -98,3 +98,39 @@ limitOnCloseOrder <- function(size = 2, price) {
     return(list(size = size,
                 price = price))
 }
+
+#' cancel_orders
+#'
+#' @description cancel orders function
+#'
+#' @param ... multiple cancel orders instructions, use \link{cancelInstruction}
+#' @param marketId market id
+#'
+#' @return list
+cancel_orders <- function(..., marketId = NA) {
+
+    inst <- as.list(environment())
+    inst <- inst[!sapply(inst, is.na)]
+
+    orders <- list(...)
+
+    if(length(orders) > 0) {
+        inst$instructions <- orders
+        if(is.na(marketId)) stop("If instructions are entered, a marketId is required")
+    }
+
+    return(inst)
+}
+
+#' cancelInstruction
+#'
+#' @description cancel individual orders using betIds
+#'
+#' @param betId unique betId
+#' @param size reduction size
+#'
+#' @export
+cancelInstruction <- function(betId = NA, size = NA) {
+    inst <- as.list(environment())
+    return(inst)
+}

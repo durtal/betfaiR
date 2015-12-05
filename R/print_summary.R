@@ -143,3 +143,18 @@ summary.betfair_orders <- function(x) {
     cat("\nInstructions:\n")
     print(x$orderInstruction, row.names = FALSE)
 }
+
+#' @export
+print.bf_cancel_orders <- function(x) {
+    cat("\nCancellation Status:\t", x$status)
+}
+
+#' @export
+summary.bf_cancel_orders <- function(x) {
+    cat("\nCancellation Status:\t", x$status)
+    if(length(x$instructions) > 0) {
+        cat("\n\nCancelled Orders:\n")
+        tmp <- plyr::ldply(x$instructions)
+        print(tmp, row.names = FALSE)
+    }
+}

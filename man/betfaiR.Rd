@@ -30,6 +30,9 @@ building the list.
 \section{Methods}{
 
 \describe{
+     \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
+     to cancel all existing orders, or use combination or marketId and ... to target specific orders,
+     see \link{cancelInstruction} to target specific order}
      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
      different competitions with current markets, see \link{competitions}.}
      \item{\code{countries(filter = marketFilter())}}{ Retrieve data about the different countries
