@@ -10,7 +10,7 @@
 
 
 
-<title>orders</title>
+<title>cancelOrders</title>
 
 <script src="libs/jquery-1.11.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -225,18 +225,16 @@ img {
 </nav>
 
 <div id="header">
-<h1 class="title">orders</h1>
+<h1 class="title">cancelOrders</h1>
 </div>
 
 
-<div id="limitorder" class="section level2">
-<h2>limitOrder</h2>
-<p>The <code>limitOrder</code> function helps construct a bet order in the correct format.</p>
+<p><strong>This function allows bets to be cancelled which were placed via <a href="placeOrders.html"><code>placeOrders</code></a></strong></p>
+<p>Having logged in using the <a href="betfair.html"><code>betfair</code></a> function and placed any number of bets using the <a href="placeOrders.html"><code>placeOrders</code></a> function, you may wish to cancel some or all of those bets, the <code>cancelOrders</code> method can help.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">limitOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>,
-           <span class="dt">price =</span> <span class="ot">NULL</span>,
-           <span class="dt">persistenceType =</span> <span class="st">&quot;LAPSE&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf$<span class="kw">cancelOrders</span>(...,
+                <span class="dt">marketId =</span> <span class="ot">NA</span>)</code></pre>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
@@ -249,32 +247,38 @@ img {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>size</code></td>
-<td align="left">the bet size, <strong>NB</strong> for a market of type <strong>EACH_WAY</strong> the total stake is <code>2 * size</code></td>
+<td align="left"><code>...</code></td>
+<td align="left">specific details about bets to cancel, use <code>cancelInstructions</code> (see <a href="cancelOrders.html#cancelinstruction">below</a>) function to target specific bets via their id</td>
 </tr>
 <tr class="even">
-<td align="left"><code>price</code></td>
-<td align="left">the limit price, the price you at which you wish to strike your bet</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>persistenceType</code></td>
-<td align="left">what to do with the order at turn in play, three choices. <strong>LAPSE</strong> - lapse the order when the market goes in play (ie. cancel bet); <strong>PERSIST</strong> - persist the order at in-play, the bet will be placed automatically into the in-play market at the start of the event; <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at turn in-play</td>
+<td align="left"><code>marketId</code></td>
+<td align="left">the unique id for the market in which bets should be cancelled</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="returns" class="section level3">
-<h3>returns</h3>
-<p>A simple list</p>
+<div id="details" class="section level3">
+<h3>details</h3>
+<p>To cancel all unmatched or partially matched bets leave the function params empty, like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r">bf$<span class="kw">cancelOrders</span>()</code></pre>
+<p>If you wish to target a specific market then add the relevant marketId to the marketId argument, and to target multiple bets in the same market use <a href="cancelOrders.html#cancelinstruction"><code>cancelInstruction</code></a>, like so:</p>
+<pre class="sourceCode r"><code class="sourceCode r">bf$<span class="kw">cancelOrders</span>(<span class="kw">cancelInstruction</span>(<span class="dt">betId =</span> bet_id_1,
+                                  <span class="dt">size =</span> <span class="dv">20</span>),
+                <span class="kw">cancelInstruction</span>(<span class="dt">betId =</span> bet_id_4,
+                                  <span class="dt">size =</span> <span class="dv">10</span>),
+                <span class="dt">marketId =</span> marketId)</code></pre>
 </div>
+<div id="return" class="section level3">
+<h3>return</h3>
+<p>The function should return details about whether the cancellation was successful or not, and if you entered any specific instructions, via the <code>marketId</code> and <code>...</code> (using the <code>cancelInstruction</code> function) params then the response should contain data about the bets cancelled, and size of stake returned. The response can be passed to <code>print</code> and <code>summary</code> for easy to interpret results.</p>
 </div>
-<div id="limitoncloseorder" class="section level2">
-<h2>limitOnCloseOrder</h2>
-<p>The <code>limitOnCloseOrder</code> function helps construct a bet order in the correct format.</p>
+<div id="cancelinstruction" class="section level2">
+<h2>cancelInstruction</h2>
+<p>The <code>cancelInstruction</code> function helps construct instructions by which to cancel an existing bet, one or both parameters should be entered</p>
 <div id="usage-1" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">limitOnCloseOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>,
-                  <span class="dt">price =</span> <span class="ot">NULL</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cancelInstructions</span>(<span class="dt">betId =</span> <span class="ot">NA</span>,
+                   <span class="dt">size =</span> <span class="ot">NA</span>)</code></pre>
 </div>
 <div id="arguments-1" class="section level3">
 <h3>arguments</h3>
@@ -287,85 +291,15 @@ img {
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left"><code>betId</code></td>
+<td align="left">the unique bet Id</td>
+</tr>
+<tr class="even">
 <td align="left"><code>size</code></td>
-<td align="left">the bet size, <strong>NB</strong>, for a market type of <strong>EACH_WAY</strong> the total stake is <code>2 * size</code></td>
-</tr>
-<tr class="even">
-<td align="left"><code>price</code></td>
-<td align="left">the limit price, the price you wish to place your bet</td>
+<td align="left">the amount of the bet to cancel</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div id="returns-1" class="section level3">
-<h3>returns</h3>
-<p>A simple list</p>
-</div>
-</div>
-<div id="betfairprepare_order" class="section level2">
-<h2>betfaiR:::prepare_order</h2>
-<p>The <code>prepare_order</code> function helps contruct a bet, it is used inside the <a href="placeOrders.html"><code>placeOrders</code></a> function so the arguments are exactly the same, the reason why I’m sharing it is in case you wish to see the list it constructs.</p>
-<div id="usage-2" class="section level3">
-<h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prepare_order</span>(marketId,
-              selectionId,
-              <span class="dt">orderType =</span> <span class="st">&quot;LIMIT&quot;</span>,
-              <span class="dt">handicap =</span> <span class="st">&quot;0&quot;</span>,
-              <span class="dt">side =</span> <span class="st">&quot;BACK&quot;</span>,
-              <span class="dt">limitOrder =</span> <span class="kw">limitOrder</span>(),
-              <span class="dt">limitOnCloseOrder =</span> <span class="kw">limitOnCloseOrder</span>(),
-              <span class="dt">marketOnCloseOrder =</span> <span class="kw">list</span>())</code></pre>
-</div>
-<div id="arguments-2" class="section level3">
-<h3>arguments</h3>
-<table>
-<thead>
-<tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>marketId</code></td>
-<td align="left">unique market id into which the bet will be placed</td>
-</tr>
-<tr class="even">
-<td align="left"><code>selectionId</code></td>
-<td align="left">the unique id for the selection in the market, this will be a horse, a team, etc, these ids can be found using the <a href="methods_marketCatalogue.html"><code>marketCatalogue</code></a> and <a href="methods_marketBook.html"><code>marketBook</code></a> methods</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>orderType</code></td>
-<td align="left">the type of order, <strong>LIMIT</strong> - a normal exchange order for immediate execution, <strong>LIMIT_ON_CLOSE</strong> - limit oder for the auction (SP bet with a price limit), <strong>MARKET_ON_CLOSE</strong> - market order for the auction, SP bet regardless of price.</td>
-</tr>
-<tr class="even">
-<td align="left"><code>handicap</code></td>
-<td align="left">for ASIAN handicap markets (I believe!), default is 0</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>side</code></td>
-<td align="left"><strong>BACK</strong> or <strong>LAY</strong></td>
-</tr>
-<tr class="even">
-<td align="left"><code>limitOrder</code></td>
-<td align="left">list with details of the bet, required if <code>orderType</code> is <strong>LIMIT</strong>, use <a href="orders.html#limitOrder"><code>limitOrder</code></a> to help construct correct list</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>limitOnCloseOrder</code></td>
-<td align="left">list with details of the bet, required if <code>orderType</code> is <strong>LIMIT_ON_CLOSE</strong>, use <a href="orders.html#limitOnCloseOrder"><code>limitOnCloseOrder</code></a> to help construct correct list</td>
-</tr>
-<tr class="even">
-<td align="left"><code>marketOnCloseOrder</code></td>
-<td align="left">single number, the size of your bet to be placed at Betfairs SP.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="return" class="section level3">
-<h3>return</h3>
-<p>A list with details about the bet.</p>
-<a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>
 </div>
 

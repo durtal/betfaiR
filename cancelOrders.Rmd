@@ -1,0 +1,61 @@
+---
+title: "cancelOrders"
+---
+
+**This function allows bets to be cancelled which were placed via [`placeOrders`](placeOrders.html)**
+
+Having logged in using the [`betfair`](betfair.html) function and placed any number of bets using the [`placeOrders`](placeOrders.html) function, you may wish to cancel some or all of those bets, the `cancelOrders` method can help.
+
+### usage
+
+```{r eval=FALSE}
+bf$cancelOrders(...,
+                marketId = NA)
+```
+
+### arguments
+
+param | details
+------|--------
+`...` | specific details about bets to cancel, use `cancelInstructions` (see [below](cancelOrders.html#cancelinstruction)) function to target specific bets via their id
+`marketId` | the unique id for the market in which bets should be cancelled
+
+### details
+
+To cancel all unmatched or partially matched bets leave the function params empty, like so:
+
+```{r eval=FALSE}
+bf$cancelOrders()
+```
+
+If you wish to target a specific market then add the relevant marketId to the marketId argument, and to target multiple bets in the same market use [`cancelInstruction`](cancelOrders.html#cancelinstruction), like so:
+
+```{r eval=FALSE}
+bf$cancelOrders(cancelInstruction(betId = bet_id_1,
+                                  size = 20),
+                cancelInstruction(betId = bet_id_4,
+                                  size = 10),
+                marketId = marketId)
+```
+
+### return
+
+The function should return details about whether the cancellation was successful or not, and if you entered any specific instructions, via the `marketId` and `...` (using the `cancelInstruction` function) params then the response should contain data about the bets cancelled, and size of stake returned.  The response can be passed to `print` and `summary` for easy to interpret results.
+
+## cancelInstruction
+
+The `cancelInstruction` function helps construct instructions by which to cancel an existing bet, one or both parameters should be entered
+
+### usage
+
+```{r eval=FALSE}
+cancelInstructions(betId = NA,
+                   size = NA)
+```
+
+### arguments
+
+param | details
+------|---------
+`betId` | the unique bet Id
+`size` | the amount of the bet to cancel

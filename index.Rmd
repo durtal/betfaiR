@@ -24,7 +24,6 @@ step | function | arguments | details | return
 
 Implement the following methods:
 
-* `cancelOrders`
 * `updateOrders`
 * `replaceOrders`
 * `listCurrentOrders`

@@ -37,6 +37,7 @@ bf
 
 method | details | available | help
 -------|---------|-----------|------
+`cancelOrders` | Cancel existing orders that may be unmatched or partially matched | `TRUE` | [cancelOrders](cancelOrders.html)
 `competitions` | Retrieve data about the different competitions with current markets | `TRUE` | [competitions](methods_competitions.html)
 `countries` | Retrieve data about the different countries hosting events | `TRUE` | [countries](methods_countries.html)
 `events` | Retrieve data about the different events | `TRUE` | [events](methods_events.html)
