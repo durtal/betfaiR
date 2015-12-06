@@ -56,13 +56,13 @@ building the list.
      markets, see \link{marketTypes}.}
      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
      to cancel all existing orders, or use combination or marketId and ... to target specific orders,
-     see \link{cancelInstruction} to target specific order}
+     see \link{cancel_inst} to target specific order}
      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
-     handicap = NULL, side = "BACK", limitOrder = limitOrder(), limitOnCloseOrder = limitOnCloseOrder(),
+     handicap = NULL, side = "BACK", limitOrder = bf_helpers$limitOrder(), limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
      marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})
      and selectionId (see \link{marketBook}),}
      \item{\code{replaceOrders(..., marketId)}}{ Replace existing orders, requires marketIds and
-     unique betIds with new prices, use \link{replaceInstructions} to target specific bets}
+     unique betIds with new prices, use \link{replace_inst} to target specific bets}
 }
 }
 \examples{
