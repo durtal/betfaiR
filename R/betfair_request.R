@@ -3,19 +3,19 @@
 #' @description convert and format request list into valid JSON object for Betfair's
 #' API. Requires users to build a list first using \link{base_request}
 #'
-#' @name betfair_request
+#' @name bf_request
 #'
 #' @details to use this function, the object should have one of the following classes,
 #' \strong{competitions}, \strong{countries}, \strong{events}, \strong{eventTypes},
 #' \strong{marketCatalogue}, \strong{marketTypes} and \strong{venues}.
 #'
 #' @export
-betfair_request <- function(x, ...) {
-    UseMethod(generic = "betfair_request", object = x)
+bf_request <- function(x, ...) {
+    UseMethod(generic = "bf_request", object = x)
 }
 
 #' @export
-betfair_request.competitions <- function(x) {
+bf_request.competitions <- function(x) {
 
     req <- standard_request()
 
@@ -26,7 +26,7 @@ betfair_request.competitions <- function(x) {
 }
 
 #' @export
-betfair_request.countries <- function(x) {
+bf_request.countries <- function(x) {
 
     req <- standard_request(method = "listCountries")
 
@@ -37,7 +37,7 @@ betfair_request.countries <- function(x) {
 }
 
 #' @export
-betfair_request.eventTypes <- function(x) {
+bf_request.eventTypes <- function(x) {
 
     req <- standard_request(method = "listEventTypes")
 
@@ -48,7 +48,7 @@ betfair_request.eventTypes <- function(x) {
 }
 
 #' @export
-betfair_request.events <- function(x) {
+bf_request.events <- function(x) {
 
     req <- standard_request(method = "listEvents")
 
@@ -59,7 +59,7 @@ betfair_request.events <- function(x) {
 }
 
 #' @export
-betfair_request.marketTypes <- function(x) {
+bf_request.marketTypes <- function(x) {
 
     req <- standard_request(method = "listMarketTypes")
 
@@ -70,7 +70,7 @@ betfair_request.marketTypes <- function(x) {
 }
 
 #' @export
-betfair_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
+bf_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
                                             maxResults = 1) {
 
     req <- standard_request(method = "listMarketCatalogue")
@@ -91,7 +91,7 @@ betfair_request.marketCatalogue <- function(x, marketProjection = NULL, sort = N
 }
 
 #' @export
-betfair_request.marketBook <- function(x, marketIds, priceProjection = NULL,
+bf_request.marketBook <- function(x, marketIds, priceProjection = NULL,
                                    orderProjection = NULL, matchProjection = NULL) {
 
     req <- standard_request(method = "listMarketBook")
@@ -114,7 +114,7 @@ betfair_request.marketBook <- function(x, marketIds, priceProjection = NULL,
 }
 
 #' @export
-betfair_request.placeOrders <- function(x, order) {
+bf_request.placeOrders <- function(x, order) {
 
     req <- standard_request(method = "placeOrders")
     req$params$filter <- NULL
@@ -125,7 +125,7 @@ betfair_request.placeOrders <- function(x, order) {
 }
 
 #' @export
-betfair_request.venues <- function(x) {
+bf_request.venues <- function(x) {
 
     req <- standard_request(method = "listVenues")
 
@@ -136,7 +136,7 @@ betfair_request.venues <- function(x) {
 }
 
 #' @export
-betfair_request.cancelOrders <- function(x, instructions = NULL) {
+bf_request.cancelOrders <- function(x, instructions = NULL) {
 
     req <- standard_request(method = "cancelOrders")
     req$params$filter <- NULL
@@ -147,7 +147,7 @@ betfair_request.cancelOrders <- function(x, instructions = NULL) {
 }
 
 #' @export
-betfair_request.replaceOrders <- function(x, instructions = NULL) {
+bf_request.replaceOrders <- function(x, instructions = NULL) {
 
     req <- standard_request(method = "replaceOrders")
     req$params$filter <- NULL
@@ -158,7 +158,7 @@ betfair_request.replaceOrders <- function(x, instructions = NULL) {
 }
 
 #' @export
-betfair_request.marketProfitAndLoss <- function(x, params) {
+bf_request.marketProfitAndLoss <- function(x, params) {
 
     req <- standard_request(method = "listMarketProfitAndLoss")
     req$params$filter <- NULL
@@ -173,7 +173,7 @@ betfair_request.marketProfitAndLoss <- function(x, params) {
 #'
 #' @description creates a list with a different class, according to the desired
 #' API method the request will be sent to, the returned value will then be passed
-#' to \link{betfair_request} to convert to valid JSON.
+#' to \link{bf_request} to convert to valid JSON.
 #'
 #' @name base_request
 #'

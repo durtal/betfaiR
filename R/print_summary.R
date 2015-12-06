@@ -173,3 +173,18 @@ print.marketPnL_list <- function(x) {
         print(i)
     })
 }
+
+#' @export
+summary.market_PnL <- function(x) {
+    cat("\nMarketId:\t", x$marketId, "\nRunners:\n")
+    print(x$PnL, row.names = FALSE)
+
+}
+
+#' @export
+summary.marketPnL_list <- function(x) {
+
+    plyr::l_ply(x, .fun = function(i) {
+        summary(i)
+    })
+}

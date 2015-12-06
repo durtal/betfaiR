@@ -1,6 +1,6 @@
 #' login to Betfair
 #'
-#' @name betfair_login
+#' @name bf_login
 #'
 #' @description login to Betfair to receive a session token
 #'
@@ -10,12 +10,12 @@
 #'
 #' @details function is invoked when calling \link{betfair}
 #'
-#' @return list with class \code{betfaiR_login} which contains the parameters
+#' @return list with class \code{bf_login} which contains the parameters
 #' entered into the function, the response (includes a session token) and the
 #' required headers for querying the API
 #'
 #' @export
-betfair_login <- function(usr, pwd, key) {
+bf_login <- function(usr, pwd, key) {
 
     # create payload
     cred <- paste0("username=", usr, "&password=", pwd)
@@ -26,7 +26,7 @@ betfair_login <- function(usr, pwd, key) {
                                    "X-Application" = key))
     # construct list containing response
     ssoid <- list()
-    class(ssoid) <- c(class(ssoid), "betfaiR_login")
+    class(ssoid) <- c(class(ssoid), "bf_login")
     ssoid$usr <- list(usr = usr,
                       pwd = pwd,
                       key = key)
@@ -39,7 +39,7 @@ betfair_login <- function(usr, pwd, key) {
 }
 
 #' @export
-print.betfaiR_login <- function(x) {
+print.bf_login <- function(x) {
     object <- x
 
     cat("Betfair Login Details:\n\tusr:\t",

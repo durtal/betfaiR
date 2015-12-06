@@ -1,4 +1,4 @@
-#' betfair_parse
+#' bf_parse
 #'
 #' @description convert response from the various \link{betfair} methods, tries
 #' to convert response into useful format, ie. dataframes with zero nested elements
@@ -10,12 +10,12 @@
 #' @param res response to be parsed into dataframes
 #'
 #' @export
-betfair_parse <- function(res, ...) {
-    UseMethod(generic = "betfair_parse", object = res)
+bf_parse <- function(res, ...) {
+    UseMethod(generic = "bf_parse", object = res)
 }
 
 #' @export
-betfair_parse.competitions <- function(res) {
+bf_parse.competitions <- function(res) {
 
     res <- basic_parse(res)
 
@@ -23,7 +23,7 @@ betfair_parse.competitions <- function(res) {
 }
 
 #' @export
-betfair_parse.countries <- function(res) {
+bf_parse.countries <- function(res) {
 
     res <- basic_parse(res)
 
@@ -31,7 +31,7 @@ betfair_parse.countries <- function(res) {
 }
 
 #' @export
-betfair_parse.events <- function(res) {
+bf_parse.events <- function(res) {
 
     res <- basic_parse(res)
 
@@ -39,7 +39,7 @@ betfair_parse.events <- function(res) {
 }
 
 #' @export
-betfair_parse.eventTypes <- function(res) {
+bf_parse.eventTypes <- function(res) {
 
     res <- basic_parse(res)
 
@@ -47,7 +47,7 @@ betfair_parse.eventTypes <- function(res) {
 }
 
 #' @export
-betfair_parse.marketBook <- function(res) {
+bf_parse.marketBook <- function(res) {
 
     out <- lapply(res$result, function(x) {
 
@@ -117,7 +117,7 @@ betfair_parse.marketBook <- function(res) {
 
 
 #' @export
-betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
+bf_parse.marketCatalogue <- function(res, marketProjection = NULL,
                                           keepRules = FALSE) {
 
     out <- lapply(res$result, function(x) {
@@ -177,7 +177,7 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
 }
 
 #' @export
-betfair_parse.marketProfitAndLoss <- function(res) {
+bf_parse.marketProfitAndLoss <- function(res) {
 
     out <- lapply(res$result, function(x) {
         out <- structure(list(), class = "market_PnL")
@@ -190,7 +190,7 @@ betfair_parse.marketProfitAndLoss <- function(res) {
 }
 
 #' @export
-betfair_parse.marketTypes <- function(res) {
+bf_parse.marketTypes <- function(res) {
 
     res <- basic_parse(res)
 
@@ -198,7 +198,7 @@ betfair_parse.marketTypes <- function(res) {
 }
 
 #' @export
-betfair_parse.placeOrders <- function(res) {
+bf_parse.placeOrders <- function(res) {
 
     out <- structure(list(), class = "betfair_orders")
     out$status <- res$result$status
@@ -214,7 +214,7 @@ betfair_parse.placeOrders <- function(res) {
 }
 
 #' @export
-betfair_parse.cancelOrders <- function(res) {
+bf_parse.cancelOrders <- function(res) {
     out <- structure(list(), class = "bf_cancel_orders")
     out$status <- res$result$status
     if(length(res$result$marketId) > 0) out$marketId
@@ -225,7 +225,7 @@ betfair_parse.cancelOrders <- function(res) {
 }
 
 #' @export
-betfair_parse.venues <- function(res) {
+bf_parse.venues <- function(res) {
 
     res <- basic_parse(res)
 

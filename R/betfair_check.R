@@ -1,6 +1,6 @@
 #' check response is valid
 #'
-#' @description check for any errors in the response from \link{betfair_POST}
+#' @description check for any errors in the response from \link{bf_post}
 #'
 #' @param res response object
 #' @param method the method the response object came from, see methods section on
@@ -9,10 +9,10 @@
 #' @details errors may be invalid JSON, missing parameters, or if the response contains
 #' zero results, otherwise return the results with a class that corresponds to
 #' the method (see \link{betfair}) that can then be parsed into a dataframe by
-#' \link{betfair_parse}.
+#' \link{bf_parse}.
 #'
 #' @export
-betfair_check <- function(res, method = "competitions") {
+bf_check <- function(res, method = "competitions") {
 
     errors <- list("-32700" = "Invalid JSON was received by the server. An error occurred on the server while parsing the JSON text.",
                    "-32601" = "Method not found",

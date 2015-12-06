@@ -16,6 +16,6 @@ base_request(filter = list(), method = "competitions")
 \description{
 creates a list with a different class, according to the desired
 API method the request will be sent to, the returned value will then be passed
-to \link{betfair_request} to convert to valid JSON.
+to \link{bf_request} to convert to valid JSON.
 }
 

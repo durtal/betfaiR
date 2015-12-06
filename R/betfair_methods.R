@@ -71,23 +71,23 @@
 betfair <- function(usr, pwd, key) {
 
     # login for session token
-    ssoid <- betfair_login(usr = usr, pwd = pwd, key = key)
+    ssoid <- bf_login(usr = usr, pwd = pwd, key = key)
 
     self <- local({
 
         competitions <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "competitions")
-            req <- betfair_request(req)
+            req <- bf_request(req)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "competitions")
+            res <- bf_check(res, method = "competitions")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res)
+                res <- bf_parse(res)
             }
 
             return(res)
@@ -96,16 +96,16 @@ betfair <- function(usr, pwd, key) {
         countries <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "countries")
-            req <- betfair_request(req)
+            req <- bf_request(req)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "countries")
+            res <- bf_check(res, method = "countries")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res)
+                res <- bf_parse(res)
             }
 
             return(res)
@@ -114,16 +114,16 @@ betfair <- function(usr, pwd, key) {
         events <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "events")
-            req <- betfair_request(req)
+            req <- bf_request(req)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "events")
+            res <- bf_check(res, method = "events")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res)
+                res <- bf_parse(res)
             }
 
             return(res)
@@ -132,16 +132,16 @@ betfair <- function(usr, pwd, key) {
         eventTypes <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "eventTypes")
-            req <- betfair_request(req)
+            req <- bf_request(req)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "eventTypes")
+            res <- bf_check(res, method = "eventTypes")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res)
+                res <- bf_parse(res)
             }
 
             return(res)
@@ -150,23 +150,23 @@ betfair <- function(usr, pwd, key) {
         venues <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "venues")
-            req <- betfair_request(req)
+            req <- bf_request(req)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "venues")
+            res <- bf_check(res, method = "venues")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res)
+                res <- bf_parse(res)
             }
 
             return(res)
         }
 
         login <- function(usr, pwd, key) {
-            ssoid <<- loginBetfair(usr = usr, pwd = pwd, key = key)
+            ssoid <<- bf_login(usr = usr, pwd = pwd, key = key)
         }
 
         session <- function() {
@@ -191,18 +191,18 @@ betfair <- function(usr, pwd, key) {
                                                                      "ROLLED_UP_BY_AVG_PRICE"))
             # build request object
             req <- base_request(filter = list(), method = "marketBook")
-            req <- betfair_request(req, marketIds = marketIds,
+            req <- bf_request(req, marketIds = marketIds,
                                    priceProjection = priceProjection,
                                    orderProjection = orderProjection,
                                    matchProjection = matchProjection)
             # post request
-            res <- betfair_POST(body = req, headers = ssoid$ssoid)
+            res <- bf_post(body = req, headers = ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "marketBook")
+            res <- bf_check(res, method = "marketBook")
             # parse response
-            res <- betfair_parse(res)
+            res <- bf_parse(res)
 
             return(res)
         }
@@ -221,17 +221,17 @@ betfair <- function(usr, pwd, key) {
                                                                        "RUNNER_METADATA"))
             # build request object
             req <- base_request(filter, "marketCatalogue")
-            req <- betfair_request(x = req, marketProjection = marketProjection,
+            req <- bf_request(x = req, marketProjection = marketProjection,
                                    sort = sort, maxResults = maxResults)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "marketCatalogue")
+            res <- bf_check(res, method = "marketCatalogue")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res, marketProjection = marketProjection,
+                res <- bf_parse(res, marketProjection = marketProjection,
                                      keepRules = keepRules)
             }
 
@@ -245,15 +245,15 @@ betfair <- function(usr, pwd, key) {
             params <- list(marketIds = marketIds,
                            settled = settled,
                            bsp = bsp, NET = NET)
-            req <- betfair_request(x = req, params = params)
+            req <- bf_request(x = req, params = params)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "marketProfitAndLoss")
+            res <- bf_check(res, method = "marketProfitAndLoss")
             # parse response
-            res <- betfair_parse(res)
+            res <- bf_parse(res)
 
             return(res)
         }
@@ -261,16 +261,16 @@ betfair <- function(usr, pwd, key) {
         marketTypes <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "marketTypes")
-            req <- betfair_request(req)
+            req <- bf_request(req)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "marketTypes")
+            res <- bf_check(res, method = "marketTypes")
             # parse response
             if(is.list(res)) {
-                res <- betfair_parse(res)
+                res <- bf_parse(res)
             }
 
             return(res)
@@ -279,16 +279,16 @@ betfair <- function(usr, pwd, key) {
         cancelOrders <- function(..., marketId = NA) {
             # build request object
             req <- base_request(method = "cancelOrders")
-            cancel <- cancel_orders(marketId = marketId, ...)
-            req <- betfair_request(req, instructions = cancel)
+            cancel <- bf_helpers$cancel(marketId = marketId, ...)
+            req <- bf_request(req, instructions = cancel)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "cancelOrders")
+            res <- bf_check(res, method = "cancelOrders")
             # parse response
-            res <- betfair_parse(res)
+            res <- bf_parse(res)
 
             return(res)
         }
@@ -298,35 +298,35 @@ betfair <- function(usr, pwd, key) {
                                 limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
             # build request object
             req <- base_request(method = "placeOrders")
-            betOrder <- prepare_order(marketId = marketId, orderType = orderType,
-                                      selectionId = selectionId, side = side,
-                                      limitOrder = limitOrder, limitOnCloseOrder = limitOnCloseOrder,
-                                      marketOnCloseOrder = marketOnCloseOrder)
-            req <- betfair_request(req, order = betOrder)
+            betOrder <- bf_helpers$prepare(marketId = marketId, orderType = orderType,
+                                           selectionId = selectionId, side = side,
+                                           limitOrder = limitOrder, limitOnCloseOrder = limitOnCloseOrder,
+                                           marketOnCloseOrder = marketOnCloseOrder)
+            req <- bf_request(req, order = betOrder)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "placeOrders")
+            res <- bf_check(res, method = "placeOrders")
             # parse response
-            res <- betfair_parse(res)
+            res <- bf_parse(res)
             return(res)
         }
 
         replaceOrders <- function(..., marketId) {
             # build request object
             req <- base_request(method = "replaceOrders")
-            replace <- cancel_orders(marketId = marketId, ...)
-            req <- betfair_request(req, instructions = replace)
+            replace <- bf_helpers$cancel(marketId = marketId, ...)
+            req <- bf_request(req, instructions = replace)
             # post request
-            res <- betfair_POST(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid)
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- betfair_check(res, method = "cancelOrders")
+            res <- bf_check(res, method = "cancelOrders")
             # parse response
-            res <- betfair_parse(res)
+            res <- bf_parse(res)
 
             return(res)
         }
