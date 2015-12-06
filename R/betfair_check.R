@@ -26,7 +26,7 @@ betfair_check <- function(res, method = "competitions") {
             stop("ERROR: Unknown.")
         }
     } else if(length(res$result) == 0) {
-        stop("NO RESULTS RETURNED FROM QUERY.")
+        res$result <- "NO RESULTS RETURNED FROM QUERY."
     } else {
         class(res) <- c(class(res), method)
         return(res)

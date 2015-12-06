@@ -221,10 +221,14 @@ betfair_parse.venues <- function(res) {
 
 basic_parse <- function(res) {
 
-    res <- lapply(res$result, data.frame, stringsAsFactors = FALSE)
-    res <- do.call(plyr::rbind.fill, res)
+    if(is.list(res$result)) {
+        res <- lapply(res$result, data.frame, stringsAsFactors = FALSE)
+        res <- do.call(plyr::rbind.fill, res)
 
-    names(res) <- gsub(pattern = "\\.", replacement = "_", x = names(res))
+        names(res) <- gsub(pattern = "\\.", replacement = "_", x = names(res))
+    } else {
+        res <- res$result
+    }
     return(res)
 }
 

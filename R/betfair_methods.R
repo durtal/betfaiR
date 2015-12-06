@@ -86,6 +86,7 @@ betfair <- function(usr, pwd, key) {
             res <- betfair_check(res, method = "cancelOrders")
             # parse response
             res <- betfair_parse(res)
+
             return(res)
         }
 
@@ -100,7 +101,9 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "competitions")
             # parse response
-            res <- betfair_parse(res)
+            if(is.list(res)) {
+                res <- betfair_parse(res)
+            }
 
             return(res)
         }
@@ -116,7 +119,9 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "countries")
             # parse response
-            res <- betfair_parse(res)
+            if(is.list(res)) {
+                res <- betfair_parse(res)
+            }
 
             return(res)
         }
@@ -132,7 +137,9 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "events")
             # parse response
-            res <- betfair_parse(res)
+            if(is.list(res)) {
+                res <- betfair_parse(res)
+            }
 
             return(res)
         }
@@ -148,7 +155,9 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "eventTypes")
             # parse response
-            res <- betfair_parse(res)
+            if(is.list(res)) {
+                res <- betfair_parse(res)
+            }
 
             return(res)
         }
@@ -214,8 +223,10 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "marketCatalogue")
             # parse response
-            res <- betfair_parse(res, marketProjection = marketProjection,
-                                 keepRules = keepRules)
+            if(is.list(res)) {
+                res <- betfair_parse(res, marketProjection = marketProjection,
+                                     keepRules = keepRules)
+            }
 
             return(res)
         }
@@ -231,7 +242,9 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "marketTypes")
             # parse response
-            res <- betfair_parse(res)
+            if(is.list(res)) {
+                res <- betfair_parse(res)
+            }
 
             return(res)
         }
@@ -272,7 +285,9 @@ betfair <- function(usr, pwd, key) {
             # handle errors
             res <- betfair_check(res, method = "venues")
             # parse response
-            res <- betfair_parse(res)
+            if(is.list(res)) {
+                res <- betfair_parse(res)
+            }
 
             return(res)
         }
