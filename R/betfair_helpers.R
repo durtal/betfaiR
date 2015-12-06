@@ -141,7 +141,7 @@ NULL
 #'
 #' @name limitOrder
 #'
-#' @description helper function to prepare a bet, used in conjunction with \link{prepare_order}
+#' @description helper function to prepare a bet, used in conjunction with \link{prepare}
 #'
 #' @param size the size of the bet. \strong{Note:} for a market type of EACH_WAY,
 #' the total stake is 2*size.
@@ -160,7 +160,7 @@ NULL
 #'
 #' @name limitOnCloseOrder
 #'
-#' @description helper function to prepare a bet, used in conjunction with \link{prepare_order}
+#' @description helper function to prepare a bet, used in conjunction with \link{prepare}
 #'
 #' @param size the size of the bet. \strong{Note:} for a market type of EACH_WAY,
 #' the total stake is 2*size.
@@ -175,7 +175,7 @@ NULL
 #'
 #' @description cancel orders function
 #'
-#' @param ... multiple cancel orders instructions, use \link{cancelInstruction}
+#' @param ... multiple cancel orders instructions, use \link{cancel_inst}
 #' @param marketId market id
 #'
 #' @return list

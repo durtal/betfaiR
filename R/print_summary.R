@@ -1,9 +1,9 @@
 #' @export
 print.marketCatalogue_simple <- function(x) {
 
-    cat("\nMarket ID:  \t", x$market$marketId)
-    cat("\nMarket Name:\t", x$market$marketName)
-    cat("\nMatched:    \t", x$market$totalMatched)
+    cat("\nMarket ID:     \t", x$market$marketId)
+    cat("\nMarket Name:   \t", x$market$marketName)
+    cat("\nMatched:       \t", x$market$totalMatched)
 
     w <- options()$width
     cat("\n", paste0(rep("-", w), collapse = ""))
@@ -14,14 +14,14 @@ print.marketCatalogue_simple <- function(x) {
 #' @export
 summary.marketCatalogue_simple <- function(x) {
 
-    id <- paste0("\nMarket ID:  \t", x$market$marketId)
-    name <- paste0("\nMarket Name:\t", x$market$marketName)
-    matched <- paste0("\nMatched:     \t", x$market$totalMatched)
+    id <- paste0("\nMarket ID:     \t", x$market$marketId)
+    name <- paste0("\nMarket Name:   \t", x$market$marketName)
+    matched <- paste0("\nMatched:       \t", x$market$totalMatched)
 
     if(!is.null(x$event)) {
 
-        id <- paste0(id, "\nEvent ID:  \t", x$event$id)
-        name <- paste0(name, "\nEvent Name:\t", x$event$name)
+        id <- paste0(id, "\nEvent ID:      \t", x$event$id)
+        name <- paste0(name, "\nEvent Name:    \t", x$event$name)
     }
 
     cat(id, name, matched)
@@ -59,9 +59,9 @@ summary.marketCatalogue_list <- function(x) {
 #' @export
 print.marketBook_simple <- function(x) {
 
-    marketId <- paste0("\nMarket ID:\t", x$market$marketId)
-    totalMatched <- paste0("\nMatched:  \t", x$market$totalMatched)
-    totalAvailable <- paste0("\nAvailable:\t", x$market$totalAvailable)
+    marketId <- paste0("\nMarket ID:     \t", x$market$marketId)
+    totalMatched <- paste0("\nMatched:       \t", x$market$totalMatched)
+    totalAvailable <- paste0("\nAvailable:     \t", x$market$totalAvailable)
 
     cat(marketId, totalMatched, totalAvailable)
 
@@ -73,9 +73,9 @@ print.marketBook_simple <- function(x) {
 #' @export
 summary.marketBook_simple <- function(x) {
 
-    marketId <- paste0("\nMarket ID:\t", x$market$marketId)
-    totalMatched <- paste0("\nMatched:  \t", x$market$totalMatched)
-    totalAvailable <- paste0("\nAvailable:\t", x$market$totalAvailable)
+    marketId <- paste0("\nMarket ID:     \t", x$market$marketId)
+    totalMatched <- paste0("\nMatched:       \t", x$market$totalMatched)
+    totalAvailable <- paste0("\nAvailable:     \t", x$market$totalAvailable)
 
     cat(marketId, totalMatched, totalAvailable)
 
@@ -123,8 +123,8 @@ summary.marketBook_list <- function(x) {
 #' @export
 print.betfair_orders <- function(x) {
 
-    status <- paste0("\nStatus:  \t", x$status, "\n")
-    market <- paste0("MarketId:\t", x$marketId, "\n")
+    status <- paste0("\nStatus:        \t", x$status, "\n")
+    market <- paste0("MarketId:      \t", x$marketId, "\n")
 
     cat(status)
     cat(market)
@@ -133,8 +133,8 @@ print.betfair_orders <- function(x) {
 #' @export
 summary.betfair_orders <- function(x) {
 
-    status <- paste0("\nStatus:  \t", x$status, "\n")
-    market <- paste0("MarketId:\t", x$marketId, "\n\nOrder:\n")
+    status <- paste0("\nStatus:        \t", x$status, "\n")
+    market <- paste0("MarketId:      \t", x$marketId, "\n\nOrder:\n")
 
     cat(status)
     cat(market)

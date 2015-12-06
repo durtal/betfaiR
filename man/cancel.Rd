@@ -4,7 +4,7 @@
 \alias{cancel}
 \title{cancel}
 \arguments{
-\item{...}{multiple cancel orders instructions, use \link{cancelInstruction}}
+\item{...}{multiple cancel orders instructions, use \link{cancel_inst}}
 
 \item{marketId}{market id}
 }

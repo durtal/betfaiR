@@ -598,10 +598,40 @@ NULL
 #'
 #' @name cancelOrders
 #'
-#' @param ... target specific bets to cancel, use \link{cancelInstruction} to enter
-#' one or more bets, \code{cancelInstruction} requires \strong{betId}, and \strong{size}
+#' @param ... target specific bets to cancel, use \link{cancel_inst} to enter
+#' one or more bets, \code{bf_helpers$cancel_inst} requires \strong{betId}, and \strong{size}
 #' can be used to cancel part of an order
 #' @param marketId target bets in a specific market
 #'
 #' @return list with details about the cancel bets, whether the cancellation was successful
+NULL
+
+#' replaceOrders method
+#'
+#' @description \code{replaceOrders} function replaces specific bets that are waiting to
+#' be matched
+#'
+#' @name replaceOrders
+#'
+#' @param ... target specific bets to cancel, use \link{replace_inst} to enter
+#' one or more bets, \code{bf_helpers$replace_inst} requires \strong{betId}, and
+#'\strong{newPrice}
+#' @param marketId target bets in a specific market
+#'
+#' @return list with details about the replaced bets, whether operation was successful
+NULL
+
+#' marketPnL method
+#'
+#' @description \code{marketPnL} function returns data about the specified market
+#' and the current profit and/or loss for each of the selections in that market
+#'
+#' @name marketPnL
+#'
+#' @param marketId target bets in a specific market
+#' @param settled include settled bets
+#' @param bsp include bets that will be made at BSP
+#' @param NET include commission
+#'
+#' @return list with data about the market and any profit and loss for selections
 NULL

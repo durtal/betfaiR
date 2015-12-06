@@ -4,8 +4,8 @@
 \alias{cancelOrders}
 \title{cancelOrders method}
 \arguments{
-\item{...}{target specific bets to cancel, use \link{cancelInstruction} to enter
-one or more bets, \code{cancelInstruction} requires \strong{betId}, and \strong{size}
+\item{...}{target specific bets to cancel, use \link{cancel_inst} to enter
+one or more bets, \code{bf_helpers$cancel_inst} requires \strong{betId}, and \strong{size}
 can be used to cancel part of an order}
 
 \item{marketId}{target bets in a specific market}
