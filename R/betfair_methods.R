@@ -238,6 +238,26 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
+        marketPnL <- function(marketIds, settled = NULL,
+                              bsp = NULL, NET = NULL) {
+            # build request object
+            req <- base_request(method = "marketProfitAndLoss")
+            params <- list(marketIds = marketIds,
+                           settled = settled,
+                           bsp = bsp, NET = NET)
+            req <- betfair_request(x = req, params = params)
+            # post request
+            res <- betfair_POST(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- betfair_check(res, method = "marketProfitAndLoss")
+            # parse response
+            res <- betfair_parse(res)
+
+            return(res)
+        }
+
         marketTypes <- function(filter = marketFilter()) {
             # build request object
             req <- base_request(filter, "marketTypes")

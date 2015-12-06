@@ -158,3 +158,18 @@ summary.bf_cancel_orders <- function(x) {
         print(tmp, row.names = FALSE)
     }
 }
+
+#' @export
+print.market_PnL <- function(x) {
+    cat("\nMarketId:\t", x$marketId, "\nRunners:\n")
+    print(x$PnL, row.names = FALSE)
+
+}
+
+#' @export
+print.marketPnL_list <- function(x) {
+
+    plyr::l_ply(x, .fun = function(i) {
+        print(i)
+    })
+}

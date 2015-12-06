@@ -177,6 +177,19 @@ betfair_parse.marketCatalogue <- function(res, marketProjection = NULL,
 }
 
 #' @export
+betfair_parse.marketProfitAndLoss <- function(res) {
+
+    out <- lapply(res$result, function(x) {
+        out <- structure(list(), class = "market_PnL")
+        out$marketId <- x$marketId
+        out$PnL <- plyr::ldply(x$profitAndLosses, data.frame, stringsAsFactors = FALSE)
+        return(out)
+    })
+    class(out) <- c("list", "marketPnL_list")
+    return(out)
+}
+
+#' @export
 betfair_parse.marketTypes <- function(res) {
 
     res <- basic_parse(res)
