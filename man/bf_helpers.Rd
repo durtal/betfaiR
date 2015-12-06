@@ -4,14 +4,14 @@
 \name{bf_helpers}
 \alias{bf_helpers}
 \title{betfair helper functions}
-\format{\preformatted{<environment: 0x00000000063dae90> 
+\format{\preformatted{<environment: 0x000000000b1985b0> 
 }}
 \usage{
 bf_helpers
 }
 \description{
-a collection of helper functions that are used in conjunction with
-the various methods available.
+a environment with collection of helper functions that are used
+in conjunction with the various methods available.
 }
 \section{Helpers}{
 
