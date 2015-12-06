@@ -1,0 +1,89 @@
+---
+title: "place a bet"
+---
+
+This vignette will walk through the methods used to place a bet using the `betfaiR` package.  It will exhibit a number of different options, returning different data, before finally placing a bet, then replacing the bet, and ultimately cancelling the bet - it might become expensive if I let the bets ride.
+
+The primary function in the `betfaiR` package is the `betfair` function, which returns an environment with the various methods to query the Betfair API.
+
+### login
+
+First we need to login in, this requires a valid username, valid password, and valid API key.  The [appendix](betfair.html#appendix) on the `betfair` page talks about how to best store these details in a safe manner.  The suggestions come from [Jenny Bryan](https://twitter.com/JennyBryan) via [Hadley Wickham's](https://twitter.com/hadleywickham) [`httr`](https://github.com/hadley/httr) package (which is used by `betfaiR` )
+
+So to login, first load the library, then login, saving the returned environment to a variable, here I named it `bf`.  This can then be printed to see the available methods:
+
+```{r login, comment=""}
+library(betfaiR)
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
+bf
+```
+
+### searching for markets
+
+It's unlikely to be the case that you know the marketId or selectionId to go straight to placing a bet, so searching for the markets is usually required.  This can be done via a number of different methods, which include, [`competitions`](methods_competitions.html), [`countries`](methods_countries.html), [`events`](methods_events.html), [`eventTypes`](methods_eventTypes.html), [`venues`](methods_venues.html) and perhaps most useful [`marketCatalogue`](methods_marketCatalogue.html) and the helper function [`marketFilter`](marketFilter.html) function.
+
+You can filter on a wide variety of parameters, but some familiarity with these parameters is useful, for example, knowing that an **eventTypeId** of 1 will return football markets, while **eventTypeId** of 7 will return horse racing markets.  We will look for 5 horse racing markets, in the UK, and we will sort by the amount traded.  The response (stored as `markets` below) can be passed to `summary` for details about the 5 markets, in an easy to read format which allows users to quickly identify the market they're interested in:
+
+```{r markets, comment=""}
+markets <- bf$marketCatalogue(filter = marketFilter(eventTypeIds = 7,
+                                                    marketCountries = "GB"),
+                              maxResults = 5,
+                              sort = "MAXIMUM_TRADED")
+summary(markets)
+```
+
+Let's look at the first market, the market name is **`r markets[[1]]$market$marketName`** while the event name is **`r markets[[1]]$event$name`**.  Below we query this market, and retrieve additional data about the runners, via the `marketProjection` parameter:
+
+```{r market, comment=""}
+marketId <- markets[[1]]$market$marketId
+market <- bf$marketCatalogue(filter = marketFilter(marketIds = marketId),
+                             marketProjection = "RUNNER_DESCRIPTION")
+summary(market)
+```
+
+Now we know the `marketId` we can use the [`marketBook`](methods_marketBook.html) method to get up to date (well, with a second or so delays) market data.  The response of this method can also be passed to `summary` for pretty printing, before being mined further.  One unfortunate thing about the `marketBook` method is that it only returns selectionIds, rather than runner names, so the likes of **`r market[[1]]$runners$runnerName[1]`** or **`r market[[1]]$runners$runnerName[2]`** are not included.
+
+```{r market_data, comment=""}
+market_data <- bf$marketBook(marketIds = marketId,
+                             priceProjection = "EX_BEST_OFFERS")
+summary(market_data)
+```
+
+### placing a bet
+
+Let's place a lay bet on the current favourite using the [`placeOrders`](placeOrders.html) method, `r market[[1]]$runners$runnerName[1]`, we don't want this to be matched, so the lay will be at the 1.01 price, and for just £2.  To place a bet, we need the `marketId` and `selectionId`:
+
+```{r place_bet, comment=""}
+marketId <- market_data[[1]]$market$marketId
+selectionId <- market_data[[1]]$runners[[1]]$basic$selectionId
+
+bet <- bf$placeOrders(marketId = marketId,
+                      selectionId = selectionId, 
+                      side = "LAY",
+                      limitOrder = bf_helpers$limitOrder(size = 2, price = 1.01))
+```
+
+With any luck we will get a successful response:
+
+```{r bet_response, comment=""}
+bet
+summary(bet)
+```
+
+We'll now change that order using the [`replaceOrders`](replaceOrders.html) function, for this we need the betId (which was returned above), and we'll change the price we wish to be matched at to 1.10.
+
+```{r bet_update, comment=""}
+betId <- bet$order$betId
+bet1 <- bf$replaceOrders(bf_helpers$replace_inst(betId = betId,
+                                                 newPrice = 1.10),
+                         marketId = marketId)
+```
+
+This update was a **`r bet1$status`**, but we don't want to leave the bet there, so lets cancel it.  We can either target this specific bet using it's ID, returned above, or we can cancel all bets as below:
+
+```{r bet_cancel, comment=""}
+(cancel <- bf$cancelOrders())
+```
+
