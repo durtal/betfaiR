@@ -141,22 +141,22 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="betfair_login.html">betfair_login</a>
+                            <a href="bf_helpers.html">bf_helpers</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
                             <a href="request_functions.html">requests</a>
                         </li>
                         <li>
-                            <a href="betfair_POST.html">betfair_POST</a>
+                            <a href="betfair_POST.html">bf_post</a>
                         </li>
                         <li>
-                            <a href="betfair_check.html">betfair_check</a>
+                            <a href="betfair_check.html">bf_check</a>
                         </li>
                         <li>
-                            <a href="betfair_parse.html">betfair_parse</a>
-                        </li>
-                        <li>
-                            <a href="orders.html">bet orders</a>
+                            <a href="betfair_parse.html">bf_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -195,12 +195,18 @@ img {
                         <li>
                             <a href="methods_marketBook.html">marketBook</a>
                         </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
                         <li class="dropdown-header">orders</li>
                         <li>
                             <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -363,22 +369,29 @@ obj &lt;-<span class="st"> </span><span class="kw">marketFilter</span>(<span cla
 res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> obj)
 <span class="kw">head</span>(res)</code></pre>
 <pre><code>  competition_id     competition_name marketCount competitionRegion
-1         744098      Chilean Primera          90               CHL
-2              7  Austrian Bundesliga          38               AUT
+1         744098      Chilean Primera          58               CHL
+2              7  Austrian Bundesliga           8               AUT
 3        5614746  FIFA World Cup 2018          10     International
 4             11 Dutch Jupiler League          48               NLD
-5             13           Campeonato         370               BRA
-6         194215 Turkish Super League         226               TUR</code></pre>
+5             13           Campeonato         202               BRA
+6         194215 Turkish Super League         115               TUR</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or use marketFilter inside a method</span>
 res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>, <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 <span class="kw">head</span>(res)</code></pre>
-<pre><code>  competition_id          competition_name marketCount competitionRegion
-1          30558            English FA Cup         463               GBR
-2           2134           Capital One Cup          29               GBR
-3          20351          NIFL Premiership          12               GBR
-4        6011072 SPFL Development League 2          22               GBR
-5        7129730          The Championship         179               GBR
-6             31   Barclays Premier League         349               GBR</code></pre>
+<pre><code>  competition_id                              competition_name marketCount
+1          30558                                English FA Cup          54
+2           2134                               Capital One Cup          29
+3         299924                                     Welsh Cup           6
+4        5808320                       SPFL Development League          88
+5          20351                              NIFL Premiership          12
+6        4081753 Southern Football League Division One Central          22
+  competitionRegion
+1               GBR
+2               GBR
+3               GBR
+4               GBR
+5               GBR
+6               GBR</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>

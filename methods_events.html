@@ -141,22 +141,22 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="betfair_login.html">betfair_login</a>
+                            <a href="bf_helpers.html">bf_helpers</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
                             <a href="request_functions.html">requests</a>
                         </li>
                         <li>
-                            <a href="betfair_POST.html">betfair_POST</a>
+                            <a href="betfair_POST.html">bf_post</a>
                         </li>
                         <li>
-                            <a href="betfair_check.html">betfair_check</a>
+                            <a href="betfair_check.html">bf_check</a>
                         </li>
                         <li>
-                            <a href="betfair_parse.html">betfair_parse</a>
-                        </li>
-                        <li>
-                            <a href="orders.html">bet orders</a>
+                            <a href="betfair_parse.html">bf_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -195,12 +195,18 @@ img {
                         <li>
                             <a href="methods_marketBook.html">marketBook</a>
                         </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
                         <li class="dropdown-header">orders</li>
                         <li>
                             <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -304,36 +310,36 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>  event_id                           event_name event_countryCode
-1 27620948         Tarxien Rainbows FC v Balzan                MT
-2 27617126        Paris St-G U19 v Shakhtar U19                FR
-3 27620951             Mumbai v Western Railway                IN
-4 27183450              ICC World Twenty20 2016                IN
-5 27620945               Mosta v St. Andrews FC                MT
+1 27619324    Midtjylland v Team Tvis Holstebro                DK
+2 27619326               Bjerringbro v Skive FH                DK
+3 27617126        Paris St-G U19 v Shakhtar U19                FR
+4 27619320                 Ribe Esbjerg v Arhus                DK
+5 27183450              ICC World Twenty20 2016                IN
 6 27617121 NAC Breda (Res) v FC Dordrecht (Res)                NL
   event_timezone           event_openDate marketCount event_venue
-1  Europe/London 2015-12-06T15:15:00.000Z          22        &lt;NA&gt;
-2  Europe/London 2015-12-08T15:00:00.000Z           2        &lt;NA&gt;
-3  Europe/London 2015-12-06T09:30:00.000Z          22        &lt;NA&gt;
-4  Asia/Calcutta 2016-02-01T11:30:00.000Z           1        &lt;NA&gt;
-5  Europe/London 2015-12-06T13:00:00.000Z          22        &lt;NA&gt;
-6  Europe/London 2015-12-08T17:30:00.000Z           2        &lt;NA&gt;</code></pre>
+1            CET 2015-12-11T17:30:00.000Z           1        &lt;NA&gt;
+2            CET 2015-12-11T18:00:00.000Z           1        &lt;NA&gt;
+3  Europe/London 2015-12-08T15:00:00.000Z          22        &lt;NA&gt;
+4            CET 2015-12-09T18:30:00.000Z           1        &lt;NA&gt;
+5  Asia/Calcutta 2016-02-01T11:30:00.000Z           1        &lt;NA&gt;
+6  Europe/London 2015-12-08T17:30:00.000Z          22        &lt;NA&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>  event_id           event_name event_countryCode event_timezone
-1 27621540   Brem (GER) 6th Dec                DE            CET
-2 27621019 Kranji (SIN) 6th Dec                SG       Hongkong
-3 27621018  CharlT (US) 5th Dec                US     US/Eastern
-4 27620836 Turfway (US) 5th Dec                US     US/Eastern
-5  3453086     Stewards Enquiry                GB  Europe/London
-6 27569474   Long (FRA) 2nd Oct                FR            CET
-                 event_venue           event_openDate marketCount
-1                     Bremen 2015-12-06T10:25:00.000Z           9
-2                     Kranji 2015-12-06T04:55:00.000Z          22
-3 Charles Town Races &amp; Slots 2015-12-06T00:05:00.000Z          24
-4               Turfway Park 2015-12-05T23:15:00.000Z          27
-5                       &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
-6                       &lt;NA&gt; 2016-10-02T13:55:00.000Z           1</code></pre>
+1 27621550    Aque (US) 6th Dec                US     US/Eastern
+2 27621549    Parx (US) 6th Dec                US     US/Eastern
+3  3453086     Stewards Enquiry                GB  Europe/London
+4 27569474   Long (FRA) 2nd Oct                FR            CET
+5 27588511   Santa (US) 5th Nov                US     US/Pacific
+6 27621895 Cagnes (FRA) 7th Dec                FR            CET
+                       event_venue           event_openDate marketCount
+1                         Aqueduct 2015-12-06T17:20:00.000Z           6
+2 Parx Racing At Philadelphia Park 2015-12-06T17:25:00.000Z           3
+3                             &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
+4                             &lt;NA&gt; 2016-10-02T13:55:00.000Z           1
+5                             &lt;NA&gt; 2016-11-05T19:00:00.000Z           1
+6                   Cagnes Sur Mer 2015-12-07T11:30:00.000Z           8</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span>
 <span class="st">    </span><span class="dv">7</span>))

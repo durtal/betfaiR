@@ -1,21 +1,21 @@
 ---
-title: "betfair_parse"
+title: "bf_parse"
 ---
 
 
-The `betfair_parse` function attempts to parse the response object into neat formats, the majority of methods the response can be parsed into single simple dataframes.  These methods include [`competitions`](competitions.html), [`countries`](countries.html), [`eventTypes`](eventTypes.html), [`events`](events.html), [`marketTypes`](marketTypes.html).  Other methods, primarily [`marketCatalogue`](marketCatalogue.html) and [`marketBook`](marketBook.html), require a bit more care in parsing the response, as it typically contains some deep nested structure.
+The `bf_parse` function attempts to parse the response object into neat formats, the majority of methods the response can be parsed into single simple dataframes.  These methods include [`competitions`](competitions.html), [`countries`](countries.html), [`eventTypes`](eventTypes.html), [`events`](events.html), [`marketTypes`](marketTypes.html).  Other methods, primarily [`marketCatalogue`](marketCatalogue.html) and [`marketBook`](marketBook.html), require a bit more care in parsing the response, as it typically contains some deep nested structure.
 
 ### usage
 
 ```{r eval=FALSE}
-res <- betfair_parse(res, ...)
+res <- bf_parse(res, ...)
 ```
 
 ### arguments
 
 param | details
 ------|--------
-`res` | response object returned by [`betfair_POST`](betfair_POST) and parsed by `httr::content`
+`res` | response object returned by [`bf_post`](betfair_POST) and parsed by `httr::content`
 
 ### return
 

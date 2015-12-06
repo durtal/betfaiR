@@ -12,23 +12,21 @@ The `betfair` function logs in, and for each of the methods the following functi
 
 step | function | arguments | details | return
 -----|----------|-----------|---------|-------
-**1** | [`betfair_login`](betfair_login.html) | _usr_, _pwd_, _key_ | login function with betfair username, password, and key | list with a session token
+**1** | [`bf_login`](betfair_login.html) | _usr_, _pwd_, _key_ | login function with betfair username, password, and key | list with a session token
 **2** | [`base_request`](request_functions.html#base_request) | _filter_, _method_ | builds a basic request object | list with class that matches _method_ param
-**3** | [`betfair_request`](request_functions.html#betfair_request) | _x_, _..._ | fleshes out the request object | json object ready to be included in a POST request
-**4** | [`betfair_POST`](betfair_POST.html) | _body_ | betfair POST, includes the request object returned in step **3**, and the session token returned in **1** | response object
+**3** | [`bf_request`](request_functions.html#betfair_request) | _x_, _..._ | fleshes out the request object | json object ready to be included in a POST request
+**4** | [`bf_post`](betfair_POST.html) | _body_ | betfair POST, includes the request object returned in step **3**, and the session token returned in **1** | response object
 **5** | `httr::content` | _response_ | response object to be parsed into a list | list with data
-**6** | [`betfair_check`](betfair_check.html) | _response_, _method_ | check the response is valid, log errors if not, apply class _method_ to list ahead of step **7** | list
-**7** | [`betfair_parse`](betfair_parse.html) | _response_ | parses the response object | list of dataframes or dataframe
+**6** | [`bf_check`](betfair_check.html) | _response_, _method_ | check the response is valid, log errors if not, apply class _method_ to list ahead of step **7** | list
+**7** | [`bf_parse`](betfair_parse.html) | _response_ | parses the response object | list of dataframes or dataframe
 
 ### To Do List
 
 Implement the following methods:
 
 * `updateOrders`
-* `replaceOrders`
 * `listCurrentOrders`
 * `listClearedOrders`
-* `listMarketProfitAndLoss`
 
 Also look to add a few plot methods for some of the data returned, plotting ladders, market depth, etc.
 

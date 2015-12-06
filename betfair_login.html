@@ -10,7 +10,7 @@
 
 
 
-<title>betfair_login</title>
+<title>bf_login</title>
 
 <script src="libs/jquery-1.11.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -141,22 +141,22 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="betfair_login.html">betfair_login</a>
+                            <a href="bf_helpers.html">bf_helpers</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
                             <a href="request_functions.html">requests</a>
                         </li>
                         <li>
-                            <a href="betfair_POST.html">betfair_POST</a>
+                            <a href="betfair_POST.html">bf_post</a>
                         </li>
                         <li>
-                            <a href="betfair_check.html">betfair_check</a>
+                            <a href="betfair_check.html">bf_check</a>
                         </li>
                         <li>
-                            <a href="betfair_parse.html">betfair_parse</a>
-                        </li>
-                        <li>
-                            <a href="orders.html">bet orders</a>
+                            <a href="betfair_parse.html">bf_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -195,12 +195,18 @@ img {
                         <li>
                             <a href="methods_marketBook.html">marketBook</a>
                         </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
                         <li class="dropdown-header">orders</li>
                         <li>
                             <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -225,16 +231,16 @@ img {
 </nav>
 
 <div id="header">
-<h1 class="title">betfair_login</h1>
+<h1 class="title">bf_login</h1>
 </div>
 
 
-<p>The <code>betfair_login</code> function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different <strong>methods</strong>.</p>
+<p>The <code>bf_login</code> function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different <strong>methods</strong>.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair_login</span>(<span class="dt">usr =</span> username,
-                    <span class="dt">pwd =</span> password,
-                    <span class="dt">key =</span> api_key)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">bf_login</span>(<span class="dt">usr =</span> username,
+               <span class="dt">pwd =</span> password,
+               <span class="dt">key =</span> api_key)</code></pre>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
@@ -264,7 +270,7 @@ img {
 </div>
 <div id="return" class="section level3">
 <h3>return</h3>
-<p>The function returns a list, if everything went okay (correct credentials were provided), with a class of <code>betfair_login</code>. The list contains 3 sub lists, <code>usr</code>, <code>resp</code> and <code>ssoid</code>:</p>
+<p>The function returns a list, if everything went okay (correct credentials were provided), with a class of <code>bf_login</code>. The list contains 3 sub lists, <code>usr</code>, <code>resp</code> and <code>ssoid</code>:</p>
 <ul>
 <li><code>usr</code>
 <ul>
@@ -315,9 +321,11 @@ Methods available:
     $login(usr, pwd, key) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
+    $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
     $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
    limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $replaceOrders(..., marketId) 
     $session() 
     $venues(filter = marketFilter()) </code></pre>
 <p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>

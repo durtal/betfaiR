@@ -141,22 +141,22 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="betfair_login.html">betfair_login</a>
+                            <a href="bf_helpers.html">bf_helpers</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
                             <a href="request_functions.html">requests</a>
                         </li>
                         <li>
-                            <a href="betfair_POST.html">betfair_POST</a>
+                            <a href="betfair_POST.html">bf_post</a>
                         </li>
                         <li>
-                            <a href="betfair_check.html">betfair_check</a>
+                            <a href="betfair_check.html">bf_check</a>
                         </li>
                         <li>
-                            <a href="betfair_parse.html">betfair_parse</a>
-                        </li>
-                        <li>
-                            <a href="orders.html">bet orders</a>
+                            <a href="betfair_parse.html">bf_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -195,12 +195,18 @@ img {
                         <li>
                             <a href="methods_marketBook.html">marketBook</a>
                         </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
                         <li class="dropdown-header">orders</li>
                         <li>
                             <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -229,7 +235,7 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-05 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-06 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username,
@@ -276,9 +282,11 @@ Methods available:
     $login(usr, pwd, key) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
+    $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
     $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
    limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $replaceOrders(..., marketId) 
     $session() 
     $venues(filter = marketFilter()) </code></pre>
 <table>
@@ -340,10 +348,22 @@ Methods available:
 <td align="left"><a href="methods_marketCatalogue.html">marketCatalogue</a></td>
 </tr>
 <tr class="odd">
+<td align="left"><code>marketPnL</code></td>
+<td align="left">Retrieve current profit and loss for markets</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="methods_marketPnL.html">marketPnL</a></td>
+</tr>
+<tr class="even">
 <td align="left"><code>marketTypes</code></td>
 <td align="left">Retrieve counts for the different market types</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_marketTypes.html">marketTypes</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>replaceOrders</code></td>
+<td align="left">Replace existing orders with new instructions</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="replaceOrders.html">replaceOrders</a></td>
 </tr>
 <tr class="even">
 <td align="left"><code>placeOrders</code></td>
@@ -400,9 +420,11 @@ Methods available:
     $login(usr, pwd, key) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
+    $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
     $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
    limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $replaceOrders(..., marketId) 
     $session() 
     $venues(filter = marketFilter()) </code></pre>
 <p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>

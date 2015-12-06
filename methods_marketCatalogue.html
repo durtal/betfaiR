@@ -141,22 +141,22 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="betfair_login.html">betfair_login</a>
+                            <a href="bf_helpers.html">bf_helpers</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
                             <a href="request_functions.html">requests</a>
                         </li>
                         <li>
-                            <a href="betfair_POST.html">betfair_POST</a>
+                            <a href="betfair_POST.html">bf_post</a>
                         </li>
                         <li>
-                            <a href="betfair_check.html">betfair_check</a>
+                            <a href="betfair_check.html">bf_check</a>
                         </li>
                         <li>
-                            <a href="betfair_parse.html">betfair_parse</a>
-                        </li>
-                        <li>
-                            <a href="orders.html">bet orders</a>
+                            <a href="betfair_parse.html">bf_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -195,12 +195,18 @@ img {
                         <li>
                             <a href="methods_marketBook.html">marketBook</a>
                         </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
                         <li class="dropdown-header">orders</li>
                         <li>
                             <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -464,88 +470,83 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>()
 tmp</code></pre>
 <pre><code>
-Market ID:       1.101193124
-Market Name:     Next Conservative Leader
-Matched:         50503.3
+Market ID:       1.105756340
+Market Name:     Prime Minister after Cameron
+Matched:         140120
  ---------------------------------------------------------------------------</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre>
 <pre><code>
-Market ID:      1.101193124
-Event ID:       27210582 
-Market Name:    Next Conservative Leader
-Event Name:     Next Party Leaders 
-Matched:        50503.3
+Market ID:      1.105756340
+Event ID:   27155632 
+Market Name:    Prime Minister after Cameron
+Event Name: Prime Minister after Cameron 
+Matched:        140120.02
 
-Runners:     55 
- selectionId       runnerName handicap sortPriority
-     4551167  George Osborne         0            1
-     4551155   Boris Johnson         0            2
-     4551190     Theresa May         0            3
-     8498834      Sajid Javid        0            4
-     4551179    Michael Gove         0            5
-     4551185 Phillip Hammond         0            6
+Runners:     50 
+ selectionId     runnerName handicap sortPriority
+     1138445 George Osborne        0            1
+     1138501  Boris Johnson        0            2
+     9553914  Jeremy Corbyn        0            3
+     1136035    Theresa May        0            4
+     8498834    Sajid Javid        0            5
+     2601254 David Miliband        0            6
 
  ---------------------------------------------------------------------------</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to access the runners data</span>
 tmp[[<span class="dv">1</span>]]$runners</code></pre>
-<pre><code>   selectionId         runnerName handicap sortPriority
-1      4551167    George Osborne         0            1
-2      4551155     Boris Johnson         0            2
-3      4551190       Theresa May         0            3
-4      8498834        Sajid Javid        0            4
-5      4551179      Michael Gove         0            5
-6      4551185   Phillip Hammond         0            6
-7      4551170       Jeremy Hunt         0            7
-8      4551186       Priti Patel         0            8
-9      4551193     Zac Goldsmith         0            9
-10     4551158    Chris Grayling         0           10
-11     7020284       Adam Afriyie        0           11
-12     4519456      Owen Paterson        0           12
-13     9475671          Liz Truss        0           13
-14     5914388    Jacob Rees-Mogg        0           14
-15     9653158       Nicky Morgan        0           15
-16     4551160     Daniel Hannan         0           16
-17     4551176          Liam Fox         0           17
-18     4519457       Grant Shapps        0           18
-19     4551178      Maria Miller         0           19
-20     4551182      Nick Herbert         0           20
-21     4551171      Jesse Norman         0           21
-22     5597442    Louise Bagshawe        0           22
-23     9505186       Graham Brady        0           23
-24     4551156  Caroline Spelman         0           24
-25     6762719     Kwasi Kwarteng        0           25
-26     5633952        Mark Harper        0           26
-27     4551165      Eric Pickles         0           27
-28     4551161       David Davis         0           28
-29     4551168        Greg Clark         0           29
-30     4551154   Andrew Mitchell         0           30
-31     4551159      Damian Green         0           31
-32     4551152       Alan Duncan         0           32
-33     9505187     Robert Halfron        0           33
-34     4551187      Rory Stewart         0           34
-35     4551157       Chloe Smith         0           35
-36     4551175    Kenneth Clarke         0           36
-37     4551164         Ed Vaizey         0           37
-38     4551163    Dominic Grieve         0           38
-39     4551172       John Bercow         0           39
-40     4551173      John Redwood         0           40
-41     4551153    Andrew Lansley         0           41
-42     4551174  Justine Greening         0           42
-43     4551189  Sir George Young         0           43
-44     4551188      Shaun Bailey         0           44
-45     4551181    Nadine Dorries         0           45
-46     4551166     Francis Maude         0           46
-47     4551169 Iain Duncan Smith         0           47
-48     4551183     Oliver Letwin         0           48
-49     4551191  Theresa Villiers         0           49
-50     4551192     William Hague         0           50
-51     4551162    David Willetts         0           51
-52     4551180  Michael Portillo         0           52
-53     4551184   Peter Ainsworth         0           53
-54     4551177   Malcolm Rifkind         0           54
-55    10570654         Amber Rudd        0           55</code></pre>
+<pre><code>   selectionId       runnerName handicap sortPriority
+1      1138445   George Osborne        0            1
+2      1138501    Boris Johnson        0            2
+3      9553914    Jeremy Corbyn        0            3
+4      1136035      Theresa May        0            4
+5      8498834      Sajid Javid        0            5
+6      2601254   David Miliband        0            6
+7      3844358   Philip Hammond        0            7
+8      1288344    Yvette Cooper        0            8
+9      9084343 Sir Keir Starmer        0            9
+10     5859546       Lisa Nandy        0           10
+11     8498836       Dan Jarvis        0           11
+12     4519444      Jeremy Hunt        0           12
+13     2601290     Andy Burnham        0           13
+14     1382294      David Lammy        0           14
+15     9475671        Liz Truss        0           15
+16     2601255      Ed Miliband        0           16
+17     4758164     Chuka Umunna        0           17
+18     1141506 Caroline Spelman        0           18
+19     5859541   Michael Dugher        0           19
+20     4551186     Priti Patel         0           20
+21     4519424     Rory Stewart        0           21
+22     4722753       Sadiq Khan        0           22
+23     1140616      Hilary Benn        0           23
+24     4562764     Nigel Farage        0           24
+25     4519440     Michael Gove        0           25
+26     7853053    Tristram Hunt        0           26
+27     1140618         Ed Balls        0           27
+28     1382303   Harriet Harman        0           28
+29     7020284     Adam Afriyie        0           29
+30     4519456    Owen Paterson        0           30
+31     4519442     Jesse Norman        0           31
+32     4519441    Daniel Hannan        0           32
+33     1136032      David Davis        0           33
+34     4519445    Zac Goldsmith        0           34
+35     4108118       Jim Murphy        0           35
+36     4519443 Justine Greening        0           36
+37     1342129       Nick Clegg        0           37
+38     9343965    Stella Creasy        0           38
+39     5859542    Rachel Reeves        0           39
+40     4519457     Grant Shapps        0           40
+41     1382304    James Purnell        0           41
+42     1136034         Liam Fox        0           42
+43     9199693      Liz Kendall        0           43
+44     1140615 Alistair Darling        0           44
+45     1138496    William Hague        0           45
+46     9487470       Ian Lavery        0           46
+47     4615253       Tim Farron        0           47
+48     1342131      Chris Huhne        0           48
+49     9645423       Tom Watson        0           49
+50    10578604   Michael Fallon        0           50</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># horse racing data</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>,
                                                 <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>,
@@ -553,55 +554,54 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<sp
                           <span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;event&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre>
 <pre><code>
-Market ID:      1.122175154
-Event ID:       27621289 
-Market Name:    2m Nov Hrd
-Event Name:     Kelso 6th Dec 
-Matched:        693.92
+Market ID:      1.122182250
+Event ID:   27621936 
+Market Name:    1m7f Nov Hrd
+Event Name: Muss 7th Dec 
+Matched:        7613.94
 
-Runners:     14 
- selectionId       runnerName handicap sortPriority
-     8443699      Cornborough        0            1
-     9417341        Nuts Well        0            2
-     9098028     Sakhees City        0            3
-     7219438    Applejack Lad        0            4
-    10458781     Road To Gold        0            5
-     8735108 Captain Redbeard        0            6
+Runners:     6 
+ selectionId        runnerName handicap sortPriority
+     8669158             Fagan        0            1
+    10555635  What Happens Now        0            2
+    10458780   Away For Slates        0            3
+     8735108  Captain Redbeard        0            4
+     9281240 Sky Full of Stars        0            5
+     9417341         Nuts Well        0            6
 
  ---------------------------------------------------------------------------</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(tmp[[<span class="dv">1</span>]]$metadata)</code></pre>
-<pre><code>&#39;data.frame&#39;:   14 obs. of  31 variables:
+<pre><code>&#39;data.frame&#39;:   6 obs. of  30 variables:
  $ weight_units             : chr  &quot;pounds&quot; &quot;pounds&quot; &quot;pounds&quot; &quot;pounds&quot; ...
- $ adjusted_rating          : chr  &quot;0&quot; &quot;0&quot; NA &quot;0&quot; ...
- $ dam_year_born            : chr  &quot;2003&quot; &quot;2002&quot; &quot;2001&quot; &quot;1999&quot; ...
- $ days_since_last_run      : chr  &quot;36&quot; &quot;30&quot; &quot;240&quot; &quot;0&quot; ...
- $ damsire_year_born        : chr  &quot;1986&quot; &quot;1997&quot; &quot;1996&quot; &quot;1993&quot; ...
- $ sire_bred                : chr  &quot;UK&quot; &quot;IRE&quot; &quot;USA&quot; &quot;USA&quot; ...
- $ trainer_name             : chr  &quot;Mark Walford&quot; &quot;Ann Hamilton&quot; &quot;Philip Kirby&quot; &quot;Michael Smith&quot; ...
+ $ dam_year_born            : chr  &quot;1995&quot; &quot;2002&quot; &quot;1991&quot; &quot;1998&quot; ...
+ $ days_since_last_run      : chr  &quot;42&quot; &quot;13&quot; &quot;31&quot; &quot;12&quot; ...
+ $ damsire_year_born        : chr  &quot;1980&quot; &quot;1977&quot; &quot;1975&quot; &quot;1988&quot; ...
+ $ sire_bred                : chr  &quot;IRE&quot; &quot;IRE&quot; &quot;GER&quot; &quot;IRE&quot; ...
+ $ trainer_name             : chr  &quot;Gordon Elliott&quot; &quot;Donald McCain&quot; &quot;Keith Dalgleish&quot; &quot;Stuart Coltherd&quot; ...
  $ sex_type                 : chr  &quot;g&quot; &quot;g&quot; &quot;g&quot; &quot;g&quot; ...
- $ owner_name               : chr  &quot;Cornborough Racing Club&quot; &quot;Mr Ian Hamilton&quot; &quot;Mrs Jayne Sivills&quot; &quot;Ownaracehorse Ltd (ownaracehorse.co.uk)&quot; ...
- $ sire_name                : chr  &quot;Sir Percy&quot; &quot;Dylan Thomas&quot; &quot;Sakhee&quot; &quot;Three Valleys&quot; ...
- $ forecastprice_numerator  : chr  &quot;9&quot; &quot;5&quot; &quot;10&quot; &quot;16&quot; ...
- $ jockey_claim             : chr  &quot;5&quot; NA &quot;3&quot; NA ...
- $ forecastprice_denominator: chr  &quot;4&quot; &quot;2&quot; &quot;1&quot; &quot;1&quot; ...
- $ weight_value             : chr  &quot;159&quot; &quot;159&quot; &quot;152&quot; &quot;152&quot; ...
- $ dam_name                 : chr  &quot;Emirates First&quot; &quot;Renada&quot; &quot;A Lulu Ofa Menifee&quot; &quot;Fittonia&quot; ...
- $ age                      : chr  &quot;4&quot; &quot;4&quot; &quot;4&quot; &quot;4&quot; ...
- $ colour_type              : chr  &quot;ch&quot; &quot;b&quot; &quot;b&quot; &quot;ch&quot; ...
- $ damsire_bred             : chr  &quot;UK&quot; &quot;IRE&quot; &quot;USA&quot; &quot;IRE&quot; ...
- $ damsire_name             : chr  &quot;In The Wings&quot; &quot;Sinndar&quot; &quot;Menifee&quot; &quot;Ashkalani&quot; ...
- $ cloth_number_alpha       : chr  &quot;1&quot; &quot;2&quot; &quot;12&quot; &quot;3&quot; ...
- $ sire_year_born           : chr  &quot;2003&quot; &quot;2003&quot; &quot;1997&quot; &quot;2001&quot; ...
- $ official_rating          : chr  &quot;70&quot; &quot;122&quot; NA &quot;58&quot; ...
- $ form                     : chr  &quot;1&quot; &quot;3-2421&quot; &quot;322P-&quot; NA ...
- $ bred                     : chr  &quot;GB&quot; &quot;GB&quot; &quot;FR&quot; &quot;GB&quot; ...
- $ jockey_name              : chr  &quot;Jamie Hamilton&quot; &quot;Brian Hughes&quot; &quot;Adam Nicol&quot; &quot;Henry Brooke&quot; ...
- $ runnerid                 : chr  &quot;8443699&quot; &quot;9417341&quot; &quot;9098028&quot; &quot;7219438&quot; ...
- $ colours_description      : chr  &quot;Black, pink hoops.&quot; &quot;Emerald green, red chevrons, quartered cap.&quot; &quot;Purple, white triple diamond, diamonds on sleeves, quartered cap.&quot; &quot;Dark blue, yellow star, checked sleeves, yellow cap.&quot; ...
- $ dam_bred                 : chr  &quot;IRE&quot; &quot;UK&quot; &quot;USA&quot; &quot;FR&quot; ...
- $ colours_filename         : chr  &quot;c20151206kel/00830357.jpg&quot; &quot;c20151206kel/00001155.jpg&quot; &quot;c20151206kel/00081709.jpg&quot; &quot;c20151206kel/00049069.jpg&quot; ...
- $ cloth_number             : chr  &quot;1&quot; &quot;2&quot; &quot;12&quot; &quot;3&quot; ...
- $ wearing                  : chr  NA NA NA NA ...</code></pre>
+ $ owner_name               : chr  &quot;Mr R. A. Bartlett&quot; &quot;Deva Racing Dr Massini Partnership&quot; &quot;Equus Syndicate&quot; &quot;Mr S. Coltherd&quot; ...
+ $ sire_name                : chr  &quot;Fair Mix&quot; &quot;Dr Massini&quot; &quot;Arcadio&quot; &quot;Bach&quot; ...
+ $ forecastprice_numerator  : chr  &quot;4&quot; &quot;16&quot; &quot;18&quot; &quot;28&quot; ...
+ $ forecastprice_denominator: chr  &quot;7&quot; &quot;1&quot; &quot;1&quot; &quot;1&quot; ...
+ $ weight_value             : chr  &quot;154&quot; &quot;154&quot; &quot;154&quot; &quot;154&quot; ...
+ $ dam_name                 : chr  &quot;Northwood May&quot; &quot;Euro Burden&quot; &quot;Rumi&quot; &quot;Diesel Dancer&quot; ...
+ $ age                      : chr  &quot;5&quot; &quot;6&quot; &quot;5&quot; &quot;6&quot; ...
+ $ colour_type              : chr  &quot;ro&quot; &quot;b&quot; &quot;b&quot; &quot;ch&quot; ...
+ $ damsire_bred             : chr  &quot;USA&quot; &quot;USA&quot; &quot;FR&quot; &quot;UK&quot; ...
+ $ damsire_name             : chr  &quot;Teenoso&quot; &quot;Good Thyne&quot; &quot;Nishapour&quot; &quot;Toulon&quot; ...
+ $ cloth_number_alpha       : chr  &quot;4&quot; &quot;6&quot; &quot;2&quot; &quot;3&quot; ...
+ $ sire_year_born           : chr  &quot;1998&quot; &quot;1993&quot; &quot;2002&quot; &quot;1997&quot; ...
+ $ form                     : chr  &quot;3-11&quot; &quot;2&quot; &quot;65&quot; &quot;52-43&quot; ...
+ $ bred                     : chr  &quot;GB&quot; &quot;IRE&quot; &quot;IRE&quot; &quot;IRE&quot; ...
+ $ jockey_name              : chr  &quot;Richard Johnson&quot; &quot;Brian Harding&quot; &quot;Craig Nichol&quot; &quot;James Reveley&quot; ...
+ $ runnerid                 : chr  &quot;8669158&quot; &quot;10555635&quot; &quot;10458780&quot; &quot;8735108&quot; ...
+ $ colours_description      : chr  &quot;Dark blue and white diamonds, white sleeves, red cap.&quot; &quot;Dark blue, red disc, diabolo on sleeves, quartered cap.&quot; &quot;Black, grey seams, black sleeves and cap.&quot; &quot;Red, large emerald green spots, grey sleeves, red spots, emerald green and red quartered cap.&quot; ...
+ $ dam_bred                 : chr  &quot;UK&quot; &quot;IRE&quot; &quot;UK&quot; &quot;IRE&quot; ...
+ $ colours_filename         : chr  &quot;c20151207mus/00017452.jpg&quot; &quot;c20151207mus/00836278.jpg&quot; &quot;c20151207mus/00828945.jpg&quot; &quot;c20151207mus/00012096.jpg&quot; ...
+ $ cloth_number             : chr  &quot;4&quot; &quot;6&quot; &quot;2&quot; &quot;3&quot; ...
+ $ jockey_claim             : chr  NA NA &quot;3&quot; NA ...
+ $ adjusted_rating          : chr  NA NA NA &quot;0&quot; ...
+ $ official_rating          : chr  NA NA NA &quot;108&quot; ...</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>

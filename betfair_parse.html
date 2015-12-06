@@ -10,7 +10,7 @@
 
 
 
-<title>betfair_parse</title>
+<title>bf_parse</title>
 
 <script src="libs/jquery-1.11.0/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -141,22 +141,22 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="betfair_login.html">betfair_login</a>
+                            <a href="bf_helpers.html">bf_helpers</a>
+                        </li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
                             <a href="request_functions.html">requests</a>
                         </li>
                         <li>
-                            <a href="betfair_POST.html">betfair_POST</a>
+                            <a href="betfair_POST.html">bf_post</a>
                         </li>
                         <li>
-                            <a href="betfair_check.html">betfair_check</a>
+                            <a href="betfair_check.html">bf_check</a>
                         </li>
                         <li>
-                            <a href="betfair_parse.html">betfair_parse</a>
-                        </li>
-                        <li>
-                            <a href="orders.html">bet orders</a>
+                            <a href="betfair_parse.html">bf_parse</a>
                         </li>
                     </ul>
                 </li>
@@ -195,12 +195,18 @@ img {
                         <li>
                             <a href="methods_marketBook.html">marketBook</a>
                         </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
                         <li class="dropdown-header">orders</li>
                         <li>
                             <a href="placeOrders.html">placeOrders</a>
                         </li>
                         <li>
                             <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -225,14 +231,14 @@ img {
 </nav>
 
 <div id="header">
-<h1 class="title">betfair_parse</h1>
+<h1 class="title">bf_parse</h1>
 </div>
 
 
-<p>The <code>betfair_parse</code> function attempts to parse the response object into neat formats, the majority of methods the response can be parsed into single simple dataframes. These methods include <a href="competitions.html"><code>competitions</code></a>, <a href="countries.html"><code>countries</code></a>, <a href="eventTypes.html"><code>eventTypes</code></a>, <a href="events.html"><code>events</code></a>, <a href="marketTypes.html"><code>marketTypes</code></a>. Other methods, primarily <a href="marketCatalogue.html"><code>marketCatalogue</code></a> and <a href="marketBook.html"><code>marketBook</code></a>, require a bit more care in parsing the response, as it typically contains some deep nested structure.</p>
+<p>The <code>bf_parse</code> function attempts to parse the response object into neat formats, the majority of methods the response can be parsed into single simple dataframes. These methods include <a href="competitions.html"><code>competitions</code></a>, <a href="countries.html"><code>countries</code></a>, <a href="eventTypes.html"><code>eventTypes</code></a>, <a href="events.html"><code>events</code></a>, <a href="marketTypes.html"><code>marketTypes</code></a>. Other methods, primarily <a href="marketCatalogue.html"><code>marketCatalogue</code></a> and <a href="marketBook.html"><code>marketBook</code></a>, require a bit more care in parsing the response, as it typically contains some deep nested structure.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">betfair_parse</span>(res, ...)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">bf_parse</span>(res, ...)</code></pre>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
@@ -246,7 +252,7 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left"><code>res</code></td>
-<td align="left">response object returned by <a href="betfair_POST"><code>betfair_POST</code></a> and parsed by <code>httr::content</code></td>
+<td align="left">response object returned by <a href="betfair_POST"><code>bf_post</code></a> and parsed by <code>httr::content</code></td>
 </tr>
 </tbody>
 </table>

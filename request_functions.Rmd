@@ -26,15 +26,15 @@ param | details
 
 ### return
 
-The function returns a list containing any parameters entered via [`marketFilter`], and is assigned a class taken from the `method` argument.  This class is used to help build the request via `betfair_request` (see below).
+The function returns a list containing any parameters entered via [`marketFilter`], and is assigned a class taken from the `method` argument.  This class is used to help build the request via `bf_request` (see below).
 
-## betfair_request
+## bf_request
 
-The `betfair_request` function builds on the request returned by `base_request`, and converts it into valid JSON ready to used in a POST request to the relevant method.
+The `bf_request` function builds on the request returned by `base_request`, and converts it into valid JSON ready to used in a POST request to the relevant method.
 
 ```{r eval=FALSE}
-req <- betfair_request(base_request(filter = marketFilter(),
-                                    method = "competitions"))
+req <- bf_request(base_request(filter = marketFilter(),
+                               method = "competitions"))
 ```
 
 ### arguments
@@ -49,18 +49,18 @@ The function returns a JSON object, which will be entered in any POST request.
 
 ### examples
 
-```{r}
+```{r comment=""}
 (req <- base_request(filter = marketFilter(),
                      method = "competitions"))
 
 class(req)
 
-(req <- betfair_request(req))
+(req <- bf_request(req))
 
 (req <- base_request(filter = marketFilter(eventTypeIds = 7),
                      method = "events"))
 
-(req <- betfair_request(req))
+(req <- bf_request(req))
 ```
 
 
