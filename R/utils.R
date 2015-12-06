@@ -134,3 +134,17 @@ cancelInstruction <- function(betId = NA, size = NA) {
     inst <- as.list(environment())
     return(inst)
 }
+
+#' replaceInstructions
+#'
+#' @description replace individual orders using betIds
+#'
+#' @param betId unique betId (required)
+#' @param newPrice new price to strike bet (required)
+#'
+#' @export
+replaceInstructions <- function(betId, newPrice) {
+    inst <- list(betId = betId,
+              newPrice = newPrice)
+    return(inst)
+}

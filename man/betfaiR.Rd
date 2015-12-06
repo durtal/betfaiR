@@ -30,9 +30,6 @@ building the list.
 \section{Methods}{
 
 \describe{
-     \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
-     to cancel all existing orders, or use combination or marketId and ... to target specific orders,
-     see \link{cancelInstruction} to target specific order}
      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
      different competitions with current markets, see \link{competitions}.}
      \item{\code{countries(filter = marketFilter())}}{ Retrieve data about the different countries
@@ -41,9 +38,13 @@ building the list.
      \link{events}.}
      \item{\code{eventTypes(filter = marketFilter())}}{ Retrieve data about the different event types,
      ie. sports, see \link{eventTypes}.}
+     \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
+     see \link{venues}.}
      \item{\code{login(usr, pwd, key)}}{ Login in, a session token will be
      returned, over-writing the previous token when \code{betfair(usr, pwd, key)}
      was used.}
+     \item{\code{session()}}{ Print details about the session, including login
+     in details and session token.}
      \item{\code{marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL,
      matchProjection = NULL)}}{ Retrieve dynamic data about markets. Data includes
      prices, the status of the market, the status of the selections, the traded
@@ -53,14 +54,15 @@ building the list.
      of markets, see \link{marketCatalogue}.}
      \item{\code{marketTypes(filter = marketFilter())}}{ Retrieve data about the different types of
      markets, see \link{marketTypes}.}
+     \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
+     to cancel all existing orders, or use combination or marketId and ... to target specific orders,
+     see \link{cancelInstruction} to target specific order}
      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
      handicap = NULL, side = "BACK", limitOrder = limitOrder(), limitOnCloseOrder = limitOnCloseOrder(),
      marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})
      and selectionId (see \link{marketBook}),}
-     \item{\code{session()}}{ Print details about the session, including login
-     in details and session token.}
-     \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
-     see \link{venues}.}
+     \item{\code{replaceOrders(..., marketId)}}{ Replace existing orders, requires marketIds and
+     unique betIds with new prices, use \link{replaceInstructions} to target specific bets}
 }
 }
 \examples{

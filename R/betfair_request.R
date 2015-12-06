@@ -146,6 +146,17 @@ betfair_request.cancelOrders <- function(x, instructions = NULL) {
     return(req)
 }
 
+#' @export
+betfair_request.replaceOrders <- function(x, instructions = NULL) {
+
+    req <- standard_request(method = "replaceOrders")
+    req$params$filter <- NULL
+    if(length(instructions) > 0) req$params <- instructions
+
+    req <- jsonlite::toJSON(req, auto_unbox = TRUE)
+    return(req)
+}
+
 #' build base request
 #'
 #' @description creates a list with a different class, according to the desired
@@ -166,7 +177,7 @@ base_request <- function(filter = list(), method = "competitions") {
                        choices = c("competitions", "countries", "events",
                                    "eventTypes", "marketTypes", "marketBook",
                                    "marketCatalogue", "placeOrders", "venues",
-                                   "cancelOrders"))
+                                   "cancelOrders", "replaceOrders"))
     tmp <- structure(filter, class = c("list", param))
     return(tmp)
 }
