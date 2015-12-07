@@ -129,14 +129,14 @@ img {
                 </li>
                 <li class="dropdown">
                     <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
-                        Functions <b class="caret"></b>
+                        functions <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Environment</li>
+                        <li class="dropdown-header">environment</li>
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">Helpers</li>
+                        <li class="dropdown-header">helpers</li>
                         <li>
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
@@ -162,7 +162,7 @@ img {
                 </li>
                 <li class="dropdown">
                     <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
-                        Methods <b class="caret"></b>
+                        methods <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">summary data</li>
@@ -212,7 +212,7 @@ img {
                 </li>
                 <li>
                     <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
-                        Misc <b class="caret"></b>
+                        misc <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -222,6 +222,16 @@ img {
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="vignettes" class="dropdown-toggle" data-toggle="dropdown">
+                        vignettes <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="vignette_one.html">place a bet</a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
                 </li>
@@ -295,17 +305,17 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>  eventType_id eventType_name marketCount
-1       468328       Handball          94
-2            1         Soccer        9318
-3            2         Tennis          28
-4      2378961       Politics          31
+1       468328       Handball         129
+2            1         Soccer       11166
+3            2         Tennis          19
+4      2378961       Politics          32
 5         6231 Financial Bets           4
-6            3           Golf          14</code></pre>
+6            3           Golf          28</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>  eventType_id eventType_name marketCount
-1            1         Soccer        2384
+1            1         Soccer        2608
 2            2         Tennis           6
 3            3           Golf           1
 4      2378961       Politics          17

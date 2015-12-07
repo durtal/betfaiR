@@ -129,14 +129,14 @@ img {
                 </li>
                 <li class="dropdown">
                     <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
-                        Functions <b class="caret"></b>
+                        functions <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Environment</li>
+                        <li class="dropdown-header">environment</li>
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">Helpers</li>
+                        <li class="dropdown-header">helpers</li>
                         <li>
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
@@ -162,7 +162,7 @@ img {
                 </li>
                 <li class="dropdown">
                     <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
-                        Methods <b class="caret"></b>
+                        methods <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">summary data</li>
@@ -212,7 +212,7 @@ img {
                 </li>
                 <li>
                     <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
-                        Misc <b class="caret"></b>
+                        misc <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
@@ -222,6 +222,16 @@ img {
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="vignettes" class="dropdown-toggle" data-toggle="dropdown">
+                        vignettes <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="vignette_one.html">place a bet</a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
                 </li>
@@ -368,13 +378,13 @@ obj &lt;-<span class="st"> </span><span class="kw">marketFilter</span>(<span cla
 <span class="co"># use obj in query</span>
 res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> obj)
 <span class="kw">head</span>(res)</code></pre>
-<pre><code>  competition_id     competition_name marketCount competitionRegion
-1         744098      Chilean Primera          58               CHL
-2              7  Austrian Bundesliga           8               AUT
-3        5614746  FIFA World Cup 2018          10     International
-4             11 Dutch Jupiler League          48               NLD
-5             13           Campeonato         202               BRA
-6         194215 Turkish Super League         115               TUR</code></pre>
+<pre><code>  competition_id      competition_name marketCount competitionRegion
+1              7   Austrian Bundesliga          10               AUT
+2        5614746   FIFA World Cup 2018          10     International
+3             11  Dutch Jupiler League          48               NLD
+4         849268 Coppa Italia Lega Pro          66               ITA
+5         194215  Turkish Super League         102               TUR
+6             15     Bulgarian Premier          11               BGR</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or use marketFilter inside a method</span>
 res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>, <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 <span class="kw">head</span>(res)</code></pre>
@@ -382,7 +392,7 @@ res &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span 
 1          30558                                English FA Cup          54
 2           2134                               Capital One Cup          29
 3         299924                                     Welsh Cup           6
-4        5808320                       SPFL Development League          88
+4        5808320                       SPFL Development League         132
 5          20351                              NIFL Premiership          12
 6        4081753 Southern Football League Division One Central          22
   competitionRegion
