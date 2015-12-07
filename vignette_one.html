@@ -278,13 +278,13 @@ Market ID:      1.117674262
 Event ID:       27390233 
 Market Name:    Gold Cup
 Event Name:     Cheltenham 2016 
-Matched:        142884.5
+Matched:        143025.64
  ---------------------------------------------------------------------------
 Market ID:      1.117674259
 Event ID:       27390233 
 Market Name:    Champion Hrd
 Event Name:     Cheltenham 2016 
-Matched:        130220.16
+Matched:        130525.14
  ---------------------------------------------------------------------------
 Market ID:      1.118987605
 Event ID:       27453850 
@@ -296,13 +296,13 @@ Market ID:      1.116824143
 Event ID:       27334314 
 Market Name:    King George VI Chs
 Event Name:     Kemp 26th Dec 
-Matched:        76843.66
+Matched:        76975.88
  ---------------------------------------------------------------------------
 Market ID:      1.118224623
 Event ID:       27419382 
 Market Name:    Grand National
 Event Name:     Aintree 2016 
-Matched:        67443.34
+Matched:        67504.12
  ---------------------------------------------------------------------------</code></pre>
 <p>Let’s look at the first market, the market name is <strong>Gold Cup</strong> while the event name is <strong>Cheltenham 2016</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
 <pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>markets[[<span class="dv">1</span>]]$market$marketId
@@ -312,7 +312,7 @@ market &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(
 <pre><code>
 Market ID:      1.117674262 
 Market Name:    Gold Cup 
-Matched:        142884.5
+Matched:        143025.64
 
 Runners:     59 
  selectionId  runnerName handicap sortPriority
@@ -330,23 +330,23 @@ Runners:     59
 <span class="kw">summary</span>(market_data)</code></pre>
 <pre><code>
 Market ID:      1.117674262 
-Matched:        142958.1 
-Available:      16087.35
+Matched:        143113.92 
+Available:      16178.96
 
 Runners:     59 
      .id selectionId handicap status lastPriceTraded totalMatched
- 5978449     5978449        0 ACTIVE             6.6     21772.23
- 6896665     6896665        0 ACTIVE             6.8     33703.85
- 5517026     5517026        0 ACTIVE             8.4     16789.26
- 7122507     7122507        0 ACTIVE             8.4     16910.53
- 6987962     6987962        0 ACTIVE             9.2      9757.06
- 4360454     4360454        0 ACTIVE            13.5      6225.25
+ 5978449     5978449        0 ACTIVE             6.6     21775.38
+ 6896665     6896665        0 ACTIVE             6.8     33705.35
+ 5517026     5517026        0 ACTIVE             8.0     16819.39
+ 7122507     7122507        0 ACTIVE             8.4     16920.85
+ 6987962     6987962        0 ACTIVE             9.4      9831.97
+ 4360454     4360454        0 ACTIVE            13.5      6237.60
 
  ---------------------------------------------------------------------------</code></pre>
 </div>
 <div id="placing-a-bet" class="section level3">
 <h3>placing a bet</h3>
-<p>Let’s place a lay bet on the current favourite using the <a href="placeOrders.html"><code>placeOrders</code></a> method, Coneygree, we don’t want this to be matched, so the lay will be at the 1.01 price, and for just £2. To place a bet, we need the <code>marketId</code> and <code>selectionId</code>:</p>
+<p>Let’s place a lay bet on the current favourite using the <a href="placeOrders.html"><code>placeOrders</code></a> method, Coneygree, we don’t want this to be matched, so the lay will be at the 1.01 price, and for just ?2. To place a bet, we need the <code>marketId</code> and <code>selectionId</code>:</p>
 <pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$market$marketId
 selectionId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$runners[[<span class="dv">1</span>]]$basic$selectionId
 
@@ -366,7 +366,7 @@ MarketId:       1.117674262
 
 Order:
   status       betId               placedDate averagePriceMatched
- SUCCESS 59149314074 2015-12-06T22:53:41.000Z                   0
+ SUCCESS 59151241704 2015-12-07T01:01:26.000Z                   0
  sizeMatched
            0
 

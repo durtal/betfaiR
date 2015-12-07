@@ -53,7 +53,7 @@ summary(market_data)
 
 ### placing a bet
 
-Let's place a lay bet on the current favourite using the [`placeOrders`](placeOrders.html) method, `r market[[1]]$runners$runnerName[1]`, we don't want this to be matched, so the lay will be at the 1.01 price, and for just £2.  To place a bet, we need the `marketId` and `selectionId`:
+Let's place a lay bet on the current favourite using the [`placeOrders`](placeOrders.html) method, `r market[[1]]$runners$runnerName[1]`, we don't want this to be matched, so the lay will be at the 1.01 price, and for just ?2.  To place a bet, we need the `marketId` and `selectionId`:
 
 ```{r place_bet, comment=""}
 marketId <- market_data[[1]]$market$marketId
