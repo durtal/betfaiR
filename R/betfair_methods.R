@@ -293,6 +293,16 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
+#         clearedOrders <- function() {
+#
+#         }
+
+#         currentOrders <- function(betId, marketId, orderProjection = "ALL",
+#                                   dateRange, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST",
+#                                   fromRecord, recordCount) {
+#
+#         }
+
         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
                                 handicap = NULL, side = "BACK", limitOrder = limitOrder(),
                                 limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
@@ -330,6 +340,10 @@ betfair <- function(usr, pwd, key) {
 
             return(res)
         }
+
+#         updateOrders <- function() {
+#
+#         }
 
         environment()
     })
