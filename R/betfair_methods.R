@@ -77,7 +77,7 @@ betfair <- function(usr, pwd, key) {
 
         competitions <- function(filter = marketFilter()) {
             # build request object
-            req <- base_request(filter, "competitions")
+            req <- bf_basic_req(filter, "competitions")
             req <- bf_request(req)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -95,7 +95,7 @@ betfair <- function(usr, pwd, key) {
 
         countries <- function(filter = marketFilter()) {
             # build request object
-            req <- base_request(filter, "countries")
+            req <- bf_basic_req(filter, "countries")
             req <- bf_request(req)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -113,7 +113,7 @@ betfair <- function(usr, pwd, key) {
 
         events <- function(filter = marketFilter()) {
             # build request object
-            req <- base_request(filter, "events")
+            req <- bf_basic_req(filter, "events")
             req <- bf_request(req)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -131,7 +131,7 @@ betfair <- function(usr, pwd, key) {
 
         eventTypes <- function(filter = marketFilter()) {
             # build request object
-            req <- base_request(filter, "eventTypes")
+            req <- bf_basic_req(filter, "eventTypes")
             req <- bf_request(req)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -149,7 +149,7 @@ betfair <- function(usr, pwd, key) {
 
         venues <- function(filter = marketFilter()) {
             # build request object
-            req <- base_request(filter, "venues")
+            req <- bf_basic_req(filter, "venues")
             req <- bf_request(req)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -190,7 +190,7 @@ betfair <- function(usr, pwd, key) {
                                                                      "ROLLED_UP_BY_PRICE",
                                                                      "ROLLED_UP_BY_AVG_PRICE"))
             # build request object
-            req <- base_request(filter = list(), method = "marketBook")
+            req <- bf_basic_req(filter = list(), method = "marketBook")
             req <- bf_request(req, marketIds = marketIds,
                                    priceProjection = priceProjection,
                                    orderProjection = orderProjection,
@@ -220,7 +220,7 @@ betfair <- function(usr, pwd, key) {
                                                                        "RUNNER_DESCRIPTION",
                                                                        "RUNNER_METADATA"))
             # build request object
-            req <- base_request(filter, "marketCatalogue")
+            req <- bf_basic_req(filter, "marketCatalogue")
             req <- bf_request(x = req, marketProjection = marketProjection,
                                    sort = sort, maxResults = maxResults)
             # post request
@@ -241,7 +241,7 @@ betfair <- function(usr, pwd, key) {
         marketPnL <- function(marketIds, settled = NULL,
                               bsp = NULL, NET = NULL) {
             # build request object
-            req <- base_request(method = "marketProfitAndLoss")
+            req <- bf_basic_req(method = "marketProfitAndLoss")
             params <- list(marketIds = marketIds,
                            settled = settled,
                            bsp = bsp, NET = NET)
@@ -260,7 +260,7 @@ betfair <- function(usr, pwd, key) {
 
         marketTypes <- function(filter = marketFilter()) {
             # build request object
-            req <- base_request(filter, "marketTypes")
+            req <- bf_basic_req(filter, "marketTypes")
             req <- bf_request(req)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -278,7 +278,7 @@ betfair <- function(usr, pwd, key) {
 
         cancelOrders <- function(..., marketId = NA) {
             # build request object
-            req <- base_request(method = "cancelOrders")
+            req <- bf_basic_req(method = "cancelOrders")
             cancel <- bf_helpers$cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = cancel)
             # post request
@@ -293,9 +293,18 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-#         clearedOrders <- function() {
-#
-#         }
+        # clearedOrders <- function(betStatus = "SETTLED", eventTypeIds, eventIds, marketIds,
+        #                           runnerIds, betIds, side, dateRange = bf_helpers$dateRange()) {
+        #
+        #     betStatus <- intersect(toupper(betStatus), c("SETTLED",
+        #                                                  "VOIDED",
+        #                                                  "LAPSED",
+        #                                                  "CANCELLED"))
+        #
+        #     # build request object
+        #     req <- bf_basic_req(method = "listClearedOrders")
+        #
+        # }
 
 #         currentOrders <- function(betId, marketId, orderProjection = "ALL",
 #                                   dateRange, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST",
@@ -307,7 +316,7 @@ betfair <- function(usr, pwd, key) {
                                 handicap = NULL, side = "BACK", limitOrder = limitOrder(),
                                 limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
             # build request object
-            req <- base_request(method = "placeOrders")
+            req <- bf_basic_req(method = "placeOrders")
             betOrder <- bf_helpers$prepare(marketId = marketId, orderType = orderType,
                                            selectionId = selectionId, side = side,
                                            limitOrder = limitOrder, limitOnCloseOrder = limitOnCloseOrder,
@@ -326,7 +335,7 @@ betfair <- function(usr, pwd, key) {
 
         replaceOrders <- function(..., marketId) {
             # build request object
-            req <- base_request(method = "replaceOrders")
+            req <- bf_basic_req(method = "replaceOrders")
             replace <- bf_helpers$cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = replace)
             # post request

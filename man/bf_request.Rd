@@ -8,7 +8,7 @@ bf_request(x, ...)
 }
 \description{
 convert and format request list into valid JSON object for Betfair's
-API. Requires users to build a list first using \link{base_request}
+API. Requires users to build a list first using \link{bf_basic_req}
 }
 \details{
 to use this function, the object should have one of the following classes,

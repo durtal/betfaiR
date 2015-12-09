@@ -1,7 +1,7 @@
 #' create Betfair request
 #'
 #' @description convert and format request list into valid JSON object for Betfair's
-#' API. Requires users to build a list first using \link{base_request}
+#' API. Requires users to build a list first using \link{bf_basic_req}
 #'
 #' @name bf_request
 #'
@@ -175,7 +175,7 @@ bf_request.marketProfitAndLoss <- function(x, params) {
 #' API method the request will be sent to, the returned value will then be passed
 #' to \link{bf_request} to convert to valid JSON.
 #'
-#' @name base_request
+#' @name bf_basic_req
 #'
 #' @param filter list of parameters to use as filters, see \link{marketFilter}
 #' @param method Betfair API method, one of \code{competitions}, \code{countries},
@@ -183,7 +183,7 @@ bf_request.marketProfitAndLoss <- function(x, params) {
 #' \code{marketCatalogue}, \code{venues}
 #'
 #' @export
-base_request <- function(filter = list(), method = "competitions") {
+bf_basic_req <- function(filter = list(), method = "competitions") {
 
     param <- match.arg(arg = method,
                        choices = c("competitions", "countries", "events",
