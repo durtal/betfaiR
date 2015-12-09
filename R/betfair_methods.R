@@ -293,8 +293,9 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        # clearedOrders <- function(betStatus = "SETTLED", eventTypeIds, eventIds, marketIds,
-        #                           runnerIds, betIds, side, dateRange = bf_helpers$dateRange()) {
+        # clearedOrders <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+        #                           marketIds = NULL, runnerIds = NULL, betIds = NULL,
+        #                           side = "BACK", dateRange = bf_helpers$dateRange()) {
         #
         #     betStatus <- intersect(toupper(betStatus), c("SETTLED",
         #                                                  "VOIDED",
@@ -303,14 +304,41 @@ betfair <- function(usr, pwd, key) {
         #
         #     # build request object
         #     req <- bf_basic_req(method = "listClearedOrders")
+        #     params <- bf_helpers$cleared(betStatus = betStatus, eventTypeIds = eventTypeIds,
+        #                                  eventIds = eventIds, marketIds = marketIds,
+        #                                  runnerIds = runnerIds, betIds = betIds,
+        #                                  side = side, dateRange = dateRange)
+        #     req <- bf_request(req, params = params)
+        #     # post request
+        #     res <- bf_post(body = req, ssoid$ssoid)
+        #     # convert response
+        #     res <- httr::content(res)
+        #     # handle errors
+        #     res <- bf_check(res, method = "listClearedOrders")
+        #     # parse response
+        #     res <- bf_parse(res)
         #
+        #     return(res)
         # }
-
-#         currentOrders <- function(betId, marketId, orderProjection = "ALL",
-#                                   dateRange, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST",
-#                                   fromRecord, recordCount) {
-#
-#         }
+        #
+        # currentOrders <- function(betId, marketId, orderProjection = "ALL",
+        #                           dateRange, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST",
+        #                           fromRecord, recordCount) {
+        #
+        #     # build request object
+        #     req <- bf_basic_req(method = "listCurrentOrders")
+        #     req <- bf_request(req, params = params)
+        #     # post request
+        #     res <- bf_post(body = req, ssoid$ssoid)
+        #     # convert response
+        #     res <- httr::content(res)
+        #     # handle errors
+        #     res <- bf_check(res, method = "listCurrentOrders")
+        #     # parse response
+        #     res <- bf_parse(res)
+        #
+        #     return(res)
+        # }
 
         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
                                 handicap = NULL, side = "BACK", limitOrder = limitOrder(),
