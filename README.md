@@ -14,7 +14,7 @@ devtools::install_github("durtal/betfaiR")
 
 #### Help
 
-There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues).  Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
+There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues), and a vignette showing how to [login, find a market, place a bet, replace the bet and cancel the bet](http://durtal.github.io/betfaiR/vignette_one.html).  Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
 
 #### Usage
 
@@ -44,18 +44,21 @@ The view the available methods, simply print the environment `bf`
 ```R
 <betfaiR API>
 Methods available:
-#    $competitions(filter = marketFilter())
-#    $countries(filter = marketFilter())
-#    $events(filter = marketFilter())
-#    $eventTypes(filter = marketFilter())
-#    $login(usr, pwd, key)
-#    $marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS", orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")
-#    $marketCatalogue(filter = marketFilter(), marketProjection = "EVENT", sort = NULL, maxResults = 1, keepRules = FALSE)
-#    $marketTypes(filter = marketFilter())
-#    $placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL, side = "BACK", limitOrder = limitOrder(),
-#       limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
-#    $session()
-#    $venues(filter = marketFilter())
+    $cancelOrders(..., marketId = NA)
+    $competitions(filter = marketFilter())
+    $countries(filter = marketFilter())
+    $events(filter = marketFilter())
+    $eventTypes(filter = marketFilter())
+    $login(usr, pwd, key)
+    $marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS", orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")
+    $marketCatalogue(filter = marketFilter(), marketProjection = "EVENT", sort = NULL, maxResults = 1, keepRules = FALSE)
+    $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL)
+    $marketTypes(filter = marketFilter())
+    $placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL, side = "BACK", limitOrder = limitOrder(),
+   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL)
+    $replaceOrders(..., marketId)
+    $session()
+    $venues(filter = marketFilter())
 ```
 
 So, if you are familiar with Betfair's API, you will realise the available methods in the package might need a little bit of work.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
@@ -72,7 +75,7 @@ The `racing` object is now a dataframe of horse racing events, providing data th
 
 ### PASSWORD and KEY
 
-The appendix **_API key best practices_** in the [api packages vignette](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html) from the [httr](https://github.com/hadley/httr) package provides some pertinent advice for the storing of you PASSWORD and KEY.  
+The appendix **_API key best practices_** in the [api packages vignette](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html) from the [httr](https://github.com/hadley/httr) package provides some pertinent advice for the storing of you PASSWORD and KEY.
 
 The advice is to store your PASSWORD and KEY, or any other variables that should be kept safe, in an environment variable, this is to prevent accidentally sharing your credentials, either by sharing an .Rhistory file, or sharing a workspace.
 
