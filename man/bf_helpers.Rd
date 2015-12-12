@@ -4,7 +4,7 @@
 \name{bf_helpers}
 \alias{bf_helpers}
 \title{betfair helper functions}
-\format{\preformatted{<environment: 0x000000000b1a68c0> 
+\format{\preformatted{<environment: 0x000000000b1b8118> 
 }}
 \usage{
 bf_helpers
