@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_helpers.R
 \name{current}
 \alias{current}
-\title{current orders}
+\title{current}
 \arguments{
 \item{betId}{unique bet Id}
 

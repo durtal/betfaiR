@@ -193,6 +193,12 @@ summary.marketPnL_list <- function(x) {
 print.currentOrders <- function(x) {
     cat("Current Orders:\n\n")
     cat("Returned:     ", length(x$current), "records\n")
+}
+
+#' @export
+summary.currentOrders <- function(x) {
+    cat("Current Orders:\n\n")
+    cat("Returned:     ", length(x$current), "records\n")
     plyr::l_ply(x$current, function(i) {
         tmp <- data.frame(betId = i$betId,
                           marketId = i$marketId,
