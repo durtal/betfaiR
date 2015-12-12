@@ -200,7 +200,7 @@ betfair <- function(usr, pwd, key, dom = "uk") {
                                    orderProjection = orderProjection,
                                    matchProjection = matchProjection)
             # post request
-            res <- bf_post(body = req, headers = ssoid$ssoid)
+            res <- bf_post(body = req, headers = ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
