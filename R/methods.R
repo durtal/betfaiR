@@ -615,7 +615,7 @@ NULL
 #'
 #' @param ... target specific bets to cancel, use \link{replace_inst} to enter
 #' one or more bets, \code{bf_helpers$replace_inst} requires \strong{betId}, and
-#'\strong{newPrice}
+#' \strong{newPrice}
 #' @param marketId target bets in a specific market
 #'
 #' @return list with details about the replaced bets, whether operation was successful
@@ -634,4 +634,47 @@ NULL
 #' @param NET include commission
 #'
 #' @return list with data about the market and any profit and loss for selections
+NULL
+
+#' updateOrders
+#'
+#' @description \code{updateOrders} function updates instructions for specific bets
+#' and how they are handled when the market goes in play
+#'
+#' @name updateOrders
+#'
+#' @param ... target specific bets to update, use \link{update_inst} to enter one
+#' or more bets, \code{bf_helpers$update_inst} requires \strong{betId} and
+#' \strong{persistenceType}
+#' @param marketId target bets in a specific market
+#'
+#' @return list with details about the updated bets
+NULL
+
+#' currentOrders
+#'
+#' @description \code{currentOrders} function allows users to retrieve data about
+#' any unsettled bets they have open.  Use the parameters to filter to specific
+#' markets, or leave the function empty to return \strong{all} open positions
+#'
+#' @name currentOrders
+#'
+#' @param betId unique bet Id
+#' @param marketId unique market Id
+#' @param orderProjection default of \strong{ALL} returns all unsettled positions,
+#' matched or partially matched, change to \strong{EXECUTABLE} to filter for orders
+#' with a portion remaining, or \strong{EXECUTION_COMPLETE} for orders which have
+#' been filled, see orderProjection section in \link{bettingEnums} for more details
+#' @param from date filter, string in yyyy-mm-dd format
+#' @param to date filter, string in yyyy-mm-dd format
+#' @param orderBy how to order orders, default orders by when they were placed, see
+#' orderBy section in \link{bettingEnums} for more details
+#' @param sort how to sort results, see sortDir section in \link{bettingEnums} for
+#' more details
+#' @param fromRecord specifies the first record to be returned, records start at
+#' index zero (not one)
+#' @param count specifies how many records are returned from the index position set
+#' by \code{fromRecord}, there is a limit of 1000.
+#'
+#' @return list with data about individual orders
 NULL

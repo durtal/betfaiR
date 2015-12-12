@@ -67,6 +67,8 @@ building the list.
      and selectionId (see \link{marketBook}),}
      \item{\code{replaceOrders(..., marketId)}}{ Replace existing orders, requires marketIds and
      unique betIds with new prices, use \link{replace_inst} to target specific bets}
+     \item{\code{updateOrders(..., marketId)}}{ Update existing orders with new
+     instructions for what to do when the market goes in play}
 }
 }
 \examples{

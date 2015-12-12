@@ -28,6 +28,8 @@
 #'      \code{cancel}, see \link{cancel_inst}}
 #'      \item{\code{replace_inst(betId, newPrice)}}{ helper function used by the
 #'      \link{replaceOrders} method, betId and newPrice are required, see \link{replace_inst}}
+#'      \item{\code{update_inst(betId, persistenceType)}}{ helper function used by
+#'      the \link{updateOrders} method, betId and persistenceType are required}
 #'      \item{\code{current(betId, marketId, orderProjection, from, to, orderBy
 #'      sort, fromRecord, recordCount)}}{ helper function used by the \link{currentOrders}
 #'      method to filter current unsettled orders.}
@@ -92,6 +94,11 @@ bf_helpers <- local({
     }
 
     replace_inst <- function(betId, newPrice) {
+        inst <- as.list(environment())
+        return(inst)
+    }
+
+    update_inst <- function(betId, persistenceType) {
         inst <- as.list(environment())
         return(inst)
     }
@@ -230,4 +237,42 @@ NULL
 #'
 #' @param betId unique betId (required)
 #' @param newPrice new price to strike bet (required)
+NULL
+
+#' update bet instructions
+#'
+#' @name update_inst
+#'
+#' @description update individual orders with new instructions for what to do when
+#' the market goes in play
+#'
+#' @param betId unique betId (required)
+#' @param persistenceType new instructions for what to do with order at in play
+NULL
+
+#' current
+#'
+#' @name current
+#'
+#' @description helper function used by the \link{currentOrders} method to build
+#' request object for finding current unsettled bets
+#'
+#' @param betId unique bet Id
+#' @param marketId unique market Id
+#' @param orderProjection default of \strong{ALL} returns all unsettled positions,
+#' matched or partially matched, change to \strong{EXECUTABLE} to filter for orders
+#' with a portion remaining, or \strong{EXECUTION_COMPLETE} for orders which have
+#' been filled, see orderProjection section in \link{bettingEnums} for more details
+#' @param from date filter, string in yyyy-mm-dd format
+#' @param to date filter, string in yyyy-mm-dd format
+#' @param orderBy how to order orders, default orders by when they were placed, see
+#' orderBy section in \link{bettingEnums} for more details
+#' @param sort how to sort results, see sortDir section in \link{bettingEnums} for
+#' more details
+#' @param fromRecord specifies the first record to be returned, records start at
+#' index zero (not one)
+#' @param count specifies how many records are returned from the index position set
+#' by \code{fromRecord}, there is a limit of 1000.
+#'
+#' @return list with parameters to filter currently unsettled bets
 NULL

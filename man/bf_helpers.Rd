@@ -4,7 +4,7 @@
 \name{bf_helpers}
 \alias{bf_helpers}
 \title{betfair helper functions}
-\format{\preformatted{<environment: 0x000000000b1ad978> 
+\format{\preformatted{<environment: 0x000000000b1b5c00> 
 }}
 \usage{
 bf_helpers
@@ -37,6 +37,8 @@ in conjunction with the various methods available.
      \code{cancel}, see \link{cancel_inst}}
      \item{\code{replace_inst(betId, newPrice)}}{ helper function used by the
      \link{replaceOrders} method, betId and newPrice are required, see \link{replace_inst}}
+     \item{\code{update_inst(betId, persistenceType)}}{ helper function used by
+     the \link{updateOrders} method, betId and persistenceType are required}
      \item{\code{current(betId, marketId, orderProjection, from, to, orderBy
      sort, fromRecord, recordCount)}}{ helper function used by the \link{currentOrders}
      method to filter current unsettled orders.}
