@@ -59,6 +59,7 @@ marketFilter <- function(bspOnly = NULL, competitionIds = NULL, eventIds = NULL,
     tmp <- tmp[!sapply(tmp, is.null)]
     if(!is.null(from) & !is.null(to)) {
         tmp$from <- NULL
+        tmp$to <- NULL
         tmp$marketStartTime <- list("from" = format(as.POSIXct(from), "%Y-%m-%dT%TZ"),
                                     "to" = format(as.POSIXct(to), "%Y-%m-%dT%TZ"))
     } else if(!is.null(from) & is.null(to)) {
