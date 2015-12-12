@@ -46,6 +46,10 @@
 #'      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
 #'      to cancel all existing orders, or use combination or marketId and ... to target specific orders,
 #'      see \link{cancel_inst} to target specific order}
+#'      \item{\code{currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL", from = NULL,
+#'      to = NULL, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)}}{
+#'      Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function
+#'      \link{current} helps target specific markets.}
 #'      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
 #'      handicap = NULL, side = "BACK", limitOrder = bf_helpers$limitOrder(), limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
 #'      marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})
@@ -321,24 +325,30 @@ betfair <- function(usr, pwd, key) {
         #     return(res)
         # }
         #
-        # currentOrders <- function(betId, marketId, orderProjection = "ALL",
-        #                           dateRange, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST",
-        #                           fromRecord, recordCount) {
-        #
-        #     # build request object
-        #     req <- bf_basic_req(method = "listCurrentOrders")
-        #     req <- bf_request(req, params = params)
-        #     # post request
-        #     res <- bf_post(body = req, ssoid$ssoid)
-        #     # convert response
-        #     res <- httr::content(res)
-        #     # handle errors
-        #     res <- bf_check(res, method = "listCurrentOrders")
-        #     # parse response
-        #     res <- bf_parse(res)
-        #
-        #     return(res)
-        # }
+        currentOrders <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
+                                  from = NULL, to = NULL, orderBy = "BY_BET",
+                                  sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
+                                  count = NULL) {
+
+            # build request object
+            req <- bf_basic_req(method = "currentOrders")
+            params <- bf_helpers$current(betId = betId, marketId = marketId,
+                                         orderProjection = orderProjection,
+                                         from = from, to = to, orderBy = orderBy,
+                                         sort = sort, fromRecord = fromRecord,
+                                         count = count)
+            req <- bf_request(req, params = params)
+            # post request
+            res <- bf_post(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- bf_check(res, method = "currentOrders")
+            # parse response
+            res <- bf_parse(res)
+
+            return(res)
+        }
 
         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
                                 handicap = NULL, side = "BACK", limitOrder = limitOrder(),

@@ -57,6 +57,10 @@ building the list.
      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
      to cancel all existing orders, or use combination or marketId and ... to target specific orders,
      see \link{cancel_inst} to target specific order}
+     \item{\code{currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL", from = NULL,
+     to = NULL, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)}}{
+     Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function
+     \link{current} helps target specific markets.}
      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
      handicap = NULL, side = "BACK", limitOrder = bf_helpers$limitOrder(), limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
      marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})

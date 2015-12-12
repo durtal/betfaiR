@@ -28,6 +28,9 @@
 #'      \code{cancel}, see \link{cancel_inst}}
 #'      \item{\code{replace_inst(betId, newPrice)}}{ helper function used by the
 #'      \link{replaceOrders} method, betId and newPrice are required, see \link{replace_inst}}
+#'      \item{\code{current(betId, marketId, orderProjection, from, to, orderBy
+#'      sort, fromRecord, recordCount)}}{ helper function used by the \link{currentOrders}
+#'      method to filter current unsettled orders.}
 #' }
 #'
 #' @export
@@ -91,6 +94,34 @@ bf_helpers <- local({
     replace_inst <- function(betId, newPrice) {
         inst <- as.list(environment())
         return(inst)
+    }
+
+    current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
+                        from = NULL, to = NULL, orderBy = "BY_BET",
+                        sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
+                        count = NULL) {
+
+        orderList <- as.list(environment())
+
+        if(!is.null(from)) {
+            orderList$from <- NULL
+            orderList$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+        }
+        if(!is.null(to)) {
+            orderList$to <- NULL
+            orderList$dateRange$to <- format(as.POSIXct(to), "%Y-%m-%dT%TZ")
+        }
+
+        orderList <- orderList[!sapply(orderList, is.null)]
+
+        if(!is.null(orderList$betId)) {
+            orderList$betId <- as.list(orderList$betId)
+        }
+        if(!is.null(orderList$marketId)) {
+            orderList$marketId <- as.list(orderList$marketId)
+        }
+
+        return(orderList)
     }
 
     environment()

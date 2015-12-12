@@ -225,6 +225,19 @@ bf_parse.cancelOrders <- function(res) {
 }
 
 #' @export
+bf_parse.currentOrders <- function(res) {
+
+    out <- structure(list(), class = c("list", "currentOrders"))
+    out$current <- lapply(res$result$currentOrders, function(i) {
+        tmp <- data.frame(i[!sapply(i, is.null)], stringsAsFactors = FALSE)
+        names(tmp) <- gsub("priceSize.", "", names(tmp))
+        return(tmp)
+    })
+    out$moreAvailable <- res$result$moreAvailable
+    return(out)
+}
+
+#' @export
 bf_parse.venues <- function(res) {
 
     res <- basic_parse(res)
