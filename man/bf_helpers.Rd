@@ -4,7 +4,7 @@
 \name{bf_helpers}
 \alias{bf_helpers}
 \title{betfair helper functions}
-\format{\preformatted{<environment: 0x000000000b1c84f8> 
+\format{\preformatted{<environment: 0x000000000b1c2e38> 
 }}
 \usage{
 bf_helpers
@@ -42,6 +42,10 @@ in conjunction with the various methods available.
      \item{\code{current(betId, marketId, orderProjection, from, to, orderBy
      sort, fromRecord, recordCount)}}{ helper function used by the \link{currentOrders}
      method to filter current unsettled orders.}
+     \item{\code{cleared(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+     marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK", to = NULL,
+     from = NULL)}}{ function used inside the \link{clearedOrders} method to help
+     retrieve data for settled/voided/lapsed/cancelled orders}
 }
 }
 \keyword{datasets}

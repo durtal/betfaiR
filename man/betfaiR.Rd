@@ -57,6 +57,10 @@ building the list.
      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
      to cancel all existing orders, or use combination or marketId and ... to target specific orders,
      see \link{cancel_inst} to target specific order}
+     \item{\code{clearedOrders(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+     marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK", from = NULL, to = NULL)}}{
+     function to return data on past bets, by default it will return settled bets, use
+     various params to help filter bets.}
      \item{\code{currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL", from = NULL,
      to = NULL, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)}}{
      Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function

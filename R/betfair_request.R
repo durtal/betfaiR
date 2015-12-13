@@ -191,6 +191,17 @@ bf_request.updateOrders <- function(x, instructions = NULL) {
     return(req)
 }
 
+#' @export
+bf_request.clearedOrders <- function(x, params = NULL) {
+
+    req <- standard_request(method = "listClearedOrders")
+    req$params$filter <- NULL
+    req$params <- params
+
+    req <- jsonlite::toJSON(req, auto_unbox = TRUE)
+    return(req)
+}
+
 #' build base request
 #'
 #' @description creates a list with a different class, according to the desired
@@ -212,7 +223,7 @@ bf_basic_req <- function(filter = list(), method = "competitions") {
                                    "eventTypes", "marketTypes", "marketBook",
                                    "marketCatalogue", "placeOrders", "venues",
                                    "cancelOrders", "replaceOrders", "marketProfitAndLoss",
-                                   "currentOrders", "updateOrders"))
+                                   "currentOrders", "updateOrders", "clearedOrders"))
     tmp <- structure(filter, class = c("list", param))
     return(tmp)
 }

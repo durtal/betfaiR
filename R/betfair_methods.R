@@ -46,6 +46,10 @@
 #'      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
 #'      to cancel all existing orders, or use combination or marketId and ... to target specific orders,
 #'      see \link{cancel_inst} to target specific order}
+#'      \item{\code{clearedOrders(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+#'      marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK", from = NULL, to = NULL)}}{
+#'      function to return data on past bets, by default it will return settled bets, use
+#'      various params to help filter bets.}
 #'      \item{\code{currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL", from = NULL,
 #'      to = NULL, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)}}{
 #'      Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function
@@ -299,33 +303,33 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        # clearedOrders <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
-        #                           marketIds = NULL, runnerIds = NULL, betIds = NULL,
-        #                           side = "BACK", dateRange = bf_helpers$dateRange()) {
-        #
-        #     betStatus <- intersect(toupper(betStatus), c("SETTLED",
-        #                                                  "VOIDED",
-        #                                                  "LAPSED",
-        #                                                  "CANCELLED"))
-        #
-        #     # build request object
-        #     req <- bf_basic_req(method = "listClearedOrders")
-        #     params <- bf_helpers$cleared(betStatus = betStatus, eventTypeIds = eventTypeIds,
-        #                                  eventIds = eventIds, marketIds = marketIds,
-        #                                  runnerIds = runnerIds, betIds = betIds,
-        #                                  side = side, dateRange = dateRange)
-        #     req <- bf_request(req, params = params)
-        #     # post request
-        #     res <- bf_post(body = req, ssoid$ssoid)
-        #     # convert response
-        #     res <- httr::content(res)
-        #     # handle errors
-        #     res <- bf_check(res, method = "listClearedOrders")
-        #     # parse response
-        #     res <- bf_parse(res)
-        #
-        #     return(res)
-        # }
+        clearedOrders <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+                                  marketIds = NULL, runnerIds = NULL, betIds = NULL,
+                                  side = "BACK", from = NULL, to = NULL) {
+
+            betStatus <- intersect(toupper(betStatus), c("SETTLED",
+                                                         "VOIDED",
+                                                         "LAPSED",
+                                                         "CANCELLED"))
+
+            # build request object
+            req <- bf_basic_req(method = "clearedOrders")
+            params <- bf_helpers$cleared(betStatus = betStatus, eventTypeIds = eventTypeIds,
+                                         eventIds = eventIds, marketIds = marketIds,
+                                         runnerIds = runnerIds, betIds = betIds,
+                                         side = side, from = from, to = to)
+            req <- bf_request(req, params = params)
+            # post request
+            res <- bf_post(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- bf_check(res, method = "clearedOrders")
+            # parse response
+            res <- bf_parse(res)
+
+            return(res)
+        }
 
         currentOrders <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
                                   from = NULL, to = NULL, orderBy = "BY_BET",

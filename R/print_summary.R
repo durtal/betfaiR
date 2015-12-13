@@ -209,3 +209,26 @@ summary.currentOrders <- function(x) {
         cat("\n")
     })
 }
+
+#' @export
+print.clearedOrders <- function(x) {
+    cat("Cleared Orders:\n\n")
+    cat("Returned:      ", length(x$cleared), "records\n")
+}
+
+#' @export
+summary.clearedOrders <- function(x) {
+    cat("Cleared Orders:\n\n")
+    cat("Returned:      ", length(x$cleared), "records\n")
+    plyr::l_ply(x$cleared, function(i) {
+        tmp <- data.frame(betId = i$betId,
+                          marketId = i$marketId,
+                          side = i$side,
+                          price = i$priceMatched,
+                          size = i$size,
+                          outcome = i$betOutcome,
+                          profit = i$profit)
+        print(tmp, row.names = FALSE)
+        cat("\n")
+    })
+}

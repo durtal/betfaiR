@@ -238,6 +238,18 @@ bf_parse.currentOrders <- function(res) {
 }
 
 #' @export
+bf_parse.clearedOrders <- function(res) {
+
+    out <- structure(list(), class = c("list", "clearedOrders"))
+    out$cleared <- lapply(res$result$clearedOrders, function(i) {
+        tmp <- data.frame(i[!sapply(i, is.null)], stringsAsFactors = FALSE)
+        return(tmp)
+    })
+    out$moreAvailable <- res$result$moreAvailable
+    return(out)    
+}
+
+#' @export
 bf_parse.venues <- function(res) {
 
     res <- basic_parse(res)

@@ -33,6 +33,10 @@
 #'      \item{\code{current(betId, marketId, orderProjection, from, to, orderBy
 #'      sort, fromRecord, recordCount)}}{ helper function used by the \link{currentOrders}
 #'      method to filter current unsettled orders.}
+#'      \item{\code{cleared(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+#'      marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK", to = NULL,
+#'      from = NULL)}}{ function used inside the \link{clearedOrders} method to help
+#'      retrieve data for settled/voided/lapsed/cancelled orders}
 #' }
 #'
 #' @export
@@ -131,25 +135,31 @@ bf_helpers <- local({
         return(orderList)
     }
 
-    # cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
-    #                     marketIds = NULL, runnerIds = NULL, betIds = NULL,
-    #                     side = "BACK", to = NULL, from = NULL) {
-    #
-    #     orderList <- as.list(environment())
-    #
-    #     if(!is.null(from)) {
-    #         orderList$from <- NULL
-    #         orderlist$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
-    #     }
-    #     if(!is.null(to)) {
-    #         orderList$to <- NULL
-    #         orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
-    #     }
-    #
-    #     orderList <- orderList[!sapply(orderList, is.null)]
-    #
-    #     return(orderList)
-    # }
+    cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+                        marketIds = NULL, runnerIds = NULL, betIds = NULL,
+                        side = "BACK", to = NULL, from = NULL) {
+
+        orderList <- as.list(environment())
+
+        if(!is.null(from)) {
+            orderList$from <- NULL
+            orderlist$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+        }
+        if(!is.null(to)) {
+            orderList$to <- NULL
+            orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
+        }
+
+        if(!is.null(orderList$eventTypeIds)) orderList$eventTypeIds <- as.list(orderlist$eventTypeIds)
+        if(!is.null(orderList$eventIds)) orderList$eventIds <- as.list(orderlist$eventIds)
+        if(!is.null(orderList$marketIds)) orderList$marketIds <- as.list(orderlistmarketIdseventTypeIds)
+        if(!is.null(orderList$runnerIds)) orderList$runnerIds <- as.list(orderlist$runnerIds)
+        if(!is.null(orderList$betIds)) orderList$betIds <- as.list(orderlist$betIds)
+
+        orderList <- orderList[!sapply(orderList, is.null)]
+
+        return(orderList)
+    }
 
     environment()
 })
@@ -295,4 +305,25 @@ NULL
 #' by \code{fromRecord}, there is a limit of 1000.
 #'
 #' @return list with parameters to filter currently unsettled bets
+NULL
+
+#' cleared
+#'
+#' @name cleared
+#'
+#' @description helper function used by the \link{clearedOrders} method to build
+#' request object for finding settled orders
+#'
+#' @param betStatus filter based on how the bet was settled, one of \strong{SETTLED},
+#' \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}
+#' @param eventTypeIds retrieve bets based on sport
+#' @param eventIds retrieve bets based on event
+#' @param marketIds retrieve bets based on markets
+#' @param runnerIds retrieve bets on specific runners
+#' @param betIds unique bets
+#' @param side \strong{BACK} or \strong{LAY} orders
+#' @param from filter according to date, format should be yyyy-mm-dd
+#' @param to filter according to date, format should be yyyy-mm-dd
+#'
+#' @return list with parameters to filter cleared bets
 NULL
