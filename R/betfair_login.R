@@ -31,6 +31,12 @@ bf_login <- function(usr, pwd, key) {
                       pwd = pwd,
                       key = key)
     ssoid$resp <- httr::content(resp)
+    if(ssoid$resp$status == "FAIL") {
+        warnMessage <- paste0("Login failed:\t", ssoid$resp$error)
+        warning(warnMessage)
+    } else {
+        message("Login successful")
+    }
     ssoid$ssoid <- list("Accept" = "application/json",
                         "X-Application" = ssoid$resp$product,
                         "X-Authentication" = ssoid$resp$token,
