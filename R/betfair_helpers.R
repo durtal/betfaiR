@@ -131,6 +131,26 @@ bf_helpers <- local({
         return(orderList)
     }
 
+    # cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+    #                     marketIds = NULL, runnerIds = NULL, betIds = NULL,
+    #                     side = "BACK", to = NULL, from = NULL) {
+    #
+    #     orderList <- as.list(environment())
+    #
+    #     if(!is.null(from)) {
+    #         orderList$from <- NULL
+    #         orderlist$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+    #     }
+    #     if(!is.null(to)) {
+    #         orderList$to <- NULL
+    #         orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
+    #     }
+    #
+    #     orderList <- orderList[!sapply(orderList, is.null)]
+    #
+    #     return(orderList)
+    # }
+
     environment()
 })
 

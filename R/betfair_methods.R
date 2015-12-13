@@ -326,7 +326,7 @@ betfair <- function(usr, pwd, key) {
         #
         #     return(res)
         # }
-        #
+
         currentOrders <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
                                   from = NULL, to = NULL, orderBy = "BY_BET",
                                   sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
