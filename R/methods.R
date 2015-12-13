@@ -678,3 +678,24 @@ NULL
 #'
 #' @return list with data about individual orders
 NULL
+
+#' clearedOrders
+#'
+#' @description \code{clearedOrders} function allows users to retrieve data about
+#' settled/voided/lapsed/cancelled bets.  These can be filtered by various parameters
+#'
+#' @name clearedOrders
+#'
+#' @param betStatus filter based on how the bet was settled, one of \strong{SETTLED},
+#' \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}
+#' @param eventTypeIds retrieve bets based on sport
+#' @param eventIds retrieve bets based on event
+#' @param marketIds retrieve bets based on markets
+#' @param runnerIds retrieve bets on specific runners
+#' @param betIds unique bets
+#' @param side \strong{BACK} or \strong{LAY} orders
+#' @param from filter according to date, format should be yyyy-mm-dd
+#' @param to filter according to date, format should be yyyy-mm-dd
+#'
+#' @return list with parameters to filter cleared bets
+NULL
