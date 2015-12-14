@@ -136,13 +136,7 @@ img {
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">helpers</li>
-                        <li>
-                            <a href="marketFilter.html">marketFilter</a>
-                        </li>
-                        <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
-                        </li>
+                        <li class="dropdown-header">functions</li>
                         <li>
                             <a href="betfair_login.html">bf_login</a>
                         </li>
@@ -157,6 +151,13 @@ img {
                         </li>
                         <li>
                             <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bf_helpers</a>
                         </li>
                     </ul>
                 </li>
@@ -200,13 +201,22 @@ img {
                         </li>
                         <li class="dropdown-header">orders</li>
                         <li>
-                            <a href="placeOrders.html">placeOrders</a>
-                        </li>
-                        <li>
                             <a href="cancelOrders.html">cancelOrders</a>
                         </li>
                         <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -247,10 +257,171 @@ img {
 
 <p><code>bf_helpers</code> is an environment which contains a number of small helper functions used in conjunction with various methods, these functions are listed below:</p>
 <hr>
-<div id="cancel" class="section level2">
-<h2>cancel</h2>
-<p>This helper function prepares the request for the <a href="cancelOrders.html"><code>cancelOrders</code></a> method, the usage is the same as that method, this function just converts those params into a format ready to be sent via a request:</p>
+<div id="limitorder" class="section level2">
+<h2><code>limitOrder</code></h2>
+<p>This helper function is to be used with the <a href="placedOrders.html"><code>placedOrders</code></a> method when an orderType is <strong>LIMIT</strong>, to help construct the conditions of a bet.</p>
 <div id="usage" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">limitOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>
+                      <span class="dt">price =</span> <span class="fl">1.01</span>,
+                      <span class="dt">persistenceType =</span> <span class="st">&quot;LAPSE&quot;</span>)</code></pre>
+</div>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">size</td>
+<td align="left">the size of the best. <strong>NB.</strong> for a market type of <strong>EACH_WAY</strong> the total stake is 2 * size.</td>
+</tr>
+<tr class="even">
+<td align="left">price</td>
+<td align="left">the limit price</td>
+</tr>
+<tr class="odd">
+<td align="left">persistenceType</td>
+<td align="left">what to do with the order when the market goes in-play. <strong>LAPSE</strong> (default) - lapse the order when the market goes in play. <strong>PERSIST</strong> - persist the order in play, the bet will be placed automatically into the in play market at the start of the event. <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at in-play.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
+</div>
+<div id="limitoncloseorder" class="section level2">
+<h2><code>limitOnCloseOrder</code></h2>
+<p>This helper function is to be used with the <a href="placeOrders.html"><code>placeOrders</code></a> method when an orderType is <strong>LIMIT_ON_CLOSE</strong>, to help construct the conditions of a bet.</p>
+<div id="usage-1" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">limitOnCloseOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>,
+                             <span class="dt">price =</span> <span class="fl">1.01</span>)</code></pre>
+</div>
+<div id="arguments-1" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">size</td>
+<td align="left">the size of the bet. <strong>NB.</strong> for a market type of <strong>EACH_WAY</strong> the total stake is 2 * size.</td>
+</tr>
+<tr class="even">
+<td align="left">price</td>
+<td align="left">the limit price</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
+</div>
+<div id="cancel_inst" class="section level2">
+<h2><code>cancel_inst</code></h2>
+<p>This helper function is to be used with the <a href="cancelOrders.html"><code>cancelOrders</code></a> method, to help cancel individual orders using their betIds.</p>
+<div id="usage-2" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">cancel_inst</span>(<span class="dt">betId =</span> <span class="st">&quot;unique_bet_id&quot;</span>,
+                       <span class="dt">size =</span> <span class="fl">1.02</span>)</code></pre>
+</div>
+<div id="arguments-2" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">betId</td>
+<td align="left">the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
+</tr>
+<tr class="even">
+<td align="left">size</td>
+<td align="left">reduction size</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
+</div>
+<div id="replace_inst" class="section level2">
+<h2><code>replace_inst</code></h2>
+<p>This helper function is to be used with the <a href="updateOrders.html"><code>cancelOrders</code></a> method, to help replace individual orders using their betIds.</p>
+<div id="usage-3" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">replace_inst</span>(<span class="dt">betId =</span> <span class="st">&quot;unique_bet_id&quot;</span>,
+                        <span class="dt">newPrice =</span> <span class="fl">1.10</span>)</code></pre>
+</div>
+<div id="arguments-3" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">betId</td>
+<td align="left">the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
+</tr>
+<tr class="even">
+<td align="left">newPrice</td>
+<td align="left">new price to strike the bet</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</div>
+</div>
+<div id="update_inst" class="section level2">
+<h2><code>update_inst</code></h2>
+<p>This helper function is to be used with the <a href="updateOrders.html"><code>updateOrders</code></a> method, to help replace individual orders using their betId with new instructions for what to do when the market goes in-play.</p>
+<div id="usage-4" class="section level3">
+<h3>usage</h3>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">update_inst</span>(<span class="dt">betId =</span> <span class="st">&quot;unique_bet_id&quot;</span>,
+                       <span class="dt">persistenceType =</span> <span class="st">&quot;PERSIST&quot;</span>)</code></pre>
+</div>
+<div id="arguments-4" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">betId</td>
+<td align="left">the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
+</tr>
+<tr class="even">
+<td align="left">persistenceType</td>
+<td align="left">new persistenceType, what to do when the market goes in-play. <strong>LAPSE</strong> - lapse the order when the market is turned in-play. <strong>PERSIST</strong> - persist the order in-play, the bet will be placed automatically into the in-play market at the start of the event. <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at turn in-play.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>The following functions are used within various methods for preparing a correctly formatted request.</p>
+</div>
+</div>
+<div id="cancel" class="section level2">
+<h2><code>cancel</code></h2>
+<p>This helper function prepares the request for the <a href="cancelOrders.html"><code>cancelOrders</code></a> method, the usage is the same as that method, this function just converts those params into a format ready to be sent via a request:</p>
+<div id="usage-5" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">cancel</span>(..., marketId)</code></pre>
 </div>
@@ -266,7 +437,7 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left"><code>...</code></td>
-<td align="left">specific details about bets to cancel, use <code>cancel_inst</code> (see <a href="bf_helpers.html#cancelinstruction">below</a>) function to target specific bets via their id</td>
+<td align="left">specific details about bets to cancel, use <code>cancel_inst</code> (see <a href="bf_helpers.html#cancel_inst">above</a>) function to target specific bets via their id</td>
 </tr>
 <tr class="even">
 <td align="left"><code>marketId</code></td>
@@ -277,40 +448,10 @@ img {
 <hr>
 </div>
 </div>
-<div id="cancel_inst" class="section level2">
-<h2>cancel_inst</h2>
-<p>This helper function is used with the <a href="cancelOrders.html"><code>cancelOrders</code></a> method to target specific bets</p>
-<div id="usage-1" class="section level3">
-<h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">cancel_inst</span>(betId, size)</code></pre>
-</div>
-<div id="params-1" class="section level3">
-<h3>params</h3>
-<table>
-<thead>
-<tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><code>betId</code></td>
-<td align="left">unique bet Id</td>
-</tr>
-<tr class="even">
-<td align="left"><code>size</code></td>
-<td align="left">size of bet to cancel</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</div>
-</div>
 <div id="prepare" class="section level2">
-<h2>prepare</h2>
-<p>This helper function is used with the <a href="placeOrders.html"><code>placeOrders</code></a> method to place orders in specific markets</p>
-<div id="usage-2" class="section level3">
+<h2><code>prepare</code></h2>
+<p>This helper function is used with the <a href="placeOrders.html"><code>placeOrders</code></a> method to place orders in specific markets, it uses another couple of helper functions, <code>limitOrder</code> and <code>limitOnCloseOrder</code>.</p>
+<div id="usage-6" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf_helpers$(marketId,
             selectionId,
@@ -321,7 +462,7 @@ img {
             <span class="dt">limitOnCloseOrder =</span> bf_helpers$<span class="kw">limitOnCloseOrder</span>()
             <span class="dt">marketOnCloseOrder =</span> <span class="kw">list</span>())</code></pre>
 </div>
-<div id="params-2" class="section level3">
+<div id="params-1" class="section level3">
 <h3>params</h3>
 <table>
 <thead>
@@ -368,15 +509,23 @@ img {
 <hr>
 </div>
 </div>
-<div id="replace_inst" class="section level2">
-<h2>replace_inst</h2>
-<p>This helper function is used with the <a href="replaceOrders.html"><code>replaceOrders</code></a> method to target specific bets to be replaced</p>
-<div id="usage-3" class="section level3">
+<div id="cleared" class="section level2">
+<h2><code>cleared</code></h2>
+<p>This helper function is used by the <a href="clearedOrders.html"><code>clearedOrders</code></a> method to build a request for retrieving data about orders that have been settled.</p>
+<div id="usage-7" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">replace_inst</span>(betId, newPrice)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">cleared</span>(<span class="dt">betStatus =</span> <span class="st">&quot;SETTLED&quot;</span>,
+                   <span class="dt">eventTypeIds =</span> <span class="ot">NULL</span>,
+                   <span class="dt">eventIds =</span> <span class="ot">NULL</span>,
+                   <span class="dt">marketIds =</span> <span class="ot">NULL</span>,
+                   <span class="dt">runnerIds =</span> <span class="ot">NULL</span>,
+                   <span class="dt">betIds =</span> <span class="ot">NULL</span>,
+                   <span class="dt">side =</span> <span class="ot">NULL</span>,
+                   <span class="dt">from =</span> <span class="ot">NULL</span>,
+                   <span class="dt">to =</span> <span class="ot">NULL</span>)</code></pre>
 </div>
-<div id="params-3" class="section level3">
-<h3>params</h3>
+<div id="arguments-5" class="section level3">
+<h3>arguments</h3>
 <table>
 <thead>
 <tr class="header">
@@ -386,27 +535,63 @@ img {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>betId</code></td>
-<td align="left">unique bet Id</td>
+<td align="left">betStatus</td>
+<td align="left">filter based on how the bet was settled, default is <strong>SETTLED</strong>, other options include, <strong>VOIDED</strong>, <strong>LAPSED</strong>, or <strong>CANCELLED</strong></td>
 </tr>
 <tr class="even">
-<td align="left"><code>newPrice</code></td>
-<td align="left">new price to strike bet at</td>
+<td align="left">eventTypeIds</td>
+<td align="left">filter based on sport, see <a href="methods_eventTypes.html"><code>eventTypes</code></a> method for the ids of various sports</td>
+</tr>
+<tr class="odd">
+<td align="left">eventIds</td>
+<td align="left">filter based on events, see <a href="methods_events.html"><code>events</code></a> method for the various event ids</td>
+</tr>
+<tr class="even">
+<td align="left">marketIds</td>
+<td align="left">filter based on marketIds</td>
+</tr>
+<tr class="odd">
+<td align="left">runnerIds</td>
+<td align="left">filter based on specific runners</td>
+</tr>
+<tr class="even">
+<td align="left">betIds</td>
+<td align="left">unique bets</td>
+</tr>
+<tr class="odd">
+<td align="left">side</td>
+<td align="left"><strong>BACK</strong> or <strong>LAY</strong></td>
+</tr>
+<tr class="even">
+<td align="left">from</td>
+<td align="left">filter according to date, format should be in yyyy-mm-dd</td>
+</tr>
+<tr class="odd">
+<td align="left">to</td>
+<td align="left">filter according to date, format should be in yyyy-mm-dd</td>
 </tr>
 </tbody>
 </table>
 <hr>
 </div>
 </div>
-<div id="limitorder" class="section level2">
-<h2>limitOrder</h2>
-<p>This helper function is used with the <a href="placeOrders.html"><code>placeOrders</code></a> method when placing bets, used by <a href="bf_helpers.html#prepare"><code>prepare</code></a></p>
-<div id="usage-4" class="section level3">
+<div id="current" class="section level2">
+<h2><code>current</code></h2>
+<p>This helper function is used by the <a href="currentOrders.html"><code>currentOrders</code></a> method to build a request for retrieving data about any current orders.</p>
+<div id="usage-8" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">limitOrder</span>(size, price, persistenceType)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">current</span>(<span class="dt">betId =</span> <span class="ot">NULL</span>,
+                   <span class="dt">marketId =</span> <span class="ot">NULL</span>,
+                   <span class="dt">orderProjection =</span> <span class="st">&quot;ALL&quot;</span>,
+                   <span class="dt">from =</span> <span class="ot">NULL</span>,
+                   <span class="dt">to =</span> <span class="ot">NULL</span>,
+                   <span class="dt">orderBy =</span> <span class="ot">NULL</span>,
+                   <span class="dt">sort =</span> <span class="ot">NULL</span>,
+                   <span class="dt">fromRecord =</span> <span class="ot">NULL</span>,
+                   <span class="dt">count =</span> <span class="ot">NULL</span>)</code></pre>
 </div>
-<div id="params-4" class="section level3">
-<h3>params</h3>
+<div id="arguments-6" class="section level3">
+<h3>arguments</h3>
 <table>
 <thead>
 <tr class="header">
@@ -416,34 +601,40 @@ img {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>size</code></td>
-<td align="left">the size of the bet. Note: for a market type of EACH_WAY, the total stake is 2*size <code>price</code> | the limit price <code>persistenceType</code> | what to do with the order at turn in-play, three choices, LAPSE - lapse the order when the market goes in play, PERSIST - persist the order in-play, the bet will be placed automatically into the in-play market at the start of the event, MARKET_ON_CLOSE - put the order into the auction (SP) at turn in-play.</td>
+<td align="left">betId</td>
+<td align="left">unique bet id</td>
 </tr>
-</tbody>
-</table>
-<hr>
-</div>
-</div>
-<div id="limitoncloseorder" class="section level2">
-<h2>limitOnCloseOrder</h2>
-<p>This helper function is used with the <a href="placeOrders.html"><code>placeOrders</code></a> method when placing bets, used by <a href="bf_helpers.html#prepare"><code>prepare</code></a></p>
-<div id="usage-5" class="section level3">
-<h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">bf_helpers$<span class="kw">limitOnCloseOrder</span>(size, price)</code></pre>
-</div>
-<div id="params-5" class="section level3">
-<h3>params</h3>
-<table>
-<thead>
-<tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<tr class="even">
+<td align="left">marketId</td>
+<td align="left">unique market id</td>
 </tr>
-</thead>
-<tbody>
 <tr class="odd">
-<td align="left"><code>size</code></td>
-<td align="left">the size of the bet. Note: for a market type of EACH_WAY, the total stake is 2*size <code>price</code> | the limit price</td>
+<td align="left">orderProjection</td>
+<td align="left">default of <strong>ALL</strong>, returns all unsettled positions, matched or partially matched. <strong>EXECUTABLE</strong> to filter for orders with a portion remaining. <strong>EXECUTION_COMPLETE</strong> for orders which have been filled. See <a href="betting_enums.html#orderprojection">betting enums</a> for more details.</td>
+</tr>
+<tr class="even">
+<td align="left">from</td>
+<td align="left">filter according to date, format should be in yyyy-mm-dd</td>
+</tr>
+<tr class="odd">
+<td align="left">to</td>
+<td align="left">filter according to date, format should be in yyyy-mm-dd</td>
+</tr>
+<tr class="even">
+<td align="left">orderBy</td>
+<td align="left">how to order orders, default is to order them by when they were placed, see <a href="betting_enums.html#orderby">betting enums</a> for more details</td>
+</tr>
+<tr class="odd">
+<td align="left">sort</td>
+<td align="left">how to sort the results, see <a href="betting_enums.html#sortdir">betting enums</a> for more details</td>
+</tr>
+<tr class="even">
+<td align="left">fromRecord</td>
+<td align="left">specifies the first record to be retured, records start at index zero (not one)</td>
+</tr>
+<tr class="odd">
+<td align="left">count</td>
+<td align="left">specifies how many records are retured from the index position set by <code>fromRecord</code>, there is a limit of 1000.</td>
 </tr>
 </tbody>
 </table>

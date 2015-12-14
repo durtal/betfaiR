@@ -6,14 +6,14 @@ title: "request functions"
 library(betfaiR)
 ```
 
-## base_request
+## `bf_basic_req`
 
-The `base_request` functions build a very simple request object, with a different class depending on the method which the request is to be used for.
+The `bf_basic_req` function builds a very simple request object, with a different class depending on the method which the request is to be used for.
 
 ### usage
 
 ```{r eval=FALSE}
-req <- base_request(filter = marketFilter(),
+req <- bf_basic_req(filter = marketFilter(),
                     method = "competitions")
 ```
 
@@ -28,12 +28,14 @@ param | details
 
 The function returns a list containing any parameters entered via [`marketFilter`], and is assigned a class taken from the `method` argument.  This class is used to help build the request via `bf_request` (see below).
 
-## bf_request
+<hr>
+
+## `bf_request`
 
 The `bf_request` function builds on the request returned by `base_request`, and converts it into valid JSON ready to used in a POST request to the relevant method.
 
 ```{r eval=FALSE}
-req <- bf_request(base_request(filter = marketFilter(),
+req <- bf_request(bf_basic_req(filter = marketFilter(),
                                method = "competitions"))
 ```
 
@@ -50,14 +52,14 @@ The function returns a JSON object, which will be entered in any POST request.
 ### examples
 
 ```{r comment=""}
-(req <- base_request(filter = marketFilter(),
+(req <- bf_basic_req(filter = marketFilter(),
                      method = "competitions"))
 
 class(req)
 
 (req <- bf_request(req))
 
-(req <- base_request(filter = marketFilter(eventTypeIds = 7),
+(req <- bf_basic_req(filter = marketFilter(eventTypeIds = 7),
                      method = "events"))
 
 (req <- bf_request(req))

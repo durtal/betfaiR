@@ -2,7 +2,7 @@
 title: "bf_post"
 ---
 
-The `bf_post` function sends a post request to the Betfair Exchange API, the user must supply credentials returned by [`bf_login`](betfair_login.html) and a request object built using the [`base_request`](request_functions.html#base_request) and [`bf_request`](request_functions.html#betfair_request) functions.
+The `bf_post` function sends a post request to the Betfair Exchange API, the user must supply credentials returned by [`bf_login`](betfair_login.html) and a request object built using the [`bf_basic_req`](request_functions.html#bf_basic_req) and [`bf_request`](request_functions.html#betfair_request) functions.
 
 ### usage
 
@@ -15,8 +15,8 @@ res <- bf_post(body,
 
 param | details
 ------|--------
-`body` | request body, JSON object containing data about the method and filter params, returned by [`base_request`](base_request.html) and [`bf_request`](betfair_request.html)
-`headers` | headers, a list containing the session token, returned by [`bf_login`](betfair_login.html)
+`body` | request body, JSON object containing data about the method and filter params, returned by [`bf_basic_req`](bf_basic_req.html) and [`bf_request`](betfair_request.html)
+`headers` | headers, a list containing the session token, returned by [`bf_login`](betfair_login.html), `bf_login` returns a list, the element is called `ssoid`
 
 ### return
 

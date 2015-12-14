@@ -136,13 +136,7 @@ img {
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">helpers</li>
-                        <li>
-                            <a href="marketFilter.html">marketFilter</a>
-                        </li>
-                        <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
-                        </li>
+                        <li class="dropdown-header">functions</li>
                         <li>
                             <a href="betfair_login.html">bf_login</a>
                         </li>
@@ -157,6 +151,13 @@ img {
                         </li>
                         <li>
                             <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bf_helpers</a>
                         </li>
                     </ul>
                 </li>
@@ -200,13 +201,22 @@ img {
                         </li>
                         <li class="dropdown-header">orders</li>
                         <li>
-                            <a href="placeOrders.html">placeOrders</a>
-                        </li>
-                        <li>
                             <a href="cancelOrders.html">cancelOrders</a>
                         </li>
                         <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -245,12 +255,12 @@ img {
 </div>
 
 
-<div id="base_request" class="section level2">
-<h2>base_request</h2>
-<p>The <code>base_request</code> functions build a very simple request object, with a different class depending on the method which the request is to be used for.</p>
+<div id="bf_basic_req" class="section level2">
+<h2><code>bf_basic_req</code></h2>
+<p>The <code>bf_basic_req</code> function builds a very simple request object, with a different class depending on the method which the request is to be used for.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span><span class="kw">base_request</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(),
+<pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span><span class="kw">bf_basic_req</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(),
                     <span class="dt">method =</span> <span class="st">&quot;competitions&quot;</span>)</code></pre>
 </div>
 <div id="arguments" class="section level3">
@@ -277,12 +287,13 @@ img {
 <div id="return" class="section level3">
 <h3>return</h3>
 <p>The function returns a list containing any parameters entered via [<code>marketFilter</code>], and is assigned a class taken from the <code>method</code> argument. This class is used to help build the request via <code>bf_request</code> (see below).</p>
+<hr>
 </div>
 </div>
 <div id="bf_request" class="section level2">
-<h2>bf_request</h2>
+<h2><code>bf_request</code></h2>
 <p>The <code>bf_request</code> function builds on the request returned by <code>base_request</code>, and converts it into valid JSON ready to used in a POST request to the relevant method.</p>
-<pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span><span class="kw">bf_request</span>(<span class="kw">base_request</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(),
+<pre class="sourceCode r"><code class="sourceCode r">req &lt;-<span class="st"> </span><span class="kw">bf_request</span>(<span class="kw">bf_basic_req</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(),
                                <span class="dt">method =</span> <span class="st">&quot;competitions&quot;</span>))</code></pre>
 <div id="arguments-1" class="section level3">
 <h3>arguments</h3>
@@ -307,7 +318,7 @@ img {
 </div>
 <div id="examples" class="section level3">
 <h3>examples</h3>
-<pre class="sourceCode r"><code class="sourceCode r">(req &lt;-<span class="st"> </span><span class="kw">base_request</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(),
+<pre class="sourceCode r"><code class="sourceCode r">(req &lt;-<span class="st"> </span><span class="kw">bf_basic_req</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(),
                      <span class="dt">method =</span> <span class="st">&quot;competitions&quot;</span>))</code></pre>
 <pre><code>named list()
 attr(,&quot;class&quot;)
@@ -316,7 +327,7 @@ attr(,&quot;class&quot;)
 <pre><code>[1] &quot;list&quot;         &quot;competitions&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">(req &lt;-<span class="st"> </span><span class="kw">bf_request</span>(req))</code></pre>
 <pre><code>{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;method&quot;:&quot;SportsAPING/v1.0/listCompetitions&quot;,&quot;params&quot;:{&quot;filter&quot;:{}},&quot;id&quot;:1} </code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(req &lt;-<span class="st"> </span><span class="kw">base_request</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>),
+<pre class="sourceCode r"><code class="sourceCode r">(req &lt;-<span class="st"> </span><span class="kw">bf_basic_req</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>),
                      <span class="dt">method =</span> <span class="st">&quot;events&quot;</span>))</code></pre>
 <pre><code>$eventTypeIds
 [1] 7

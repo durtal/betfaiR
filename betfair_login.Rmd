@@ -6,7 +6,7 @@ title: "bf_login"
 library(betfaiR)
 ```
 
-The `bf_login` function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different **methods**.
+The `bf_login` function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different **methods**.  The function will print *Login successful* to the console if a session token was returned, and will print a warning message if login failed, usually due to an incorrect username and/or password.
 
 ### usage
 
@@ -35,7 +35,7 @@ The function returns a list, if everything went okay (correct credentials were p
 * `resp`
     - list with the response from Betfair with any errors,
 * `ssoid`
-    - list which includes you session token, it is this list which is to be used as the header in future requests made to the Exchange API.
+    - list which includes a session token, it is this list which is to be used as the header in future requests made to the Exchange API via the [`bf_post`](betfair_POST.html) function.
 
 You can print the object, which will display the credentials you passed into the function and any session token that was returned.
 

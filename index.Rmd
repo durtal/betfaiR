@@ -2,7 +2,7 @@
 title: "intro"
 ---
 
-The `betfaiR` package will eventually provide R users full access to the Betfair API, retrieving data and placing bets.  
+The `betfaiR` package will eventually provide R users full access to the Betfair API, retrieving data and placing bets.
 
 The **primary** function of the package is [`betfair`](betfair.html) which requires users to enter their login details, including an API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key).  The function returns an environment with various methods for querying and retrieving data from Betfair.
 
@@ -13,7 +13,7 @@ The `betfair` function logs in, and for each of the methods the following functi
 step | function | arguments | details | return
 -----|----------|-----------|---------|-------
 **1** | [`bf_login`](betfair_login.html) | _usr_, _pwd_, _key_ | login function with betfair username, password, and key | list with a session token
-**2** | [`base_request`](request_functions.html#base_request) | _filter_, _method_ | builds a basic request object | list with class that matches _method_ param
+**2** | [`bf_basic_req`](request_functions.html#bf_basic_req) | _filter_, _method_ | builds a basic request object | list with class that matches _method_ param
 **3** | [`bf_request`](request_functions.html#betfair_request) | _x_, _..._ | fleshes out the request object | json object ready to be included in a POST request
 **4** | [`bf_post`](betfair_POST.html) | _body_ | betfair POST, includes the request object returned in step **3**, and the session token returned in **1** | response object
 **5** | `httr::content` | _response_ | response object to be parsed into a list | list with data
@@ -22,11 +22,7 @@ step | function | arguments | details | return
 
 ### To Do List
 
-Implement the following methods:
-
-* `updateOrders`
-* `listCurrentOrders`
-* `listClearedOrders`
+Look to build similar environment as `betfair` for the accounts API, the `betfair` environment could have a function called `account` which would return this environment, and equally, the resulting `account` environment could produce a `betfair` environment.
 
 Also look to add a few plot methods for some of the data returned, plotting ladders, market depth, etc.
 

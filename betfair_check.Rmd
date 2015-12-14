@@ -2,7 +2,7 @@
 title: "bf_check"
 ---
 
-The `bf_check` function checks for any errors in the response from [`bf_post`](betfair_POST.html).
+The `bf_check` function attempts to check for any errors in the response from [`bf_post`](betfair_POST.html), this isn't a thorough check.  It looks for mention of four error codes, then checks if the result response has more than 0 elements in it, once checked the response will be passed to [`bf_parse`](betfair_parse.html), which has multiple methods based on the method of the response.
 
 ### usage
 
