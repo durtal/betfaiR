@@ -18,15 +18,12 @@ immediate execution, \strong{LIMIT_ON_CLOSE} limit order for the auction (SP bet
 
 \item{side}{\strong{BACK} or \strong{LAY}}
 
-\item{limitOrder}{list with details of the bet, required if \strong{orderType} is
-\strong{LIMIT}, use \link{limitOrder} function to help construct correct list}
-
-\item{limitOnCloseOrder}{list with details of the bet, required if \strong{orderType}
-is \strong{LIMIT_ON_CLOSE}, use \link{marketOnCloseOrder} function to help
-construct correct list}
-
-\item{marketOnCloseOrder}{single number, the size of your bet, which will be
-struck at Betfair SP}
+\item{orderthe}{type of order, this can be three types and inputs depend on
+parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
+\link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
+use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
+\strong{MARKET_ON_CLOSE} then a simple list consisting of one element called
+\strong{liability} should be supplied}
 }
 \value{
 list with details about the bet, the market the bet was made in, the prices

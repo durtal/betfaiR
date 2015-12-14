@@ -1,169 +1,3 @@
-#' betfair helper functions
-#'
-#' @name bf_helpers
-#'
-#' @description a environment with collection of helper functions that are used
-#' in conjunction with the various methods available.
-#'
-#' @section Helpers:
-#' \describe{
-#'      \item{\code{prepare(marketId, selectionId, orderType = "LIMIT",
-#'      handicap = "0", side = "BACK",limitOrder = bf_helpers$limitOrder(),
-#'      limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
-#'      marketOnCloseOrder = list())}}{ function used inside \link{prepareOrders}
-#'      method to help construct an order, uses other helper functions \code{limitOrder}
-#'      or \code{limitOnCloseOrder}, see \link{prepare}}
-#'      \item{\code{limitOrder(size = 2, price = NULL, persistenceType = "LAPSE")}}{
-#'      helper function used in conjunction with \code{prepare} when an orderType is
-#'      \strong{LIMIT}, see \link{limitOrder}}
-#'      \item{\code{limitOnCloseOrder(size = 2, price = NULL)}}{ helper function
-#'      used in conjunction with \code{prepare}, when an orderType is \strong{LIMIT_ON_CLOSE},
-#'      see \link{limitOnCloseOrder}}
-#'      \item{\code{cancel(..., marketId = NA)}}{ helper function used by the
-#'      the \link{cancelOrders} method to cancel all bets if no params are entered,
-#'      or by using \code{cancel_inst} to target individual bets, or target markets
-#'      via the marketId param, see \link{cancel}}
-#'      \item{\code{cancel_inst(betId = NA, size = NA)}}{ helper function used with
-#'      \code{cancel} to cancel individual bets, can be used multiple times inside
-#'      \code{cancel}, see \link{cancel_inst}}
-#'      \item{\code{replace_inst(betId, newPrice)}}{ helper function used by the
-#'      \link{replaceOrders} method, betId and newPrice are required, see \link{replace_inst}}
-#'      \item{\code{update_inst(betId, persistenceType)}}{ helper function used by
-#'      the \link{updateOrders} method, betId and persistenceType are required}
-#'      \item{\code{current(betId, marketId, orderProjection, from, to, orderBy
-#'      sort, fromRecord, recordCount)}}{ helper function used by the \link{currentOrders}
-#'      method to filter current unsettled orders.}
-#'      \item{\code{cleared(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
-#'      marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK", to = NULL,
-#'      from = NULL)}}{ function used inside the \link{clearedOrders} method to help
-#'      retrieve data for settled/voided/lapsed/cancelled orders}
-#' }
-#'
-#' @export
-bf_helpers <- local({
-
-    prepare <- function(marketId, selectionId, orderType = "LIMIT",
-                        handicap = "0", side = "BACK",
-                        limitOrder = bf_helpers$limitOrder(),
-                        limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
-                        marketOnCloseOrder = list()) {
-
-        orderList <- list(marketId = as.character(marketId),
-                          instructions = data.frame(selectionId = as.character(selectionId),
-                                                    orderType = as.character(orderType),
-                                                    side = as.character(side),
-                                                    stringsAsFactors = FALSE))
-
-        if(!is.null(handicap)) orderList$instructions$handicap <- as.character(handicap)
-
-        if(orderType == "LIMIT") {
-            orderList$instructions$limitOrder <- list(limitOrder)
-        }
-        if(orderType == "LIMIT_ON_CLOSE") {
-            orderList$instructions$limitOnCloseOrder <- list(limitOnCloseOrder)
-        }
-        if(orderType == "MARKET_ON_CLOSE") {
-            orderList$instructions$marketOnCloseOrder <- list(marketOnCloseOrder)
-        }
-
-        return(orderList)
-    }
-
-    limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
-        ord <- as.list(environment())
-        return(ord)
-    }
-
-    limitOnCloseOrder <- function(size = 2, price = NULL) {
-        ord <- as.list(environment())
-        return(ord)
-    }
-
-    cancel <- function(..., marketId = NA) {
-        inst <- as.list(environment())
-        inst <- inst[!sapply(inst, is.na)]
-
-        orders <- list(...)
-
-        if(length(orders) > 0) {
-            inst$instructions <- orders
-            if(is.na(marketId)) stop("If instructions are provided a marketId is required")
-        }
-        return(inst)
-    }
-
-    cancel_inst <- function(betId = NA, size = NA) {
-        inst <- as.list(environment())
-        return(inst)
-    }
-
-    replace_inst <- function(betId, newPrice) {
-        inst <- as.list(environment())
-        return(inst)
-    }
-
-    update_inst <- function(betId, persistenceType) {
-        inst <- as.list(environment())
-        return(inst)
-    }
-
-    current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
-                        from = NULL, to = NULL, orderBy = "BY_BET",
-                        sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
-                        count = NULL) {
-
-        orderList <- as.list(environment())
-
-        if(!is.null(from)) {
-            orderList$from <- NULL
-            orderList$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
-        }
-        if(!is.null(to)) {
-            orderList$to <- NULL
-            orderList$dateRange$to <- format(as.POSIXct(to), "%Y-%m-%dT%TZ")
-        }
-
-        orderList <- orderList[!sapply(orderList, is.null)]
-
-        if(!is.null(orderList$betId)) {
-            orderList$betId <- as.list(orderList$betId)
-        }
-        if(!is.null(orderList$marketId)) {
-            orderList$marketId <- as.list(orderList$marketId)
-        }
-
-        return(orderList)
-    }
-
-    cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
-                        marketIds = NULL, runnerIds = NULL, betIds = NULL,
-                        side = "BACK", to = NULL, from = NULL) {
-
-        orderList <- as.list(environment())
-
-        if(!is.null(from)) {
-            orderList$from <- NULL
-            orderlist$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
-        }
-        if(!is.null(to)) {
-            orderList$to <- NULL
-            orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
-        }
-
-        if(!is.null(orderList$eventTypeIds)) orderList$eventTypeIds <- as.list(orderlist$eventTypeIds)
-        if(!is.null(orderList$eventIds)) orderList$eventIds <- as.list(orderlist$eventIds)
-        if(!is.null(orderList$marketIds)) orderList$marketIds <- as.list(orderlistmarketIdseventTypeIds)
-        if(!is.null(orderList$runnerIds)) orderList$runnerIds <- as.list(orderlist$runnerIds)
-        if(!is.null(orderList$betIds)) orderList$betIds <- as.list(orderlist$betIds)
-
-        orderList <- orderList[!sapply(orderList, is.null)]
-
-        return(orderList)
-    }
-
-    environment()
-})
-
 #' prepare bet for Betfair
 #'
 #' @name prepare
@@ -178,32 +12,38 @@ bf_helpers <- local({
 #' @param handicap the handicap associated with the runner (\code{selectionId}) in
 #' case of Asian Handicap markets
 #' @param side "BACK" (default) or "LAY"
-#' @param limitOrder a simple exchange bet for immediate execution, a list consisting of
-#' \itemize{
-#'      \item \strong{size} the size of the bet. \strong{Note:} for a market type
-#'      of EACH_WAY, the total stake is 2*size.
-#'      \item \strong{price} the limit price
-#'      \item \strong{persistenceType} what to do with the order at turn in-play,
-#'      three choices, \strong{LAPSE} - lapse the order when the market goes in play,
-#'      \strong{PERSIST} - persist the order in-play, the bet will be placed automatically
-#'      into the in-play market at the start of the event, \strong{MARKET_ON_CLOSE} -
-#'      put the order into the auction (SP) at turn in-play.
-#' }
-#' @param limitOnCloseOrder bets are matched if, and only if, the returned starting
-#' price is better than a specified price, a list consisting of
-#' \itemize{
-#'      \item \strong{liability} the size of the bet
-#'      \item \strong{price} the limit price of the bet
-#' }
-#' @param marketOnCloseOrder Bets remain unmatched until the market is reconciled,
-#' hey are matched and settled at a price that is representative of the market at
-#' the point the market is turned in-play, a list consisting of
-#' \itemize{
-#'      \item \strong{liability} the size of the bet
-#' }
+#' @param order the type of order, this can be three types and inputs depend on
+#' parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
+#' \link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
+#' use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
+#' \strong{MARKET_ON_CLOSE} then a simple list consisting of one element called
+#' \strong{liability} should be supplied
 #'
 #' @return returns a list with an order for Betfair
-NULL
+prepare <- function(marketId, selectionId, orderType = "LIMIT",
+                    handicap = "0", side = "BACK",
+                    order = NULL) {
+
+    orderList <- list("marketId" = as.character(marketId),
+                      "instructions" = data.frame("selectionId" = as.character(selectionId),
+                                                  "orderType" = as.character(orderType),
+                                                  "side" = as.character(side),
+                                                  "stringsAsFactors" = FALSE))
+
+    if(!is.null(handicap)) orderList$instructions$handicap <- as.character(handicap)
+
+    if(orderType == "LIMIT") {
+        orderList$instructions$limitOrder <- list(order)
+    }
+    if(orderType == "LIMIT_ON_CLOSE") {
+        orderList$instructions$limitOnCloseOrder <- list(order)
+    }
+    if(orderType == "MARKET_ON_CLOSE") {
+        orderList$instructions$marketOnCloseOrder <- list(order)
+    }
+
+    return(orderList)
+}
 
 #' limitOrder
 #'
@@ -221,8 +61,13 @@ NULL
 #'      \strong{MARKET_ON_CLOSE} - put the order into the auction (SP) at turn
 #'      in-play.
 #'
+#' @export
+#'
 #' @return list with bet order
-NULL
+limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
+    ord <- as.list(environment())
+    return(ord)
+}
 
 #' limitOnCloseOrder
 #'
@@ -234,8 +79,13 @@ NULL
 #' the total stake is 2*size.
 #' @param price the limit price
 #'
+#' @export
+#'
 #' @return list with bet order
-NULL
+limitOnCloseOrder <- function(size = 2, price = NULL) {
+    ord <- as.list(environment())
+    return(ord)
+}
 
 #' cancel
 #'
@@ -247,7 +97,18 @@ NULL
 #' @param marketId market id
 #'
 #' @return list
-NULL
+cancel <- function(..., marketId = NA) {
+    inst <- as.list(environment())
+    inst <- inst[!sapply(inst, is.na)]
+
+    orders <- list(...)
+
+    if(length(orders) > 0) {
+        inst$instructions <- orders
+        if(is.na(marketId)) stop("If instructions are provided a marketId is required")
+    }
+    return(inst)
+}
 
 #' cancel bet instructions
 #'
@@ -257,7 +118,14 @@ NULL
 #'
 #' @param betId unique betId
 #' @param size reduction size
-NULL
+#'
+#' @export
+#'
+#' @return list with cancel instructions
+cancel_inst <- function(betId = NA, size = NA) {
+    inst <- as.list(environment())
+    return(inst)
+}
 
 #' replace bet instructions
 #'
@@ -267,7 +135,14 @@ NULL
 #'
 #' @param betId unique betId (required)
 #' @param newPrice new price to strike bet (required)
-NULL
+#'
+#' @export
+#'
+#' @return list with replace instructions
+replace_inst <- function(betId, newPrice) {
+    inst <- as.list(environment())
+    return(inst)
+}
 
 #' update bet instructions
 #'
@@ -278,7 +153,14 @@ NULL
 #'
 #' @param betId unique betId (required)
 #' @param persistenceType new instructions for what to do with order at in play
-NULL
+#'
+#' @export
+#'
+#' @return list with update instructions
+update_inst <- function(betId, persistenceType) {
+    inst <- as.list(environment())
+    return(inst)
+}
 
 #' current
 #'
@@ -305,7 +187,33 @@ NULL
 #' by \code{fromRecord}, there is a limit of 1000.
 #'
 #' @return list with parameters to filter currently unsettled bets
-NULL
+current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
+                    from = NULL, to = NULL, orderBy = "BY_BET",
+                    sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
+                    count = NULL) {
+
+    orderList <- as.list(environment())
+
+    if(!is.null(from)) {
+        orderList$from <- NULL
+        orderList$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+    }
+    if(!is.null(to)) {
+        orderList$to <- NULL
+        orderList$dateRange$to <- format(as.POSIXct(to), "%Y-%m-%dT%TZ")
+    }
+
+    orderList <- orderList[!sapply(orderList, is.null)]
+
+    if(!is.null(orderList$betId)) {
+        orderList$betId <- as.list(orderList$betId)
+    }
+    if(!is.null(orderList$marketId)) {
+        orderList$marketId <- as.list(orderList$marketId)
+    }
+
+    return(orderList)
+}
 
 #' cleared
 #'
@@ -326,4 +234,28 @@ NULL
 #' @param to filter according to date, format should be yyyy-mm-dd
 #'
 #' @return list with parameters to filter cleared bets
-NULL
+cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+                    marketIds = NULL, runnerIds = NULL, betIds = NULL,
+                    side = "BACK", to = NULL, from = NULL) {
+
+    orderList <- as.list(environment())
+
+    if(!is.null(from)) {
+        orderList$from <- NULL
+        orderlist$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+    }
+    if(!is.null(to)) {
+        orderList$to <- NULL
+        orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
+    }
+
+    if(!is.null(orderList$eventTypeIds)) orderList$eventTypeIds <- as.list(orderlist$eventTypeIds)
+    if(!is.null(orderList$eventIds)) orderList$eventIds <- as.list(orderlist$eventIds)
+    if(!is.null(orderList$marketIds)) orderList$marketIds <- as.list(orderlistmarketIdseventTypeIds)
+    if(!is.null(orderList$runnerIds)) orderList$runnerIds <- as.list(orderlist$runnerIds)
+    if(!is.null(orderList$betIds)) orderList$betIds <- as.list(orderlist$betIds)
+
+    orderList <- orderList[!sapply(orderList, is.null)]
+
+    return(orderList)
+}

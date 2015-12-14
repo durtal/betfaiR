@@ -3,6 +3,11 @@
 \name{cleared}
 \alias{cleared}
 \title{cleared}
+\usage{
+cleared(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+  marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK",
+  to = NULL, from = NULL)
+}
 \arguments{
 \item{betStatus}{filter based on how the bet was settled, one of \strong{SETTLED},
 \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}}
@@ -19,9 +24,9 @@
 
 \item{side}{\strong{BACK} or \strong{LAY} orders}
 
-\item{from}{filter according to date, format should be yyyy-mm-dd}
-
 \item{to}{filter according to date, format should be yyyy-mm-dd}
+
+\item{from}{filter according to date, format should be yyyy-mm-dd}
 }
 \value{
 list with parameters to filter cleared bets

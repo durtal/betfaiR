@@ -3,6 +3,9 @@
 \name{limitOnCloseOrder}
 \alias{limitOnCloseOrder}
 \title{limitOnCloseOrder}
+\usage{
+limitOnCloseOrder(size = 2, price = NULL)
+}
 \arguments{
 \item{size}{the size of the bet. \strong{Note:} for a market type of EACH_WAY,
 the total stake is 2*size.}

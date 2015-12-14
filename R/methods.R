@@ -579,13 +579,12 @@ NULL
 #' \strong{MARKET_ON_CLOSE} market order for the auction (SP)
 #' @param handicap
 #' @param side \strong{BACK} or \strong{LAY}
-#' @param limitOrder list with details of the bet, required if \strong{orderType} is
-#' \strong{LIMIT}, use \link{limitOrder} function to help construct correct list
-#' @param limitOnCloseOrder list with details of the bet, required if \strong{orderType}
-#' is \strong{LIMIT_ON_CLOSE}, use \link{marketOnCloseOrder} function to help
-#' construct correct list
-#' @param marketOnCloseOrder single number, the size of your bet, which will be
-#' struck at Betfair SP
+#' @param orderthe type of order, this can be three types and inputs depend on
+#' parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
+#' \link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
+#' use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
+#' \strong{MARKET_ON_CLOSE} then a simple list consisting of one element called
+#' \strong{liability} should be supplied
 #'
 #' @return list with details about the bet, the market the bet was made in, the prices
 #' attained, whether it was successful or failed
@@ -599,7 +598,7 @@ NULL
 #' @name cancelOrders
 #'
 #' @param ... target specific bets to cancel, use \link{cancel_inst} to enter
-#' one or more bets, \code{bf_helpers$cancel_inst} requires \strong{betId}, and \strong{size}
+#' one or more bets, \code{cancel_inst} requires \strong{betId}, and \strong{size}
 #' can be used to cancel part of an order
 #' @param marketId target bets in a specific market
 #'
@@ -614,7 +613,7 @@ NULL
 #' @name replaceOrders
 #'
 #' @param ... target specific bets to cancel, use \link{replace_inst} to enter
-#' one or more bets, \code{bf_helpers$replace_inst} requires \strong{betId}, and
+#' one or more bets, \code{replace_inst} requires \strong{betId}, and
 #' \strong{newPrice}
 #' @param marketId target bets in a specific market
 #'
@@ -644,7 +643,7 @@ NULL
 #' @name updateOrders
 #'
 #' @param ... target specific bets to update, use \link{update_inst} to enter one
-#' or more bets, \code{bf_helpers$update_inst} requires \strong{betId} and
+#' or more bets, \code{update_inst} requires \strong{betId} and
 #' \strong{persistenceType}
 #' @param marketId target bets in a specific market
 #'

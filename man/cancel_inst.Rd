@@ -3,10 +3,16 @@
 \name{cancel_inst}
 \alias{cancel_inst}
 \title{cancel bet instructions}
+\usage{
+cancel_inst(betId = NA, size = NA)
+}
 \arguments{
 \item{betId}{unique betId}
 
 \item{size}{reduction size}
+}
+\value{
+list with cancel instructions
 }
 \description{
 cancel individual orders using betIds

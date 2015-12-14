@@ -66,9 +66,8 @@ building the list.
      Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function
      \link{current} helps target specific markets.}
      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
-     handicap = NULL, side = "BACK", limitOrder = bf_helpers$limitOrder(), limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
-     marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})
-     and selectionId (see \link{marketBook}),}
+     handicap = NULL, side = "BACK", order = limitOrder())}}{ Place a bet, requires a marketId
+     (see \link{marketCatalogue}) and selectionId (see \link{marketBook}),}
      \item{\code{replaceOrders(..., marketId)}}{ Replace existing orders, requires marketIds and
      unique betIds with new prices, use \link{replace_inst} to target specific bets}
      \item{\code{updateOrders(..., marketId)}}{ Update existing orders with new

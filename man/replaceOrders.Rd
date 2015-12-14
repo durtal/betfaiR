@@ -5,7 +5,7 @@
 \title{replaceOrders method}
 \arguments{
 \item{...}{target specific bets to cancel, use \link{replace_inst} to enter
-one or more bets, \code{bf_helpers$replace_inst} requires \strong{betId}, and
+one or more bets, \code{replace_inst} requires \strong{betId}, and
 \strong{newPrice}}
 
 \item{marketId}{target bets in a specific market}

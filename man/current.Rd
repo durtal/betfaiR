@@ -3,6 +3,11 @@
 \name{current}
 \alias{current}
 \title{current}
+\usage{
+current(betId = NULL, marketId = NULL, orderProjection = "ALL",
+  from = NULL, to = NULL, orderBy = "BY_BET",
+  sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)
+}
 \arguments{
 \item{betId}{unique bet Id}
 

@@ -3,6 +3,10 @@
 \name{prepare}
 \alias{prepare}
 \title{prepare bet for Betfair}
+\usage{
+prepare(marketId, selectionId, orderType = "LIMIT", handicap = "0",
+  side = "BACK", order = NULL)
+}
 \arguments{
 \item{marketId}{the unique market id, starts with \code{1.} for UK exchange,
 and \code{2.} for Aus exchange}
@@ -18,31 +22,12 @@ case of Asian Handicap markets}
 
 \item{side}{"BACK" (default) or "LAY"}
 
-\item{limitOrder}{a simple exchange bet for immediate execution, a list consisting of
-\itemize{
-     \item \strong{size} the size of the bet. \strong{Note:} for a market type
-     of EACH_WAY, the total stake is 2*size.
-     \item \strong{price} the limit price
-     \item \strong{persistenceType} what to do with the order at turn in-play,
-     three choices, \strong{LAPSE} - lapse the order when the market goes in play,
-     \strong{PERSIST} - persist the order in-play, the bet will be placed automatically
-     into the in-play market at the start of the event, \strong{MARKET_ON_CLOSE} -
-     put the order into the auction (SP) at turn in-play.
-}}
-
-\item{limitOnCloseOrder}{bets are matched if, and only if, the returned starting
-price is better than a specified price, a list consisting of
-\itemize{
-     \item \strong{liability} the size of the bet
-     \item \strong{price} the limit price of the bet
-}}
-
-\item{marketOnCloseOrder}{Bets remain unmatched until the market is reconciled,
-hey are matched and settled at a price that is representative of the market at
-the point the market is turned in-play, a list consisting of
-\itemize{
-     \item \strong{liability} the size of the bet
-}}
+\item{order}{the type of order, this can be three types and inputs depend on
+parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
+\link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
+use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
+\strong{MARKET_ON_CLOSE} then a simple list consisting of one element called
+\strong{liability} should be supplied}
 }
 \value{
 returns a list with an order for Betfair

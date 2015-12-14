@@ -3,6 +3,9 @@
 \name{cancel}
 \alias{cancel}
 \title{cancel}
+\usage{
+cancel(..., marketId = NA)
+}
 \arguments{
 \item{...}{multiple cancel orders instructions, use \link{cancel_inst}}
 

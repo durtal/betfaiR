@@ -3,10 +3,16 @@
 \name{replace_inst}
 \alias{replace_inst}
 \title{replace bet instructions}
+\usage{
+replace_inst(betId, newPrice)
+}
 \arguments{
 \item{betId}{unique betId (required)}
 
 \item{newPrice}{new price to strike bet (required)}
+}
+\value{
+list with replace instructions
 }
 \description{
 replace individual orders using betIds

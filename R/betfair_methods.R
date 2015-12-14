@@ -55,9 +55,8 @@
 #'      Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function
 #'      \link{current} helps target specific markets.}
 #'      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
-#'      handicap = NULL, side = "BACK", limitOrder = bf_helpers$limitOrder(), limitOnCloseOrder = bf_helpers$limitOnCloseOrder(),
-#'      marketOnCloseOrder = NULL)}}{ Place a bet, requires a marketId (see \link{marketCatalogue})
-#'      and selectionId (see \link{marketBook}),}
+#'      handicap = NULL, side = "BACK", order = limitOrder())}}{ Place a bet, requires a marketId
+#'      (see \link{marketCatalogue}) and selectionId (see \link{marketBook}),}
 #'      \item{\code{replaceOrders(..., marketId)}}{ Replace existing orders, requires marketIds and
 #'      unique betIds with new prices, use \link{replace_inst} to target specific bets}
 #'      \item{\code{updateOrders(..., marketId)}}{ Update existing orders with new
@@ -84,6 +83,11 @@ betfair <- function(usr, pwd, key) {
     ssoid <- bf_login(usr = usr, pwd = pwd, key = key)
 
     self <- local({
+
+        # account <- function() {
+        #     # once implemented the accounts API this will return an environment
+        #     # to manipulate the users account
+        # }
 
         competitions <- function(filter = marketFilter()) {
             # build request object
@@ -289,7 +293,7 @@ betfair <- function(usr, pwd, key) {
         cancelOrders <- function(..., marketId = NA) {
             # build request object
             req <- bf_basic_req(method = "cancelOrders")
-            cancel <- bf_helpers$cancel(marketId = marketId, ...)
+            cancel <- betfaiR:::cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = cancel)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -314,7 +318,7 @@ betfair <- function(usr, pwd, key) {
 
             # build request object
             req <- bf_basic_req(method = "clearedOrders")
-            params <- bf_helpers$cleared(betStatus = betStatus, eventTypeIds = eventTypeIds,
+            params <- betfaiR:::cleared(betStatus = betStatus, eventTypeIds = eventTypeIds,
                                          eventIds = eventIds, marketIds = marketIds,
                                          runnerIds = runnerIds, betIds = betIds,
                                          side = side, from = from, to = to)
@@ -338,7 +342,7 @@ betfair <- function(usr, pwd, key) {
 
             # build request object
             req <- bf_basic_req(method = "currentOrders")
-            params <- bf_helpers$current(betId = betId, marketId = marketId,
+            params <- betfaiR:::current(betId = betId, marketId = marketId,
                                          orderProjection = orderProjection,
                                          from = from, to = to, orderBy = orderBy,
                                          sort = sort, fromRecord = fromRecord,
@@ -357,14 +361,12 @@ betfair <- function(usr, pwd, key) {
         }
 
         placeOrders <- function(marketId, selectionId, orderType = "LIMIT",
-                                handicap = NULL, side = "BACK", limitOrder = limitOrder(),
-                                limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) {
+                                handicap = NULL, side = "BACK", order = limitOrder()) {
             # build request object
             req <- bf_basic_req(method = "placeOrders")
-            betOrder <- bf_helpers$prepare(marketId = marketId, orderType = orderType,
-                                           selectionId = selectionId, side = side,
-                                           limitOrder = limitOrder, limitOnCloseOrder = limitOnCloseOrder,
-                                           marketOnCloseOrder = marketOnCloseOrder)
+            betOrder <- betfaiR:::prepare(marketId = marketId, orderType = orderType,
+                                          selectionId = selectionId, side = side,
+                                          order = order)
             req <- bf_request(req, order = betOrder)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -380,7 +382,7 @@ betfair <- function(usr, pwd, key) {
         replaceOrders <- function(..., marketId) {
             # build request object
             req <- bf_basic_req(method = "replaceOrders")
-            replace <- bf_helpers$cancel(marketId = marketId, ...)
+            replace <- betfaiR:::cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = replace)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)
@@ -397,7 +399,7 @@ betfair <- function(usr, pwd, key) {
         updateOrders <- function(..., marketId) {
             # build request object
             req <- bf_basic_req(method = "updateOrders")
-            update <- bf_helpers$cancel(marketId = marketId, ...)
+            update <- betfaiR:::cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = update)
             # post request
             res <- bf_post(body = req, ssoid$ssoid)

@@ -3,6 +3,9 @@
 \name{limitOrder}
 \alias{limitOrder}
 \title{limitOrder}
+\usage{
+limitOrder(size = 2, price = NULL, persistenceType = "LAPSE")
+}
 \arguments{
 \item{size}{the size of the bet. \strong{Note:} for a market type of EACH_WAY,
 the total stake is 2*size.}

@@ -5,7 +5,7 @@
 \title{updateOrders}
 \arguments{
 \item{...}{target specific bets to update, use \link{update_inst} to enter one
-or more bets, \code{bf_helpers$update_inst} requires \strong{betId} and
+or more bets, \code{update_inst} requires \strong{betId} and
 \strong{persistenceType}}
 
 \item{marketId}{target bets in a specific market}

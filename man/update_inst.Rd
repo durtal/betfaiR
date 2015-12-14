@@ -3,10 +3,16 @@
 \name{update_inst}
 \alias{update_inst}
 \title{update bet instructions}
+\usage{
+update_inst(betId, persistenceType)
+}
 \arguments{
 \item{betId}{unique betId (required)}
 
 \item{persistenceType}{new instructions for what to do with order at in play}
+}
+\value{
+list with update instructions
 }
 \description{
 update individual orders with new instructions for what to do when
