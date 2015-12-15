@@ -1,9 +1,7 @@
 betfaiR
 =======
 
-**coming soon** (hopefully)
-
-This package still requires some work, but you can use it to place a bet with the `placeOrders` method.  I don't recommend placing any huge bets with this, I am testing with small stakes, so any issues you encounter let me know.
+This package likely still needs a little work, but you can use it to place a bet with the `placeOrders` method.  Please proceed with caution when placing any bets, and if you encounter any issues let me know.
 
 #### Installation
 
@@ -45,8 +43,12 @@ The view the available methods, simply print the environment `bf`
 <betfaiR API>
 Methods available:
     $cancelOrders(..., marketId = NA)
+    $clearedOrders(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL,
+   betIds = NULL, side = "BACK", from = NULL, to = NULL)
     $competitions(filter = marketFilter())
     $countries(filter = marketFilter())
+    $currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL", from = NULL, to = NULL, orderBy = "BY_BET",
+   sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)
     $events(filter = marketFilter())
     $eventTypes(filter = marketFilter())
     $login(usr, pwd, key)
@@ -54,10 +56,10 @@ Methods available:
     $marketCatalogue(filter = marketFilter(), marketProjection = "EVENT", sort = NULL, maxResults = 1, keepRules = FALSE)
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL)
     $marketTypes(filter = marketFilter())
-    $placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL, side = "BACK", limitOrder = limitOrder(),
-   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL)
+    $placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL, side = "BACK", order = limitOrder())
     $replaceOrders(..., marketId)
     $session()
+    $updateOrders(..., marketId)
     $venues(filter = marketFilter())
 ```
 
