@@ -136,18 +136,12 @@ img {
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">helpers</li>
-                        <li>
-                            <a href="marketFilter.html">marketFilter</a>
-                        </li>
-                        <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
-                        </li>
+                        <li class="dropdown-header">functions</li>
                         <li>
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
-                            <a href="request_functions.html">requests</a>
+                            <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
                             <a href="betfair_POST.html">bf_post</a>
@@ -157,6 +151,13 @@ img {
                         </li>
                         <li>
                             <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bf_helpers</a>
                         </li>
                     </ul>
                 </li>
@@ -200,13 +201,22 @@ img {
                         </li>
                         <li class="dropdown-header">orders</li>
                         <li>
-                            <a href="placeOrders.html">placeOrders</a>
-                        </li>
-                        <li>
                             <a href="cancelOrders.html">cancelOrders</a>
                         </li>
                         <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -245,7 +255,7 @@ img {
 </div>
 
 
-<p>The <code>bf_post</code> function sends a post request to the Betfair Exchange API, the user must supply credentials returned by <a href="betfair_login.html"><code>bf_login</code></a> and a request object built using the <a href="request_functions.html#base_request"><code>base_request</code></a> and <a href="request_functions.html#betfair_request"><code>bf_request</code></a> functions.</p>
+<p>The <code>bf_post</code> function sends a post request to the Betfair Exchange API, the user must supply credentials returned by <a href="betfair_login.html"><code>bf_login</code></a> and a request object built using the <a href="request_functions.html#bf_basic_req"><code>bf_basic_req</code></a> and <a href="request_functions.html#betfair_request"><code>bf_request</code></a> functions.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">bf_post</span>(body,
@@ -263,11 +273,11 @@ img {
 <tbody>
 <tr class="odd">
 <td align="left"><code>body</code></td>
-<td align="left">request body, JSON object containing data about the method and filter params, returned by <a href="base_request.html"><code>base_request</code></a> and <a href="betfair_request.html"><code>bf_request</code></a></td>
+<td align="left">request body, JSON object containing data about the method and filter params, returned by <a href="bf_basic_req.html"><code>bf_basic_req</code></a> and <a href="betfair_request.html"><code>bf_request</code></a></td>
 </tr>
 <tr class="even">
 <td align="left"><code>headers</code></td>
-<td align="left">headers, a list containing the session token, returned by <a href="betfair_login.html"><code>bf_login</code></a></td>
+<td align="left">headers, a list containing the session token, returned by <a href="betfair_login.html"><code>bf_login</code></a>, <code>bf_login</code> returns a list, the element is called <code>ssoid</code></td>
 </tr>
 </tbody>
 </table>

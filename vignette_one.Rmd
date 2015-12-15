@@ -62,7 +62,7 @@ selectionId <- market_data[[1]]$runners[[1]]$basic$selectionId
 bet <- bf$placeOrders(marketId = marketId,
                       selectionId = selectionId,
                       side = "LAY",
-                      limitOrder = bf_helpers$limitOrder(size = 2, price = 1.01))
+                      order = limitOrder(size = 2, price = 1.01))
 ```
 
 With any luck we will get a successful response:
@@ -76,8 +76,8 @@ We'll now change that order using the [`replaceOrders`](replaceOrders.html) func
 
 ```{r bet_update, comment=""}
 betId <- bet$order$betId
-bet1 <- bf$replaceOrders(bf_helpers$replace_inst(betId = betId,
-                                                 newPrice = 1.10),
+bet1 <- bf$replaceOrders(replace_inst(betId = betId,
+                                      newPrice = 1.10),
                          marketId = marketId)
 ```
 

@@ -136,18 +136,12 @@ img {
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">helpers</li>
-                        <li>
-                            <a href="marketFilter.html">marketFilter</a>
-                        </li>
-                        <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
-                        </li>
+                        <li class="dropdown-header">functions</li>
                         <li>
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
-                            <a href="request_functions.html">requests</a>
+                            <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
                             <a href="betfair_POST.html">bf_post</a>
@@ -157,6 +151,13 @@ img {
                         </li>
                         <li>
                             <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bf_helpers</a>
                         </li>
                     </ul>
                 </li>
@@ -200,13 +201,22 @@ img {
                         </li>
                         <li class="dropdown-header">orders</li>
                         <li>
-                            <a href="placeOrders.html">placeOrders</a>
-                        </li>
-                        <li>
                             <a href="cancelOrders.html">cancelOrders</a>
                         </li>
                         <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -245,7 +255,7 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-07 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-15 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username,
@@ -285,8 +295,12 @@ img {
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
     $cancelOrders(..., marketId = NA) 
+    $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
+   betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
     $competitions(filter = marketFilter()) 
     $countries(filter = marketFilter()) 
+    $currentOrders(betId = NULL, marketId = NULL, orderProjection = &quot;ALL&quot;, from = NULL, to = NULL, orderBy = &quot;BY_BET&quot;, 
+   sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
@@ -294,10 +308,10 @@ Methods available:
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
-    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
-   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, order = limitOrder()) 
     $replaceOrders(..., marketId) 
     $session() 
+    $updateOrders(..., marketId) 
     $venues(filter = marketFilter()) </code></pre>
 <table>
 <thead>
@@ -316,16 +330,28 @@ Methods available:
 <td align="left"><a href="cancelOrders.html">cancelOrders</a></td>
 </tr>
 <tr class="even">
+<td align="left"><code>clearedOrders</code></td>
+<td align="left">Retrieve data about cleared orders</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="clearedOrders.html">clearedOrders</a></td>
+</tr>
+<tr class="odd">
 <td align="left"><code>competitions</code></td>
 <td align="left">Retrieve data about the different competitions with current markets</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_competitions.html">competitions</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>countries</code></td>
 <td align="left">Retrieve data about the different countries hosting events</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_countries.html">countries</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>currentOrders</code></td>
+<td align="left">Retrieve data about current orders</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="currentOrders.html">currentOrders</a></td>
 </tr>
 <tr class="even">
 <td align="left"><code>events</code></td>
@@ -370,16 +396,16 @@ Methods available:
 <td align="left"><a href="methods_marketTypes.html">marketTypes</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>replaceOrders</code></td>
-<td align="left">Replace existing orders with new instructions</td>
-<td align="left"><code>TRUE</code></td>
-<td align="left"><a href="replaceOrders.html">replaceOrders</a></td>
-</tr>
-<tr class="even">
 <td align="left"><code>placeOrders</code></td>
 <td align="left">Place a bet. <strong>This likely needs work, so please proceed cautiously, and if possible provide feedback</strong></td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="placeOrders.html">placeOrder</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>replaceOrders</code></td>
+<td align="left">Replace existing orders with new instructions</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="replaceOrders.html">replaceOrders</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>session</code></td>
@@ -388,6 +414,12 @@ Methods available:
 <td align="left"><a href="login_session.html">session</a></td>
 </tr>
 <tr class="even">
+<td align="left"><code>updateOrders</code></td>
+<td align="left">Update existing orders with new instructions</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="updateOrders.html">updateOrders</a></td>
+</tr>
+<tr class="odd">
 <td align="left"><code>venues</code></td>
 <td align="left">Retrieve data about the venues hosting racing (horse and greyhound)</td>
 <td align="left"><code>TRUE</code></td>
@@ -418,13 +450,18 @@ BETFAIR_KEY=yourAPIkey</code></pre></li>
 <span class="co"># login</span>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
-bf</code></pre>
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+<pre><code>Login successful</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
     $cancelOrders(..., marketId = NA) 
+    $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
+   betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
     $competitions(filter = marketFilter()) 
     $countries(filter = marketFilter()) 
+    $currentOrders(betId = NULL, marketId = NULL, orderProjection = &quot;ALL&quot;, from = NULL, to = NULL, orderBy = &quot;BY_BET&quot;, 
+   sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
@@ -432,10 +469,10 @@ Methods available:
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
-    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
-   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, order = limitOrder()) 
     $replaceOrders(..., marketId) 
     $session() 
+    $updateOrders(..., marketId) 
     $venues(filter = marketFilter()) </code></pre>
 <p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>
 <p>Because there are many combinations of OS and ways of running R where the <code>.Renviron</code> approach <em>just works</em> and the bash stuff does not. When R is a child process of, say, Emacs or RStudio, you can’t always count on environment variables being passed to R. Put them in an R-specific start-up file and save yourself some grief.</p>

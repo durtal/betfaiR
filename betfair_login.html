@@ -136,18 +136,12 @@ img {
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">helpers</li>
-                        <li>
-                            <a href="marketFilter.html">marketFilter</a>
-                        </li>
-                        <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
-                        </li>
+                        <li class="dropdown-header">functions</li>
                         <li>
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
-                            <a href="request_functions.html">requests</a>
+                            <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
                             <a href="betfair_POST.html">bf_post</a>
@@ -157,6 +151,13 @@ img {
                         </li>
                         <li>
                             <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bf_helpers</a>
                         </li>
                     </ul>
                 </li>
@@ -200,13 +201,22 @@ img {
                         </li>
                         <li class="dropdown-header">orders</li>
                         <li>
-                            <a href="placeOrders.html">placeOrders</a>
-                        </li>
-                        <li>
                             <a href="cancelOrders.html">cancelOrders</a>
                         </li>
                         <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -245,7 +255,7 @@ img {
 </div>
 
 
-<p>The <code>bf_login</code> function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different <strong>methods</strong>.</p>
+<p>The <code>bf_login</code> function is used to login to Betfair and return a session token, which is required to retrieve data from the exchange API using the different <strong>methods</strong>. The function will print <em>Login successful</em> to the console if a session token was returned, and will print a warning message if login failed, usually due to an incorrect username and/or password.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">bf_login</span>(<span class="dt">usr =</span> username,
@@ -292,7 +302,7 @@ img {
 </ul></li>
 <li><code>ssoid</code>
 <ul>
-<li>list which includes you session token, it is this list which is to be used as the header in future requests made to the Exchange API.</li>
+<li>list which includes a session token, it is this list which is to be used as the header in future requests made to the Exchange API via the <a href="betfair_POST.html"><code>bf_post</code></a> function.</li>
 </ul></li>
 </ul>
 <p>You can print the object, which will display the credentials you passed into the function and any session token that was returned.</p>
@@ -319,13 +329,18 @@ BETFAIR_KEY=yourAPIkey</code></pre></li>
 <span class="co"># login</span>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
-bf</code></pre>
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+<pre><code>Login successful</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
     $cancelOrders(..., marketId = NA) 
+    $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
+   betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
     $competitions(filter = marketFilter()) 
     $countries(filter = marketFilter()) 
+    $currentOrders(betId = NULL, marketId = NULL, orderProjection = &quot;ALL&quot;, from = NULL, to = NULL, orderBy = &quot;BY_BET&quot;, 
+   sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
@@ -333,10 +348,10 @@ Methods available:
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
-    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
-   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, order = limitOrder()) 
     $replaceOrders(..., marketId) 
     $session() 
+    $updateOrders(..., marketId) 
     $venues(filter = marketFilter()) </code></pre>
 <p>FAQ: Why define this environment variable via <code>.Renviron</code> instead of in <code>.bash_profile</code> or <code>.bashrc</code>?</p>
 <p>Because there are many combinations of OS and ways of running R where the <code>.Renviron</code> approach <em>just works</em> and the bash stuff does not. When R is a child process of, say, Emacs or RStudio, you can’t always count on environment variables being passed to R. Put them in an R-specific start-up file and save yourself some grief.</p>

@@ -136,18 +136,12 @@ img {
                         <li>
                             <a href="betfair.html">betfair</a>
                         </li>
-                        <li class="dropdown-header">helpers</li>
-                        <li>
-                            <a href="marketFilter.html">marketFilter</a>
-                        </li>
-                        <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
-                        </li>
+                        <li class="dropdown-header">functions</li>
                         <li>
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
-                            <a href="request_functions.html">requests</a>
+                            <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
                             <a href="betfair_POST.html">bf_post</a>
@@ -157,6 +151,13 @@ img {
                         </li>
                         <li>
                             <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bf_helpers</a>
                         </li>
                     </ul>
                 </li>
@@ -200,13 +201,22 @@ img {
                         </li>
                         <li class="dropdown-header">orders</li>
                         <li>
-                            <a href="placeOrders.html">placeOrders</a>
-                        </li>
-                        <li>
                             <a href="cancelOrders.html">cancelOrders</a>
                         </li>
                         <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
                             <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
                         </li>
                     </ul>
                 </li>
@@ -254,13 +264,18 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
-bf</code></pre>
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+<pre><code>Login successful</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
     $cancelOrders(..., marketId = NA) 
+    $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
+   betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
     $competitions(filter = marketFilter()) 
     $countries(filter = marketFilter()) 
+    $currentOrders(betId = NULL, marketId = NULL, orderProjection = &quot;ALL&quot;, from = NULL, to = NULL, orderBy = &quot;BY_BET&quot;, 
+   sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
     $login(usr, pwd, key) 
@@ -268,10 +283,10 @@ Methods available:
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
-    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, limitOrder = limitOrder(), 
-   limitOnCloseOrder = limitOnCloseOrder(), marketOnCloseOrder = NULL) 
+    $placeOrders(marketId, selectionId, orderType = &quot;LIMIT&quot;, handicap = NULL, side = &quot;BACK&quot;, order = limitOrder()) 
     $replaceOrders(..., marketId) 
     $session() 
+    $updateOrders(..., marketId) 
     $venues(filter = marketFilter()) </code></pre>
 </div>
 <div id="searching-for-markets" class="section level3">
@@ -285,36 +300,36 @@ Methods available:
 <span class="kw">summary</span>(markets)</code></pre>
 <pre><code>
 Market ID:      1.117674262
-Event ID:       27390233 
+Event ID:       27625530 
 Market Name:    Gold Cup
-Event Name:     Cheltenham 2016 
-Matched:        145563.3
+Event Name:     Chelt 18th Mar 
+Matched:        159355.9
  ---------------------------------------------------------------------------
 Market ID:      1.117674259
-Event ID:       27390233 
+Event ID:       27625527 
 Market Name:    Champion Hrd
-Event Name:     Cheltenham 2016 
-Matched:        131231.06
- ---------------------------------------------------------------------------
-Market ID:      1.118987605
-Event ID:       27453850 
-Market Name:    2000 Guineas
-Event Name:     Newmarket 2016 
-Matched:        79983.48
+Event Name:     Chelt 15th Mar 
+Matched:        154822.22
  ---------------------------------------------------------------------------
 Market ID:      1.116824143
 Event ID:       27334314 
 Market Name:    King George VI Chs
 Event Name:     Kemp 26th Dec 
-Matched:        78922.26
+Matched:        96064.9
+ ---------------------------------------------------------------------------
+Market ID:      1.118987605
+Event ID:       27453850 
+Market Name:    2000 Guineas
+Event Name:     Newmarket 2016 
+Matched:        80902.36
  ---------------------------------------------------------------------------
 Market ID:      1.118224623
 Event ID:       27419382 
 Market Name:    Grand National
 Event Name:     Aintree 2016 
-Matched:        68055.74
+Matched:        72560.74
  ---------------------------------------------------------------------------</code></pre>
-<p>Let’s look at the first market, the market name is <strong>Gold Cup</strong> while the event name is <strong>Cheltenham 2016</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
+<p>Let’s look at the first market, the market name is <strong>Gold Cup</strong> while the event name is <strong>Chelt 18th Mar</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
 <pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>markets[[<span class="dv">1</span>]]$market$marketId
 market &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketIds =</span> marketId),
                              <span class="dt">marketProjection =</span> <span class="st">&quot;RUNNER_DESCRIPTION&quot;</span>)
@@ -322,35 +337,35 @@ market &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(
 <pre><code>
 Market ID:      1.117674262 
 Market Name:    Gold Cup 
-Matched:        145563.3
+Matched:        159355.9
 
-Runners:     59 
+Runners:     61 
  selectionId  runnerName handicap sortPriority
      5978449   Coneygree        0            1
-     6896665     Vautour        0            2
-     5517026 Don Cossack        0            3
-     7122507    Don Poli        0            4
-     6987962    Djakadam        0            5
+     5517026 Don Cossack        0            2
+     6896665     Vautour        0            3
+     6987962    Djakadam        0            4
+     7122507    Don Poli        0            5
      4360454    Cue Card        0            6
 
  ---------------------------------------------------------------------------</code></pre>
-<p>Now we know the <code>marketId</code> we can use the <a href="methods_marketBook.html"><code>marketBook</code></a> method to get up to date (well, with a second or so delays) market data. The response of this method can also be passed to <code>summary</code> for pretty printing, before being mined further. One unfortunate thing about the <code>marketBook</code> method is that it only returns selectionIds, rather than runner names, so the likes of <strong>Coneygree</strong> or <strong>Vautour</strong> are not included.</p>
+<p>Now we know the <code>marketId</code> we can use the <a href="methods_marketBook.html"><code>marketBook</code></a> method to get up to date (well, with a second or so delays) market data. The response of this method can also be passed to <code>summary</code> for pretty printing, before being mined further. One unfortunate thing about the <code>marketBook</code> method is that it only returns selectionIds, rather than runner names, so the likes of <strong>Coneygree</strong> or <strong>Don Cossack</strong> are not included.</p>
 <pre class="sourceCode r"><code class="sourceCode r">market_data &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> marketId,
                              <span class="dt">priceProjection =</span> <span class="st">&quot;EX_BEST_OFFERS&quot;</span>)
 <span class="kw">summary</span>(market_data)</code></pre>
 <pre><code>
 Market ID:      1.117674262 
-Matched:        145634.16 
-Available:      16367.87
+Matched:        159535.93 
+Available:      17075.18
 
-Runners:     59 
+Runners:     61 
      .id selectionId handicap status lastPriceTraded totalMatched
- 5978449     5978449        0 ACTIVE             6.8     21867.68
- 6896665     6896665        0 ACTIVE             8.0     34353.52
- 5517026     5517026        0 ACTIVE             8.0     16992.91
- 7122507     7122507        0 ACTIVE             8.4     16993.31
- 6987962     6987962        0 ACTIVE             8.2     11072.24
- 4360454     4360454        0 ACTIVE            14.0      6289.84
+ 5978449     5978449        0 ACTIVE             7.0     24267.86
+ 5517026     5517026        0 ACTIVE             7.8     18439.60
+ 6896665     6896665        0 ACTIVE             8.0     36781.85
+ 6987962     6987962        0 ACTIVE             7.6     14102.27
+ 7122507     7122507        0 ACTIVE             8.2     18504.63
+ 4360454     4360454        0 ACTIVE            14.5      7065.74
 
  ---------------------------------------------------------------------------</code></pre>
 </div>
@@ -363,7 +378,7 @@ selectionId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>
 bet &lt;-<span class="st"> </span>bf$<span class="kw">placeOrders</span>(<span class="dt">marketId =</span> marketId,
                       <span class="dt">selectionId =</span> selectionId,
                       <span class="dt">side =</span> <span class="st">&quot;LAY&quot;</span>,
-                      <span class="dt">limitOrder =</span> bf_helpers$<span class="kw">limitOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">price =</span> <span class="fl">1.01</span>))</code></pre>
+                      <span class="dt">order =</span> <span class="kw">limitOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">price =</span> <span class="fl">1.01</span>))</code></pre>
 <p>With any luck we will get a successful response:</p>
 <pre class="sourceCode r"><code class="sourceCode r">bet</code></pre>
 <pre><code>
@@ -376,7 +391,7 @@ MarketId:       1.117674262
 
 Order:
   status       betId               placedDate averagePriceMatched
- SUCCESS 59173798666 2015-12-07T19:19:33.000Z                   0
+ SUCCESS 59494860326 2015-12-15T00:44:11.000Z                   0
  sizeMatched
            0
 
@@ -385,8 +400,8 @@ Instructions:
      5978449        0    2  1.01           LAPSE     LIMIT  LAY</code></pre>
 <p>We’ll now change that order using the <a href="replaceOrders.html"><code>replaceOrders</code></a> function, for this we need the betId (which was returned above), and we’ll change the price we wish to be matched at to 1.10.</p>
 <pre class="sourceCode r"><code class="sourceCode r">betId &lt;-<span class="st"> </span>bet$order$betId
-bet1 &lt;-<span class="st"> </span>bf$<span class="kw">replaceOrders</span>(bf_helpers$<span class="kw">replace_inst</span>(<span class="dt">betId =</span> betId,
-                                                 <span class="dt">newPrice =</span> <span class="fl">1.10</span>),
+bet1 &lt;-<span class="st"> </span>bf$<span class="kw">replaceOrders</span>(<span class="kw">replace_inst</span>(<span class="dt">betId =</span> betId,
+                                      <span class="dt">newPrice =</span> <span class="fl">1.10</span>),
                          <span class="dt">marketId =</span> marketId)</code></pre>
 <p>This update was a <strong>SUCCESS</strong>, but we don’t want to leave the bet there, so lets cancel it. We can either target this specific bet using it’s ID, returned above, or we can cancel all bets as below:</p>
 <pre class="sourceCode r"><code class="sourceCode r">(cancel &lt;-<span class="st"> </span>bf$<span class="kw">cancelOrders</span>())</code></pre>

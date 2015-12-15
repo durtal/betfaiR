@@ -4,7 +4,7 @@ title: "betfair"
 
 `betfair` is the **primary** function in the `betfaiR` package.  It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - `r Sys.Date()` - this is not _all_ methods).
 
-```{r echo=FALSE}
+```{r echo=FALSE, message=FALSE}
 library(betfaiR)
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"), pwd = Sys.getenv("BETFAIR_PWD"), key = Sys.getenv("BETFAIR_KEY"))
 ```
@@ -38,8 +38,10 @@ bf
 method | details | available | help
 -------|---------|-----------|------
 `cancelOrders` | Cancel existing orders that may be unmatched or partially matched | `TRUE` | [cancelOrders](cancelOrders.html)
+`clearedOrders` | Retrieve data about cleared orders | `TRUE` | [clearedOrders](clearedOrders.html)
 `competitions` | Retrieve data about the different competitions with current markets | `TRUE` | [competitions](methods_competitions.html)
 `countries` | Retrieve data about the different countries hosting events | `TRUE` | [countries](methods_countries.html)
+`currentOrders` | Retrieve data about current orders | `TRUE` | [currentOrders](currentOrders.html)
 `events` | Retrieve data about the different events | `TRUE` | [events](methods_events.html)
 `eventTypes` | Retrieve data about the different event types, ie. sports | `TRUE` | [eventTypes](methods_eventTypes.html)
 `login` | Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used | `TRUE` | [login](login_session.html)
@@ -47,9 +49,10 @@ method | details | available | help
 `marketCatalogue` | Retrieve data about the different types of markets | `TRUE` | [marketCatalogue](methods_marketCatalogue.html)
 `marketPnL` | Retrieve current profit and loss for markets | `TRUE` | [marketPnL](methods_marketPnL.html)
 `marketTypes` | Retrieve counts for the different market types | `TRUE` | [marketTypes](methods_marketTypes.html)
-`replaceOrders` | Replace existing orders with new instructions | `TRUE` | [replaceOrders](replaceOrders.html)
 `placeOrders` | Place a bet.  **This likely needs work, so please proceed cautiously, and if possible provide feedback** | `TRUE` | [placeOrder](placeOrders.html)
+`replaceOrders` | Replace existing orders with new instructions | `TRUE` | [replaceOrders](replaceOrders.html)
 `session` | Prints session token | `TRUE` | [session](login_session.html)
+`updateOrders` | Update existing orders with new instructions | `TRUE` | [updateOrders](updateOrders.html)
 `venues` | Retrieve data about the venues hosting racing (horse and greyhound) | `TRUE` | [venues](methods_venues.html)
 
 ### appendix
