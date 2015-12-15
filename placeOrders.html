@@ -264,9 +264,7 @@ img {
                <span class="dt">orderType =</span> <span class="kw">c</span>(<span class="st">&quot;LIMIT&quot;</span>, <span class="st">&quot;LIMIT_ON_CLOSE&quot;</span>, <span class="st">&quot;MARKET_ON_CLOSE&quot;</span>),
                <span class="dt">handicap =</span> <span class="st">&quot;0&quot;</span>,
                <span class="dt">side =</span> <span class="st">&quot;BACK&quot;</span>,
-               <span class="dt">limitOrder =</span> <span class="kw">limitOrder</span>(),
-               <span class="dt">limitOnCloseOrder =</span> <span class="kw">limitOnCloseOrder</span>(),
-               <span class="dt">marketOnCloseOrder =</span> <span class="ot">NULL</span>)</code></pre>
+               <span class="dt">order =</span> <span class="kw">limitOrder</span>())</code></pre>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
@@ -299,16 +297,8 @@ img {
 <td align="left"><strong>BACK</strong> or <strong>LAY</strong></td>
 </tr>
 <tr class="even">
-<td align="left"><code>limitOrder</code></td>
-<td align="left">list with details of the bet, required if <code>orderType</code> is <strong>LIMIT</strong>, use <a href="orders.html#limitorder"><code>limitOrder</code></a> to help construct correct list</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>limitOnCloseOrder</code></td>
-<td align="left">list with details of the bet, required if <code>orderType</code> is <strong>LIMIT_ON_CLOSE</strong>, use <a href="orders.html#limitoncloseorder"><code>limitOnCloseOrder</code></a> to help construct correct list</td>
-</tr>
-<tr class="even">
-<td align="left"><code>marketOnCloseOrder</code></td>
-<td align="left">single number, the size of your bet to be placed at Betfairs SP.</td>
+<td align="left"><code>order</code></td>
+<td align="left">list with details of the bet, if <code>orderType</code> is <strong>LIMIT</strong>, use <a href="bf_helpers.html#limitorder"><code>limitOrder</code></a> to help construct correct list. If <code>orderType</code> is <strong>LIMIT_ON_CLOSE</strong> use <a href="bf_helpers.html#limitoncloseorder"><code>limitOnCloseOrder</code></a> to help construct correct list. If <code>orderType</code> is <strong>MARKET_ON_CLOSE</strong> then a list with a element called <code>liability</code> which is the size of the bet to be placed at Betfair’s SP.</td>
 </tr>
 </tbody>
 </table>

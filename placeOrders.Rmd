@@ -14,9 +14,7 @@ bf$placeOrders(marketId,
                orderType = c("LIMIT", "LIMIT_ON_CLOSE", "MARKET_ON_CLOSE"),
                handicap = "0",
                side = "BACK",
-               limitOrder = limitOrder(),
-               limitOnCloseOrder = limitOnCloseOrder(),
-               marketOnCloseOrder = NULL)
+               order = limitOrder())
 ```
 
 ### arguments
@@ -28,9 +26,7 @@ param | details
 `orderType` | the type of order, **LIMIT** - a normal exchange order for immediate execution, **LIMIT\_ON\_CLOSE** - limit oder for the auction (SP bet with a price limit), **MARKET\_ON\_CLOSE** - market order for the auction, SP bet regardless of price.
 `handicap` | for ASIAN handicap markets (I believe!), default is 0
 `side` | **BACK** or **LAY**
-`limitOrder` | list with details of the bet, required if `orderType` is **LIMIT**, use [`limitOrder`](orders.html#limitorder) to help construct correct list
-`limitOnCloseOrder` | list with details of the bet, required if `orderType` is **LIMIT\_ON\_CLOSE**, use [`limitOnCloseOrder`](orders.html#limitoncloseorder) to help construct correct list
-`marketOnCloseOrder` | single number, the size of your bet to be placed at Betfairs SP.
+`order` | list with details of the bet, if `orderType` is **LIMIT**, use [`limitOrder`](bf_helpers.html#limitorder) to help construct correct list. If `orderType` is **LIMIT_ON_CLOSE** use [`limitOnCloseOrder`](bf_helpers.html#limitoncloseorder) to help construct correct list. If `orderType` is **MARKET_ON_CLOSE** then a list with a element called `liability` which is the size of the bet to be placed at Betfair's SP.
 
 ### return
 
