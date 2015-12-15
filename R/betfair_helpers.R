@@ -222,8 +222,8 @@ current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
 #' @description helper function used by the \link{clearedOrders} method to build
 #' request object for finding settled orders
 #'
-#' @param betStatus filter based on how the bet was settled, one of \strong{SETTLED},
-#' \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}
+#' @param betStatus filter based on how the bet was settled, one of \strong{SETTLED}
+#' (default), \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}
 #' @param eventTypeIds retrieve bets based on sport
 #' @param eventIds retrieve bets based on event
 #' @param marketIds retrieve bets based on markets

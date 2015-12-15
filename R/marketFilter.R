@@ -52,7 +52,7 @@ marketFilter <- function(bspOnly = NULL, competitionIds = NULL, eventIds = NULL,
                          marketBettingTypes = NULL, marketCountries = NULL,
                          marketIds = NULL, from = NULL, to = NULL,
                          marketTypeCodes = NULL, textQuery = NULL,
-                         turnInPlayEnabled = NULL, venues = NULL, withOrders = NULL, ...) {
+                         turnInPlayEnabled = NULL, venues = NULL, withOrders = NULL) {
 
 
     tmp <- as.list(environment())

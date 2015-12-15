@@ -16,7 +16,8 @@ bf_login(usr, pwd, key)
 \value{
 list with class \code{bf_login} which contains the parameters
 entered into the function, the response (includes a session token) and the
-required headers for querying the API
+required headers for querying the API.  Message will be printed to the console
+whether login was successful or failed
 }
 \description{
 login to Betfair to receive a session token

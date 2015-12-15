@@ -31,47 +31,61 @@ building the list.
 
 \describe{
      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
-     different competitions with current markets, see \link{competitions}.}
+     different competitions with current markets, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
      \item{\code{countries(filter = marketFilter())}}{ Retrieve data about the different countries
-     hosting events, see \link{countries}.}
+     hosting events, see \link{countries}, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
      \item{\code{events(filter = marketFilter())}}{ Retrieve data about the different events, see
-     \link{events}.}
+     \link{events}, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
      \item{\code{eventTypes(filter = marketFilter())}}{ Retrieve data about the different event types,
-     ie. sports, see \link{eventTypes}.}
+     ie. sports, see \link{eventTypes}, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
      \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
-     see \link{venues}.}
+     see \link{venues}, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
      \item{\code{login(usr, pwd, key)}}{ Login in, a session token will be
      returned, over-writing the previous token when \code{betfair(usr, pwd, key)}
      was used.}
      \item{\code{session()}}{ Print details about the session, including login
      in details and session token.}
-     \item{\code{marketBook(marketIds = list(), priceProjection = NULL, orderProjection = NULL,
-     matchProjection = NULL)}}{ Retrieve dynamic data about markets. Data includes
-     prices, the status of the market, the status of the selections, the traded
-     volume, and the status of any orders you have in the market.}
-     \item{\code{marketCatalogue(filter = list(), marketProjection = "EVENT", sort = NULL,
-     maxResults = 50, keepRules = FALSE)}}{ Retrieve data about the different types
-     of markets, see \link{marketCatalogue}.}
+     \item{\code{marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS",
+     orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")}}{ Retrieve dynamic
+     data about markets, data includes, prices, status of the market, status of
+     selections, the traded volume, and the status of any orders in the market,
+     see \link{marketBook}}
+     \item{\code{marketCatalogue(filter = marketFilter(), marketProjection = "EVENT",
+     sort = NULL, maxResults = 1, keepRules = FALSE)}}{ Retrieve data about the
+     different types of markets, see \link{marketCatalogue}, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
+     \item{\code{marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL)}}{ Retrieve
+     data about the current profit/loss for markets you may have existing orders in'}
      \item{\code{marketTypes(filter = marketFilter())}}{ Retrieve data about the different types of
-     markets, see \link{marketTypes}.}
+     markets, see \link{marketTypes}, see \link{competitions}, see
+     \link{marketFilter} for filtering data.}
      \item{\code{cancelOrders(..., marketId = NA)}}{ Cancel existing orders, leave function blank
-     to cancel all existing orders, or use combination or marketId and ... to target specific orders,
-     see \link{cancel_inst} to target specific order}
+     to cancel all existing orders, see \link{cancelOrders}.  You can use a combination of marketId
+     and ... to target specific orders, see \link{cancel_inst} to target specific order}
      \item{\code{clearedOrders(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
      marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK", from = NULL, to = NULL)}}{
-     function to return data on past bets, by default it will return settled bets, use
-     various params to help filter bets.}
-     \item{\code{currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL", from = NULL,
-     to = NULL, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST", fromRecord = NULL, count = NULL)}}{
-     Retrieve existing orders, leave funciton blank to retrieve all unsettled orders, the function
-     \link{current} helps target specific markets.}
-     \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT",
-     handicap = NULL, side = "BACK", order = limitOrder())}}{ Place a bet, requires a marketId
-     (see \link{marketCatalogue}) and selectionId (see \link{marketBook}),}
+     Retrieve data about cleared orders, which are orders that have been settled, see
+     \link{clearedOrders}, use the various params to help filter bets}
+     \item{\code{currentOrders(betId = NULL, marketId = NULL, orderProjection = "ALL",
+     from = NULL, to = NULL, orderBy = "BY_BET", sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
+     count = NULL)}}{ Retrieve existing unsettled orders, leave function blank to retreive
+     all orders, see \link{currentOrders}, use the various params too help filter
+     bets}
+     \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL,
+     side = "BACK", order = limitOrder())}}{ Place an order, requires a marketId and selectionId (see
+     \link{marketCatalogue} and \link{marketBook} for details on these params), make use of
+     various helper functions (\link{limitOrder} or \link{limitOnCloseOrder}) depending
+     on the type of order}
      \item{\code{replaceOrders(..., marketId)}}{ Replace existing orders, requires marketIds and
      unique betIds with new prices, use \link{replace_inst} to target specific bets}
      \item{\code{updateOrders(..., marketId)}}{ Update existing orders with new
-     instructions for what to do when the market goes in play}
+     instructions for what to do when the market goes in play, use \link{update_inst} to target
+     specific bets}
 }
 }
 \examples{

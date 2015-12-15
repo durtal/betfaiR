@@ -9,8 +9,8 @@ cleared(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
   to = NULL, from = NULL)
 }
 \arguments{
-\item{betStatus}{filter based on how the bet was settled, one of \strong{SETTLED},
-\strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}}
+\item{betStatus}{filter based on how the bet was settled, one of \strong{SETTLED}
+(default), \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}}
 
 \item{eventTypeIds}{retrieve bets based on sport}
 

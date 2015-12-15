@@ -4,7 +4,7 @@
 \alias{marketTypes}
 \title{marketTypes method}
 \arguments{
-\item{filter}{list to select desired markets, see \link{marketFilter}, or marketFilter section below,
+\item{filter}{list to select desired markets, see \link{marketFilter},
 or visit \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter}{developer.betfair.com},
 for the different options.}
 }
@@ -18,59 +18,5 @@ with markets selected by the \code{filter} parameter, with the following variabl
 }
 \description{
 marketTypes associated with markets
-}
-\section{marketFilter}{
-
-Paramaters that can be included in the \code{filter} list
-\itemize{
-     \item \strong{bspOnly} \code{(boolean)} Restrict to BSP (Betfair Starting Price)
-     markets only, TRUE, or non-BSP markets, FALSE. If not specified then returns
-     both BSP and non-BSP markets.
-     \item \strong{competitionIds} \code{(string)} Restrict markets by the competitions
-     associated with the market.
-     \item \strong{eventIds} \code{(string)} Restrict markets by the event Id
-     associated with the market.
-     \item \strong{eventTypeIds} \code{(string)} Restrict markets by event type
-     associated with the market, ie. Football, Hockey, etc.
-     \item \strong{exchangeIds} \code{(string)} Restrict markets by the Exchange
-     where the market operates. As of Jun 11, 2015, \strong{not available}.
-     \item \strong{inPlayOnly} \code{boolean} Restrict to markets that are
-     currently in play, TRUE, or not currently in play, FALSE. If not specified
-     returns both.
-     \item \strong{marketBettingTypes} see section \strong{MarketBettingType} in
-     \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#MarketBettingType}{developer.betfair.com}
-     Restrict to markets that match the betting type of the market, ie. Odds,
-     Asian Handicap Singles, Asian Handicap Doubles.
-     \item \strong{marketCountries} \code{string} Restrict to markets that are in the
-     specified country or countries.
-     \item \strong{marketIds} \code{string} Restrict markets by the market Id
-     associated with the market.
-     \item \strong{marketStartTime} see section \strong{TimeRange} Restrict markets
-     with a market start time before or after the specified date.
-     \item \strong{marketTypeCodes} \code{string} Restrict to markets that match
-     the type of the market, ie. MATCH_ODDS, HALF_TIME_SCORE. You should use this
-     instead of relying on the market name as the market type codes are the same
-     in all locales.
-     \item \strong{textQuery} \code{string} Restrict markets by any text associated
-     with the market such as Name, Event, Competition, etc. You can include a wildcard
-     (*) character, as long as it is not the first character.
-     \item \strong{turnInPlayEnabled} \code{boolean} Restrict to markets that will
-     turn in play, TRUE, or will not turn in play, FALSE. If not specified returns
-     both.
-     \item \strong{venues} \code{string} Restrict markets by the venue associated
-     with the market. Currently, as of Jun 11, 2015, only Horse Racing markets
-     have venues.
-     \item \strong{withOrders} see section \strong{OrderStatus} in
-     \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#OrderStatus}{developer.betfair.com}
-     Restrict to markets that I have one or more orders in these status.
-}
-}
-
-\section{TimeRange}{
-
-\itemize{
-     \item \strong{from} \code{date} From date.
-     \item \strong{to} \code{date} To date
-}
 }
 
