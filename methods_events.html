@@ -157,7 +157,7 @@ img {
                             <a href="marketFilter.html">marketFilter</a>
                         </li>
                         <li>
-                            <a href="bf_helpers.html">bf_helpers</a>
+                            <a href="bf_helpers.html">bet instructions</a>
                         </li>
                     </ul>
                 </li>
@@ -341,23 +341,23 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 1 2016-03-08T14:30:00.000Z           1        &lt;NA&gt;
 2 2015-09-11T00:30:00.000Z           5        &lt;NA&gt;
 3 2015-10-15T14:20:00.000Z           1        &lt;NA&gt;
-4 2015-12-16T19:45:00.000Z           3        &lt;NA&gt;
+4 2015-12-16T19:45:00.000Z           5        &lt;NA&gt;
 5 2015-12-16T17:00:00.000Z           1        &lt;NA&gt;
 6 2016-06-10T19:00:00.000Z           5        &lt;NA&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>  event_id           event_name event_countryCode event_timezone
-1 27630014 Kenil (RSA) 15th Dec                ZA            CET
-2 27630012  Turf (RSA) 15th Dec                ZA            CET
-3 27630153        Catt 15th Dec                GB  Europe/London
-4  3453086     Stewards Enquiry                GB  Europe/London
-5 27569474   Long (FRA) 2nd Oct                FR            CET
-6 27588511   Santa (US) 5th Nov                US     US/Pacific
+<pre><code>  event_id          event_name event_countryCode event_timezone
+1 27630702       Clon 16th Dec                IE  Europe/London
+2 27630012 Turf (RSA) 15th Dec                ZA            CET
+3 27630693       Kemp 16th Dec                GB  Europe/London
+4  3453086    Stewards Enquiry                GB  Europe/London
+5 27569474  Long (FRA) 2nd Oct                FR            CET
+6 27588511  Santa (US) 5th Nov                US     US/Pacific
   event_venue           event_openDate marketCount
-1  Kenilworth 2015-12-15T11:30:00.000Z          16
-2 Turffontein 2015-12-15T16:00:00.000Z          16
-3   Catterick 2015-12-15T12:15:00.000Z          28
+1     Clonmel 2015-12-16T11:45:00.000Z          30
+2 Turffontein 2015-12-15T16:00:00.000Z           6
+3     Kempton 2015-12-16T16:05:00.000Z          32
 4        &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
 5        &lt;NA&gt; 2016-10-02T13:55:00.000Z           1
 6        &lt;NA&gt; 2016-11-05T19:00:00.000Z           1</code></pre>
@@ -374,7 +374,7 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class=
             event_openDate marketCount
 1 2015-12-27T12:20:00.000Z           1
 2 2016-03-26T13:00:00.000Z           1
-3 2015-12-28T15:00:00.000Z           1
+3 2015-12-28T12:10:00.000Z           2
 4 2016-10-02T13:55:00.000Z           1
 5 2016-11-05T19:00:00.000Z           1
 6 2015-12-27T13:15:00.000Z           2</code></pre>
