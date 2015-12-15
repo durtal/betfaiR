@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_parse.R
 \name{bf_parse}
 \alias{bf_parse}
-\title{bf_parse}
+\title{parse the response from Betfair}
 \usage{
 bf_parse(res, ...)
 }

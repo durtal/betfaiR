@@ -1,4 +1,4 @@
-#' bf_post
+#' post a request to Betfair
 #'
 #' @description POST request to Betfair's Exchange API, requires users to prepare
 #' a request using \link{base_request}, \link{bf_request} and to have login

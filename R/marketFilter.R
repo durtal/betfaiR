@@ -1,4 +1,4 @@
-#' create list to be used as filter in various methods
+#' helper function to construct list to filter data for various available methods
 #'
 #' @description build a market filter object given the parameters available, this
 #' object can be used in the following methods \link{competitions}, \link{countries},

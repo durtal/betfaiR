@@ -1,4 +1,4 @@
-#' bf_parse
+#' parse the response from Betfair
 #'
 #' @description convert response from the various \link{betfair} methods, tries
 #' to convert response into useful format, ie. dataframes with zero nested elements
@@ -246,7 +246,7 @@ bf_parse.clearedOrders <- function(res) {
         return(tmp)
     })
     out$moreAvailable <- res$result$moreAvailable
-    return(out)    
+    return(out)
 }
 
 #' @export

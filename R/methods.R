@@ -635,7 +635,7 @@ NULL
 #' @return list with data about the market and any profit and loss for selections
 NULL
 
-#' updateOrders
+#' updateOrders method
 #'
 #' @description \code{updateOrders} function updates instructions for specific bets
 #' and how they are handled when the market goes in play
@@ -650,7 +650,7 @@ NULL
 #' @return list with details about the updated bets
 NULL
 
-#' currentOrders
+#' currentOrders method
 #'
 #' @description \code{currentOrders} function allows users to retrieve data about
 #' any unsettled bets they have open.  Use the parameters to filter to specific
@@ -678,7 +678,7 @@ NULL
 #' @return list with data about individual orders
 NULL
 
-#' clearedOrders
+#' clearedOrders method
 #'
 #' @description \code{clearedOrders} function allows users to retrieve data about
 #' settled/voided/lapsed/cancelled bets.  These can be filtered by various parameters

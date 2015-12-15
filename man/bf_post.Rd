@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_post.R
 \name{bf_post}
 \alias{bf_post}
-\title{bf_post}
+\title{post a request to Betfair}
 \usage{
 bf_post(body, headers)
 }

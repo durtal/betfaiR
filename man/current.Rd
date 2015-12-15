@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_helpers.R
 \name{current}
 \alias{current}
-\title{current}
+\title{helper function for constructing request for retrieving current orders}
 \usage{
 current(betId = NULL, marketId = NULL, orderProjection = "ALL",
   from = NULL, to = NULL, orderBy = "BY_BET",

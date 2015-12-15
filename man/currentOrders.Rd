@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods.R
 \name{currentOrders}
 \alias{currentOrders}
-\title{currentOrders}
+\title{currentOrders method}
 \arguments{
 \item{betId}{unique bet Id}
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_request.R
 \name{bf_request}
 \alias{bf_request}
-\title{create Betfair request}
+\title{create Betfair request to individual methods}
 \usage{
 bf_request(x, ...)
 }

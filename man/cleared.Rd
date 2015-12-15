@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_helpers.R
 \name{cleared}
 \alias{cleared}
-\title{cleared}
+\title{helper function for constructing request for retrieving cleared orders}
 \usage{
 cleared(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
   marketIds = NULL, runnerIds = NULL, betIds = NULL, side = "BACK",

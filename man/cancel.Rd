@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_helpers.R
 \name{cancel}
 \alias{cancel}
-\title{cancel}
+\title{helper function for constructing request for canceling orders}
 \usage{
 cancel(..., marketId = NA)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_request.R
 \name{bf_basic_req}
 \alias{bf_basic_req}
-\title{build base request}
+\title{build basic request object to be supplemented with other data}
 \usage{
 bf_basic_req(filter = list(), method = "competitions")
 }

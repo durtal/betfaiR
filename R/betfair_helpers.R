@@ -1,4 +1,4 @@
-#' prepare bet for Betfair
+#' helper function for constructing request for preparing orders
 #'
 #' @name prepare
 #' @description prepare a bet for \link{placeOrders} method
@@ -87,7 +87,7 @@ limitOnCloseOrder <- function(size = 2, price = NULL) {
     return(ord)
 }
 
-#' cancel
+#' helper function for constructing request for canceling orders
 #'
 #' @name cancel
 #'
@@ -162,7 +162,7 @@ update_inst <- function(betId, persistenceType) {
     return(inst)
 }
 
-#' current
+#' helper function for constructing request for retrieving current orders
 #'
 #' @name current
 #'
@@ -215,7 +215,7 @@ current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
     return(orderList)
 }
 
-#' cleared
+#' helper function for constructing request for retrieving cleared orders
 #'
 #' @name cleared
 #'

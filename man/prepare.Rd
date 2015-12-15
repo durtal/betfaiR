@@ -2,7 +2,7 @@
 % Please edit documentation in R/betfair_helpers.R
 \name{prepare}
 \alias{prepare}
-\title{prepare bet for Betfair}
+\title{helper function for constructing request for preparing orders}
 \usage{
 prepare(marketId, selectionId, orderType = "LIMIT", handicap = "0",
   side = "BACK", order = NULL)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods.R
 \name{clearedOrders}
 \alias{clearedOrders}
-\title{clearedOrders}
+\title{clearedOrders method}
 \arguments{
 \item{betStatus}{filter based on how the bet was settled, one of \strong{SETTLED},
 \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}}

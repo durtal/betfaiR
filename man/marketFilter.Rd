@@ -2,7 +2,7 @@
 % Please edit documentation in R/marketFilter.R
 \name{marketFilter}
 \alias{marketFilter}
-\title{create list to be used as filter in various methods}
+\title{helper function to construct list to filter data for various available methods}
 \usage{
 marketFilter(bspOnly = NULL, competitionIds = NULL, eventIds = NULL,
   eventTypeIds = NULL, exchangeIds = NULL, inPlayOnly = NULL,

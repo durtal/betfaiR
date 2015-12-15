@@ -2,7 +2,7 @@
 % Please edit documentation in R/methods.R
 \name{updateOrders}
 \alias{updateOrders}
-\title{updateOrders}
+\title{updateOrders method}
 \arguments{
 \item{...}{target specific bets to update, use \link{update_inst} to enter one
 or more bets, \code{update_inst} requires \strong{betId} and

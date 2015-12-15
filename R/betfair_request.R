@@ -1,4 +1,4 @@
-#' create Betfair request
+#' create Betfair request to individual methods
 #'
 #' @description convert and format request list into valid JSON object for Betfair's
 #' API. Requires users to build a list first using \link{bf_basic_req}
@@ -202,7 +202,7 @@ bf_request.clearedOrders <- function(x, params = NULL) {
     return(req)
 }
 
-#' build base request
+#' build basic request object to be supplemented with other data
 #'
 #' @description creates a list with a different class, according to the desired
 #' API method the request will be sent to, the returned value will then be passed
