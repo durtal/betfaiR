@@ -1,14 +1,14 @@
 Package: betfaiR
 Type: Package
 Title: R client for Betfair's API
-Version: 0.2
+Version: 0.5
 Date: 2015-07-11
 Author: Thomas Heslop
 Maintainer: Thomas Heslop <t_heslop@hotmail.co.uk>
 Description: R client for the Betfair Exchange API.
 License: MIT
 LazyData: TRUE
-Imports: 
+Imports:
     httr,
     jsonlite,
     plyr,
