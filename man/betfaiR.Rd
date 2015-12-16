@@ -77,7 +77,7 @@ building the list.
      all orders, see \link{currentOrders}, use the various params too help filter
      bets}
      \item{\code{placeOrders(marketId, selectionId, orderType = "LIMIT", handicap = NULL,
-     side = "BACK", order = limitOrder())}}{ Place an order, requires a marketId and selectionId (see
+     side = "BACK", order = limitOrder())}}{ Place an order, see \link{placeOrders}, requires a marketId and selectionId (see
      \link{marketCatalogue} and \link{marketBook} for details on these params), make use of
      various helper functions (\link{limitOrder} or \link{limitOnCloseOrder}) depending
      on the type of order}

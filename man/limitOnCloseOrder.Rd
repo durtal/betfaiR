@@ -16,6 +16,6 @@ the total stake is 2*size.}
 list with bet order
 }
 \description{
-helper function to prepare a bet, used in conjunction with \link{prepare}
+helper function to prepare a bet, used in conjunction with \link{placeOrders}
 }
 

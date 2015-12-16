@@ -1,25 +1,25 @@
-#' helper function for constructing request for preparing orders
-#'
-#' @name prepare
-#' @description prepare a bet for \link{placeOrders} method
-#'
-#' @param marketId the unique market id, starts with \code{1.} for UK exchange,
-#' and \code{2.} for Aus exchange
-#' @param selectionId the selection (runner) unique id
-#' @param orderType type of order, \strong{LIMIT} (default) for immediate execution,
-#' \strong{LIMIT_ON_CLOSE} limit order for the auction (SP), \strong{MARKET_ON_CLOSE}
-#' market order for the auction (SP)
-#' @param handicap the handicap associated with the runner (\code{selectionId}) in
-#' case of Asian Handicap markets
-#' @param side "BACK" (default) or "LAY"
-#' @param order the type of order, this can be three types and inputs depend on
-#' parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
-#' \link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
-#' use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
-#' \strong{MARKET_ON_CLOSE} then a simple list consisting of one element called
-#' \strong{liability} should be supplied
-#'
-#' @return returns a list with an order for Betfair
+# helper function for constructing request for preparing orders
+#
+# @name prepare
+# @description prepare a bet for \link{placeOrders} method
+#
+# @param marketId the unique market id, starts with \code{1.} for UK exchange,
+# and \code{2.} for Aus exchange
+# @param selectionId the selection (runner) unique id
+# @param orderType type of order, \strong{LIMIT} (default) for immediate execution,
+# \strong{LIMIT_ON_CLOSE} limit order for the auction (SP), \strong{MARKET_ON_CLOSE}
+# market order for the auction (SP)
+# @param handicap the handicap associated with the runner (\code{selectionId}) in
+# case of Asian Handicap markets
+# @param side "BACK" (default) or "LAY"
+# @param order the type of order, this can be three types and inputs depend on
+# parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
+# \link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
+# use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
+# \strong{MARKET_ON_CLOSE} then a simple list consisting of one element called
+# \strong{liability} should be supplied
+#
+# @return returns a list with an order for Betfair
 prepare <- function(marketId, selectionId, orderType = "LIMIT",
                     handicap = "0", side = "BACK",
                     order = NULL) {
@@ -49,7 +49,7 @@ prepare <- function(marketId, selectionId, orderType = "LIMIT",
 #'
 #' @name limitOrder
 #'
-#' @description helper function to prepare a bet, used in conjunction with \link{prepare}
+#' @description helper function to prepare a bet, used in conjunction with \link{placeOrders}
 #'
 #' @param size the size of the bet. \strong{Note:} for a market type of EACH_WAY,
 #' the total stake is 2*size.
@@ -73,7 +73,7 @@ limitOrder <- function(size = 2, price = NULL, persistenceType = "LAPSE") {
 #'
 #' @name limitOnCloseOrder
 #'
-#' @description helper function to prepare a bet, used in conjunction with \link{prepare}
+#' @description helper function to prepare a bet, used in conjunction with \link{placeOrders}
 #'
 #' @param size the size of the bet. \strong{Note:} for a market type of EACH_WAY,
 #' the total stake is 2*size.
@@ -87,16 +87,16 @@ limitOnCloseOrder <- function(size = 2, price = NULL) {
     return(ord)
 }
 
-#' helper function for constructing request for canceling orders
-#'
-#' @name cancel
-#'
-#' @description cancel orders function
-#'
-#' @param ... multiple cancel orders instructions, use \link{cancel_inst}
-#' @param marketId market id
-#'
-#' @return list
+# helper function for constructing request for canceling orders
+#
+# @name cancel
+#
+# @description cancel orders function
+#
+# @param ... multiple cancel orders instructions, use \link{cancel_inst}
+# @param marketId market id
+#
+# @return list
 cancel <- function(..., marketId = NA) {
     inst <- as.list(environment())
     inst <- inst[!sapply(inst, is.na)]
@@ -162,31 +162,31 @@ update_inst <- function(betId, persistenceType) {
     return(inst)
 }
 
-#' helper function for constructing request for retrieving current orders
-#'
-#' @name current
-#'
-#' @description helper function used by the \link{currentOrders} method to build
-#' request object for finding current unsettled bets
-#'
-#' @param betId unique bet Id
-#' @param marketId unique market Id
-#' @param orderProjection default of \strong{ALL} returns all unsettled positions,
-#' matched or partially matched, change to \strong{EXECUTABLE} to filter for orders
-#' with a portion remaining, or \strong{EXECUTION_COMPLETE} for orders which have
-#' been filled, see orderProjection section in \link{bettingEnums} for more details
-#' @param from date filter, string in yyyy-mm-dd format
-#' @param to date filter, string in yyyy-mm-dd format
-#' @param orderBy how to order orders, default orders by when they were placed, see
-#' orderBy section in \link{bettingEnums} for more details
-#' @param sort how to sort results, see sortDir section in \link{bettingEnums} for
-#' more details
-#' @param fromRecord specifies the first record to be returned, records start at
-#' index zero (not one)
-#' @param count specifies how many records are returned from the index position set
-#' by \code{fromRecord}, there is a limit of 1000.
-#'
-#' @return list with parameters to filter currently unsettled bets
+# helper function for constructing request for retrieving current orders
+#
+# @name current
+#
+# @description helper function used by the \link{currentOrders} method to build
+# request object for finding current unsettled bets
+#
+# @param betId unique bet Id
+# @param marketId unique market Id
+# @param orderProjection default of \strong{ALL} returns all unsettled positions,
+# matched or partially matched, change to \strong{EXECUTABLE} to filter for orders
+# with a portion remaining, or \strong{EXECUTION_COMPLETE} for orders which have
+# been filled, see orderProjection section in \link{bettingEnums} for more details
+# @param from date filter, string in yyyy-mm-dd format
+# @param to date filter, string in yyyy-mm-dd format
+# @param orderBy how to order orders, default orders by when they were placed, see
+# orderBy section in \link{bettingEnums} for more details
+# @param sort how to sort results, see sortDir section in \link{bettingEnums} for
+# more details
+# @param fromRecord specifies the first record to be returned, records start at
+# index zero (not one)
+# @param count specifies how many records are returned from the index position set
+# by \code{fromRecord}, there is a limit of 1000.
+#
+# @return list with parameters to filter currently unsettled bets
 current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
                     from = NULL, to = NULL, orderBy = "BY_BET",
                     sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
@@ -215,25 +215,25 @@ current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
     return(orderList)
 }
 
-#' helper function for constructing request for retrieving cleared orders
-#'
-#' @name cleared
-#'
-#' @description helper function used by the \link{clearedOrders} method to build
-#' request object for finding settled orders
-#'
-#' @param betStatus filter based on how the bet was settled, one of \strong{SETTLED}
-#' (default), \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}
-#' @param eventTypeIds retrieve bets based on sport
-#' @param eventIds retrieve bets based on event
-#' @param marketIds retrieve bets based on markets
-#' @param runnerIds retrieve bets on specific runners
-#' @param betIds unique bets
-#' @param side \strong{BACK} or \strong{LAY} orders
-#' @param from filter according to date, format should be yyyy-mm-dd
-#' @param to filter according to date, format should be yyyy-mm-dd
-#'
-#' @return list with parameters to filter cleared bets
+# helper function for constructing request for retrieving cleared orders
+#
+# @name cleared
+#
+# @description helper function used by the \link{clearedOrders} method to build
+# request object for finding settled orders
+#
+# @param betStatus filter based on how the bet was settled, one of \strong{SETTLED}
+# (default), \strong{VOIDED}, \strong{LAPSED}, or \strong{CANCELLED}
+# @param eventTypeIds retrieve bets based on sport
+# @param eventIds retrieve bets based on event
+# @param marketIds retrieve bets based on markets
+# @param runnerIds retrieve bets on specific runners
+# @param betIds unique bets
+# @param side \strong{BACK} or \strong{LAY} orders
+# @param from filter according to date, format should be yyyy-mm-dd
+# @param to filter according to date, format should be yyyy-mm-dd
+#
+# @return list with parameters to filter cleared bets
 cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
                     marketIds = NULL, runnerIds = NULL, betIds = NULL,
                     side = "BACK", to = NULL, from = NULL) {
@@ -242,18 +242,18 @@ cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
 
     if(!is.null(from)) {
         orderList$from <- NULL
-        orderlist$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+        orderList$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
     }
     if(!is.null(to)) {
         orderList$to <- NULL
         orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
     }
 
-    if(!is.null(orderList$eventTypeIds)) orderList$eventTypeIds <- as.list(orderlist$eventTypeIds)
-    if(!is.null(orderList$eventIds)) orderList$eventIds <- as.list(orderlist$eventIds)
-    if(!is.null(orderList$marketIds)) orderList$marketIds <- as.list(orderlistmarketIdseventTypeIds)
-    if(!is.null(orderList$runnerIds)) orderList$runnerIds <- as.list(orderlist$runnerIds)
-    if(!is.null(orderList$betIds)) orderList$betIds <- as.list(orderlist$betIds)
+    if(!is.null(orderList$eventTypeIds)) orderList$eventTypeIds <- as.list(orderList$eventTypeIds)
+    if(!is.null(orderList$eventIds)) orderList$eventIds <- as.list(orderList$eventIds)
+    if(!is.null(orderList$marketIds)) orderList$marketIds <- as.list(orderList$marketIds)
+    if(!is.null(orderList$runnerIds)) orderList$runnerIds <- as.list(orderList$runnerIds)
+    if(!is.null(orderList$betIds)) orderList$betIds <- as.list(orderList$betIds)
 
     orderList <- orderList[!sapply(orderList, is.null)]
 

@@ -224,7 +224,7 @@ NULL
 #' \strong{MARKET_ON_CLOSE} market order for the auction (SP)
 #' @param handicap
 #' @param side \strong{BACK} or \strong{LAY}
-#' @param orderthe type of order, this can be three types and inputs depend on
+#' @param order the type of order, this can be three types and inputs depend on
 #' parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
 #' \link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}
 #' use the \link{limitOnCloseOrder} function to construct the order.  If orderType is
