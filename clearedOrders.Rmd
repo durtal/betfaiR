@@ -30,8 +30,6 @@ param | details
 `betIds` | retrieve data on specific bets
 `side` | retrieve data based on whether they were **BACK** or **LAY**
 `from` | date filter
-`count` | specifies how many records are returned from the index position set by `fromRecord`. There is a limit of 1000 records.
-`from` | date filter, string should be in yyyy-mm-dd format
 `to` | date filter, string should be in yyyy-mm-dd format
 
 ### return
