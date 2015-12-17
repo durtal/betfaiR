@@ -8,7 +8,7 @@ Different types of bets require differently formatted requests when bets are bei
 
 ## `limitOrder`
 
-This helper function is to be used with the [`placedOrders`](placedOrders.html) method when an orderType is **LIMIT**, to help construct the conditions of a bet.
+This helper function is to be used with the [`placeOrders`](placeOrders.html) method when an orderType is **LIMIT**, to help construct the conditions of a bet.
 
 ### usage
 
