@@ -10,7 +10,7 @@ bf_check(res, method = "competitions")
 \item{res}{response object}
 
 \item{method}{the method the response object came from, see methods section on
-\link{betfair} page, or \link{base_request}.}
+\link{betfair} page, or \link{bf_basic_req}.}
 }
 \description{
 check for any errors in the response from \link{bf_post}

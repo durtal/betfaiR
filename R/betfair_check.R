@@ -4,7 +4,7 @@
 #'
 #' @param res response object
 #' @param method the method the response object came from, see methods section on
-#' \link{betfair} page, or \link{base_request}.
+#' \link{betfair} page, or \link{bf_basic_req}.
 #'
 #' @details errors may be invalid JSON, missing parameters, or if the response contains
 #' zero results, otherwise return the results with a class that corresponds to
