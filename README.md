@@ -21,7 +21,7 @@ The primary function in **betfaiR** is `betfair`, which takes three arguments, y
 ```R
 bf <- betfair(usr = "USERNAME",
               pwd = "PASSWORD",
-              key = "APP_KEY")
+              key = "API_KEY")
 ```
 
 The `betfair` function returns an environment with various methods, you can inspect you session token (required by Betfair for all methods) via the following:
@@ -34,7 +34,7 @@ bf$session()
 There is a login in method returned into the `bf` environment, allowing users to login in again if something went wrong initially, this function stores the new details in an hidden object within the environment, and updates the session token.
 
 ```R
-bf$login(usr = "USERNAME2", pwd = "PASSWORD", key = "APP_KEY")
+bf$login(usr = "USERNAME2", pwd = "PASSWORD", key = "API_KEY")
 ```
 
 The view the available methods, simply print the environment `bf`
