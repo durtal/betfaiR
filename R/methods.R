@@ -8,29 +8,14 @@
 #' @param filter list to select desired markets, see \link{marketFilter},
 #' or visit \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter}{developer.betfair.com},
 #' for the different options.
-#' competitions (ie. World Cup 2014) associated with the
-#' markets selected by the \code{filter} parameter, with the following variables:
+#'
+#' @return competitions (ie. World Cup 2014) associated with the markets selected
+#' by the \code{filter} parameter, with the following variables:
 #' \itemize{
 #'      \item{\code{competition_id} competition id}
 #'      \item{\code{competition_name} competition name}
 #'      \item{\code{marketCount} number of markets associated with this competition}
 #'      \item{\code{competitionRegion} region in which this competition is happening}
-#' }
-#'
-#' @examples
-#' \dontrun{
-#'
-#' # after logging in
-#' bf <- betfair(usr = "username", pwd = "password", key = "API_key)
-#'
-#' # return all competitions
-#' bf$competitions()
-#'
-#' # filter just football competitions
-#' bf$competitions(filter = list("eventTypeIds" = 1))
-#'
-#' # or
-#' bf$competitions(filter = marketFilter(eventTypeIds = 1))
 #' }
 NULL
 
@@ -211,7 +196,7 @@ NULL
 
 #' placeOrders method
 #'
-#' @description \code{placeOrders} function allows bets to be placed.
+#' @description placeOrders function allows bets to be placed.
 #'
 #' @name placeOrders
 #'
@@ -222,8 +207,8 @@ NULL
 #' @param orderType the type of order, \strong{LIMIT} a normal exchange order for
 #' immediate execution, \strong{LIMIT_ON_CLOSE} limit order for the auction (SP bet)
 #' \strong{MARKET_ON_CLOSE} market order for the auction (SP)
-#' @param handicap
-#' @param side \strong{BACK} or \strong{LAY}
+#' @param handicap The handicap associated with the runner in case of Asian handicap markets, null otherwise.
+#' @param side Back or Lay order
 #' @param order the type of order, this can be three types and inputs depend on
 #' parameter \strong{orderType}.  If orderType is \strong{LIMIT} then use the
 #' \link{limitOrder} function to construct order.  If orderType is \strong{LIMIT_ON_CLOSE}

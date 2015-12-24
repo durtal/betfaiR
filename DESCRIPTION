@@ -13,4 +13,6 @@ Imports:
     jsonlite,
     plyr,
     stringr
-Suggests: testthat
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
