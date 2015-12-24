@@ -24,7 +24,7 @@ bf_login <- function(usr, pwd, key) {
     resp <- httr::POST(url = "https://identitysso.betfair.com/api/login",
                        query = cred,
                        httr::add_headers("Accept" = "application/json",
-                                   "X-Application" = key))
+                                         "X-Application" = key))
     # construct list containing response
     ssoid <- list()
     class(ssoid) <- c(class(ssoid), "bf_login")
