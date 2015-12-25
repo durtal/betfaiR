@@ -2,7 +2,7 @@
 title: "betfair"
 ---
 
-`betfair` is the **primary** function in the `betfaiR` package.  It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - `r Sys.Date()` - this is not _all_ methods).
+`betfair` is the **primary** function in the `betfaiR` package.  It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods.
 
 ```{r echo=FALSE, message=FALSE}
 library(betfaiR)
