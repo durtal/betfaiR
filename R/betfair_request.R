@@ -223,7 +223,9 @@ bf_basic_req <- function(filter = list(), method = "competitions") {
                                    "eventTypes", "marketTypes", "marketBook",
                                    "marketCatalogue", "placeOrders", "venues",
                                    "cancelOrders", "replaceOrders", "marketProfitAndLoss",
-                                   "currentOrders", "updateOrders", "clearedOrders"))
+                                   "currentOrders", "updateOrders", "clearedOrders",
+                                   "acc_funds", "acc_details", "acc_statement",
+                                   "acc_transfer"))
     tmp <- structure(filter, class = c("list", param))
     return(tmp)
 }

@@ -11,8 +11,10 @@
 #' @export
 bf_post <- function(body, headers) {
 
+    url <- "https://api.betfair.com/exchange/betting/json-rpc/v1"
+    if(grepl("AccountAPING", body)) url <- "https://api.betfair.com/exchange/account/json-rpc/v1"
     headers <- httr::add_headers(unlist(headers))
-    res <- httr::POST(url = "https://api.betfair.com/exchange/betting/json-rpc/v1",
+    res <- httr::POST(url = url,
                       body = body,
                       headers)
     return(res)

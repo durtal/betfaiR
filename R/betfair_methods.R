@@ -98,10 +98,15 @@ betfair <- function(usr, pwd, key) {
 
     self <- local({
 
-        # account <- function() {
-        #     # once implemented the accounts API this will return an environment
-        #     # to manipulate the users account
-        # }
+        account <- function(pass) {
+            if(pass == pwd) {
+                acc <- bf_account(usr = usr, pwd = pwd, key = key)
+                return(acc)
+            } else {
+                message("pass != previously entered password")
+                return()
+            }
+        }
 
         competitions <- function(filter = marketFilter()) {
             # build request object

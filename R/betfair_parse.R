@@ -257,6 +257,19 @@ bf_parse.venues <- function(res) {
     return(res)
 }
 
+#' @export
+bf_parse.acc_details <- function(res) {
+
+    out <- data.frame(res$result, stringsAsFactors = FALSE)
+    return(out)
+}
+
+#' @export
+bf_parse.acc_transfer <- function(res) {
+
+    return(res$result$transactionId)
+}
+
 basic_parse <- function(res) {
 
     if(is.list(res$result)) {

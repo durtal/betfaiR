@@ -259,3 +259,11 @@ cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
 
     return(orderList)
 }
+
+# statement function for constructing request for retrieving data about Account
+#
+statement <- function(after = NULL, before = NULL, n = NULL, wallet = NULL,
+                      include = "ALL") {
+
+    statement <- as.list(environment())
+}
