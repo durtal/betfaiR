@@ -1,6 +1,6 @@
 # helper function for constructing request for preparing orders
 #
-# @name prepare
+# @name bf_prepare
 # @description prepare a bet for \link{placeOrders} method
 #
 # @param marketId the unique market id, starts with \code{1.} for UK exchange,
@@ -20,9 +20,8 @@
 # \strong{liability} should be supplied
 #
 # @return returns a list with an order for Betfair
-prepare <- function(marketId, selectionId, orderType = "LIMIT",
-                    handicap = "0", side = "BACK",
-                    order = NULL) {
+bf_prepare <- function(marketId, selectionId, orderType = "LIMIT",
+                       handicap = "0", side = "BACK", order = NULL) {
 
     orderList <- list("marketId" = as.character(marketId),
                       "instructions" = data.frame("selectionId" = as.character(selectionId),
@@ -89,7 +88,7 @@ limitOnCloseOrder <- function(size = 2, price = NULL) {
 
 # helper function for constructing request for canceling orders
 #
-# @name cancel
+# @name bf_cancel
 #
 # @description cancel orders function
 #
@@ -97,7 +96,7 @@ limitOnCloseOrder <- function(size = 2, price = NULL) {
 # @param marketId market id
 #
 # @return list
-cancel <- function(..., marketId = NA) {
+bf_cancel <- function(..., marketId = NA) {
     inst <- as.list(environment())
     inst <- inst[!sapply(inst, is.na)]
 
@@ -164,7 +163,7 @@ update_inst <- function(betId, persistenceType) {
 
 # helper function for constructing request for retrieving current orders
 #
-# @name current
+# @name bf_current
 #
 # @description helper function used by the \link{currentOrders} method to build
 # request object for finding current unsettled bets
@@ -187,7 +186,7 @@ update_inst <- function(betId, persistenceType) {
 # by \code{fromRecord}, there is a limit of 1000.
 #
 # @return list with parameters to filter currently unsettled bets
-current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
+bf_current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
                     from = NULL, to = NULL, orderBy = "BY_BET",
                     sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
                     count = NULL) {
@@ -217,7 +216,7 @@ current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
 
 # helper function for constructing request for retrieving cleared orders
 #
-# @name cleared
+# @name bf_cleared
 #
 # @description helper function used by the \link{clearedOrders} method to build
 # request object for finding settled orders
@@ -234,9 +233,9 @@ current <- function(betId = NULL, marketId = NULL, orderProjection = "ALL",
 # @param to filter according to date, format should be yyyy-mm-dd
 #
 # @return list with parameters to filter cleared bets
-cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
-                    marketIds = NULL, runnerIds = NULL, betIds = NULL,
-                    side = "BACK", to = NULL, from = NULL) {
+bf_cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
+                       marketIds = NULL, runnerIds = NULL, betIds = NULL,
+                       side = "BACK", to = NULL, from = NULL) {
 
     orderList <- as.list(environment())
 
@@ -262,8 +261,20 @@ cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL,
 
 # statement function for constructing request for retrieving data about Account
 #
-statement <- function(after = NULL, before = NULL, n = NULL, wallet = NULL,
-                      include = "ALL") {
+bf_statement <- function(after = NULL, before = NULL, n = NULL, wallet = NULL,
+                         include = "ALL") {
 
     statement <- as.list(environment())
+    statement <- statement[!sapply(statement, is.null)]
+    statement$itemDateRange <- as.list(data.frame())
+    if(!is.null(after)) {
+        statement$itemDateRange$from <- format(as.POSIXct(after), "%Y-%m-%dT%TZ")
+        statement$after <- NULL
+    }
+    if(!is.null(before)) {
+        statement$itemDateRange$to <- format(as.POSIXct(before), "%Y-%m-%dT%TZ")
+        statement$before <- NULL
+    }
+
+    return(statement)
 }
