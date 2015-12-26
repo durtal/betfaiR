@@ -1,7 +1,7 @@
 #' post a request to Betfair
 #'
 #' @description POST request to Betfair's Exchange API, requires users to prepare
-#' a request using \link{base_request}, \link{bf_request} and to have login
+#' a request using \link{bf_basic_req}, \link{bf_request} and to have login
 #' credentials from \link{bf_login}.
 #'
 #' @param body request body, json object containing data about the method and

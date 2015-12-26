@@ -8,6 +8,10 @@ bf_parse(res, ...)
 }
 \arguments{
 \item{res}{response to be parsed into dataframes}
+
+\item{...}{some methods require additional arguments, when parsing data from
+\link{marketCatalogue} you can enter the parameter \code{keepRules} to make
+the rules of the market are returned, otherwise these are discarded}
 }
 \description{
 convert response from the various \link{betfair} methods, tries

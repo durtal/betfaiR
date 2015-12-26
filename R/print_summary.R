@@ -232,3 +232,44 @@ summary.clearedOrders <- function(x) {
         cat("\n")
     })
 }
+
+#' @export
+print.bf_transaction <- function(x) {
+
+    cat("\nDate:            \t", x$basic$itemDate, "\n")
+    cat("Amount:          \t", x$basic$amount, "\n")
+    cat("Balance:         \t", x$basic$balance, "\n")
+
+    w <- options()$width
+    cat("\n", paste0(rep("-", w), collapse = ""))
+}
+
+#' @export
+summary.bf_transaction <- function(x) {
+
+    cat("\nDate:            \t", x$basic$itemDate, "\n")
+    cat("Amount:          \t", x$basic$amount, "\n")
+    cat("Balance:         \t", x$basic$balance, "\n")
+
+    cat("\nFull Market Name:\t", x$transaction$fullMarketName, "\n")
+    cat("Avg Price:       \t", x$transaction$avgPrice, "\n")
+    cat("Bet Size:        \t", x$transaction$betSize, "\n")
+    cat("Win/Lose:       \t", x$transaction$winLose, "\n")
+
+    w <- options()$width
+    cat("\n", paste0(rep("-", w), collapse = ""))
+}
+
+#' @export
+print.account_statement <- function(x) {
+    plyr::l_ply(x, .fun = function(i) {
+        print(i)
+    })
+}
+
+#' @export
+summary.account_statement <- function(x) {
+    plyr::l_ply(x, .fun = function(i) {
+        summary(i)
+    })
+}

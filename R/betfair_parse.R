@@ -8,6 +8,9 @@
 #' may not be that reliable at the moment
 #'
 #' @param res response to be parsed into dataframes
+#' @param ... some methods require additional arguments, when parsing data from
+#' \link{marketCatalogue} you can enter the parameter \code{keepRules} to make
+#' the rules of the market are returned, otherwise these are discarded
 #'
 #' @export
 bf_parse <- function(res, ...) {
@@ -117,8 +120,7 @@ bf_parse.marketBook <- function(res) {
 
 
 #' @export
-bf_parse.marketCatalogue <- function(res, marketProjection = NULL,
-                                          keepRules = FALSE) {
+bf_parse.marketCatalogue <- function(res, keepRules = FALSE) {
 
     out <- lapply(res$result, function(x) {
 
@@ -268,6 +270,20 @@ bf_parse.acc_details <- function(res) {
 bf_parse.acc_transfer <- function(res) {
 
     return(res$result$transactionId)
+}
+
+#' @export
+bf_parse.acc_statement <- function(res) {
+
+    out <- lapply(res$result$accountStatement, function(i) {
+        out <- structure(list(), class = c("list", "bf_transaction"))
+        out$basic <- data.frame(i[!sapply(i, is.list)], stringsAsFactors = FALSE)
+        out$transaction <- data.frame(i$legacyData[!sapply(i$legacyData, is.null)], stringsAsFactors = FALSE)
+        return(out)
+    })
+    class(out) <- c("list", "account_statement")
+
+    return(out)
 }
 
 basic_parse <- function(res) {

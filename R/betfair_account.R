@@ -60,28 +60,24 @@ bf_account <- function(usr, pwd, key) {
             return(res)
         }
 
-        # statement <- function(after = NULL, before = NULL, n = NULL, wallet = NULL,
-        #                       include = "ALL") {
-        #     # build request object
-        #     req <- bf_basic_req(list(), method = "acc_statement")
-        #     params <- list("includeItem" = include,
-        #                    "itemDateRange" = list())
-        #     if(!is.null(n)) params$recordCount <- n
-        #     if(!is.null(wallet)) params$wallet <- wallet
-        #     if(!is.null(after)) params$itemDateRange$from <- format(as.POSIXct(after), "%Y-%m-%dT%TZ")
-        #     if(!is.null(before)) params$itemDateRange$to <- format(as.POSIXct(before), "%Y-%m-%dT%TZ")
-        #     req <- bf_request(req, params)
-        #     # post request
-        #     res <- bf_post(body = req, ssoid$ssoid)
-        #     # convert response
-        #     res <- httr::content(res)
-        #     # handle errors
-        #     # res <- bf_check(res, method = "")
-        #     # # parse response
-        #     # res <- bf_parse(res)
-        #
-        #     return(res)
-        # }
+        statement <- function(after = NULL, before = NULL, n = NULL, wallet = NULL,
+                              include = "ALL") {
+            # build request object
+            req <- bf_basic_req(list(), method = "acc_statement")
+            params <- bf_statement(after = after, before = before, n = n, wallet = wallet,
+                                   include = include)
+            req <- bf_request(req, params)
+            # post request
+            res <- bf_post(body = req, ssoid$ssoid)
+            # convert response
+            res <- httr::content(res)
+            # handle errors
+            res <- bf_check(res, method = "acc_statement")
+            # parse response
+            res <- bf_parse(res)
+
+            return(res)
+        }
 
         transfer <- function(from = "UK", to = "AUSTRALIAN", amount = 2) {
             # build request object
