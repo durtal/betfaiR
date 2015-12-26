@@ -208,8 +208,8 @@ bf_parse.placeOrders <- function(res) {
     if("errorCode" %in% res$result) {
         out$errorCode <- res$result$errorCode
     }
-    out$order <- data.frame(res$result$instructionReports[[1]][!sapply(res$result$instructionReports[[1]], is.list)])
-    out$orderInstruction <- data.frame(res$result$instructionReports[[1]]$instruction)
+    out$order <- data.frame(res$result$instructionReports[[1]][!sapply(res$result$instructionReports[[1]], is.list)], stringsAsFactors = FALSE)
+    out$orderInstruction <- data.frame(res$result$instructionReports[[1]]$instruction, stringsAsFactors = FALSE)
     names(out$orderInstruction) <- gsub("[[:alpha:]]+\\.", "", names(out$orderInstruction))
 
     return(out)
@@ -223,6 +223,17 @@ bf_parse.cancelOrders <- function(res) {
     out$instructions <- lapply(res$result$instructionReports, function(i) {
         data.frame(i, stringsAsFactors = FALSE)
     })
+    return(out)
+}
+
+#' @export
+bf_parse.replaceOrders <- function(res) {
+    out <- structure(list(), class = "bf_replace_orders")
+    tmp <- res$result$instructionReports
+    out$status <- res$result$status
+    out$cancel <- data.frame(tmp[[1]]$cancelInstructionReport[!sapply(tmp[[1]]$cancelInstructionReport, is.null)], stringsAsFactors = FALSE)
+    out$place <- data.frame(tmp[[1]]$placeInstructionReport[!sapply(tmp[[1]]$placeInstructionReport, is.null)], stringsAsFactors = FALSE)
+    names(out$place) <- gsub("([[:alpha:]]*\\.)+", "", names(out$place))
     return(out)
 }
 

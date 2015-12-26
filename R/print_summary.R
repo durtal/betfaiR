@@ -160,6 +160,24 @@ summary.bf_cancel_orders <- function(x) {
 }
 
 #' @export
+print.bf_replace_orders <- function(x) {
+    cat("\nStatus:       \t", x$status)
+    cat("\nCancel Status:\t", x$cancel$status)
+    cat("\n              \t", x$cancel$selectionId)
+    cat("\nPlace Status: \t", x$place$status)
+    cat("\n              \t", x$place$selectionId)
+}
+
+#' @export
+summary.bf_replace_orders <- function(x) {
+    cat("\nStatus:       \t", x$status)
+    cat("\nCancel Status:\t", x$cancel$status)
+    cat("\n              \t", x$cancel$selectionId)
+    cat("\nPlace Status: \t", x$place$status, "\nInstructions:\n")
+    print(x$place, row.names = FALSE)
+}
+
+#' @export
 print.market_PnL <- function(x) {
     cat("\nMarketId:\t", x$marketId, "\nRunners:\n")
     print(x$PnL, row.names = FALSE)

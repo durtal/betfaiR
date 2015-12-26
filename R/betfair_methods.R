@@ -263,8 +263,7 @@ betfair <- function(usr, pwd, key) {
             res <- bf_check(res, method = "marketCatalogue")
             # parse response
             if(is.list(res)) {
-                res <- bf_parse(res, marketProjection = marketProjection,
-                                     keepRules = keepRules)
+                res <- bf_parse(res, keepRules = keepRules)
             }
 
             return(res)
@@ -405,7 +404,7 @@ betfair <- function(usr, pwd, key) {
             # convert response
             res <- httr::content(res)
             # handle errors
-            res <- bf_check(res, method = "cancelOrders")
+            res <- bf_check(res, method = "replaceOrders")
             # parse response
             res <- bf_parse(res)
 
