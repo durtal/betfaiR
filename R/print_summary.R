@@ -291,3 +291,20 @@ summary.account_statement <- function(x) {
         summary(i)
     })
 }
+
+#' @export
+plot.account_statement <- function(x) {
+    df <- lapply(x, function(i) {
+        i$basic
+    })
+    df <- plyr::ldply(df)
+    df$itemDate <- strptime(df$itemDate, "%Y-%m-%dT%H:%M:%S")
+    ggplot2::ggplot(data = df) +
+        ggplot2::geom_path(ggplot2::aes(x = itemDate,
+                                        y = balance),
+                           col = "#D9220F",
+                           size = 1.1) +
+        ggplot2::labs(x = "Date",
+                      y = "Balance") +
+        ggplot2::theme_light()
+}
