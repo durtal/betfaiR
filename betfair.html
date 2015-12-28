@@ -141,6 +141,9 @@ img {
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
+                            <a href="bf_account.html">bf_account</a>
+                        </li>
+                        <li>
                             <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
@@ -242,9 +245,6 @@ img {
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
-                </li>
             </ul>
         </div>
     </div>
@@ -255,7 +255,7 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-15 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-28 - this is not <em>all</em> methods).</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username,
@@ -294,6 +294,7 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
+    $account(pass) 
     $cancelOrders(..., marketId = NA) 
     $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
    betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
@@ -324,102 +325,108 @@ Methods available:
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left"><code>account</code></td>
+<td align="left">Return environment with methods for retrieving data about your account</td>
+<td align="left"><code>TRUE</code></td>
+<td align="left"><a href="bf_account.html">bf_account</a></td>
+</tr>
+<tr class="even">
 <td align="left"><code>cancelOrders</code></td>
 <td align="left">Cancel existing orders that may be unmatched or partially matched</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="cancelOrders.html">cancelOrders</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>clearedOrders</code></td>
 <td align="left">Retrieve data about cleared orders</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="clearedOrders.html">clearedOrders</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>competitions</code></td>
 <td align="left">Retrieve data about the different competitions with current markets</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_competitions.html">competitions</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>countries</code></td>
 <td align="left">Retrieve data about the different countries hosting events</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_countries.html">countries</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>currentOrders</code></td>
 <td align="left">Retrieve data about current orders</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="currentOrders.html">currentOrders</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>events</code></td>
 <td align="left">Retrieve data about the different events</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_events.html">events</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>eventTypes</code></td>
 <td align="left">Retrieve data about the different event types, ie. sports</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_eventTypes.html">eventTypes</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>login</code></td>
 <td align="left">Login in, a session token will be returned, over-writing the previous token when betfair(usr, pwd, key) was used</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="login_session.html">login</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>marketBook</code></td>
 <td align="left">Retrieve dynamic data about markets. Data includes prices, the status of the market, the status of the selections, the traded volume, and the status of any orders you have in the market</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_marketBook.html">marketBook</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>marketCatalogue</code></td>
 <td align="left">Retrieve data about the different types of markets</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_marketCatalogue.html">marketCatalogue</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>marketPnL</code></td>
 <td align="left">Retrieve current profit and loss for markets</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_marketPnL.html">marketPnL</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>marketTypes</code></td>
 <td align="left">Retrieve counts for the different market types</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="methods_marketTypes.html">marketTypes</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>placeOrders</code></td>
 <td align="left">Place a bet. <strong>This likely needs work, so please proceed cautiously, and if possible provide feedback</strong></td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="placeOrders.html">placeOrder</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>replaceOrders</code></td>
 <td align="left">Replace existing orders with new instructions</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="replaceOrders.html">replaceOrders</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>session</code></td>
 <td align="left">Prints session token</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="login_session.html">session</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code>updateOrders</code></td>
 <td align="left">Update existing orders with new instructions</td>
 <td align="left"><code>TRUE</code></td>
 <td align="left"><a href="updateOrders.html">updateOrders</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code>venues</code></td>
 <td align="left">Retrieve data about the venues hosting racing (horse and greyhound)</td>
 <td align="left"><code>TRUE</code></td>
@@ -455,6 +462,7 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
+    $account(pass) 
     $cancelOrders(..., marketId = NA) 
     $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
    betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 

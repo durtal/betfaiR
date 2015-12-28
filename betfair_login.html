@@ -141,6 +141,9 @@ img {
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
+                            <a href="bf_account.html">bf_account</a>
+                        </li>
+                        <li>
                             <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
@@ -242,9 +245,6 @@ img {
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
-                </li>
             </ul>
         </div>
     </div>
@@ -334,6 +334,7 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
+    $account(pass) 
     $cancelOrders(..., marketId = NA) 
     $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
    betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 

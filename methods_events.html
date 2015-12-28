@@ -141,6 +141,9 @@ img {
                             <a href="betfair_login.html">bf_login</a>
                         </li>
                         <li>
+                            <a href="bf_account.html">bf_account</a>
+                        </li>
+                        <li>
                             <a href="request_functions.html">bf_request</a>
                         </li>
                         <li>
@@ -242,9 +245,6 @@ img {
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="http://www.github.com/durtal/betfaiR"> <i class="fa fa-github-square fa-lg"></i></a>
-                </li>
             </ul>
         </div>
     </div>
@@ -330,54 +330,54 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all countries</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>  event_id                  event_name event_countryCode event_timezone
-1 27183450     ICC World Twenty20 2016                IN  Asia/Calcutta
-2 27357114          NFL Season 2015/16                US     US/Eastern
-3 27560545 PGA Tour Money List 2015/16                US  Europe/London
-4 27629926           Denmark v Romania              &lt;NA&gt;            UTC
-5 27629924            Levice v Komarno                SK            UTC
-6 27157160                     Group E                FR  Europe/London
+<pre><code>  event_id              event_name event_countryCode event_timezone
+1 27632318     Tampa Bay @ Calgary                US     US/Eastern
+2 27183450 ICC World Twenty20 2016                IN  Asia/Calcutta
+3 27632312    Winnipeg @ Nashville                US     US/Eastern
+4 27357114      NFL Season 2015/16                US     US/Eastern
+5 27632306 Montreal @ Philadelphia                US     US/Eastern
+6 27632304    Minnesota @ Columbus                US     US/Eastern
             event_openDate marketCount event_venue
-1 2016-03-08T14:30:00.000Z           1        &lt;NA&gt;
-2 2015-09-11T00:30:00.000Z           5        &lt;NA&gt;
-3 2015-10-15T14:20:00.000Z           1        &lt;NA&gt;
-4 2015-12-16T19:45:00.000Z           5        &lt;NA&gt;
-5 2015-12-16T17:00:00.000Z           1        &lt;NA&gt;
-6 2016-06-10T19:00:00.000Z           5        &lt;NA&gt;</code></pre>
+1 2016-01-06T02:05:00.000Z           5        &lt;NA&gt;
+2 2016-03-08T14:30:00.000Z           1        &lt;NA&gt;
+3 2016-01-06T01:05:00.000Z           5        &lt;NA&gt;
+4 2015-09-11T00:30:00.000Z           4        &lt;NA&gt;
+5 2016-01-06T00:35:00.000Z           5        &lt;NA&gt;
+6 2016-01-06T00:05:00.000Z           5        &lt;NA&gt;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
-<pre><code>  event_id          event_name event_countryCode event_timezone
-1 27630702       Clon 16th Dec                IE  Europe/London
-2 27630012 Turf (RSA) 15th Dec                ZA            CET
-3 27630693       Kemp 16th Dec                GB  Europe/London
-4  3453086    Stewards Enquiry                GB  Europe/London
-5 27569474  Long (FRA) 2nd Oct                FR            CET
-6 27588511  Santa (US) 5th Nov                US     US/Pacific
+<pre><code>  event_id           event_name event_countryCode event_timezone
+1 27639491 Kenil (RSA) 29th Dec                ZA            CET
+2 27639493  Turf (RSA) 29th Dec                ZA            CET
+3  3453086     Stewards Enquiry                GB  Europe/London
+4 27569474   Long (FRA) 2nd Oct                FR            CET
+5 27588511   Santa (US) 5th Nov                US     US/Pacific
+6 27639504 Neuss (GER) 29th Dec                DE            CET
   event_venue           event_openDate marketCount
-1     Clonmel 2015-12-16T11:45:00.000Z          30
-2 Turffontein 2015-12-15T16:00:00.000Z           6
-3     Kempton 2015-12-16T16:05:00.000Z          32
-4        &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
-5        &lt;NA&gt; 2016-10-02T13:55:00.000Z           1
-6        &lt;NA&gt; 2016-11-05T19:00:00.000Z           1</code></pre>
+1  Kenilworth 2015-12-29T11:40:00.000Z          16
+2 Turffontein 2015-12-29T16:05:00.000Z          16
+3        &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
+4        &lt;NA&gt; 2016-10-02T13:55:00.000Z           1
+5        &lt;NA&gt; 2016-11-05T19:00:00.000Z           1
+6       Neuss 2015-12-29T15:55:00.000Z           7</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre>
 <pre><code>  event_id            event_name event_countryCode event_timezone
-1 27604429         Chep 27th Dec                GB  Europe/London
-2 27467672 Meydan (UAE) 26th Mar                AE     Asia/Dubai
-3 27551870         Leop 28th Dec                IE  Europe/London
-4 27569474    Long (FRA) 2nd Oct                FR            CET
-5 27588511    Santa (US) 5th Nov                US     US/Pacific
-6 27618178         Leop 27th Dec                IE  Europe/London
+1 27639255          Newm 3rd May                GB  Europe/London
+2 27639254          Newm 2nd May                GB  Europe/London
+3 27639253          Aint 9th Apr                GB  Europe/London
+4 27467672 Meydan (UAE) 26th Mar                AE     Asia/Dubai
+5 27604429          Chep 9th Jan                GB  Europe/London
+6 27639259         Epsom 3rd Jun                GB  Europe/London
             event_openDate marketCount
-1 2015-12-27T12:20:00.000Z           1
-2 2016-03-26T13:00:00.000Z           1
-3 2015-12-28T12:10:00.000Z           2
-4 2016-10-02T13:55:00.000Z           1
-5 2016-11-05T19:00:00.000Z           1
-6 2015-12-27T13:15:00.000Z           2</code></pre>
+1 2016-05-03T14:00:00.000Z           1
+2 2016-05-02T14:00:00.000Z           1
+3 2016-04-09T14:00:00.000Z           2
+4 2016-03-26T13:00:00.000Z           1
+5 2016-01-09T12:20:00.000Z           2
+6 2016-06-03T14:00:00.000Z           1</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>

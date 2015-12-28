@@ -37,6 +37,7 @@ bf
 
 method | details | available | help
 -------|---------|-----------|------
+`account` | Return environment with methods for retrieving data about your account | `TRUE` | [bf_account](bf_account.html)
 `cancelOrders` | Cancel existing orders that may be unmatched or partially matched | `TRUE` | [cancelOrders](cancelOrders.html)
 `clearedOrders` | Retrieve data about cleared orders | `TRUE` | [clearedOrders](clearedOrders.html)
 `competitions` | Retrieve data about the different competitions with current markets | `TRUE` | [competitions](methods_competitions.html)
