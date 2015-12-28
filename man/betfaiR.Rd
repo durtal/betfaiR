@@ -30,6 +30,8 @@ building the list.
 \section{Methods}{
 
 \describe{
+     \item{\code{account(pwd)}}{ Return environment with methods for accessing data
+     about your account}
      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
      different competitions with current markets, see \link{competitions}, see
      \link{marketFilter} for filtering data.}

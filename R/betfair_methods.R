@@ -19,6 +19,8 @@
 #'
 #' @section Methods:
 #' \describe{
+#'      \item{\code{account(pwd)}}{ Return environment with methods for accessing data
+#'      about your account}
 #'      \item{\code{competitions(filter = marketFilter())}}{ Retrieve data about the
 #'      different competitions with current markets, see \link{competitions}, see
 #'      \link{marketFilter} for filtering data.}
@@ -98,8 +100,8 @@ betfair <- function(usr, pwd, key) {
 
     self <- local({
 
-        account <- function(pass) {
-            if(pass == pwd) {
+        account <- function(pwd) {
+            if(pwd == ssoid$usr$pwd) {
                 acc <- bf_account(usr = usr, pwd = pwd, key = key)
                 return(acc)
             } else {

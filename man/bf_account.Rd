@@ -27,6 +27,9 @@ about your account
 \describe{
      \item{\code{funds()}}{ Retrieve available funds, see \link{funds}}
      \item{\code{details()}}{ Retreive account details, see \link{details}}
+     \item{\code{statement(after = NULL, before = NULL, n = NULL, wallet = NULL,
+     include = "ALL)}}{ Return account statement with all transactions, including
+     bets, deposits, withdrawals, and transfers}
      \item{\code{transfer(from = "uk", to = "aus", amount = 2)}}{ Transfer funds from one wallet
      to another, see \link{transfer}}
 }

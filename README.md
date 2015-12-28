@@ -42,6 +42,7 @@ The view the available methods, simply print the environment `bf`
 ```R
 <betfaiR API>
 Methods available:
+    $account(pass)
     $cancelOrders(..., marketId = NA)
     $clearedOrders(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL,
    betIds = NULL, side = "BACK", from = NULL, to = NULL)
@@ -74,6 +75,8 @@ racing <- bf$events(filter = marketFilter(eventTypeIds = 7))
 ```
 
 The `racing` object is now a dataframe of horse racing events, providing data that includes the event Id, event name, countryCode, timezone, venue, date, and the number of markets.
+
+The `account` method returns an environment with 4 methods for accessing data about your account, it requires you password, which will be checked against the password you entered when using `betfair`.  You can also use the `bf_account` function which requires your username, password and api key.  The `account` method can return your account statement, which can be `plot`ed, showing profit/loss over a set time period.
 
 ### PASSWORD and KEY
 
