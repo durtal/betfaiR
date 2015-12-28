@@ -18,7 +18,7 @@
 #'      \item{\code{funds()}}{ Retrieve available funds, see \link{funds}}
 #'      \item{\code{details()}}{ Retreive account details, see \link{details}}
 #'      \item{\code{statement(after = NULL, before = NULL, n = NULL, wallet = NULL,
-#'      include = "ALL)}}{ Return account statement with all transactions, including
+#'      include = "ALL")}}{ Return account statement with all transactions, including
 #'      bets, deposits, withdrawals, and transfers}
 #'      \item{\code{transfer(from = "uk", to = "aus", amount = 2)}}{ Transfer funds from one wallet
 #'      to another, see \link{transfer}}
@@ -137,4 +137,22 @@ NULL
 #' @param amount amount to transfer, minimum of 2 (default)
 #'
 #' @return transaction id
+NULL
+
+#' statement
+#'
+#' @description return account statement with all or filtered transactions,
+#' including deposits, withdrawals, bets, transfers, etc
+#'
+#' @name statement
+#'
+#' @param after filter records after this date, date should be in YYYY-MM-DD format
+#' @param before filter records before this date, date should be in YYYY-MM-DD format
+#' @param n number of records
+#' @param wallet filter according to wallet, default returns both, enter "UK" or
+#' "AUSTRALIAN"
+#' @param include filter according to transaction type
+#'
+#' @return list of transactions, one element per transaction, this list can be
+#' passed to \code{print}, \code{summary} or \code{plot}
 NULL
