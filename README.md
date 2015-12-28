@@ -42,7 +42,7 @@ The view the available methods, simply print the environment `bf`
 ```R
 <betfaiR API>
 Methods available:
-    $account(pass)
+    $account(pwd)
     $cancelOrders(..., marketId = NA)
     $clearedOrders(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL,
    betIds = NULL, side = "BACK", from = NULL, to = NULL)
