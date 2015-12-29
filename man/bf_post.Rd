@@ -4,13 +4,16 @@
 \alias{bf_post}
 \title{post a request to Betfair}
 \usage{
-bf_post(body, headers)
+bf_post(body, headers, dom)
 }
 \arguments{
 \item{body}{request body, json object containing data about the method and
 params}
 
 \item{headers}{headers, list object containing session token and api key}
+
+\item{dom}{Betfair domain, default is "uk" for the European exchange, change to
+"aus" for Australian exchange}
 }
 \description{
 POST request to Betfair's Exchange API, requires users to prepare

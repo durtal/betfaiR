@@ -9,6 +9,8 @@
 #' @param usr Betfair username
 #' @param pwd Betfair password
 #' @param key Betfair API key see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}
+#' @param dom Betfair domain, default is "uk" for the European exchange, change to
+#' "aus" for Australian exchange
 #'
 #' @return returns environment with functions for the various methods available for
 #' Betfair's API
@@ -93,16 +95,20 @@
 #' bf$competitions(filter = marketFilter(eventTypeIds = 1))
 #' }
 #' @export
-betfair <- function(usr, pwd, key) {
+betfair <- function(usr, pwd, key, dom = "uk") {
 
     # login for session token
     ssoid <- bf_login(usr = usr, pwd = pwd, key = key)
+    # domain
+    dom <- dom
 
     self <- local({
 
         account <- function(pwd) {
             if(pwd == ssoid$usr$pwd) {
-                acc <- bf_account(usr = usr, pwd = pwd, key = key)
+                acc <- bf_account(usr = ssoid$usr$usr,
+                                  pwd = ssoid$usr$pwd,
+                                  key = ssoid$usr$key)
                 return(acc)
             } else {
                 stop("pass != previously entered password")
@@ -114,7 +120,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_basic_req(filter, "competitions")
             req <- bf_request(req)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -132,7 +138,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_basic_req(filter, "countries")
             req <- bf_request(req)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -150,7 +156,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_basic_req(filter, "events")
             req <- bf_request(req)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -168,7 +174,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_basic_req(filter, "eventTypes")
             req <- bf_request(req)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -186,7 +192,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_basic_req(filter, "venues")
             req <- bf_request(req)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -199,8 +205,9 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        login <- function(usr, pwd, key) {
+        login <- function(usr, pwd, key, dom) {
             ssoid <<- bf_login(usr = usr, pwd = pwd, key = key)
+            dom <<- dom
         }
 
         session <- function() {
@@ -230,7 +237,7 @@ betfair <- function(usr, pwd, key) {
                                    orderProjection = orderProjection,
                                    matchProjection = matchProjection)
             # post request
-            res <- bf_post(body = req, headers = ssoid$ssoid)
+            res <- bf_post(body = req, headers = ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -258,7 +265,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_request(x = req, marketProjection = marketProjection,
                                    sort = sort, maxResults = maxResults)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -280,7 +287,7 @@ betfair <- function(usr, pwd, key) {
                            bsp = bsp, NET = NET)
             req <- bf_request(x = req, params = params)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -296,7 +303,7 @@ betfair <- function(usr, pwd, key) {
             req <- bf_basic_req(filter, "marketTypes")
             req <- bf_request(req)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -315,7 +322,7 @@ betfair <- function(usr, pwd, key) {
             cancel <- bf_cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = cancel)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -386,7 +393,7 @@ betfair <- function(usr, pwd, key) {
                                 order = order)
             req <- bf_request(req, order = betOrder)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors
@@ -402,7 +409,7 @@ betfair <- function(usr, pwd, key) {
             replace <- bf_cancel(marketId = marketId, ...)
             req <- bf_request(req, instructions = replace)
             # post request
-            res <- bf_post(body = req, ssoid$ssoid)
+            res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response
             res <- httr::content(res)
             # handle errors

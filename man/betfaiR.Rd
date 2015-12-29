@@ -4,7 +4,7 @@
 \alias{betfair}
 \title{betfair - Betfair Environment w/ methods}
 \usage{
-betfair(usr, pwd, key)
+betfair(usr, pwd, key, dom = "uk")
 }
 \arguments{
 \item{usr}{Betfair username}
@@ -12,6 +12,9 @@ betfair(usr, pwd, key)
 \item{pwd}{Betfair password}
 
 \item{key}{Betfair API key see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}}
+
+\item{dom}{Betfair domain, default is "uk" for the European exchange, change to
+"aus" for Australian exchange}
 }
 \value{
 returns environment with functions for the various methods available for
