@@ -259,7 +259,8 @@ img {
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">bf_post</span>(body,
-               headers)</code></pre>
+               headers,
+               <span class="dt">dom =</span> <span class="st">&quot;uk&quot;</span>)</code></pre>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
@@ -278,6 +279,10 @@ img {
 <tr class="even">
 <td align="left"><code>headers</code></td>
 <td align="left">headers, a list containing the session token, returned by <a href="betfair_login.html"><code>bf_login</code></a>, <code>bf_login</code> returns a list, the element is called <code>ssoid</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>dom</code></td>
+<td align="left">Exchange domain, default is “uk”, change to “aus” to post requests to Australian Exchange</td>
 </tr>
 </tbody>
 </table>

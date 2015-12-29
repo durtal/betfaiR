@@ -255,12 +255,13 @@ img {
 </div>
 
 
-<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods (at the moment - 2015-12-28 - this is not <em>all</em> methods).</p>
+<p><code>betfair</code> is the <strong>primary</strong> function in the <code>betfaiR</code> package. It takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with the various Betfair API methods.</p>
 <div id="usage" class="section level3">
 <h3>usage</h3>
 <pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> username,
               <span class="dt">pwd =</span> password,
-              <span class="dt">key =</span> api_key)</code></pre>
+              <span class="dt">key =</span> api_key,
+              <span class="dt">dom =</span> <span class="st">&quot;uk&quot;</span>)</code></pre>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
@@ -284,6 +285,10 @@ img {
 <td align="left"><code>key</code></td>
 <td align="left">Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
 </tr>
+<tr class="even">
+<td align="left"><code>dom</code></td>
+<td align="left">Exchange domain, default set to “uk”, change to “aus” to use Australian exchange</td>
+</tr>
 </tbody>
 </table>
 <p>Usernames, passwords and API Keys <strong>SHOULD NOT</strong> be shared, there is the danger in R that you inadvertently save these either by saving your workspace on exiting or in your .Rhistory. The <code>httr</code> package (on which this package relies) has a very good appendix in one of its vignettes on ways to keep data like this more secure, you can read the vignette <a href="https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html">here</a>, but the relevant section is repeated in the appendix at the bottom of this page.</p>
@@ -294,7 +299,7 @@ img {
 <pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
-    $account(pass) 
+    $account(pwd) 
     $cancelOrders(..., marketId = NA) 
     $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
    betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
@@ -304,7 +309,7 @@ Methods available:
    sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
-    $login(usr, pwd, key) 
+    $login(usr, pwd, key, dom) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
@@ -462,7 +467,7 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
-    $account(pass) 
+    $account(pwd) 
     $cancelOrders(..., marketId = NA) 
     $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
    betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
@@ -472,7 +477,7 @@ Methods available:
    sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
-    $login(usr, pwd, key) 
+    $login(usr, pwd, key, dom) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 

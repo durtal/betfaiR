@@ -8,7 +8,8 @@ The `bf_post` function sends a post request to the Betfair Exchange API, the use
 
 ```{r eval=FALSE}
 res <- bf_post(body,
-               headers)
+               headers,
+               dom = "uk")
 ```
 
 ### arguments
@@ -17,6 +18,7 @@ param | details
 ------|--------
 `body` | request body, JSON object containing data about the method and filter params, returned by [`bf_basic_req`](bf_basic_req.html) and [`bf_request`](betfair_request.html)
 `headers` | headers, a list containing the session token, returned by [`bf_login`](betfair_login.html), `bf_login` returns a list, the element is called `ssoid`
+`dom` | Exchange domain, default is "uk", change to "aus" to post requests to Australian Exchange
 
 ### return
 
