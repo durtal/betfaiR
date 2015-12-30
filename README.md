@@ -1,4 +1,4 @@
-betfaiR v0.5
+betfaiR v0.6
 =======
 
 This package likely still needs a little work, but you can use it to place a bet with the `placeOrders` method.  Please proceed with caution when placing any bets, and if you encounter any issues let me know.
