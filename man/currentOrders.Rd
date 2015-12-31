@@ -17,10 +17,11 @@ been filled, see orderProjection section in \link{bettingEnums} for more details
 
 \item{to}{date filter, string in yyyy-mm-dd format}
 
-\item{orderBy}{how to order orders, default orders by when they were placed, see
+\item{orderBy}{how to order orders, default of "BY_BET" orders by when they were placed, see
 orderBy section in \link{bettingEnums} for more details}
 
-\item{sort}{how to sort results, see sortDir section in \link{bettingEnums} for
+\item{sort}{how to sort results, default is "EALIEST_TO_LATEST" (alternative is
+"LATEST_TO_EARLIEST") see sortDir section in \link{bettingEnums} for
 more details}
 
 \item{fromRecord}{specifies the first record to be returned, records start at

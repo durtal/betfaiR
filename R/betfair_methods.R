@@ -260,6 +260,12 @@ betfair <- function(usr, pwd, key, dom = "uk") {
                                                                        "MARKET_DESCRIPTION",
                                                                        "RUNNER_DESCRIPTION",
                                                                        "RUNNER_METADATA"))
+            sort <- intersect(toupper(sort), c("MINIMUM_TRADED",
+                                               "MAXIMUM_TRADED",
+                                               "MINIMUM_AVAILABLE",
+                                               "MAXIMUM_TRADED",
+                                               "FIRST_TO_START",
+                                               "LAST_TO_START"))
             # build request object
             req <- bf_basic_req(filter, "marketCatalogue")
             req <- bf_request(x = req, marketProjection = marketProjection,
@@ -366,6 +372,13 @@ betfair <- function(usr, pwd, key, dom = "uk") {
                                   sort = "EARLIEST_TO_LATEST", fromRecord = NULL,
                                   count = NULL) {
 
+            sort <- intersect(toupper(sort), c("EARLIEST_TO_LATEST", "LATEST_TO_EARLIEST"))
+            orderBy <- intersect(toupper(orderBy), c("BY_BET",
+                                                     "BY_MARKET",
+                                                     "BY_MATCH_TIME",
+                                                     "BY_PLACE_TIME",
+                                                     "BY_SETTLED_TIME",
+                                                     "BY_VOID_TIME"))
             # build request object
             req <- bf_basic_req(method = "currentOrders")
             params <- bf_current(betId = betId, marketId = marketId, orderProjection = orderProjection,

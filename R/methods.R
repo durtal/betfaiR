@@ -296,9 +296,10 @@ NULL
 #' been filled, see orderProjection section in \link{bettingEnums} for more details
 #' @param from date filter, string in yyyy-mm-dd format
 #' @param to date filter, string in yyyy-mm-dd format
-#' @param orderBy how to order orders, default orders by when they were placed, see
+#' @param orderBy how to order orders, default of "BY_BET" orders by when they were placed, see
 #' orderBy section in \link{bettingEnums} for more details
-#' @param sort how to sort results, see sortDir section in \link{bettingEnums} for
+#' @param sort how to sort results, default is "EALIEST_TO_LATEST" (alternative is
+#' "LATEST_TO_EARLIEST") see sortDir section in \link{bettingEnums} for
 #' more details
 #' @param fromRecord specifies the first record to be returned, records start at
 #' index zero (not one)
