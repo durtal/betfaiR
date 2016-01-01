@@ -4,7 +4,7 @@
 \alias{bf_post}
 \title{post a request to Betfair}
 \usage{
-bf_post(body, headers, dom)
+bf_post(body, headers, dom = "uk")
 }
 \arguments{
 \item{body}{request body, json object containing data about the method and

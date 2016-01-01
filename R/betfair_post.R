@@ -11,7 +11,7 @@
 #' "aus" for Australian exchange
 #'
 #' @export
-bf_post <- function(body, headers, dom) {
+bf_post <- function(body, headers, dom = "uk") {
 
     url <- switch(dom,
                   "uk" = "https://api.betfair.com/exchange/betting/json-rpc/v1",
