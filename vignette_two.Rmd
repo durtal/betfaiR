@@ -1,0 +1,5 @@
+---
+title: "cron jobs w/ betfaiR"
+---
+
+This vignette will walk through the (theoretical) use of `betfaiR` to collect data over time - this will be useful for collecting data about markets, to potentially build trading strategies.  I will attempt to explain how to perform similar tasks on both Windows and Linux/OSX machines.
