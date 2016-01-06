@@ -260,16 +260,20 @@ betfair <- function(usr, pwd, key, dom = "uk") {
                                                                        "MARKET_DESCRIPTION",
                                                                        "RUNNER_DESCRIPTION",
                                                                        "RUNNER_METADATA"))
-            sort <- intersect(toupper(sort), c("MINIMUM_TRADED",
-                                               "MAXIMUM_TRADED",
-                                               "MINIMUM_AVAILABLE",
-                                               "MAXIMUM_TRADED",
-                                               "FIRST_TO_START",
-                                               "LAST_TO_START"))
+            if(!is.null(sort)) {
+                sort <- intersect(toupper(sort), c("MINIMUM_TRADED",
+                                                   "MAXIMUM_TRADED",
+                                                   "MINIMUM_AVAILABLE",
+                                                   "MAXIMUM_TRADED",
+                                                   "FIRST_TO_START",
+                                                   "LAST_TO_START"))
+            } else {
+                sort <- NULL
+            }
             # build request object
             req <- bf_basic_req(filter, "marketCatalogue")
             req <- bf_request(x = req, marketProjection = marketProjection,
-                                   sort = sort, maxResults = maxResults)
+                              sort = sort, maxResults = maxResults)
             # post request
             res <- bf_post(body = req, ssoid$ssoid, dom = dom)
             # convert response

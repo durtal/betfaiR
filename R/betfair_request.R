@@ -71,7 +71,7 @@ bf_request.marketTypes <- function(x) {
 
 #' @export
 bf_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
-                                            maxResults = 1) {
+                                       maxResults = 1) {
 
     req <- standard_request(method = "listMarketCatalogue")
 
@@ -82,7 +82,6 @@ bf_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
     }
     if(!is.null(sort)) {
         req$params$sort <- toupper(sort)
-
     }
     req$params$filter <- build_request(req = x)
 
