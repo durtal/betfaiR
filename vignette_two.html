@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>cron jobs w/ betfaiR</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<style type="text/css">
+
+	/* padding for bootstrap navbar */
+	body {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	@media (max-width: 979px) {
+		body {
+			padding-top: 0;
+		}
+	}
+
+	/* offset scroll position for anchor links (for fixed navbar) */
+	@media (min-width: 980px) {
+		.section h2 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+		.section h3 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	/* don't use link color in navbar */
+	.dropdown-menu>li>a {
+		color: black;
+	}
+
+	/* some padding for disqus */
+	#disqus_thread {
+		margin-top: 45px;
+	}
+
+</style>
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+<h1>betfaiR</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#betfaiR-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://github.com/durtal" class="navbar-brand">durtal@github</a>
+        </div>
+        <div class="collapse navbar-collapse" id="betfaiR-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
+                        functions <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">environment</li>
+                        <li>
+                            <a href="betfair.html">betfair</a>
+                        </li>
+                        <li class="dropdown-header">functions</li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
+                        </li>
+                        <li>
+                            <a href="bf_account.html">bf_account</a>
+                        </li>
+                        <li>
+                            <a href="request_functions.html">bf_request</a>
+                        </li>
+                        <li>
+                            <a href="betfair_POST.html">bf_post</a>
+                        </li>
+                        <li>
+                            <a href="betfair_check.html">bf_check</a>
+                        </li>
+                        <li>
+                            <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bet instructions</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
+                        methods <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">summary data</li>
+                        <li>
+                            <a href="methods_competitions.html">competitions</a>
+                        </li>
+                        <li>
+                            <a href="methods_countries.html">countries</a>
+                        </li>
+                        <li>
+                            <a href="methods_events.html">events</a>
+                        </li>
+                        <li>
+                            <a href="methods_eventTypes.html">eventTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_venues.html">venues</a>
+                        </li>
+                        <li class="dropdown-header">login</li>
+                        <li>
+                            <a href="login_session.html">login + session</a>
+                        </li>
+                        <li class="dropdown-header">market data</li>
+                        <li>
+                            <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketCatalogue.html">marketCatalogue</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketBook.html">marketBook</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
+                        <li class="dropdown-header">orders</li>
+                        <li>
+                            <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
+                        misc <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="betting_enums.html">Betting Enums</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="vignettes" class="dropdown-toggle" data-toggle="dropdown">
+                        vignettes <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="vignette_one.html">place a bet</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+<h1 class="title">cron jobs w/ betfaiR</h1>
+</div>
+
+
+<p>This vignette will walk through the (theoretical) use of <code>betfaiR</code> to collect data over time - this will be useful for collecting data about markets, to potentially build models and establish trading strategies. I will attempt to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and cronjobs on Linux/OSX).</p>
+<p>There are a few things that we will need to do, we need</p>
+<ul>
+<li>to create an R script that uses dynamic inputs
+<ul>
+<li>these dynamic inputs will be the marketIds which will change day to day</li>
+</ul></li>
+<li>to store data in .RDS or RData files, data will include
+<ul>
+<li>marketId</li>
+<li>returned market data</li>
+</ul></li>
+</ul>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>
