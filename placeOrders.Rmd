@@ -2,7 +2,7 @@
 title: "placeOrders"
 ---
 
-**This function allows bets to be placed, and could require some additional work so proceed with great caution**
+**This function allows bets to be placed, and could require some additional work so proceed with great caution.  See the [vignette](vignette_one.html) for a more complete example.**
 
 Having logged in using the [`betfair`](betfair.html) function and found the market and selection that you wish to place a bet on using either [`marketCatalogue`](methods_marketCatalogue.html) or [`marketBook`](methods_marketBook.html) methods (or a combination of both).  A bet can be struck using `placeOrders`.
 
