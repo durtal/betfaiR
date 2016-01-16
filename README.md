@@ -1,7 +1,9 @@
 betfaiR v0.6
 =======
 
-This package likely still needs a little work, but you can use it to place a bet with the `placeOrders` method.  Please proceed with caution when placing any bets, and if you encounter any issues let me know.
+`betfaiR` is an R package which provides access to Betfair's API, and allows users to retrieve data (in various amounts of detail) from available markets, to place a bet in those markets, cancel bets, replace bets, etc.  The package possibly needs a little work (it's hard to test a package like this, unless someone has suggestions), so please proceed with caution when placing any bets, and provide feedback with any issues you encounter, or features you want added.
+
+Installation instructions are below, and the usage section walks through the primary function in the package, and the various API methods available (which I believe is all of them).
 
 #### Installation
 
@@ -76,7 +78,7 @@ racing <- bf$events(filter = marketFilter(eventTypeIds = 7))
 
 The `racing` object is now a dataframe of horse racing events, providing data that includes the event Id, event name, countryCode, timezone, venue, date, and the number of markets.
 
-The `account` method returns an environment with 4 methods for accessing data about your account, it requires you password, which will be checked against the password you entered when using `betfair`.  You can also use the `bf_account` function which requires your username, password and api key.  The `account` method can return your account statement, which can be `plot`ed, showing profit/loss over a set time period.
+The `account` method returns an environment with 4 methods for accessing data about your account, it requires your password, which will be checked against the password you entered when using `betfair`.  You can also use the `bf_account` function which requires your username, password and api key.  The `account` method can return your account statement, which can be `plot`ed, showing profit/loss over a set time period.
 
 ### PASSWORD and KEY
 
