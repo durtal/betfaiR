@@ -5,7 +5,10 @@ Version: 0.6
 Date: 2015-07-11
 Author: Thomas Heslop
 Maintainer: Thomas Heslop <t_heslop@hotmail.co.uk>
-Description: R client for the Betfair Exchange API.
+Description: R client for the Betfair Exchange API.  Retrieve data about markets,
+    competitions, events, runners, prices, etc.  Place orders (bets), replace,
+    update, and cancel orders.  Retrieve data about your account, available funds,
+    statement, etc.    
 License: MIT
 LazyData: TRUE
 Imports:
