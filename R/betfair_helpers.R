@@ -261,6 +261,11 @@ bf_cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NU
 
 # statement function for constructing request for retrieving data about Account
 #
+# @param after date to filter by, format in yyyy-mm-dd
+# @param before date to filter by, format in yyyy-mm-dd
+# @param n number of records
+# @param wallet choose wallet
+# @param include
 bf_statement <- function(after = NULL, before = NULL, n = NULL, wallet = NULL,
                          include = "ALL") {
 
