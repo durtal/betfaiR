@@ -2,7 +2,7 @@
 title: "cron jobs w/ betfaiR"
 ---
 
-This vignette will walk through the (theoretical) use of `betfaiR` to collect data over time - this will be useful for collecting data about markets, to potentially build models and establish trading strategies.  I will attempt to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and cronjobs on Linux/OSX).
+This vignette will walk through the (theoretical) use of `betfaiR` to collect data over time - this will be useful for collecting data about markets, to potentially build models and establish trading strategies.  I will try to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and [cron](https://en.wikipedia.org/wiki/Cron) on Linux/OSX).
 
 There are a few things that we will need to do:
 
