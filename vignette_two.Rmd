@@ -21,6 +21,9 @@ library(betfaiR)
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
               pwd = Sys.getenv("BETFAIR_PWD"),
               key = Sys.getenv("BETFAIR_KEY"))
+
+markets <- bf$marketCatalogue(filter = marketFilter(eventTypeIds = 1,
+                                                    marketCountries = "GB"))
 ```
 
 
