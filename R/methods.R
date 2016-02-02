@@ -121,7 +121,7 @@ NULL
 #' depends on the amount of data you request via the price projection.
 #' @param priceProjection the projection of price data you want to receive in the
 #' response, see section
-#' \strong{PriceProjection} in \link{bettingEnums}.
+#' \strong{PriceProjection} in \link{BettingEnums}.
 #' @param orderProjection the orders you want to receive in the response, see
 #' section \strong{OrderProjection} in \link{BettingEnums}.
 #' @param matchProjection if you ask for orders, specifies the representation of
@@ -293,13 +293,13 @@ NULL
 #' @param orderProjection default of \strong{ALL} returns all unsettled positions,
 #' matched or partially matched, change to \strong{EXECUTABLE} to filter for orders
 #' with a portion remaining, or \strong{EXECUTION_COMPLETE} for orders which have
-#' been filled, see orderProjection section in \link{bettingEnums} for more details
+#' been filled, see orderProjection section in \link{BettingEnums} for more details
 #' @param from date filter, string in yyyy-mm-dd format
 #' @param to date filter, string in yyyy-mm-dd format
 #' @param orderBy how to order orders, default of "BY_BET" orders by when they were placed, see
-#' orderBy section in \link{bettingEnums} for more details
+#' orderBy section in \link{BettingEnums} for more details
 #' @param sort how to sort results, default is "EALIEST_TO_LATEST" (alternative is
-#' "LATEST_TO_EARLIEST") see sortDir section in \link{bettingEnums} for
+#' "LATEST_TO_EARLIEST") see sortDir section in \link{BettingEnums} for
 #' more details
 #' @param fromRecord specifies the first record to be returned, records start at
 #' index zero (not one)

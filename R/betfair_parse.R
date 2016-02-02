@@ -18,7 +18,7 @@ bf_parse <- function(res, ...) {
 }
 
 #' @export
-bf_parse.competitions <- function(res) {
+bf_parse.competitions <- function(res, ...) {
 
     res <- basic_parse(res)
 
@@ -26,7 +26,7 @@ bf_parse.competitions <- function(res) {
 }
 
 #' @export
-bf_parse.countries <- function(res) {
+bf_parse.countries <- function(res, ...) {
 
     res <- basic_parse(res)
 
@@ -34,7 +34,7 @@ bf_parse.countries <- function(res) {
 }
 
 #' @export
-bf_parse.events <- function(res) {
+bf_parse.events <- function(res, ...) {
 
     res <- basic_parse(res)
 
@@ -42,7 +42,7 @@ bf_parse.events <- function(res) {
 }
 
 #' @export
-bf_parse.eventTypes <- function(res) {
+bf_parse.eventTypes <- function(res, ...) {
 
     res <- basic_parse(res)
 
@@ -50,7 +50,7 @@ bf_parse.eventTypes <- function(res) {
 }
 
 #' @export
-bf_parse.marketBook <- function(res) {
+bf_parse.marketBook <- function(res, ...) {
 
     out <- lapply(res$result, function(x) {
 
@@ -120,7 +120,7 @@ bf_parse.marketBook <- function(res) {
 
 
 #' @export
-bf_parse.marketCatalogue <- function(res, keepRules = FALSE) {
+bf_parse.marketCatalogue <- function(res, keepRules = FALSE, ...) {
 
     out <- lapply(res$result, function(x) {
 
@@ -179,7 +179,7 @@ bf_parse.marketCatalogue <- function(res, keepRules = FALSE) {
 }
 
 #' @export
-bf_parse.marketProfitAndLoss <- function(res) {
+bf_parse.marketProfitAndLoss <- function(res, ...) {
 
     out <- lapply(res$result, function(x) {
         out <- structure(list(), class = "market_PnL")
@@ -192,7 +192,7 @@ bf_parse.marketProfitAndLoss <- function(res) {
 }
 
 #' @export
-bf_parse.marketTypes <- function(res) {
+bf_parse.marketTypes <- function(res, ...) {
 
     res <- basic_parse(res)
 
@@ -200,7 +200,7 @@ bf_parse.marketTypes <- function(res) {
 }
 
 #' @export
-bf_parse.placeOrders <- function(res) {
+bf_parse.placeOrders <- function(res, ...) {
 
     out <- structure(list(), class = "betfair_orders")
     out$status <- res$result$status
@@ -216,7 +216,7 @@ bf_parse.placeOrders <- function(res) {
 }
 
 #' @export
-bf_parse.cancelOrders <- function(res) {
+bf_parse.cancelOrders <- function(res, ...) {
     out <- structure(list(), class = "bf_cancel_orders")
     out$status <- res$result$status
     if(length(res$result$marketId) > 0) out$marketId
@@ -227,7 +227,7 @@ bf_parse.cancelOrders <- function(res) {
 }
 
 #' @export
-bf_parse.replaceOrders <- function(res) {
+bf_parse.replaceOrders <- function(res, ...) {
     out <- structure(list(), class = "bf_replace_orders")
     tmp <- res$result$instructionReports
     out$status <- res$result$status
@@ -238,7 +238,7 @@ bf_parse.replaceOrders <- function(res) {
 }
 
 #' @export
-bf_parse.currentOrders <- function(res) {
+bf_parse.currentOrders <- function(res, ...) {
 
     out <- structure(list(), class = c("list", "currentOrders"))
     out$current <- lapply(res$result$currentOrders, function(i) {
@@ -251,7 +251,7 @@ bf_parse.currentOrders <- function(res) {
 }
 
 #' @export
-bf_parse.clearedOrders <- function(res) {
+bf_parse.clearedOrders <- function(res, ...) {
 
     out <- structure(list(), class = c("list", "clearedOrders"))
     out$cleared <- lapply(res$result$clearedOrders, function(i) {
@@ -263,7 +263,7 @@ bf_parse.clearedOrders <- function(res) {
 }
 
 #' @export
-bf_parse.venues <- function(res) {
+bf_parse.venues <- function(res, ...) {
 
     res <- basic_parse(res)
 
@@ -271,20 +271,20 @@ bf_parse.venues <- function(res) {
 }
 
 #' @export
-bf_parse.acc_details <- function(res) {
+bf_parse.acc_details <- function(res, ...) {
 
     out <- data.frame(res$result, stringsAsFactors = FALSE)
     return(out)
 }
 
 #' @export
-bf_parse.acc_transfer <- function(res) {
+bf_parse.acc_transfer <- function(res, ...) {
 
     return(res$result$transactionId)
 }
 
 #' @export
-bf_parse.acc_statement <- function(res) {
+bf_parse.acc_statement <- function(res, ...) {
 
     out <- lapply(res$result$accountStatement, function(i) {
         out <- structure(list(), class = c("list", "bf_transaction"))

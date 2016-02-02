@@ -11,17 +11,17 @@
 \item{orderProjection}{default of \strong{ALL} returns all unsettled positions,
 matched or partially matched, change to \strong{EXECUTABLE} to filter for orders
 with a portion remaining, or \strong{EXECUTION_COMPLETE} for orders which have
-been filled, see orderProjection section in \link{bettingEnums} for more details}
+been filled, see orderProjection section in \link{BettingEnums} for more details}
 
 \item{from}{date filter, string in yyyy-mm-dd format}
 
 \item{to}{date filter, string in yyyy-mm-dd format}
 
 \item{orderBy}{how to order orders, default of "BY_BET" orders by when they were placed, see
-orderBy section in \link{bettingEnums} for more details}
+orderBy section in \link{BettingEnums} for more details}
 
 \item{sort}{how to sort results, default is "EALIEST_TO_LATEST" (alternative is
-"LATEST_TO_EARLIEST") see sortDir section in \link{bettingEnums} for
+"LATEST_TO_EARLIEST") see sortDir section in \link{BettingEnums} for
 more details}
 
 \item{fromRecord}{specifies the first record to be returned, records start at

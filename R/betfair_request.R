@@ -5,6 +5,10 @@
 #'
 #' @name bf_request
 #'
+#' @param x basic request object returned by \link{bf_basic_req}
+#' @param ... additional arguments used to flesh out the request object depending
+#' on the Betfair API method being targetted
+#'
 #' @details to use this function, the object should have one of the following classes,
 #' \strong{competitions}, \strong{countries}, \strong{events}, \strong{eventTypes},
 #' \strong{marketCatalogue}, \strong{marketTypes} and \strong{venues}.
@@ -15,7 +19,7 @@ bf_request <- function(x, ...) {
 }
 
 #' @export
-bf_request.competitions <- function(x) {
+bf_request.competitions <- function(x, ...) {
 
     req <- standard_request()
 
@@ -26,7 +30,7 @@ bf_request.competitions <- function(x) {
 }
 
 #' @export
-bf_request.countries <- function(x) {
+bf_request.countries <- function(x, ...) {
 
     req <- standard_request(method = "listCountries")
 
@@ -37,7 +41,7 @@ bf_request.countries <- function(x) {
 }
 
 #' @export
-bf_request.eventTypes <- function(x) {
+bf_request.eventTypes <- function(x, ...) {
 
     req <- standard_request(method = "listEventTypes")
 
@@ -48,7 +52,7 @@ bf_request.eventTypes <- function(x) {
 }
 
 #' @export
-bf_request.events <- function(x) {
+bf_request.events <- function(x, ...) {
 
     req <- standard_request(method = "listEvents")
 
@@ -59,7 +63,7 @@ bf_request.events <- function(x) {
 }
 
 #' @export
-bf_request.marketTypes <- function(x) {
+bf_request.marketTypes <- function(x, ...) {
 
     req <- standard_request(method = "listMarketTypes")
 
@@ -71,7 +75,7 @@ bf_request.marketTypes <- function(x) {
 
 #' @export
 bf_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
-                                       maxResults = 1) {
+                                       maxResults = 1, ...) {
 
     req <- standard_request(method = "listMarketCatalogue")
 
@@ -91,7 +95,7 @@ bf_request.marketCatalogue <- function(x, marketProjection = NULL, sort = NULL,
 
 #' @export
 bf_request.marketBook <- function(x, marketIds, priceProjection = NULL,
-                                   orderProjection = NULL, matchProjection = NULL) {
+                                   orderProjection = NULL, matchProjection = NULL, ...) {
 
     req <- standard_request(method = "listMarketBook")
     req$params$filter <- NULL
@@ -113,7 +117,7 @@ bf_request.marketBook <- function(x, marketIds, priceProjection = NULL,
 }
 
 #' @export
-bf_request.placeOrders <- function(x, order) {
+bf_request.placeOrders <- function(x, order, ...) {
 
     req <- standard_request(method = "placeOrders")
     req$params$filter <- NULL
@@ -124,7 +128,7 @@ bf_request.placeOrders <- function(x, order) {
 }
 
 #' @export
-bf_request.venues <- function(x) {
+bf_request.venues <- function(x, ...) {
 
     req <- standard_request(method = "listVenues")
 
@@ -135,7 +139,7 @@ bf_request.venues <- function(x) {
 }
 
 #' @export
-bf_request.cancelOrders <- function(x, instructions = NULL) {
+bf_request.cancelOrders <- function(x, instructions = NULL, ...) {
 
     req <- standard_request(method = "cancelOrders")
     req$params$filter <- NULL
@@ -146,7 +150,7 @@ bf_request.cancelOrders <- function(x, instructions = NULL) {
 }
 
 #' @export
-bf_request.replaceOrders <- function(x, instructions = NULL) {
+bf_request.replaceOrders <- function(x, instructions = NULL, ...) {
 
     req <- standard_request(method = "replaceOrders")
     req$params$filter <- NULL
@@ -157,7 +161,7 @@ bf_request.replaceOrders <- function(x, instructions = NULL) {
 }
 
 #' @export
-bf_request.marketProfitAndLoss <- function(x, params) {
+bf_request.marketProfitAndLoss <- function(x, params, ...) {
 
     req <- standard_request(method = "listMarketProfitAndLoss")
     req$params$filter <- NULL
@@ -169,7 +173,7 @@ bf_request.marketProfitAndLoss <- function(x, params) {
 }
 
 #' @export
-bf_request.currentOrders <- function(x, params) {
+bf_request.currentOrders <- function(x, params, ...) {
 
     req <- standard_request(method = "listCurrentOrders")
     req$params$filter <- NULL
@@ -180,7 +184,7 @@ bf_request.currentOrders <- function(x, params) {
 }
 
 #' @export
-bf_request.updateOrders <- function(x, instructions = NULL) {
+bf_request.updateOrders <- function(x, instructions = NULL, ...) {
 
     req <- standard_request(method = "updateOrders")
     req$params$filter <- NULL
@@ -191,7 +195,7 @@ bf_request.updateOrders <- function(x, instructions = NULL) {
 }
 
 #' @export
-bf_request.clearedOrders <- function(x, params = NULL) {
+bf_request.clearedOrders <- function(x, params = NULL, ...) {
 
     req <- standard_request(method = "listClearedOrders")
     req$params$filter <- NULL

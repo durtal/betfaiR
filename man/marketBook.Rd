@@ -9,7 +9,7 @@ depends on the amount of data you request via the price projection.}
 
 \item{priceProjection}{the projection of price data you want to receive in the
 response, see section
-\strong{PriceProjection} in \link{bettingEnums}.}
+\strong{PriceProjection} in \link{BettingEnums}.}
 
 \item{orderProjection}{the orders you want to receive in the response, see
 section \strong{OrderProjection} in \link{BettingEnums}.}

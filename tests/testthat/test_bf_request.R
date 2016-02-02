@@ -61,5 +61,5 @@ test_that("test that betfaiR:::build_request correctly formats request", {
     req3 <- betfaiR:::build_request(req = marketFilter(from = "2015-01-01"))
     expect_is(req3$marketStartTime, "list")
     expect_equal(req3$marketStartTime$from, "2015-01-01T00:00:00Z")
-    
+
 })

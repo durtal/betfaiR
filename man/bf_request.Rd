@@ -6,6 +6,12 @@
 \usage{
 bf_request(x, ...)
 }
+\arguments{
+\item{x}{basic request object returned by \link{bf_basic_req}}
+
+\item{...}{additional arguments used to flesh out the request object depending
+on the Betfair API method being targetted}
+}
 \description{
 convert and format request list into valid JSON object for Betfair's
 API. Requires users to build a list first using \link{bf_basic_req}
