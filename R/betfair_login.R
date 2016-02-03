@@ -46,7 +46,7 @@ bf_login <- function(usr, pwd, key) {
 }
 
 #' @export
-print.bf_login <- function(x) {
+print.bf_login <- function(x, ...) {
     object <- x
 
     cat("Betfair Login Details:\n\tusr:\t",

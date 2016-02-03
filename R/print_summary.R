@@ -1,5 +1,5 @@
 #' @export
-print.marketCatalogue_simple <- function(x) {
+print.marketCatalogue_simple <- function(x, ...) {
 
     cat("\nMarket ID:     \t", x$market$marketId)
     cat("\nMarket Name:   \t", x$market$marketName)
@@ -12,8 +12,9 @@ print.marketCatalogue_simple <- function(x) {
 
 
 #' @export
-summary.marketCatalogue_simple <- function(x) {
+summary.marketCatalogue_simple <- function(object, ...) {
 
+    x <- object
     id <- paste0("\nMarket ID:     \t", x$market$marketId)
     name <- paste0("\nMarket Name:   \t", x$market$marketName)
     matched <- paste0("\nMatched:       \t", x$market$totalMatched)
@@ -36,19 +37,18 @@ summary.marketCatalogue_simple <- function(x) {
 }
 
 #' @export
-print.marketCatalogue_list <- function(x) {
+print.marketCatalogue_list <- function(x, ...) {
 
     plyr::l_ply(x, .fun = function(i) {
-
         print(i)
-
     })
 }
 
 
 #' @export
-summary.marketCatalogue_list <- function(x) {
+summary.marketCatalogue_list <- function(object, ...) {
 
+    x <- object
     plyr::l_ply(x, .fun = function(i) {
 
         summary(i)
@@ -57,7 +57,7 @@ summary.marketCatalogue_list <- function(x) {
 }
 
 #' @export
-print.marketBook_simple <- function(x) {
+print.marketBook_simple <- function(x, ...) {
 
     marketId <- paste0("\nMarket ID:     \t", x$market$marketId)
     totalMatched <- paste0("\nMatched:       \t", x$market$totalMatched)
@@ -71,8 +71,9 @@ print.marketBook_simple <- function(x) {
 }
 
 #' @export
-summary.marketBook_simple <- function(x) {
+summary.marketBook_simple <- function(object, ...) {
 
+    x <- object
     marketId <- paste0("\nMarket ID:     \t", x$market$marketId)
     totalMatched <- paste0("\nMatched:       \t", x$market$totalMatched)
     totalAvailable <- paste0("\nAvailable:     \t", x$market$totalAvailable)
@@ -100,19 +101,18 @@ summary.marketBook_simple <- function(x) {
 }
 
 #' @export
-print.marketBook_list <- function(x) {
+print.marketBook_list <- function(x, ...) {
 
     plyr::l_ply(x, .fun = function(i) {
-
         print(i)
-
     })
 }
 
 
 #' @export
-summary.marketBook_list <- function(x) {
+summary.marketBook_list <- function(object, ...) {
 
+    x <- object
     plyr::l_ply(x, .fun = function(i) {
 
         summary(i)
@@ -121,7 +121,7 @@ summary.marketBook_list <- function(x) {
 }
 
 #' @export
-print.betfair_orders <- function(x) {
+print.betfair_orders <- function(x, ...) {
 
     status <- paste0("\nStatus:        \t", x$status, "\n")
     market <- paste0("MarketId:      \t", x$marketId, "\n")
@@ -131,26 +131,29 @@ print.betfair_orders <- function(x) {
 }
 
 #' @export
-summary.betfair_orders <- function(x) {
+summary.betfair_orders <- function(object, ...) {
 
+    x <- object
     status <- paste0("\nStatus:        \t", x$status, "\n")
     market <- paste0("MarketId:      \t", x$marketId, "\n\nOrder:\n")
 
     cat(status)
     cat(market)
 
-    print(x$order, row.names = FALSE)
+    print(x$order, row.names = FALSE, ...)
     cat("\nInstructions:\n")
     print(x$orderInstruction, row.names = FALSE)
 }
 
 #' @export
-print.bf_cancel_orders <- function(x) {
+print.bf_cancel_orders <- function(x, ...) {
     cat("\nStatus:\t", x$status)
 }
 
 #' @export
-summary.bf_cancel_orders <- function(x) {
+summary.bf_cancel_orders <- function(object, ...) {
+
+    x <- object
     cat("\nStatus:\t", x$status)
     if(length(x$instructions) > 0) {
         cat("\n\nOrders:\n")
@@ -160,7 +163,7 @@ summary.bf_cancel_orders <- function(x) {
 }
 
 #' @export
-print.bf_replace_orders <- function(x) {
+print.bf_replace_orders <- function(x, ...) {
     cat("\nStatus:       \t", x$status)
     cat("\nCancel Status:\t", x$cancel$status)
     cat("\n              \t", x$cancel$selectionId)
@@ -169,7 +172,9 @@ print.bf_replace_orders <- function(x) {
 }
 
 #' @export
-summary.bf_replace_orders <- function(x) {
+summary.bf_replace_orders <- function(object, ...) {
+
+    x <- object
     cat("\nStatus:       \t", x$status)
     cat("\nCancel Status:\t", x$cancel$status)
     cat("\n              \t", x$cancel$selectionId)
@@ -178,14 +183,14 @@ summary.bf_replace_orders <- function(x) {
 }
 
 #' @export
-print.market_PnL <- function(x) {
+print.market_PnL <- function(x, ...) {
     cat("\nMarketId:\t", x$marketId, "\nRunners:\n")
     print(x$PnL, row.names = FALSE)
 
 }
 
 #' @export
-print.marketPnL_list <- function(x) {
+print.marketPnL_list <- function(x, ...) {
 
     plyr::l_ply(x, .fun = function(i) {
         print(i)
@@ -193,28 +198,32 @@ print.marketPnL_list <- function(x) {
 }
 
 #' @export
-summary.market_PnL <- function(x) {
+summary.market_PnL <- function(object, ...) {
+
+    x <- object
     cat("\nMarketId:\t", x$marketId, "\nRunners:\n")
     print(x$PnL, row.names = FALSE)
-
 }
 
 #' @export
-summary.marketPnL_list <- function(x) {
+summary.marketPnL_list <- function(object, ...) {
 
+    x <- object
     plyr::l_ply(x, .fun = function(i) {
         summary(i)
     })
 }
 
 #' @export
-print.currentOrders <- function(x) {
+print.currentOrders <- function(x, ...) {
     cat("Current Orders:\n\n")
     cat("Returned:     ", length(x$current), "records\n")
 }
 
 #' @export
-summary.currentOrders <- function(x) {
+summary.currentOrders <- function(object, ...) {
+
+    x <- object
     cat("Current Orders:\n\n")
     cat("Returned:     ", length(x$current), "records\n")
     plyr::l_ply(x$current, function(i) {
@@ -229,13 +238,15 @@ summary.currentOrders <- function(x) {
 }
 
 #' @export
-print.clearedOrders <- function(x) {
+print.clearedOrders <- function(x, ...) {
     cat("Cleared Orders:\n\n")
     cat("Returned:      ", length(x$cleared), "records\n")
 }
 
 #' @export
-summary.clearedOrders <- function(x) {
+summary.clearedOrders <- function(object, ...) {
+
+    x <- object
     cat("Cleared Orders:\n\n")
     cat("Returned:      ", length(x$cleared), "records\n")
     plyr::l_ply(x$cleared, function(i) {
@@ -252,7 +263,7 @@ summary.clearedOrders <- function(x) {
 }
 
 #' @export
-print.bf_transaction <- function(x) {
+print.bf_transaction <- function(x, ...) {
 
     cat("\nDate:            \t", x$basic$itemDate, "\n")
     cat("Amount:          \t", x$basic$amount, "\n")
@@ -263,8 +274,9 @@ print.bf_transaction <- function(x) {
 }
 
 #' @export
-summary.bf_transaction <- function(x) {
+summary.bf_transaction <- function(object, ...) {
 
+    x <- object
     cat("\nDate:            \t", x$basic$itemDate, "\n")
     cat("Amount:          \t", x$basic$amount, "\n")
     cat("Balance:         \t", x$basic$balance, "\n")
@@ -279,29 +291,31 @@ summary.bf_transaction <- function(x) {
 }
 
 #' @export
-print.account_statement <- function(x) {
+print.account_statement <- function(x, ...) {
     plyr::l_ply(x, .fun = function(i) {
         print(i)
     })
 }
 
 #' @export
-summary.account_statement <- function(x) {
+summary.account_statement <- function(object, ...) {
+
+    x <- object
     plyr::l_ply(x, .fun = function(i) {
         summary(i)
     })
 }
 
 #' @export
-plot.account_statement <- function(x) {
+plot.account_statement <- function(x, ...) {
     df <- lapply(x, function(i) {
         i$basic
     })
     df <- plyr::ldply(df)
     df$itemDate <- strptime(df$itemDate, "%Y-%m-%dT%H:%M:%S")
     ggplot2::ggplot(data = df) +
-        ggplot2::geom_path(ggplot2::aes(x = itemDate,
-                                        y = balance),
+        ggplot2::geom_path(ggplot2::aes(x = df$itemDate,
+                                        y = df$balance),
                            col = "#D9220F",
                            size = 1.1) +
         ggplot2::labs(x = "Date",

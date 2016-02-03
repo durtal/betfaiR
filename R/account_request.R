@@ -1,5 +1,5 @@
 #' @export
-bf_request.acc_funds <- function(x) {
+bf_request.acc_funds <- function(x, ...) {
 
     req <- standard_acc_request(method = "getAccountFunds")
     req$params$filter <- NULL
@@ -9,7 +9,7 @@ bf_request.acc_funds <- function(x) {
 }
 
 #' @export
-bf_request.acc_details <- function(x) {
+bf_request.acc_details <- function(x, ...) {
 
     req <- standard_acc_request(method = "getAccountDetails")
     req$params$filter <- NULL
@@ -19,7 +19,7 @@ bf_request.acc_details <- function(x) {
 }
 
 #' @export
-bf_request.acc_statement <- function(x, params) {
+bf_request.acc_statement <- function(x, params, ...) {
 
     req <- standard_acc_request(method = "getAccountStatement")
     req$params$filter <- NULL
@@ -30,7 +30,7 @@ bf_request.acc_statement <- function(x, params) {
 }
 
 #' @export
-bf_request.acc_transfer <- function(x, from, to, amount) {
+bf_request.acc_transfer <- function(x, from, to, amount, ...) {
 
     req <- standard_acc_request(method = "transferFunds")
     req$params$filter <- NULL

@@ -1,16 +1,18 @@
 Package: betfaiR
 Type: Package
-Title: R client for Betfair's API
-Version: 0.6
-Date: 2015-07-11
+Title: R Client for Betfair's API
+Version: 0.6.1
+Date: 2016-02-03
 Author: Thomas Heslop
 Maintainer: Thomas Heslop <t_heslop@hotmail.co.uk>
-Description: R client for the Betfair Exchange API.  Retrieve data about markets,
+Description: R Client for the Betfair Exchange API.  Retrieve data about markets,
     competitions, events, runners, prices, etc.  Place orders (bets), replace,
     update, and cancel orders.  Retrieve data about your account, available funds,
-    statement, etc.    
-License: MIT
+    statement, etc.
+License: MIT + file LICENSE
 LazyData: TRUE
+URL: https://github.com/durtal/betfaiR/
+BugReports: https://github.com/durtal/betfaiR/issues
 Imports:
     httr,
     jsonlite,
