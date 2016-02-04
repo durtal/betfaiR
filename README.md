@@ -1,9 +1,9 @@
-betfaiR v0.6
+betfaiR v0.6.1
 =======
 
 `betfaiR` is an R package which provides access to Betfair's API, and allows users to retrieve data (in various amounts of detail) from available markets, to place a bet in those markets, cancel bets, replace bets, etc.  The package possibly needs a little work (it's hard to test a package like this, unless someone has suggestions), so please proceed with caution when placing any bets, and provide feedback with any issues you encounter, or features you want added.
 
-Installation instructions are below, and the usage section walks through the primary function in the package, and the various API methods available (which I believe is all of them).
+Installation instructions are below, the usage section walks through the primary function in the package and the various API methods available (which I believe is all of them).
 
 #### Installation
 
@@ -14,7 +14,7 @@ devtools::install_github("durtal/betfaiR")
 
 #### Help
 
-There are help pages available [here](http://durtal.github.io/betfaiR/), and issues can be filed [here](https://github.com/durtal/betfaiR/issues), and a vignette showing how to [login, find a market, place a bet, replace the bet and cancel the bet](http://durtal.github.io/betfaiR/vignette_one.html).  Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
+There are help pages available [here](http://durtal.github.io/betfaiR/), issues can be filed [here](https://github.com/durtal/betfaiR/issues), and a vignette showing how to [login, find a market, place a bet, replace the bet and cancel the bet](http://durtal.github.io/betfaiR/vignette_one.html).  Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
 
 #### Usage
 
@@ -26,20 +26,20 @@ bf <- betfair(usr = "USERNAME",
               key = "API_KEY")
 ```
 
-The `betfair` function returns an environment with various methods, you can inspect you session token (required by Betfair for all methods) via the following:
+The `betfair` function returns an environment with various methods, you can inspect your session token (required by Betfair for all methods) via the following:
 
 ```R
 bf$session()
 ## Session Token: "some_session_token"
 ```
 
-There is a login in method returned into the `bf` environment, allowing users to login in again if something went wrong initially, this function stores the new details in an hidden object within the environment, and updates the session token.
+There is a login in method available in `bf`, allowing users to login in again if something went wrong initially, this function stores the new details in an hidden object within the environment, and updates the session token.
 
 ```R
 bf$login(usr = "USERNAME2", pwd = "PASSWORD", key = "API_KEY")
 ```
 
-The view the available methods, simply print the environment `bf`
+To view the available methods, simply print the environment `bf`
 
 ```R
 <betfaiR API>
