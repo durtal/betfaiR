@@ -259,9 +259,9 @@ img {
 <p><img src="manchester-derby.jpeg" style="display: block; margin-left: auto; margin-right: auto"></p>
 <p>There are a few things that we will need to do:</p>
 <ul>
-<li>to create an R script that uses dynamic inputs
+<li>to create an R script that will use changing variables
 <ul>
-<li>these dynamic inputs will be the marketIds which will change day to day</li>
+<li>variables will be the marketIds which will change day to day</li>
 </ul></li>
 <li>to store data in .RDS or RData files, data will include
 <ul>
@@ -269,9 +269,200 @@ img {
 <li>returned market data</li>
 </ul></li>
 </ul>
+<div id="find-markets" class="section level2">
+<h2>Find markets</h2>
+<p>First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data. We will try to collect match odds data for Premier League matches. We will need the competition id for these markets.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load betfaiR and login</span>
+<span class="kw">library</span>(betfaiR)
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+<pre><code>Login successful</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correct eventTypeIds</span>
+(eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>())</code></pre>
+<pre><code>   eventType_id     eventType_name marketCount
+1        468328           Handball          39
+2             1             Soccer       14011
+3             2             Tennis        2112
+4       2378961           Politics          42
+5             3               Golf          58
+6          6231     Financial Bets           3
+7        998917         Volleyball          24
+8             4            Cricket         386
+9             5        Rugby Union         113
+10            6             Boxing          30
+11            7       Horse Racing         395
+12            8        Motor Sport           5
+13         7524         Ice Hockey         194
+14     27589895      Olympics 2016           1
+15           10       Special Bets          79
+16           11            Cycling           6
+17       451485      Winter Sports           9
+18     26420387 Mixed Martial Arts         132
+19         3503              Darts          14
+20       136332              Chess          14
+21         7522         Basketball         489
+22         1477       Rugby League          37
+23      2152880       Gaelic Games           4
+24         6422            Snooker          42
+25         6423  American Football         113
+26         7511           Baseball           1
+27         4339   Greyhound Racing         148</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
+(competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
+                                                       <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>)))</code></pre>
+<pre><code>   competition_id                           competition_name marketCount
+1           30558                             English FA Cup         109
+2            2134                            Capital One Cup          14
+3          299924                                  Welsh Cup           6
+4         5808320                    SPFL Development League          44
+5           20351                           NIFL Premiership          10
+6         6011072                  SPFL Development League 2          66
+7         7129730                           The Championship         122
+8         4644728 Northern Premier League Division One North          22
+9         4596912                Isthmian Division One North          22
+10             31                    Barclays Premier League         356
+11          24789                    Johnstones Paint Trophy           1
+12             35                                 League One         235
+13         409743                               Scottish Cup         107
+14             39                            National League          33
+15         252549                       Welsh Premier League          12
+16             37                                 League Two         125
+17        4540650                        NIFL Reserve League          22
+18            111                        Scottish League Two          11
+19             43                      National League South          50
+20             41                      National League North          24
+21            109                        Scottish League One          13
+22            107                      Scottish Championship          13
+23            105                       Scottish Premiership          64
+24        2129602            Professional Development League          86
+25         820588                           Southern Premier          58
+26        3784863                          UEFA Youth League           5
+27         820753                           Northern Premier          14
+28        2608550                                   Specials           6
+29          42886                                  FA Trophy           2
+30         820582                           Isthmian Premier          12
+   competitionRegion
+1                GBR
+2                GBR
+3                GBR
+4                GBR
+5                GBR
+6                GBR
+7                GBR
+8                GBR
+9                GBR
+10               GBR
+11               GBR
+12               GBR
+13               GBR
+14               GBR
+15               GBR
+16               GBR
+17               GBR
+18               GBR
+19               GBR
+20               GBR
+21               GBR
+22               GBR
+23               GBR
+24               GBR
+25               GBR
+26     International
+27               GBR
+28               GBR
+29               GBR
+30               GBR</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
+(marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>)))</code></pre>
+<pre><code>             marketType marketCount
+1                UNUSED          18
+2               SPECIAL          18
+3              HANDICAP           2
+4      UNDIFFERENTIATED           2
+5          TOP_N_FINISH           1
+6           ROCK_BOTTOM           1
+7        TOP_GOALSCORER           2
+8                WINNER           1
+9        DAILY_SPECIALS           2
+10      NEXT_GOALSCORER          16
+11      WIN_BOTH_HALVES           4
+12          DRAW_NO_BET           2
+13  BOTH_TEAMS_TO_SCORE          12
+14            NEXT_GOAL           2
+15           SCORE_CAST           2
+16        OVER_UNDER_35          12
+17        OVER_UNDER_15          12
+18          TOTAL_GOALS           2
+19        OVER_UNDER_45          12
+20      WIN_FROM_BEHIND           4
+21             WIN_HALF           4
+22      RACE_TO_3_GOALS           2
+23             TO_SCORE           2
+24            HALF_TIME          12
+25      RACE_TO_2_GOALS           2
+26  OVER_UNDER_65_CARDS           2
+27         BOOKING_ODDS           2
+28              WINCAST           4
+29      HALF_TIME_SCORE          12
+30        CORRECT_SCORE          12
+31 MATCH_ODDS_AND_OU_25           2
+32        OVER_UNDER_25          12
+33             TEAM_A_1           2
+34             TEAM_A_3           2
+35  HALF_TIME_FULL_TIME          12
+36             TEAM_B_1           2
+37      FIRST_GOAL_ODDS           2
+38      LAST_GOALSCORER           2
+39    FIRST_GOAL_SCORER           2
+40           MATCH_ODDS          12
+41          CORNER_ODDS           2
+42          SENDING_OFF           2
+43 OVER_UNDER_105_CORNR           2
+44          CLEAN_SHEET           4
+45        PENALTY_TAKEN           2
+46  OVER_UNDER_55_CORNR           2
+47          EXACT_GOALS           2
+48 TO_SCORE_BOTH_HALVES           4
+49    BOOKING_MATCH_BET           2
+50  MATCH_ODDS_AND_BTTS           2
+51 OVER_UNDER_135_CORNR           2
+52   FIRST_HALF_CORNERS           2
+53  OVER_UNDER_25_CARDS           2
+54         FIRST_CORNER           2
+55          ODD_OR_EVEN           2
+56          DAILY_GOALS           1
+57  FIRST_HALF_GOALS_15           2
+58     CORNER_MATCH_BET           2
+59   HAT_TRICKED_SCORED           2
+60     GOAL_BOTH_HALVES           2
+61        DOUBLE_CHANCE           2
+62             TEAM_A_2           2
+63             TEAM_B_2           2
+64             TEAM_B_3           2
+65     TEAM_TOTAL_GOALS           4
+66  OVER_UNDER_45_CARDS           2
+67         SHOWN_A_CARD           2
+68  OVER_UNDER_85_CORNR           2
+69        OVER_UNDER_65          12
+70  FIRST_HALF_GOALS_25           2
+71 HALF_WITH_MOST_GOALS           2
+72        OVER_UNDER_55          12
+73        OVER_UNDER_75           2
+74       CORRECT_SCORE2           4
+75       WINNING_MARGIN           2
+76        OVER_UNDER_05          12
+77    TEAM_B_WIN_TO_NIL           2
+78   TO_SCORE_2_OR_MORE           2
+79       ASIAN_HANDICAP           2
+80  FIRST_HALF_GOALS_05           2
+81    TO_SCORE_HATTRICK           2
+82    TEAM_A_WIN_TO_NIL           2
+83        OVER_UNDER_85           2</code></pre>
+</div>
 <div id="r-script" class="section level2">
 <h2>R script</h2>
-<p>Our script will need to log in to betfair, filter markets, retrieve market data before saving it somewhere:</p>
+<p>Our script will need to log in to betfair, filter markets, retrieve market data before saving it somewhere.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),

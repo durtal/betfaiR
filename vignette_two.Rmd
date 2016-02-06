@@ -2,21 +2,45 @@
 title: "cron jobs w/ betfaiR"
 ---
 
+```{r echo=FALSE}
+library(knitr)
+opts_chunk$set(comment = NA)
+```
 This vignette will walk through the (theoretical) use of `betfaiR` to collect data over time - this will be useful for collecting data about markets, to potentially build models and establish trading strategies.  I will try to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and [cron](https://en.wikipedia.org/wiki/Cron) on Linux/OSX).  As an example, the plot below shows the Betfair odds during the course of a football game between Manchester United and Manchester City:
 
 <img src="manchester-derby.jpeg" style="display: block; margin-left: auto; margin-right: auto">
 
 There are a few things that we will need to do:
 
-* to create an R script that uses dynamic inputs
-    * these dynamic inputs will be the marketIds which will change day to day
+* to create an R script that will use changing variables
+    * variables will be the marketIds which will change day to day
 * to store data in .RDS or RData files, data will include
     * marketId
     * returned market data
 
+## Find markets
+
+First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data.  We will try to collect match odds data for Premier League matches.  We will need the competition id for these markets.
+
+```{r}
+# load betfaiR and login
+library(betfaiR)
+bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+              pwd = Sys.getenv("BETFAIR_PWD"),
+              key = Sys.getenv("BETFAIR_KEY"))
+
+# find correct eventTypeIds
+(eventTypeIds <- bf$eventTypes())
+# soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition
+(competitions <- bf$competitions(filter = marketFilter(eventTypeIds = 1,
+                                                       marketCountries = "GB")))
+# the Premier League has a competition id of 31, we can find the different market types for this competition
+(marketTypes <- bf$marketTypes(filter = marketFilter(competitionIds = 31)))
+```
+
 ## R script
 
-Our script will need to log in to betfair, filter markets, retrieve market data before saving it somewhere:
+Our script will need to log in to betfair, filter markets, retrieve market data before saving it somewhere.
 
 ```{r eval=FALSE}
 library(betfaiR)
