@@ -30,12 +30,15 @@ bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
               key = Sys.getenv("BETFAIR_KEY"))
 
 # find correct eventTypeIds
-(eventTypeIds <- bf$eventTypes())
+eventTypeIds <- bf$eventTypes()
+eventTypeIds[grepl("soccer|football", eventTypeIds$eventType_name, ignore.case = TRUE),]
 # soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition
-(competitions <- bf$competitions(filter = marketFilter(eventTypeIds = 1,
-                                                       marketCountries = "GB")))
+competitions <- bf$competitions(filter = marketFilter(eventTypeIds = 1,
+                                                      marketCountries = "GB"))
+competitions[grepl("premier", competitions$competition_name, ignore.case =  TRUE),]
 # the Premier League has a competition id of 31, we can find the different market types for this competition
-(marketTypes <- bf$marketTypes(filter = marketFilter(competitionIds = 31)))
+marketTypes <- bf$marketTypes(filter = marketFilter(competitionIds = 31))
+head(marketTypes)
 ```
 
 ## R script
