@@ -6,7 +6,7 @@ title: "cron jobs w/ betfaiR"
 library(knitr)
 opts_chunk$set(comment = NA)
 ```
-This vignette will walk through the (theoretical) use of `betfaiR` to collect data over time - this will be useful for collecting data about markets, to potentially build models and establish trading strategies.  I will try to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and [cron](https://en.wikipedia.org/wiki/Cron) on Linux/OSX).  As an example, the plot below shows the Betfair odds during the course of a football game between Manchester United and Manchester City:
+This vignette will walk through the use of `betfaiR` to collect data over time - the markets we will focus on is the match odds markets for Man City vs Spurs and Arsenal vs Leicester, as well as the Premier League outright market.  However this approach can be used for collecting data about other markets, to potentially build models and establish trading strategies.  I will try to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and [cron](https://en.wikipedia.org/wiki/Cron) on Linux/OSX).  As an example, the plot below shows the Betfair odds during the course of a football game between Manchester United and Manchester City:
 
 <img src="manchester-derby.jpeg" style="display: block; margin-left: auto; margin-right: auto">
 
