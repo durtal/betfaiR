@@ -62,23 +62,41 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -255,7 +273,7 @@ img {
 </div>
 
 
-<p>This vignette will walk through the (theoretical) use of <code>betfaiR</code> to collect data over time - this will be useful for collecting data about markets, to potentially build models and establish trading strategies. I will try to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and <a href="https://en.wikipedia.org/wiki/Cron">cron</a> on Linux/OSX). As an example, the plot below shows the Betfair odds during the course of a football game between Manchester United and Manchester City:</p>
+<p>This vignette will walk through the use of <code>betfaiR</code> to collect data over time - the markets we will focus on is the match odds markets for Man City vs Spurs and Arsenal vs Leicester, as well as the Premier League outright market. However this approach can be used for collecting data about other markets, to potentially build models and establish trading strategies. I will try to explain how to perform similar tasks on both Windows and Linux/OSX machines, this will involve creating an R script and using a Task scheduler (Task Scheduler on Windows and <a href="https://en.wikipedia.org/wiki/Cron">cron</a> on Linux/OSX). As an example, the plot below shows the Betfair odds during the course of a football game between Manchester United and Manchester City:</p>
 <p><img src="manchester-derby.jpeg" style="display: block; margin-left: auto; margin-right: auto"></p>
 <p>There are a few things that we will need to do:</p>
 <ul>
@@ -271,66 +289,90 @@ img {
 </ul>
 <div id="find-markets" class="section level2">
 <h2>Find markets</h2>
-<p>First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data. We will try to collect match odds data for Premier League matches. We will need the competition id for these markets.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load betfaiR and login</span>
+<p>First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data. As we are focussing on the Premier League, we need an eventTypeId, a competitionId, which will help us to find the markets we are interested in.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load betfaiR and login</span>
 <span class="kw">library</span>(betfaiR)
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
 <pre><code>Login successful</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correct eventTypeIds</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correct eventTypeIds</span>
 eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
-eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre>
+eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre></div>
 <pre><code>   eventType_id    eventType_name marketCount
-2             1            Soccer        9055
-25         6423 American Football         114</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
+2             1            Soccer       15769
+26         6423 American Football           1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
 competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
                                                       <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
-competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre>
-<pre><code>   competition_id                           competition_name marketCount
-6           20351                           NIFL Premiership          10
-9         4644728 Northern Premier League Division One North          66
-11             31                    Barclays Premier League         175
-13        4644737 Northern Premier League Division One South          66
-16        6447264      Northern Premier League Challenge Cup          22
-18         252549                       Welsh Premier League          12
-28            105                       Scottish Premiership         136
-31         820588                           Southern Premier          78
-33         820753                           Northern Premier          54
-36         820582                           Isthmian Premier          32
-   competitionRegion
-6                GBR
-9                GBR
-11               GBR
-13               GBR
-16               GBR
-18               GBR
-28               GBR
-31               GBR
-33               GBR
-36               GBR</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
-marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))
-<span class="kw">head</span>(marketTypes)</code></pre>
-<pre><code>        marketType marketCount
-1           WINNER           1
-2 UNDIFFERENTIATED           2
-3          SPECIAL          18
-4   TOP_GOALSCORER           2
-5         HANDICAP           2
-6           UNUSED          18</code></pre>
+competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre></div>
+<pre><code>   competition_id        competition_name marketCount competitionRegion
+6          252549    Welsh Premier League          52               GBR
+14            105    Scottish Premiership         242               GBR
+18          20351        NIFL Premiership          44               GBR
+22             31 Barclays Premier League         576               GBR</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
+marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))</code></pre></div>
+<pre><code>             marketType marketCount
+1                WINNER           1
+31  MATCH_ODDS_AND_BTTS           7
+49 MATCH_ODDS_AND_OU_25           7
+52           MATCH_ODDS          10</code></pre>
+<p>The marketIds of the two matches (Man City vs Spurs and Arsenal vs Leicester) and the outright winner of the Premier League are shown below:</p>
 </div>
 <div id="r-script" class="section level2">
 <h2>R script</h2>
-<p>Our script will need to log in to betfair, filter markets, retrieve market data before saving it somewhere.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
-bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
-              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
+<p>A script will need to login, find the correct markets, retreive the relevant data, and then save the data. There are a couple of steps which will be unnecessarily repeated, the login and finding the correct markets. These can be done once, and then saved, although the script needs to be able to run straight off the bat, so it might look something like the code below</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 
-markets &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
-                                                    <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))</code></pre>
+files &lt;-<span class="st"> </span><span class="kw">list.files</span>()
+if(!(<span class="st">&quot;login.RDS&quot;</span> %in%<span class="st"> </span>files)) {
+    bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+                  <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+                  <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
+    <span class="kw">saveRDS</span>(bf, <span class="st">&quot;login.RDS&quot;</span>)
+} else {
+    bf &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;login.RDS&quot;</span>)
+}</code></pre></div>
+<p>A similar <code>if else</code> section can be applied for marketIds:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </span>files)) {
+    cittot &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>, 
+                                                       <span class="dt">textQuery =</span> <span class="st">&quot;Tottenham&quot;</span>,
+                                                       <span class="dt">to =</span> <span class="st">&quot;2016-02-15&quot;</span>,
+                                                       <span class="dt">marketTypeCodes =</span> <span class="st">&quot;MATCH_ODDS&quot;</span>),
+                                 <span class="dt">maxResults =</span> <span class="dv">10</span>)
+    arslei &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>,
+                                                       <span class="dt">textQuery =</span> <span class="st">&quot;Arsenal&quot;</span>,
+                                                       <span class="dt">to =</span> <span class="st">&quot;2016-02-15&quot;</span>,
+                                                       <span class="dt">marketTypeCodes =</span> <span class="st">&quot;MATCH_ODDS&quot;</span>),
+                                 <span class="dt">maxResults =</span> <span class="dv">10</span>)
+    winner &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>,
+                                                       <span class="dt">marketTypeCodes =</span> <span class="st">&quot;WINNER&quot;</span>))
+    marketIds &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">cittot =</span> cittot, <span class="dt">arslei =</span> arslei, <span class="dt">winner =</span> winner)
+    <span class="kw">saveRDS</span>(marketIds, <span class="st">&quot;marketIds.RDS&quot;</span>)
+} else {
+    marketIds &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;marketIds.RDS&quot;</span>)
+}</code></pre></div>
+<p>The following are the three markets of interest, which were collected and saved sometime on Weds 10th Feb 2016.</p>
+<pre><code>
+Market ID:      1.122843814
+Event ID:       27674404 
+Market Name:    Match Odds
+Event Name:     Man City v Tottenham 
+Matched:        62869.59
+ ---------------------------------------------------------------------------
+Market ID:      1.122843669
+Event ID:       27674402 
+Market Name:    Match Odds
+Event Name:     Arsenal v Leicester 
+Matched:        82476.81
+ ---------------------------------------------------------------------------
+Market ID:      1.118280148
+Event ID:       2022802 
+Market Name:    2015/16 Winner
+Event Name:     Barclays Premier League 
+Matched:        13345021.84
+ ---------------------------------------------------------------------------</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>

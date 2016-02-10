@@ -2,7 +2,7 @@
 title: "cron jobs w/ betfaiR"
 ---
 
-```{r echo=FALSE}
+```{r set-knitr, echo=FALSE}
 library(knitr)
 opts_chunk$set(comment = NA)
 ```
@@ -20,9 +20,9 @@ There are a few things that we will need to do:
 
 ## Find markets
 
-First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data.  We will try to collect match odds data for Premier League matches.  We will need the competition id for these markets.
+First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data.  As we are focussing on the Premier League, we need an eventTypeId, a competitionId, which will help us to find the markets we are interested in.
 
-```{r}
+```{r login-and-search}
 # load betfaiR and login
 library(betfaiR)
 bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
@@ -38,21 +38,63 @@ competitions <- bf$competitions(filter = marketFilter(eventTypeIds = 1,
 competitions[grepl("premier", competitions$competition_name, ignore.case =  TRUE),]
 # the Premier League has a competition id of 31, we can find the different market types for this competition
 marketTypes <- bf$marketTypes(filter = marketFilter(competitionIds = 31))
-head(marketTypes)
+```
+```{r show-marketTypes, echo=FALSE}
+marketTypes[grepl("WINNER|MATCH_ODDS", marketTypes$marketType),]
+```
+
+The marketIds of the two matches (Man City vs Spurs and Arsenal vs Leicester) and the outright winner of the Premier League are shown below:
+
+```{r show-marketIds, echo=FALSE}
+
 ```
 
 ## R script
 
-Our script will need to log in to betfair, filter markets, retrieve market data before saving it somewhere.
+A script will need to login, find the correct markets, retreive the relevant data, and then save the data.  There are a couple of steps which will be unnecessarily repeated, the login and finding the correct markets.  These can be done once, and then saved, although the script needs to be able to run straight off the bat, so it might look something like the code below
 
-```{r eval=FALSE}
+```{r example-login, eval=FALSE}
 library(betfaiR)
-bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
-              pwd = Sys.getenv("BETFAIR_PWD"),
-              key = Sys.getenv("BETFAIR_KEY"))
 
-markets <- bf$marketCatalogue(filter = marketFilter(eventTypeIds = 1,
-                                                    marketCountries = "GB"))
+files <- list.files()
+if(!("login.RDS" %in% files)) {
+    bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
+                  pwd = Sys.getenv("BETFAIR_PWD"),
+                  key = Sys.getenv("BETFAIR_KEY"))
+    saveRDS(bf, "login.RDS")
+} else {
+    bf <- readRDS("login.RDS")
+}
+```
+
+A similar `if else` section can be applied for marketIds:
+
+```{r example-marketIds, eval=FALSE}
+if(!("marketIds.RDS" %in% files)) {
+    cittot <- bf$marketCatalogue(filter = marketFilter(competitionIds = 31, 
+                                                       textQuery = "Tottenham",
+                                                       to = "2016-02-15",
+                                                       marketTypeCodes = "MATCH_ODDS"),
+                                 maxResults = 10)
+    arslei <- bf$marketCatalogue(filter = marketFilter(competitionIds = 31,
+                                                       textQuery = "Arsenal",
+                                                       to = "2016-02-15",
+                                                       marketTypeCodes = "MATCH_ODDS"),
+                                 maxResults = 10)
+    winner <- bf$marketCatalogue(filter = marketFilter(competitionIds = 31,
+                                                       marketTypeCodes = "WINNER"))
+    marketIds <- list(cittot = cittot, arslei = arslei, winner = winner)
+    saveRDS(marketIds, "marketIds.RDS")
+} else {
+    marketIds <- readRDS("marketIds.RDS")
+}
+```
+
+The following are the three markets of interest, which were collected and saved sometime on Weds 10th Feb 2016.
+
+```{r echo=FALSE}
+marketIds <- readRDS("vignette_two/marketIds.RDS")
+plyr::l_ply(marketIds, summary)
 ```
 
 
