@@ -243,6 +243,9 @@ img {
                         <li>
                             <a href="vignette_one.html">place a bet</a>
                         </li>
+                        <li>
+                            <a href="vignette_two.html">cron jobs w/ betfaiR</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -284,7 +287,7 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
 eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre>
 <pre><code>   eventType_id    eventType_name marketCount
-2             1            Soccer       16001
+2             1            Soccer       15889
 26         6423 American Football           1</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
 competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
@@ -401,7 +404,7 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 <h3>windows</h3>
 <p>Windows does have a GUI to help with Scheduling tasks (read about that <a href="http://windows.microsoft.com/en-gb/windows/schedule-task#1TC=windows-7">here</a>) but some of it is quite restrictive, eg. you can (Windows 8) only schedule a task to run every 5minutes. So we will be using the command line as an administrator, docs about the arguments which can be used can be found <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb736357(v=vs.85).aspx">here</a>.</p>
 <p>The command entered for this task will be</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">schtasks</span> /create /sc minute /sd 14/02/2016 /st 10:00 /ed 14/02/2016 /et 19:00 /tn betfairsupersunday /tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat \k</code></pre>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">schtasks</span> /create /sc minute /sd 14/02/2016 /st 10:00 /ed 14/02/2016 /et 19:00 /tn betfairsupersunday /tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat</code></pre>
 <p>So walking through that:</p>
 <ol style="list-style-type: decimal">
 <li><code>schtasks /create</code> creates a task, what follows are the arguments or parameters</li>
@@ -409,8 +412,8 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 <li><code>/ed 14/02/2016 /et 19:00</code> informs the end date (<code>/ed 14/02/2016</code>) and the end time (<code>/et 19:00</code>)</li>
 <li><code>/tn betfairsupersunday</code> informs the task name so it can be found/deleted/updated</li>
 <li><code>/tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat</code> informs the task to run, in this case the <a href="https://github.com/durtal/betfaiR/blob/gh-pages/vignette_two/task.bat">task.bat</a> file</li>
-<li><code>/k</code> informs the task scheduler to delete the task on completion.</li>
 </ol>
+<p>I used a couple of additional parameters, <code>/ru</code> and <code>/rp</code>, which informs the scheduler to run the task under a certain user (<code>/ru</code>, and their password <code>/rp</code>), this means that the CMD prompt won’t pop up every minute when the task launches, and the task will run quietly.</p>
 </div>
 </div>
 <div id="part-two---findings" class="section level2">
