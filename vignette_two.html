@@ -284,27 +284,39 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
 eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre>
 <pre><code>   eventType_id    eventType_name marketCount
-2             1            Soccer       23692
+2             1            Soccer       16001
 26         6423 American Football           1</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
 competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
                                                       <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre>
-<pre><code>   competition_id        competition_name marketCount competitionRegion
-6           20351        NIFL Premiership          54               GBR
-9              31 Barclays Premier League         880               GBR
-14         252549    Welsh Premier League          72               GBR
-21            105    Scottish Premiership         201               GBR
-23         820588        Southern Premier          40               GBR
-24         820753        Northern Premier          30               GBR
-27         820582        Isthmian Premier          32               GBR</code></pre>
+<pre><code>   competition_id                           competition_name marketCount
+6           20351                           NIFL Premiership          84
+9         4644728 Northern Premier League Division One North          48
+10             31                    Barclays Premier League         393
+15        6447264      Northern Premier League Challenge Cup          24
+16         252549                       Welsh Premier League          64
+23            105                       Scottish Premiership          70
+25         820588                           Southern Premier          31
+26         820753                           Northern Premier           6
+29         820582                           Isthmian Premier          25
+   competitionRegion
+6                GBR
+9                GBR
+10               GBR
+15               GBR
+16               GBR
+23               GBR
+25               GBR
+26               GBR
+29               GBR</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
 marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))</code></pre>
 <pre><code>             marketType marketCount
 1                WINNER           1
-33  MATCH_ODDS_AND_BTTS          10
-51 MATCH_ODDS_AND_OU_25          10
-54           MATCH_ODDS          16</code></pre>
+41  MATCH_ODDS_AND_BTTS           3
+60           MATCH_ODDS           9
+64 MATCH_ODDS_AND_OU_25           3</code></pre>
 <p>The marketIds of the two matches (Man City vs Spurs and Arsenal vs Leicester) and the outright winner of the Premier League are shown below:</p>
 <p>The following are the three markets of interest, which were collected and saved sometime on Weds 10th Feb 2016.</p>
 <pre><code>
@@ -380,10 +392,105 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 } else {
     marketIds &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;marketIds.RDS&quot;</span>)
 }</code></pre>
+<p>The complete R script which will be run each time can be found at the <a href="http://durtal.github.io/betfaiR/vignette_two.html#complete-r-script">bottom of this page</a> or on <a href="https://github.com/durtal/betfaiR/blob/gh-pages/vignette_two/collect_data.R">github</a>, the script is commented so you should be able to follow it.</p>
+</div>
+<div id="schedule-tasks" class="section level2">
+<h2>schedule tasks</h2>
+<p>Tasks will be run every minute on Sunday 14th Feb between 10am (GMT) and 7pm (GMT). So data might catch pre-match team announcment movements, and how these may ripple over other markets.</p>
+<div id="windows" class="section level3">
+<h3>windows</h3>
+<p>Windows does have a GUI to help with Scheduling tasks (read about that <a href="http://windows.microsoft.com/en-gb/windows/schedule-task#1TC=windows-7">here</a>) but some of it is quite restrictive, eg. you can (Windows 8) only schedule a task to run every 5minutes. So we will be using the command line as an administrator, docs about the arguments which can be used can be found <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb736357(v=vs.85).aspx">here</a>.</p>
+<p>The command entered for this task will be</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">schtasks</span> /create /sc minute /sd 14/02/2016 /st 10:00 /ed 14/02/2016 /et 19:00 /tn betfairsupersunday /tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat \k</code></pre>
+<p>So walking through that:</p>
+<ol style="list-style-type: decimal">
+<li><code>schtasks /create</code> creates a task, what follows are the arguments or parameters</li>
+<li><code>/sc minute /sd 14/02/2016 /st 10:00</code> informs the schedule frequency (<code>/sc minute</code>), the start date (<code>/sd 14/02/2016</code>) and the start time (<code>/st 10:00</code>)</li>
+<li><code>/ed 14/02/2016 /et 19:00</code> informs the end date (<code>/ed 14/02/2016</code>) and the end time (<code>/et 19:00</code>)</li>
+<li><code>/tn betfairsupersunday</code> informs the task name so it can be found/deleted/updated</li>
+<li><code>/tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat</code> informs the task to run, in this case the <a href="https://github.com/durtal/betfaiR/blob/gh-pages/vignette_two/task.bat">task.bat</a> file</li>
+<li><code>/k</code> informs the task scheduler to delete the task on completion.</li>
+</ol>
+</div>
 </div>
 <div id="part-two---findings" class="section level2">
 <h2>part two - findings</h2>
 <p>I will try to post a follow up vignette/blog with some basic analysis of the data returned by the markets…</p>
+</div>
+<div id="complete-r-script" class="section level2">
+<h2>complete R script</h2>
+<p>The script below is called every time a task runs. So we first load libraries, set our working environment and log in to betfair via the <a href="http://durtal.github.io/betfaiR/betfair.html"><code>betfair</code></a> function. We then retrieve the files in our current directory, to establish whether there is a marketIds.RDS file we can load, or whether we need to retrieve the marketIds, as discussed above.</p>
+<p>The next steps save the current time - to help with comparing data from the three markets - which will be added to each of the markets’ data. The code then establishes whether the market is still available using the <a href="http://durtal.github.io/betfaiR/marketCatalogue.html"><code>marketCatalogue</code></a> method; Arsenal vs Leicester kics off at 12pm so will be finished and closed before Man City vs Tottenham. So the <code>available_markets</code> variable becomes the markets whose data we will retrieve.</p>
+<p>We then loop through these <code>available_markets</code> and retrieve data via the <a href="http://durtal.github.io/betfaiR/marketBook.html"><code>marketBook</code></a> method. We will read in any existing data for this market, append the newly returned data (gradually building a larger and larger list) to the existing data, and then save our updated list.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<span class="kw">setwd</span>(<span class="st">&quot;C:/Users/TomHeslop/Documents/Github/betfaiR/vignette_two/&quot;</span>)
+<span class="kw">readRenviron</span>(<span class="st">&quot;~/.Renviron&quot;</span>) <span class="co"># slightly curious why I needed to do this?</span>
+
+<span class="co"># log in</span>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))
+
+<span class="co"># return list of files to check whether marketIds have been collected before</span>
+files &lt;-<span class="st"> </span><span class="kw">list.files</span>()
+<span class="co"># if marketIds are not available collect and save them, otherwise load them</span>
+if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </span>files)) {
+    cittot &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>,
+                                                       <span class="dt">textQuery =</span> <span class="st">&quot;Tottenham&quot;</span>,
+                                                       <span class="dt">to =</span> <span class="st">&quot;2016-02-15&quot;</span>,
+                                                       <span class="dt">marketTypeCodes =</span> <span class="st">&quot;MATCH_ODDS&quot;</span>),
+                                 <span class="dt">maxResults =</span> <span class="dv">10</span>,
+                                 <span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;RUNNER_DESCRIPTION&quot;</span>))
+    arslei &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>,
+                                                       <span class="dt">textQuery =</span> <span class="st">&quot;Arsenal&quot;</span>,
+                                                       <span class="dt">to =</span> <span class="st">&quot;2016-02-15&quot;</span>,
+                                                       <span class="dt">marketTypeCodes =</span> <span class="st">&quot;MATCH_ODDS&quot;</span>),
+                                 <span class="dt">maxResults =</span> <span class="dv">10</span>,
+                                 <span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;RUNNER_DESCRIPTION&quot;</span>))
+    winner &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>,
+                                                       <span class="dt">marketTypeCodes =</span> <span class="st">&quot;WINNER&quot;</span>),
+                                 <span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;RUNNER_DESCRIPTION&quot;</span>))
+    markets &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">cittot =</span> cittot, <span class="dt">arslei =</span> arslei, <span class="dt">winner =</span> winner)
+    <span class="kw">saveRDS</span>(markets, <span class="st">&quot;marketIds.RDS&quot;</span>)
+} else {
+    markets &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;marketIds.RDS&quot;</span>)
+}
+
+<span class="co"># get current time, to allow comparison between each of the 3 markets</span>
+currentTime &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
+<span class="co"># extract marketIds, and their names</span>
+marketIds &lt;-<span class="st"> </span><span class="kw">sapply</span>(markets, function(i) i[[<span class="dv">1</span>]]$market$marketId)
+<span class="co"># use marketIds to see if markets are still available</span>
+available_markets &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketIds =</span> <span class="kw">as.vector</span>(marketIds)),
+                                        <span class="dt">maxResults =</span> <span class="dv">3</span>)
+available_markets &lt;-<span class="st"> </span><span class="kw">sapply</span>(available_markets, function(i) i$market$marketId)
+<span class="co"># build logical vector</span>
+test &lt;-<span class="st"> </span>marketIds %in%<span class="st"> </span>available_markets
+<span class="co"># return names of markets that are still available</span>
+available_markets &lt;-<span class="st"> </span><span class="kw">names</span>(marketIds[test])
+
+<span class="co"># loop through each market and retrieve data, add currentTime to make comparison easier</span>
+plyr::<span class="kw">l_ply</span>(available_markets, function(i, files, currentTime, bf, markets) {
+
+    filename &lt;-<span class="st"> </span><span class="kw">paste0</span>(i, <span class="st">&quot;.RDS&quot;</span>)
+    if(filename %in%<span class="st"> </span>files) {
+        tmp &lt;-<span class="st"> </span><span class="kw">readRDS</span>(filename)
+    } else {
+        tmp &lt;-<span class="st"> </span><span class="kw">list</span>()
+    }
+    cur &lt;-<span class="st"> </span>markets[[i]]
+    cur &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> cur,
+                         <span class="dt">priceProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EX_ALL_OFFERS&quot;</span>, <span class="st">&quot;EX_TRADED&quot;</span>))
+    cur[[<span class="dv">1</span>]]$collectedAt &lt;-<span class="st"> </span>currentTime
+
+    tmp &lt;-<span class="st"> </span><span class="kw">append</span>(tmp, cur)
+
+    <span class="kw">saveRDS</span>(tmp, filename)
+
+}, <span class="dt">files =</span> files,
+    <span class="dt">currentTime =</span> currentTime,
+    <span class="dt">bf =</span> bf,
+    <span class="dt">markets =</span> marketIds)</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>
