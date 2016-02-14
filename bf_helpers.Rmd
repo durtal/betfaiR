@@ -21,7 +21,7 @@ limitOrder(size = 2,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 size | the size of the best. **NB.** for a market type of **EACH_WAY** the total stake is 2 \* size.
 price | the limit price
 persistenceType | what to do with the order when the market goes in-play.  **LAPSE** (default) - lapse the order when the market goes in play.  **PERSIST** - persist the order in play, the bet will be placed automatically into the in play market at the start of the event.  **MARKET_ON_CLOSE** - put the order into the auction (SP) at in-play.
@@ -42,7 +42,7 @@ limitOnCloseOrder(size = 2,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 size | the size of the bet. **NB.** for a market type of **EACH_WAY** the total stake is 2 \* size.
 price | the limit price
 
@@ -62,7 +62,7 @@ cancel_inst(betId = NA,
 ### arguments
 
 param | details
-------|---------
+------|-------------------------------------------------------------------------
 betId | the unique betId, returned when the bet was placed, these can also be retrieved by the [`currentOrders`](currentOrders.html) method.
 size | reduction size
 
@@ -82,7 +82,7 @@ replace_inst(betId = NA,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 betId | the unique betId, returned when the bet was placed, these can also be retrieved by the [`currentOrders`](currentOrders.html) method.
 newPrice | new price to strike the bet
 
@@ -102,7 +102,7 @@ update_inst(betId = NA,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 betId | the unique betId, returned when the bet was placed, these can also be retrieved by the [`currentOrders`](currentOrders.html) method.
 persistenceType | new persistenceType, what to do when the market goes in-play.  **LAPSE** - lapse the order when the market is turned in-play.  **PERSIST** - persist the order in-play, the bet will be placed automatically into the in-play market at the start of the event.  **MARKET_ON_CLOSE** - put the order into the auction (SP) at turn in-play.
 

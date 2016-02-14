@@ -13,7 +13,7 @@ bf$countries(filter = marketFilter())
 ### arguments
 
 param | details
-------|---------
+------|-------------------------------------------------------------------------
 `filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.  If nothing is entered, **all** competitions are returned
 
 ### return
@@ -21,7 +21,7 @@ param | details
 The function returns a dataframe of countries with available markets, and the number of markets:
 
 variable | details
----------|--------
+------|-------------------------------------------------------------------------
 `countryCode` | the ISO-2 code, ISO-2 codes are available on [wiki](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2), examples include _GB_, _IE_, _US_, etc
 `marketCount` | number of markets associated with this country
 

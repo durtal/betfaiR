@@ -14,7 +14,7 @@ bf$updateOrders(...,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `...` | specific details about the bets to update, use [`update_inst`](bf_helpers.html#update_inst) function to target individual bets via their id
 `marketId` | the unique id for the market in which the bets should be updated
 

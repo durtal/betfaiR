@@ -16,7 +16,7 @@ bf$replaceOrders(...,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `...` | specific details about bets to replace, use [`replace_inst`](bf_helpers.html#replace_inst) function to target specific bets via their id
 `marketId` | the unique id for the market in which bets should be replaced
 

@@ -62,23 +62,41 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -243,6 +261,9 @@ img {
                         <li>
                             <a href="vignette_one.html">place a bet</a>
                         </li>
+                        <li>
+                            <a href="vignette_two.html">cron jobs w/ betfaiR</a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -261,15 +282,15 @@ img {
 <h3>login</h3>
 <p>First we need to login in, this requires a valid username, valid password, and valid API key. The <a href="betfair.html#appendix">appendix</a> on the <code>betfair</code> page talks about how to best store these details in a safe manner. The suggestions come from <a href="https://twitter.com/JennyBryan">Jenny Bryan</a> via <a href="https://twitter.com/hadleywickham">Hadley Wickham’s</a> <a href="https://github.com/hadley/httr"><code>httr</code></a> package (which is used by <code>betfaiR</code> )</p>
 <p>So to login, first load the library, then login, saving the returned environment to a variable, here I named it <code>bf</code>. This can then be printed to see the available methods:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
 <pre><code>Login successful</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">bf</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bf</code></pre></div>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
-    $account(pass) 
+    $account(pwd) 
     $cancelOrders(..., marketId = NA) 
     $clearedOrders(betStatus = &quot;SETTLED&quot;, eventTypeIds = NULL, eventIds = NULL, marketIds = NULL, runnerIds = NULL, 
    betIds = NULL, side = &quot;BACK&quot;, from = NULL, to = NULL) 
@@ -279,7 +300,7 @@ Methods available:
    sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
-    $login(usr, pwd, key) 
+    $login(usr, pwd, key, dom) 
     $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
@@ -294,118 +315,118 @@ Methods available:
 <h3>searching for markets</h3>
 <p>It’s unlikely to be the case that you know the marketId or selectionId to go straight to placing a bet, so searching for the markets is usually required. This can be done via a number of different methods, which include, <a href="methods_competitions.html"><code>competitions</code></a>, <a href="methods_countries.html"><code>countries</code></a>, <a href="methods_events.html"><code>events</code></a>, <a href="methods_eventTypes.html"><code>eventTypes</code></a>, <a href="methods_venues.html"><code>venues</code></a> and perhaps most useful <a href="methods_marketCatalogue.html"><code>marketCatalogue</code></a> and the helper function <a href="marketFilter.html"><code>marketFilter</code></a> function.</p>
 <p>You can filter on a wide variety of parameters, but some familiarity with these parameters is useful, for example, knowing that an <strong>eventTypeId</strong> of 1 will return football markets, while <strong>eventTypeId</strong> of 7 will return horse racing markets. We will look for 5 horse racing markets, in the UK, and we will sort by the amount traded. The response (stored as <code>markets</code> below) can be passed to <code>summary</code> for details about the 5 markets, in an easy to read format which allows users to quickly identify the market they’re interested in:</p>
-<pre class="sourceCode r"><code class="sourceCode r">markets &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">markets &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>,
                                                     <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>),
                               <span class="dt">maxResults =</span> <span class="dv">5</span>,
                               <span class="dt">sort =</span> <span class="st">&quot;MAXIMUM_TRADED&quot;</span>)
-<span class="kw">summary</span>(markets)</code></pre>
+<span class="kw">summary</span>(markets)</code></pre></div>
 <pre><code>
-Market ID:      1.117674262
-Event ID:       27625530 
-Market Name:    Gold Cup
-Event Name:     Chelt 18th Mar 
-Matched:        206479.14
- ---------------------------------------------------------------------------
 Market ID:      1.117674259
 Event ID:       27625527 
 Market Name:    Champion Hrd
 Event Name:     Chelt 15th Mar 
-Matched:        188709.9
+Matched:        383082.74
  ---------------------------------------------------------------------------
-Market ID:      1.118224623
-Event ID:       27639253 
-Market Name:    Grand National
-Event Name:     Aint 9th Apr 
-Matched:        85060.16
+Market ID:      1.117674262
+Event ID:       27625530 
+Market Name:    Gold Cup
+Event Name:     Chelt 18th Mar 
+Matched:        350753.94
  ---------------------------------------------------------------------------
 Market ID:      1.117674261
 Event ID:       27625529 
 Market Name:    World Hrd
 Event Name:     Chelt 17th Mar 
-Matched:        84708.04
+Matched:        209370.32
  ---------------------------------------------------------------------------
-Market ID:      1.118987605
-Event ID:       27639254 
-Market Name:    2000 Guineas
-Event Name:     Newm 2nd May 
-Matched:        82759.18
+Market ID:      1.119301054
+Event ID:       27625527 
+Market Name:    Supreme Nov Hrd
+Event Name:     Chelt 15th Mar 
+Matched:        189733.52
+ ---------------------------------------------------------------------------
+Market ID:      1.117674260
+Event ID:       27625528 
+Market Name:    Champion Chs
+Event Name:     Chelt 16th Mar 
+Matched:        172612.48
  ---------------------------------------------------------------------------</code></pre>
-<p>Let’s look at the first market, the market name is <strong>Gold Cup</strong> while the event name is <strong>Chelt 18th Mar</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
-<pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>markets[[<span class="dv">1</span>]]$market$marketId
+<p>Let’s look at the first market, the market name is <strong>Champion Hrd</strong> while the event name is <strong>Chelt 15th Mar</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>markets[[<span class="dv">1</span>]]$market$marketId
 market &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketIds =</span> marketId),
                              <span class="dt">marketProjection =</span> <span class="st">&quot;RUNNER_DESCRIPTION&quot;</span>)
-<span class="kw">summary</span>(market)</code></pre>
+<span class="kw">summary</span>(market)</code></pre></div>
 <pre><code>
-Market ID:      1.117674262 
-Market Name:    Gold Cup 
-Matched:        206479.14
+Market ID:      1.117674259 
+Market Name:    Champion Hrd 
+Matched:        383082.74
 
-Runners:     63 
- selectionId        runnerName handicap sortPriority
-     6987962          Djakadam        0            1
-     7122507          Don Poli        0            2
-     5517026       Don Cossack        0            3
-     4360454          Cue Card        0            4
-     6896665           Vautour        0            5
-     5554342 Carlingford Lough        0            6
+Runners:     38 
+ selectionId       runnerName handicap sortPriority
+     6871369         Faugheen        0            1
+     7767260      Arctic Fire        0            2
+     5959467      The New One        0            3
+     9037733   Identity Thief        0            4
+     6042342 My Tent Or Yours        0            5
+     6570387   Nichols Canyon        0            6
 
  ---------------------------------------------------------------------------</code></pre>
-<p>Now we know the <code>marketId</code> we can use the <a href="methods_marketBook.html"><code>marketBook</code></a> method to get up to date (well, with a second or so delays) market data. The response of this method can also be passed to <code>summary</code> for pretty printing, before being mined further. One unfortunate thing about the <code>marketBook</code> method is that it only returns selectionIds, rather than runner names, so the likes of <strong>Djakadam</strong> or <strong>Don Poli</strong> are not included.</p>
-<pre class="sourceCode r"><code class="sourceCode r">market_data &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> marketId,
+<p>Now we know the <code>marketId</code> we can use the <a href="methods_marketBook.html"><code>marketBook</code></a> method to get up to date (well, with a second or so delays) market data. The response of this method can also be passed to <code>summary</code> for pretty printing, before being mined further. One unfortunate thing about the <code>marketBook</code> method is that it only returns selectionIds, rather than runner names, so the likes of <strong>Faugheen</strong> or <strong>Arctic Fire</strong> are not included.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">market_data &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> marketId,
                              <span class="dt">priceProjection =</span> <span class="st">&quot;EX_BEST_OFFERS&quot;</span>)
-<span class="kw">summary</span>(market_data)</code></pre>
+<span class="kw">summary</span>(market_data)</code></pre></div>
 <pre><code>
-Market ID:      1.117674262 
-Matched:        206915.75 
-Available:      16635.52
+Market ID:      1.117674259 
+Matched:        392123.17 
+Available:      9624.14
 
-Runners:     63 
+Runners:     18 (20 removed) 
      .id selectionId handicap status lastPriceTraded totalMatched
- 6987962     6987962        0 ACTIVE             5.7     20763.53
- 7122507     7122507        0 ACTIVE             7.6     26345.18
- 5517026     5517026        0 ACTIVE             7.0     25206.43
- 4360454     4360454        0 ACTIVE             7.4     14831.76
- 6896665     6896665        0 ACTIVE            11.0     44236.34
- 5554342     5554342        0 ACTIVE           130.0       220.25
+ 6871369     6871369        0 ACTIVE            1.49    296013.07
+ 7767260     7767260        0 ACTIVE           13.50     15220.81
+ 5959467     5959467        0 ACTIVE           19.00      9883.07
+ 9037733     9037733        0 ACTIVE           22.00      4733.79
+ 6042342     6042342        0 ACTIVE           25.00      6625.64
+ 6570387     6570387        0 ACTIVE           38.00     13911.97
 
  ---------------------------------------------------------------------------</code></pre>
 </div>
 <div id="placing-a-bet" class="section level3">
 <h3>placing a bet</h3>
-<p>Let’s place a lay bet on the current favourite using the <a href="placeOrders.html"><code>placeOrders</code></a> method, Djakadam, we don’t want this to be matched, so the lay will be at the 1.01 price, and for just ?2. To place a bet, we need the <code>marketId</code> and <code>selectionId</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$market$marketId
+<p>Let’s place a lay bet on the current favourite using the <a href="placeOrders.html"><code>placeOrders</code></a> method, Faugheen, we don’t want this to be matched, so the lay will be at the 1.01 price, and for just ?2. To place a bet, we need the <code>marketId</code> and <code>selectionId</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$market$marketId
 selectionId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$runners[[<span class="dv">1</span>]]$basic$selectionId
 
 bet &lt;-<span class="st"> </span>bf$<span class="kw">placeOrders</span>(<span class="dt">marketId =</span> marketId,
                       <span class="dt">selectionId =</span> selectionId,
                       <span class="dt">side =</span> <span class="st">&quot;LAY&quot;</span>,
-                      <span class="dt">order =</span> <span class="kw">limitOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">price =</span> <span class="fl">1.01</span>))</code></pre>
+                      <span class="dt">order =</span> <span class="kw">limitOrder</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">price =</span> <span class="fl">1.01</span>))</code></pre></div>
 <p>With any luck we will get a successful response:</p>
-<pre class="sourceCode r"><code class="sourceCode r">bet</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bet</code></pre></div>
 <pre><code>
 Status:         SUCCESS
-MarketId:       1.117674262</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(bet)</code></pre>
+MarketId:       1.117674259</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(bet)</code></pre></div>
 <pre><code>
 Status:         SUCCESS
-MarketId:       1.117674262
+MarketId:       1.117674259
 
 Order:
   status       betId               placedDate averagePriceMatched
- SUCCESS 59988467894 2015-12-28T20:34:48.000Z                   0
+ SUCCESS 62268788917 2016-02-13T23:19:08.000Z                   0
  sizeMatched
            0
 
 Instructions:
  selectionId handicap size price persistenceType orderType side
-     6987962        0    2  1.01           LAPSE     LIMIT  LAY</code></pre>
+     6871369        0    2  1.01           LAPSE     LIMIT  LAY</code></pre>
 <p>We’ll now change that order using the <a href="replaceOrders.html"><code>replaceOrders</code></a> function, for this we need the betId (which was returned above), and we’ll change the price we wish to be matched at to 1.10.</p>
-<pre class="sourceCode r"><code class="sourceCode r">betId &lt;-<span class="st"> </span>bet$order$betId
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">betId &lt;-<span class="st"> </span>bet$order$betId
 bet1 &lt;-<span class="st"> </span>bf$<span class="kw">replaceOrders</span>(<span class="kw">replace_inst</span>(<span class="dt">betId =</span> betId,
                                       <span class="dt">newPrice =</span> <span class="fl">1.10</span>),
-                         <span class="dt">marketId =</span> marketId)</code></pre>
+                         <span class="dt">marketId =</span> marketId)</code></pre></div>
 <p>This update was a <strong>SUCCESS</strong>, but we don’t want to leave the bet there, so lets cancel it. We can either target this specific bet using it’s ID, returned above, or we can cancel all bets as below:</p>
-<pre class="sourceCode r"><code class="sourceCode r">(cancel &lt;-<span class="st"> </span>bf$<span class="kw">cancelOrders</span>())</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(cancel &lt;-<span class="st"> </span>bf$<span class="kw">cancelOrders</span>())</code></pre></div>
 <pre><code>
 Status:  SUCCESS</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>

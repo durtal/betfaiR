@@ -21,8 +21,8 @@ m <- marketFilter(bspOnly = NULL, competitionIds = NULL, eventIds = NULL, eventT
 
 ### arguments
 
-param | type | details | example
-------|------|---------|--------
+param | type | details                                            | example
+------|------|----------------------------------------------------|-------------
 `bspOnly` | `boolean` | restrict to BSP (Betfair Starting Price) markets only `TRUE`, or non-BSP markets `FALSE`.  If not specified then returns both BSP and non-BSP markets | `TRUE`
 `competitionIds` | `string` | restrict markets by the competitions associated with the competition id | `"123456"`
 `eventIds` | `string` | restrict markets by the event id | `"767956"`

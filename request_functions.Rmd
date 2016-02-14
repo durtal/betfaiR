@@ -20,7 +20,7 @@ req <- bf_basic_req(filter = marketFilter(),
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `filter` | list returned by [`marketFilter`](marketFilter.html) or an empty list
 `method` | the method which this request will be passed to
 
@@ -42,7 +42,7 @@ req <- bf_request(bf_basic_req(filter = marketFilter(),
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `x` | a list returned by `base_request`
 
 ### return

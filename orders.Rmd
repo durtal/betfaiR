@@ -17,7 +17,7 @@ limitOrder(size = 2,
 ### arguments
 
 param | details
-------|---------
+------|-------------------------------------------------------------------------
 `size` | the bet size, **NB** for a market of type **EACH_WAY** the total stake is `2 * size`
 `price` | the limit price, the price you at which you wish to strike your bet
 `persistenceType` | what to do with the order at turn in play, three choices.  **LAPSE** - lapse the order when the market goes in play (ie. cancel bet); **PERSIST** - persist the order at in-play, the bet will be placed automatically into the in-play market at the start of the event; **MARKET\_ON\_CLOSE** - put the order into the auction (SP) at turn in-play
@@ -40,7 +40,7 @@ limitOnCloseOrder(size = 2,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `size` | the bet size, **NB**, for a market type of **EACH\_WAY** the total stake is `2 * size`
 `price` | the limit price, the price you wish to place your bet
 
@@ -68,7 +68,7 @@ prepare_order(marketId,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `marketId` | unique market id into which the bet will be placed
 `selectionId` | the unique id for the selection in the market, this will be a horse, a team, etc, these ids can be found using the [`marketCatalogue`](methods_marketCatalogue.html) and [`marketBook`](methods_marketBook.html) methods
 `orderType` | the type of order, **LIMIT** - a normal exchange order for immediate execution, **LIMIT\_ON\_CLOSE** - limit oder for the auction (SP bet with a price limit), **MARKET\_ON\_CLOSE** - market order for the auction, SP bet regardless of price.

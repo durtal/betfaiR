@@ -13,7 +13,7 @@ bf$venues(filter = marketFilter())
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.  If nothing is entered, **all** venues are returned
 
 ### return
@@ -21,7 +21,7 @@ param | details
 The function returns a dataframe of venues associated with the markets selected by the `filter` parameter, the dataframe contains the following:
 
 variable | details
----------|--------
+------|-------------------------------------------------------------------------
 `venue` | horse racing or greyhound venue (racecourse or racetrack)
 `marketCount` | number of markets associated with the venue
 

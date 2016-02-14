@@ -20,7 +20,7 @@ bf$placeOrders(marketId,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `marketId` | unique market id into which the bet will be placed
 `selectionId` | the unique id for the selection in the market, this will be a horse, a team, etc, these ids can be found using the [`marketCatalogue`](methods_marketCatalogue.html) and [`marketBook`](methods_marketBook.html) methods
 `orderType` | the type of order, **LIMIT** - a normal exchange order for immediate execution, **LIMIT\_ON\_CLOSE** - limit oder for the auction (SP bet with a price limit), **MARKET\_ON\_CLOSE** - market order for the auction, SP bet regardless of price.

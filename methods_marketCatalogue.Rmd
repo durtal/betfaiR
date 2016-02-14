@@ -19,7 +19,7 @@ bf$marketCatalogue(filter = marketFilter(),
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.
 `marketProjection` | the type and amount of data returned about the market, see section **Market Projection** in [Betting Enums](betting_enums.html#marketprojection) or visit the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection) for more details.  The different options are **COMPETITION**, **EVENT**, **EVENT_TYPE**, **MARKET_START_TIME**, **MARKET_DESCRIPTION**, **RUNNER_DESCRIPTION**, and **RUNNER_METADATA**, these needn't be entered in caps, however if any are misspelt they will be discarded.
 `sort` | the order of the results, see section **sort** in [Betting Enums](betting_enums.html#marketsort) or the relevant section in the Betfair [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketSort)
@@ -30,8 +30,8 @@ param | details
 
 A list with at least one dataframe about the market(s) filtered using the `filter` parameter (and the [`marketFilter`](marketFilter.html) function) and the `maxResults` paramater.  Each market will have at most 4 dataframes in its list, all the variables are explained below, along with the `marketProjection` option that sees that variable returned.  The list returned can be printed, allowing quick glance at markets before users can drill down into selections etc.
 
-variable | marketProjection | dataframe | details
----------|------------------|-----------|--------
+variable | marketProjection    | dataframe | details
+---------|---------------------|-----------|------------------------------------
 `marketId` | returned by default | market | id of the market
 `marketName` | returned by default | market | name of the market
 `totalMatched` | returned by default | market | amount of money already traded in the market

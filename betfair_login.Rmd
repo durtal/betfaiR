@@ -19,7 +19,7 @@ bf <- bf_login(usr = username,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `usr` | Betfair username
 `pwd` | Betfair password
 `key` | Betfair API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key)

@@ -24,7 +24,7 @@ If using the `account` method found in the [`betfair`](betfair.html) environment
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `usr` | Betfair username
 `pwd` | Betfair password
 `key` | Betfair API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key)
@@ -38,7 +38,7 @@ acc
 ```
 
 method | details
--------|--------
+------|-------------------------------------------------------------------------
 `details` | account details, such as first name, last name, etc
 `funds` | account funds, available to bet balance, exposure, points balance, etc
 `statement` | account statement, returns a list with transactions, can be filtered according to date, wallet, number of records, etc.

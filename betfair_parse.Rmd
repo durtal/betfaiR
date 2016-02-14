@@ -14,7 +14,7 @@ res <- bf_parse(res, ...)
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `res` | response object returned by [`bf_post`](betfair_POST.html) and parsed by `httr::content`
 
 ### return

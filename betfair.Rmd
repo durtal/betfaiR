@@ -21,7 +21,7 @@ bf <- betfair(usr = username,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `usr` | Betfair username
 `pwd` | Betfair password
 `key` | Betfair API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key)
@@ -37,8 +37,8 @@ The function returns an environment (stored as `bf` in the usage section) with v
 bf
 ```
 
-method | details | available | help
--------|---------|-----------|------
+method      | details                                      | available | help
+------------|----------------------------------------------|-------|------------
 `account` | Return environment with methods for retrieving data about your account | `TRUE` | [bf_account](bf_account.html)
 `cancelOrders` | Cancel existing orders that may be unmatched or partially matched | `TRUE` | [cancelOrders](cancelOrders.html)
 `clearedOrders` | Retrieve data about cleared orders | `TRUE` | [clearedOrders](clearedOrders.html)

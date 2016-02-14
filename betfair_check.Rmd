@@ -14,7 +14,7 @@ res <- bf_check(res,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `res` | response object returned by [`bf_post`](betfair_POST) and parsed by `httr::content`
 `method` | method to which the initial response was passed.
 

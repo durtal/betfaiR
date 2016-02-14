@@ -16,7 +16,7 @@ bf$marketPnL(marketIds,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `marketIds` | _string_, one or more marketIds, the number of markets returned depends on the amount of data you request via the `priceProjection`
 `settled` | settled markets only
 `bsp` | include bets which will be placed at BSP

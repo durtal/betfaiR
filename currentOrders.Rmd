@@ -21,7 +21,7 @@ bf$currentOrders(betId = NULL,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `betId` | retrieve data on a specific bet
 `marketId` | retrieve data on open orders in a specific market
 `orderProjection` | retrieve data based on whether orders were filled, default of **ALL** returns all open bets, whether fully matched, partially matched or still unmatched.  **EXECUTABLE** returns data on orders that have an unmatched portion. **EXECUTION_COMPLETE** returns data on orders which have been filled in

@@ -21,7 +21,7 @@ bf$clearedOrders(betStatus = "SETTLED",
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `betStatus` | filter based on how the bet was settled, one of **SETTLED**, **VOIDED**, **LAPSED**, or **CANCELLED**
 `eventTypeIds` | retrieve data on orders per sport
 `eventIds` | retrieve data on orders per event

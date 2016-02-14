@@ -16,7 +16,7 @@ bf$cancelOrders(...,
 ### arguments
 
 param | details
-------|--------
+------|-------------------------------------------------------------------------
 `...` | specific details about bets to cancel, use `cancel_inst` (see [help](bf_helpers.html#cancel_inst)) function to target specific bets via their id
 `marketId` | the unique id for the market in which bets should be cancelled
 

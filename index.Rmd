@@ -10,8 +10,8 @@ This is not to say that it is the only way to use this package, all the function
 
 The `betfair` function logs in, and for each of the methods the following functions are called:
 
-step | function | arguments | details | return
------|----------|-----------|---------|-------
+step | function | arguments | details                       | return
+-----|----------|-----------|-------------------------------|-------------------
 **1** | [`bf_login`](betfair_login.html) | _usr_, _pwd_, _key_ | login function with betfair username, password, and key | list with a session token
 **2** | [`bf_basic_req`](request_functions.html#bf_basic_req) | _filter_, _method_ | builds a basic request object | list with class that matches _method_ param
 **3** | [`bf_request`](request_functions.html#betfair_request) | _x_, _..._ | fleshes out the request object | json object ready to be included in a POST request

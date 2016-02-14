@@ -13,7 +13,7 @@ bf$marketTypes(filter = marketFilter())
 ### arguments
 
 param | details
-------|---------
+------|-------------------------------------------------------------------------
 `filter` | select desired markets, see [marketFilter](marketFilter.html) for various parameters to filter by, or the relevant [help pages](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter) on Betfair.  If nothing is entered, **all** marketTypes are returned
 
 ### return
@@ -21,7 +21,7 @@ param | details
 The function returns a dataframe of market Types and the number of markets associated with that type.
 
 variable | details
----------|--------
+------|-------------------------------------------------------------------------
 `marketType` | the type of market (eg. WINNER, HANDICAP, OVER_UNDER_25)
 `marketCount` | the number of markets currently available associated with this market type
 
