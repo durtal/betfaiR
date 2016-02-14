@@ -126,9 +126,9 @@ r <- paste0(readLines("vignette_two/collect_data.R", warn = FALSE), collapse = "
 ```
 The script below is called every time a task runs.  So we first load libraries, set our working environment and log in to betfair via the [`betfair`](http://durtal.github.io/betfaiR/betfair.html) function.  We then retrieve the files in our current directory, to establish whether there is a marketIds.RDS file we can load, or whether we need to retrieve the marketIds, as discussed above.
 
-The next steps save the current time - to help with comparing data from the three markets - which will be added to each of the markets' data.  The code then establishes whether the market is still available using the [`marketCatalogue`](http://durtal.github.io/betfaiR/marketCatalogue.html) method; Arsenal vs Leicester kics off at 12pm so will be finished and closed before Man City vs Tottenham.  So the `available_markets` variable becomes the markets whose data we will retrieve.
+The next steps save the current time - to help with comparing data from the three markets - which will be added to each of the markets' data.  The code then establishes whether the market is still available using the [`marketCatalogue`](http://durtal.github.io/betfaiR/methods_marketCatalogue.html) method; Arsenal vs Leicester kics off at 12pm so will be finished and closed before Man City vs Tottenham.  So the `available_markets` variable becomes the markets whose data we will retrieve.
 
-We then loop through these `available_markets` and retrieve data via the [`marketBook`](http://durtal.github.io/betfaiR/marketBook.html) method.  We will read in any existing data for this market, append the newly returned data (gradually building a larger and larger list) to the existing data, and then save our updated list.
+We then loop through these `available_markets` and retrieve data via the [`marketBook`](http://durtal.github.io/betfaiR/methods_marketBook.html) method.  We will read in any existing data for this market, append the newly returned data (gradually building a larger and larger list) to the existing data, and then save our updated list.
 
 ```r
 `r r`
