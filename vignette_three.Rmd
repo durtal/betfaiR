@@ -1,0 +1,103 @@
+---
+title: "betfair super sunday - 14/02/16"
+---
+
+
+```{r set-knitr, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(comment = NA,
+               message = FALSE,
+               warning = FALSE,
+               fig.align = 'center',
+               echo = FALSE)
+library(dplyr)
+library(ggplot2)
+
+# load theme
+source("vignette_two/theme.R")
+```
+
+```{r load-and-prepare-data}
+markets <- readRDS("vignette_two/marketIds.RDS")
+arslei <- readRDS("vignette_two/arslei.RDS")
+cittot <- readRDS("vignette_two/cittot.RDS")
+winner <- readRDS("vignette_two/winner.RDS")
+# convert lists to dataframes
+arslei <- plyr::ldply(arslei, .fun = function(i) {
+    x <- plyr::ldply(i$runners, .fun = function(j) {
+        j$basic
+    })
+    x$collectedAt <- i$collectedAt
+    return(x)
+})
+cittot <- plyr::ldply(cittot, .fun = function(i) {
+    x <- plyr::ldply(i$runners, .fun = function(j) {
+        j$basic
+    })
+    x$collectedAt <- i$collectedAt
+    return(x)
+})
+winner <- plyr::ldply(winner, .fun = function(i) {
+    x <- plyr::ldply(i$runners, .fun = function(j) {
+        j$basic
+    })
+    x$collectedAt <- i$collectedAt
+    return(x)
+})
+# join with marketIds to get runnerName
+arslei <- arslei %>%
+    left_join(markets$arslei[[1]]$runners)
+cittot <- cittot %>%
+    left_join(markets$cittot[[1]]$runners)
+winner <- winner %>%
+    left_join(markets$winner[[1]]$runners)
+```
+
+This is a follow up post to the [cron jobs w/ betfaiR](http://durtal.github.io/betfaiR/vignette_two.html) post, which walked through scheduling a task to periodically collect betfair data.  The data collected came from 3 markets on 14/02/16, the early match between Arsenal and Leicester, the late match between Man City and Spurs, and the Premier League Outright market.  This post will summarise and plot some of the data, given some of action, especially in the early game which saw Leicester take the lead, get a man sent off and then lose, we should see some interest movements not only in that market but the outright market too.
+
+(there was a period, around 23minutes from 15:57 to 16:20, where the task was stopped as my laptop was running off its battery, not something I saw being an issue)
+
+## arsenal vs leicester
+
+The early game saw league leaders Leicester travel to the Emirates fresh off a superb away performance at the Etihad.  Arsenal were favourites going into the crucial game, starting the game at **`r arslei %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Arsenal") %>% .$lastPriceTraded`** (having been `r arslei %>% head(3) %>% filter(runnerName == "Arsenal") %>% .$lastPriceTraded` at 10:00am), while Leicester 
+
+<div class="row">
+<div class="col-sm-6">
+```{r ars-lei}
+arslei %>%
+    ggplot(aes(x = collectedAt,
+               y = 1 / lastPriceTraded)) +
+        geom_line(aes(colour = runnerName),
+                  size = 1.05) +
+        theme_betfair() +
+        labs(x = "time",
+             y = "prob",
+             title = "Arsenal vs Leicester (12:00 KO)") +
+        scale_colour_manual(values = betfair_palette)
+```
+</div>
+<div class="col-sm-6">
+```{r ars-lei-matched}
+arslei %>%
+    group_by(runnerName) %>%
+    mutate(
+        prevTotal = lag(totalMatched, 1),
+        prevTotal = ifelse(is.na(prevTotal), totalMatched, prevTotal),
+        matched = totalMatched - prevTotal
+    ) %>%
+    ggplot(aes(x = collectedAt,
+               y = matched)) +
+        geom_bar(stat = "identity",
+                 aes(colour = runnerName)) +
+        labs(x = "time",
+             y = "matched",
+             title = "Arsenal vs Leicester (12:00 KO)\nminute by minute matched bets") +
+        scale_colour_manual(values = betfair_palette) +
+        facet_grid(runnerName ~ .) +
+        theme_betfair() +
+        theme(
+            legend.position = "none"
+        )
+```
+</div>
+</div>
