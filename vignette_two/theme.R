@@ -23,7 +23,7 @@ theme_betfair <- function(base_size = 10, base_family = "", ...) {
         legend.text =           ggplot2::element_text(size = ggplot2::rel(0.9)),
         legend.text.align =     NULL,
         legend.title =          ggplot2::element_blank(),
-        legend.position =       "top",
+        legend.position =       "bottom",
         legend.justification =  "center",
         legend.box =            NULL,
         panel.background =      ggplot2::element_rect(fill = "#fcfcfc", colour = NA),
@@ -40,6 +40,15 @@ theme_betfair <- function(base_size = 10, base_family = "", ...) {
         plot.title =            ggplot2::element_text(size = ggplot2::rel(1.1), colour = "#000000"),
         plot.margin =           grid::unit(c(1, 1, 0.5, 0.5), "lines")
     )
+}
+
+# function from Todd Schneider https://github.com/toddwschneider/nyc-citibike-data/blob/61c1855d8f95be108fb4f84ef218b9c808b50854/analysis/helpers.R#L28-L34
+title_with_subtitle = function(title, subtitle = NA) {
+  if (is.na(subtitle)) {
+    ggtitle(bquote(bold(.(title))))
+  } else {
+    ggtitle(bquote(atop(bold(.(title)), atop(.(subtitle)))))
+  }
 }
 
 betfair_palette <- c("Arsenal" = "#EF0107", "Leicester" = "#0053A0",
