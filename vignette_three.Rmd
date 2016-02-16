@@ -121,7 +121,7 @@ arslei_matched <- arslei %>%
     )
 ```
 
-The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when **£`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, **£`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
+The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when **ï¿½`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, **ï¿½`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
 
 
 ```{r ars-lei-matched}
@@ -154,7 +154,7 @@ arslei %>%
         scale_colour_manual(values = betfair_palette) +
         theme_betfair()
 ```
-<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-price-1.png" target="_new">enlarge</a></sub></p>
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-price-1.png" target="_new">open in new window</a></sub></p>
 ```{r prem-outright-early-ko}
 winner %>%
     filter(runnerName %in% c("Arsenal", "Leicester", "Tottenham", "Man City"),
@@ -169,7 +169,7 @@ winner %>%
         scale_y_continuous(limits = c(0, 0.44)) +
         theme_betfair()
 ```
-<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/prem-outright-early-ko-1.png" target="_new">enlarge</a></sub></p>
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/prem-outright-early-ko-1.png" target="_new">open in new window</a></sub></p>
 </div>
 </div>
 
