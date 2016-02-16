@@ -12,6 +12,7 @@ opts_chunk$set(comment = NA,
                echo = FALSE)
 library(dplyr)
 library(ggplot2)
+options(scipen = 999)
 
 # load theme
 source("vignette_two/theme.R")
@@ -57,6 +58,45 @@ This is a follow up post to the [cron jobs w/ betfaiR](http://durtal.github.io/b
 
 (there was a period, around 23minutes from 15:57 to 16:20, where the task was stopped as my laptop was running off its battery, not something I saw being an issue.)
 
+## outright market
+
+The two plots below show the outright market from Betfair (left, at 10am on 14th Feb) compared to [Michael Caley's](https://twitter.com/MC_of_A) title projections ([from Feb 7th](https://twitter.com/MC_of_A/status/696363010110181376)).  Betfair has it a little tighter than Michael, but not by much, and Michael's projections are closer to Betfair than some models have the title race; Chad Murphy ([soccermetric](https://twitter.com/soccermetric)) wrote [_MOTSON [his model] has Arsenal as a 67% favorite_](http://soccer.chadmurphy.org/predictions/the-math-behind-why-leicester-will-win-the-title/) on Feb 8th, while Christopher Long ([octonion](https://twitter.com/octonion)) tweeted on Feb 9th [_I have Leicester 62%, Tottenham 15%, Arsenal 9%, Man City 13%_](https://twitter.com/octonion/status/696918453907759104).
+
+
+<div class="row">
+<div class="col-sm-6">
+```{r title-market-pre-match}
+winner %>%
+    filter(collectedAt == min(collectedAt),
+           runnerName %in% c("Arsenal", "Leicester", "Man City", "Tottenham")) %>%
+    mutate(runnerName = factor(runnerName, levels = c("Arsenal", "Leicester", "Man City", "Tottenham")),
+           prob = 1 / lastPriceTraded) %>%
+    ggplot(aes(x = runnerName,
+               y = prob)) +
+        geom_bar(stat = "identity",
+                 aes(fill = runnerName)) +
+        scale_fill_manual(values = betfair_palette) +
+        title_with_subtitle(title = "Outright Market") +
+        theme_betfair() +
+        theme(
+            legend.position = "none",
+            axis.title.x = element_blank(),
+            panel.ontop = TRUE,
+            panel.background = element_rect(fill = "transparent"),
+            panel.grid.major.x = element_blank(),
+            panel.grid.major.y = element_line(colour = "#FCFCFC", size = 1.5),
+            panel.grid.minor.y = element_line(colour = "#FCFCFC", size = 1)
+        )
+```
+</div>
+<div class="col-sm-6">
+<img src="vignette_three_files/Michael-Caley-Feb-7th-Title.png">
+</div>
+</div>
+
+Caley in a piece for the [Washington Post](https://www.washingtonpost.com/news/fancy-stats/wp/2016/02/12/arsenal-and-leicester-square-off-in-the-biggest-match-of-the-english-premier-league-season/) shared a plot which showed the ramifications of each of the 9 different possible combinations from the 2 huge games.  Given the data collected we will see how these 4 title challengers chances changed over the course of a truly Super Sunday.
+
+
 <div class="row">
 <div class="col-sm-5">
 
@@ -64,38 +104,28 @@ This is a follow up post to the [cron jobs w/ betfaiR](http://durtal.github.io/b
 
 The early game saw league leaders Leicester travel to the Emirates fresh off a superb away performance at the Etihad.  Arsenal were favourites going into the crucial game, starting the game at **`r arslei %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Arsenal") %>% .$lastPriceTraded`** (having been `r arslei %>% head(3) %>% filter(runnerName == "Arsenal") %>% .$lastPriceTraded` at 10:00am), while Leicester started the game **`r arslei %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Leicester") %>% .$lastPriceTraded`**.
 
-The Premier League title market also favoured Arsenal at **`r winner %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Arsenal") %>% .$lastPriceTraded %>% round(3)`**, Leicester were second favourites **`r winner %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Leicester") %>% .$lastPriceTraded %>% round(3)`**.
+The plot to the right shows the implied probability over time, below that shows the Premier League outright market, while the plot below shows the amount matched over the previous minute.
 
-The plot to the right shows the implied probability over time.
-
-</div>
-<div class="col-sm-7">
-
-```{r ars-lei-price}
-arslei %>%
-    ggplot(aes(x = collectedAt,
-               y = 1 / lastPriceTraded,
-               col = factor(runnerName))) +
-        geom_line() +
-        labs(x = "time",
-             y = "prob") +
-        title_with_subtitle(title = "Arsenal vs Leicester", subtitle = "minute by minute implied prob") +
-        scale_colour_manual(values = betfair_palette) +
-        theme_betfair()
-```
-<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-price-1.png" target="_new">enlarge</a></sub></p>
-
-</div>
-</div>
-
-```{r ars-lei-matched}
-arslei %>%
+```{r ars-lei-matched-summary}
+arslei_matched <- arslei %>%
     group_by(runnerName) %>%
     mutate(
         prevTotal = lag(totalMatched, 1),
         prevTotal = ifelse(is.na(prevTotal), totalMatched, prevTotal),
         matched = totalMatched - prevTotal
     ) %>%
+    ungroup() %>%
+    arrange(desc(matched)) %>%
+    mutate(
+        rank = row_number()
+    )
+```
+
+The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when **£`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, **£`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
+
+
+```{r ars-lei-matched}
+arslei_matched %>%
     ggplot(aes(x = collectedAt,
                y = matched)) +
         geom_bar(stat = "identity",
@@ -110,5 +140,46 @@ arslei %>%
         ) +
         facet_grid(runnerName ~ .)
 ```
+</div>
+<div class="col-sm-7">
+
+```{r ars-lei-price}
+arslei %>%
+    ggplot(aes(x = collectedAt,
+               y = 1 / lastPriceTraded)) +
+        geom_line(aes(colour = factor(runnerName))) +
+        labs(x = "time",
+             y = "prob") +
+        title_with_subtitle(title = "Arsenal vs Leicester", subtitle = "minute by minute implied prob") +
+        scale_colour_manual(values = betfair_palette) +
+        theme_betfair()
+```
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-price-1.png" target="_new">enlarge</a></sub></p>
+```{r prem-outright-early-ko}
+winner %>%
+    filter(runnerName %in% c("Arsenal", "Leicester", "Tottenham", "Man City"),
+           collectedAt <= max(arslei$collectedAt)) %>%
+    ggplot(aes(x = collectedAt,
+               y = 1 / lastPriceTraded)) +
+        geom_line(aes(colour = factor(runnerName))) +
+        labs(x = "time",
+             y = "prob") +
+        title_with_subtitle(title = "Premier League Outright", subtitle = "minute by minute implied prob") +
+        scale_colour_manual(values = betfair_palette) +
+        scale_y_continuous(limits = c(0, 0.44)) +
+        theme_betfair()
+```
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/prem-outright-early-ko-1.png" target="_new">enlarge</a></sub></p>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-5">
+
+</div>
+<div class="col-md-7">
+
+</div>
+</div>
 
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
