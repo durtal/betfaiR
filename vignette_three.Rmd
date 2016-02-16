@@ -55,7 +55,7 @@ winner <- winner %>%
 
 This is a follow up post to the [cron jobs w/ betfaiR](http://durtal.github.io/betfaiR/vignette_two.html) post, which walked through scheduling a task to periodically collect betfair data.  The data collected came from 3 markets on 14/02/16, the early match between Arsenal and Leicester, the late match between Man City and Spurs, and the Premier League Outright market.  This post will summarise and plot some of the data, given some of action, especially in the early game which saw Leicester take the lead, get a man sent off and then lose, we should see some interest movements not only in that market but the outright market too.
 
-(there was a period, around 23minutes from 15:57 to 16:20, where the task was stopped as my laptop was running off its battery, not something I saw being an issue)
+(there was a period, around 23minutes from 15:57 to 16:20, where the task was stopped as my laptop was running off its battery, not something I saw being an issue.)
 
 <div class="row">
 <div class="col-sm-5">
@@ -64,7 +64,9 @@ This is a follow up post to the [cron jobs w/ betfaiR](http://durtal.github.io/b
 
 The early game saw league leaders Leicester travel to the Emirates fresh off a superb away performance at the Etihad.  Arsenal were favourites going into the crucial game, starting the game at **`r arslei %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Arsenal") %>% .$lastPriceTraded`** (having been `r arslei %>% head(3) %>% filter(runnerName == "Arsenal") %>% .$lastPriceTraded` at 10:00am), while Leicester started the game **`r arslei %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Leicester") %>% .$lastPriceTraded`**.
 
-The Premier League title market also favoured Arsenal at **`r winner %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Arsenal") %>% .$lastPriceTraded %>% round(3)`**, Leicester were second favourites **`r winner %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Leicester") %>% .$lastPriceTraded %>% round(3)`**
+The Premier League title market also favoured Arsenal at **`r winner %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Arsenal") %>% .$lastPriceTraded %>% round(3)`**, Leicester were second favourites **`r winner %>% filter(collectedAt >= "2016-02-14 11:59:59", collectedAt < "2016-02-14 12:00:10", runnerName == "Leicester") %>% .$lastPriceTraded %>% round(3)`**.
+
+The plot to the right shows the implied probability over time.
 
 </div>
 <div class="col-sm-7">
@@ -77,7 +79,7 @@ arslei %>%
         geom_line() +
         labs(x = "time",
              y = "prob") +
-        title_with_subtitle(title = "Arsenal vs Leicester", subtitle = "minute by minute price") +
+        title_with_subtitle(title = "Arsenal vs Leicester", subtitle = "minute by minute implied prob") +
         scale_colour_manual(values = betfair_palette) +
         theme_betfair()
 ```
