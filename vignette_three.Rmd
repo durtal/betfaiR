@@ -121,7 +121,7 @@ arslei_matched <- arslei %>%
     )
 ```
 
-The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when £**`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, £**`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
+The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when &pound;**`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, &pound;**`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
 
 The two plots to the right, showing implied probability for the match and outright markets unsurprisingly are closely correlated.  The events of the match impacting the outright market, although liquidity in the outright market saw some instability are Arsenal equalised (around 13:30).  The late Danny Wellbeck winner saw all change in both the match and outright markets, with Arsenal cementing favouritism for the title at around 2.56 (0.39), while Leicester drifted to around 4.6 (0.21).
 
@@ -227,7 +227,7 @@ cittot_matched %>%
 <div class="col-md-7">
 ```{r cit-tot-price}
 cittot %>%
-    filter(collectedAt >= max(arslei$collectedAt)) %>% 
+    filter(collectedAt >= max(arslei$collectedAt)) %>%
     mutate(runnerName = factor(runnerName, levels = c("Man City", "Tottenham", "The Draw"))) %>%
     ggplot(aes(x = collectedAt,
                y = 1 / lastPriceTraded)) +
@@ -261,11 +261,11 @@ winner %>%
 
 <div class="row">
 <div class="col-sm-5">
-The plot to the right shows the outright market at around 19:00, after both crucial games.  Post match Arsenal are still favourites, the late winner cementing their favouritism, while Leicester's chances took a hit - despite the claims of Chief Sports writer at the Telegraph claiming their [_chances were undiminished_](http://www.telegraph.co.uk/sport/football/teams/arsenal/12156764/Arsenal-fans-put-through-the-ringer-again-in-angsty-error-strewn-win-against-Leicester-City.html?x).  
+The plot to the right shows the outright market at around 19:00, after both crucial games.  Post match Arsenal are still favourites, the late winner cementing their favouritism, while Leicester's chances took a hit - despite the claims of Chief Sports writer at the Telegraph claiming their [_chances were undiminished_](http://www.telegraph.co.uk/sport/football/teams/arsenal/12156764/Arsenal-fans-put-through-the-ringer-again-in-angsty-error-strewn-win-against-Leicester-City.html?x).
 
-At the Etihad the winners were the winners and the losers the losers, Spurs becoming marginal second favourites to their North London rivals, both sitting on the same points.
+At the Etihad the winners were the winners and the losers the losers, Spurs becoming marginal second favourites, ahead of Leicester, to their North London rivals, both sitting on the same points.
 
-The North London derby in a couple of weeks will be even more enticing as these two look set to lock horns down the stretch! 
+The North London derby in a couple of weeks will be even more enticing as these two look set to lock horns down the stretch!
 
 **Greatest League in the World** ;-)
 </div>
