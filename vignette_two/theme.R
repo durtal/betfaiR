@@ -52,5 +52,5 @@ title_with_subtitle = function(title, subtitle = NA) {
 }
 
 betfair_palette <- c("Arsenal" = "#EF0107", "Leicester" = "#0053A0",
-                     "The Draw" = "#848484",
+                     "The Draw" = "#CD9B9B",
                      "Man City" = "#5DBFEB", "Tottenham" = "#001C58")
