@@ -56,7 +56,7 @@ winner <- winner %>%
 
 This is a follow up post to the [cron jobs w/ betfaiR](http://durtal.github.io/betfaiR/vignette_two.html) post, which walked through scheduling a task to periodically collect betfair data.  The data collected came from 3 markets on 14/02/16, the early match between Arsenal and Leicester, the late match between Man City and Spurs, and the Premier League Outright market.  This post will summarise and plot some of the data, given some of action, especially in the early game which saw Leicester take the lead, get a man sent off and then lose, we should see some interest movements not only in that market but the outright market too.
 
-(there was a period, around 23minutes from 15:57 to 16:20, where the task was stopped as my laptop was running off its battery, not something I saw being an issue.)
+(there was a period, around 23minutes from 15:57 to 16:20, where the task was stopped as my laptop was running off its battery, not something I saw being an issue.  If anyone would like the data used in this post get in touch via the email on my [github page](https://github.com/durtal).)
 
 ## outright market
 
@@ -121,7 +121,9 @@ arslei_matched <- arslei %>%
     )
 ```
 
-The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when **ï¿½`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, **ï¿½`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
+The minute by minute matched plot (below) shows a huge spike for the minute prior to **`r arslei_matched %>% filter(rank == 1) %>% .$collectedAt %>% gsub("[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} | GMT", "", .)`** when £**`r arslei_matched %>% filter(rank == 1) %>% .$matched`** was traded on Arsenal at around `r arslei_matched %>% filter(rank == 1) %>% .$lastPriceTraded` (approaching the price Arsenal started the match).  A similar amount, £**`r arslei_matched %>% filter(rank == 2) %>% .$matched`**, was traded on Leicester during half time at **`r arslei_matched %>% filter(rank == 2) %>% .$lastPriceTraded`**.
+
+The two plots to the right, showing implied probability for the match and outright markets unsurprisingly are closely correlated.  The events of the match impacting the outright market, although liquidity in the outright market saw some instability are Arsenal equalised (around 13:30).  The late Danny Wellbeck winner saw all change in both the match and outright markets, with Arsenal cementing favouritism for the title at around 2.56 (0.39), while Leicester drifted to around 4.6 (0.21).
 
 
 ```{r ars-lei-matched}
@@ -140,6 +142,7 @@ arslei_matched %>%
         ) +
         facet_grid(runnerName ~ .)
 ```
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-matched-1.png" target="_new">open in new window</a></sub></p>
 </div>
 <div class="col-sm-7">
 
@@ -176,9 +179,120 @@ winner %>%
 <div class="row">
 <div class="col-md-5">
 
+## man city vs tottenham
+
+After the early game, which ensured Leicester didn't break from the pack (see Caley's Washington Post piece for a sense of what might have been for the Foxes), the late kick-off saw one young side Spurs travel to an experienced City side with Aguero, Kompany, Toure and Silva all starting.  This game was not without similar controversy.
+
+Recall that data collection failed for about 23minutes from 15:57 to 16:20, so unforunately failed to catch the late drift of City.  The plot below, which shows minute by minute matched also sees a huge spike, which is the amount matched over the missing period.
+
+One of the more interesting things of note is the outright market, immediately after the early game Arsenal were backed in to around 2.56 (0.4), but by the time the late game kicked off back to 2.7, while City had been shortened slightly from around 4.7 to 4.3. (drift for the match, shorten for the title.)
+
+
+```{r cit-tot-matched-summary}
+cittot_matched <- cittot %>%
+    group_by(runnerName) %>%
+    mutate(
+        prevTotal = lag(totalMatched, 1),
+        prevTotal = ifelse(is.na(prevTotal), totalMatched, prevTotal),
+        matched = totalMatched - prevTotal
+    ) %>%
+    ungroup() %>%
+    arrange(desc(matched)) %>%
+    mutate(
+        rank = row_number()
+    )
+```
+
+
+```{r cit-tot-matched}
+cittot_matched %>%
+    filter(collectedAt >= max(arslei$collectedAt)) %>%
+    ggplot(aes(x = collectedAt,
+               y = matched)) +
+        geom_bar(stat = "identity",
+                 aes(fill = runnerName)) +
+        labs(x = "time",
+             y = "matched") +
+        title_with_subtitle(title = "Man City vs Tottenham", subtitle = "minute by minute matched") +
+        scale_fill_manual(values = betfair_palette) +
+        theme_betfair() +
+        theme(
+            legend.position = "none"
+        ) +
+        facet_grid(runnerName ~ .)
+```
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/cit-tot-matched-1.png" target="_new">open in new window</a></sub></p>
+
 </div>
 <div class="col-md-7">
+```{r cit-tot-price}
+cittot %>%
+    filter(collectedAt >= max(arslei$collectedAt)) %>% 
+    mutate(runnerName = factor(runnerName, levels = c("Man City", "Tottenham", "The Draw"))) %>%
+    ggplot(aes(x = collectedAt,
+               y = 1 / lastPriceTraded)) +
+        geom_line(aes(colour = factor(runnerName))) +
+        labs(x = "time",
+             y = "prob") +
+        title_with_subtitle(title = "Man City vs Tottenham", subtitle = "minute by minute implied prob") +
+        scale_colour_manual(values = betfair_palette) +
+        theme_betfair()
+```
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/cit-tot-price-1.png" target="_new">open in new window</a></sub></p>
+```{r prem-outright-late-ko}
+winner %>%
+    filter(runnerName %in% c("Arsenal", "Leicester", "Tottenham", "Man City"),
+           collectedAt >= max(arslei$collectedAt)) %>%
+    ggplot(aes(x = collectedAt,
+               y = 1 / lastPriceTraded)) +
+        geom_line(aes(colour = factor(runnerName))) +
+        labs(x = "time",
+             y = "prob") +
+        title_with_subtitle(title = "Premier League Outright", subtitle = "minute by minute implied prob") +
+        scale_colour_manual(values = betfair_palette) +
+        scale_y_continuous(limits = c(0, 0.44)) +
+        theme_betfair()
+```
+<p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/prem-outright-late-ko-1.png" target="_new">open in new window</a></sub></p>
+</div>
+</div>
 
+## outright market
+
+<div class="row">
+<div class="col-sm-5">
+The plot to the right shows the outright market at around 19:00, after both crucial games.  Post match Arsenal are still favourites, the late winner cementing their favouritism, while Leicester's chances took a hit - despite the claims of Chief Sports writer at the Telegraph claiming their [_chances were undiminished_](http://www.telegraph.co.uk/sport/football/teams/arsenal/12156764/Arsenal-fans-put-through-the-ringer-again-in-angsty-error-strewn-win-against-Leicester-City.html?x).  
+
+At the Etihad the winners were the winners and the losers the losers, Spurs becoming marginal second favourites to their North London rivals, both sitting on the same points.
+
+The North London derby in a couple of weeks will be even more enticing as these two look set to lock horns down the stretch! 
+
+**Greatest League in the World** ;-)
+</div>
+<div class="col-sm-7">
+```{r title-market-post-match}
+winner %>%
+    filter(collectedAt == max(collectedAt),
+           runnerName %in% c("Arsenal", "Leicester", "Man City", "Tottenham")) %>%
+    mutate(runnerName = factor(runnerName, levels = c("Arsenal", "Leicester", "Man City", "Tottenham")),
+           prob = 1 / lastPriceTraded) %>%
+    ggplot(aes(x = runnerName,
+               y = prob)) +
+        geom_bar(stat = "identity",
+                 aes(fill = runnerName)) +
+        scale_fill_manual(values = betfair_palette) +
+        title_with_subtitle(title = "Outright Market") +
+        theme_betfair() +
+        theme(
+            legend.position = "none",
+            axis.title.x = element_blank(),
+            panel.ontop = TRUE,
+            panel.background = element_rect(fill = "transparent"),
+            panel.grid.major.x = element_blank(),
+            panel.grid.major.y = element_line(colour = "#FCFCFC", size = 1.5),
+            panel.grid.minor.y = element_line(colour = "#FCFCFC", size = 1)
+        )
+```
 </div>
 </div>
 
