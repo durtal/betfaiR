@@ -115,9 +115,35 @@ So walking through that:
 
 I used a couple of additional parameters, `/ru` and `/rp`, which informs the scheduler to run the task under a certain user (`/ru`, and their password `/rp`), this means that the CMD prompt won't pop up every minute when the task launches, and the task will run quietly.
 
+### cron
+
+[crontab](http://crontab.org/) isn't as familiar to me as windows, so any input/corrections would be very welcome.  It involves editing a file with your tasks.  For each task there are 6 categories, some examples are below (taken from [cronhowto](https://help.ubuntu.com/community/CronHowto)):
+
+min | hour | day | month | weekday | command | task
+----|------|-----|-------|---------|---------|----------------------------------
+01  | 04   | 1   | 1     | 1       | /usr/bin/somedirectory/somecommand | run on Jan 1st (and every monday in January) at 04:01am
+01  | 04   | *   | *     | *       | /usr/bin/somedirectory/somecommand | run every day of every month at 04:01am
+
+Unlike Windows I don't believe it's easy (or more likely I don't know how) to set a start and end time, nevertheless the task would possibly look something like below
+
+```bash
+*/1 10,11,12,13,14,15,16,17,18,19 14 2 0 Rscript /path/to/collect_data.R
+```
+
+Walking through the above (hopefully correctly):
+
+1. `*/1` informs which minutes the task should be run, I believe this means every minute, * is wildcard for all, and /1 means divisible by 1, so */10 would be minutes 10, 20, 30, 40, 50.
+2. `10,11,12,13,14,15,16,17,18,19` informs the hours to run the task, 10am through to 7pm
+3. `14` informs the day of the month
+4. `2` informs the month
+5. `0` informs the day, 0 is Sunday
+6. `Rscript /path/to/collect_data.R` is the task to run
+
+I think the above should ensure the task is run once on the 14th of Feb 2016, and it'll be a 2021 when the 14th of Feb falls on a Sunday again, so plenty of time to delete the task :-)
+
 ## part two - findings
 
-I will try to post a follow up vignette/blog with some basic analysis of the data returned by the markets...
+A short post looking at the data returned by using the code outlined in this post can be found [here](http://durtal.github.io/betfaiR/vignette_three.html).
 
 ## complete R script
 

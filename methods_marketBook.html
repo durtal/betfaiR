@@ -262,7 +262,10 @@ img {
                             <a href="vignette_one.html">place a bet</a>
                         </li>
                         <li>
-                            <a href="vignette_two.html">cron jobs w/ betfaiR</a>
+                            <a href="vignette_two.html">cron jobs w/ betfaiR (pt.1)</a>
+                        </li>
+                        <li>
+                            <a href="vignette_three.html">betfair super sunday (pt.2)</a>
                         </li>
                     </ul>
                 </li>
@@ -337,201 +340,203 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<sp
                           <span class="dt">maxResults =</span> <span class="dv">10</span>)
 <span class="kw">summary</span>(tmp)</code></pre></div>
 <pre><code>
-Market ID:      1.123028349
-Event ID:       8782499 
+Market ID:      1.123022122
+Event ID:       61 
 Market Name:    Match Odds
-Event Name:     UAAP Football Championship 
-Matched:        4.01
+Event Name:     Bundesliga 2 
+Matched:        311698.72
  ---------------------------------------------------------------------------
-Market ID:      1.123027380
-Event ID:       8556896 
+Market ID:      1.123022199
+Event ID:       61 
 Market Name:    Match Odds
-Event Name:     U19 Liga Leumit North 
-Matched:        0.02
+Event Name:     Bundesliga 2 
+Matched:        174596.41
  ---------------------------------------------------------------------------
-Market ID:      1.123001924 
-Market Name:    Match Odds 
-Matched:        13.84
- ---------------------------------------------------------------------------
-Market ID:      1.122982378
-Event ID:       844197 
+Market ID:      1.123022045
+Event ID:       61 
 Market Name:    Match Odds
-Event Name:     Colombian Primera A 
-Matched:        21496.14
+Event Name:     Bundesliga 2 
+Matched:        496396.49
  ---------------------------------------------------------------------------
-Market ID:      1.123033032
-Event ID:       6566654 
+Market ID:      1.123136096
+Event ID:       827078 
 Market Name:    Match Odds
-Event Name:     Guatemalan Liga Nacional 
-Matched:        18944.47
+Event Name:     Mexican U20 League 
+Matched:        1261.22
  ---------------------------------------------------------------------------
-Market ID:      1.122998584
-Event ID:       67387 
+Market ID:      1.123023279
+Event ID:       194215 
 Market Name:    Match Odds
-Event Name:     Argentinian Primera Division 
-Matched:        52342.9
+Event Name:     Turkish Super League 
+Matched:        49456.97
  ---------------------------------------------------------------------------
-Market ID:      1.122998296
-Event ID:       67387 
+Market ID:      1.123019873
+Event ID:       158146 
 Market Name:    Match Odds
-Event Name:     Argentinian Primera Division 
-Matched:        41427.52
+Event Name:     3. Liga 
+Matched:        12595.83
  ---------------------------------------------------------------------------
-Market ID:      1.122998680
-Event ID:       67387 
+Market ID:      1.123134757
+Event ID:       8616348 
 Market Name:    Match Odds
-Event Name:     Argentinian Primera Division 
-Matched:        95818.94
+Event Name:     Friendly 
+Matched:        2724.79
  ---------------------------------------------------------------------------
-Market ID:      1.123033089
-Event ID:       6566654 
+Market ID:      1.123020968
+Event ID:       8139939 
 Market Name:    Match Odds
-Event Name:     Guatemalan Liga Nacional 
-Matched:        296.77
+Event Name:     Eredivisie (W) 
+Matched:        3296.74
  ---------------------------------------------------------------------------
-Market ID:      1.122982452
-Event ID:       844197 
+Market ID:      1.123051623
+Event ID:       840808 
 Market Name:    Match Odds
-Event Name:     Colombian Primera A 
-Matched:        19730.46
+Event Name:     Regionalliga West 
+Matched:        6453.99
+ ---------------------------------------------------------------------------
+Market ID:      1.123051735
+Event ID:       840808 
+Market Name:    Match Odds
+Event Name:     Regionalliga West 
+Matched:        2868.7
  ---------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find market with most matched</span>
 ind &lt;-<span class="st"> </span><span class="kw">which.max</span>(<span class="kw">sapply</span>(tmp, function(i) i$market$totalMatched))
 market &lt;-<span class="st"> </span>tmp[[ind]]
 <span class="kw">summary</span>(market)</code></pre></div>
 <pre><code>
-Market ID:      1.122998680
-Event ID:       67387 
+Market ID:      1.123022045
+Event ID:       61 
 Market Name:    Match Odds
-Event Name:     Argentinian Primera Division 
-Matched:        95818.94
+Event Name:     Bundesliga 2 
+Matched:        496396.49
  ---------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">market &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> market$market$marketId)
 <span class="kw">summary</span>(market)</code></pre></div>
 <pre><code>
-Market ID:      1.122998680 
-Matched:        103897.56 
-Available:      6928.33
+Market ID:      1.123022045 
+Matched:        535437.38 
+Available:      12824.62
 
 Runners:     3 
-     .id selectionId handicap status lastPriceTraded totalMatched
- 5174666     5174666        0 ACTIVE            1.14     91393.01
-  453739      453739        0 ACTIVE          560.00      3644.77
-   58805       58805        0 ACTIVE           65.00      8859.77
+    .id selectionId handicap status lastPriceTraded totalMatched
+  64375       64375        0 ACTIVE            3.65    354277.04
+ 210943      210943        0 ACTIVE           21.00    109884.46
+  58805       58805        0 ACTIVE            1.48     71275.87
 
  ---------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># collect data on all 10 markets</span>
 markets &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> <span class="kw">sapply</span>(tmp, function(i) i$market$marketId))
 <span class="kw">summary</span>(markets)</code></pre></div>
 <pre><code>
-Market ID:      1.122982378 
-Matched:        21496.15 
-Available:      703.8
-
-Runners:     3 
-     .id selectionId handicap status lastPriceTraded totalMatched
- 9188271     9188271        0 ACTIVE          450.00      2844.55
- 4880434     4880434        0 ACTIVE            1.01     16401.15
-   58805       58805        0 ACTIVE          200.00      2250.43
-
- ---------------------------------------------------------------------------
-Market ID:      1.122982452 
-Matched:        20987.74 
-Available:      5986.85
+Market ID:      1.123019873 
+Matched:        12791.46 
+Available:      8748.38
 
 Runners:     3 
     .id selectionId handicap status lastPriceTraded totalMatched
- 900849      900849        0 ACTIVE            3.55     15017.11
- 478919      478919        0 ACTIVE           10.50      2691.97
-  58805       58805        0 ACTIVE            1.60      3278.66
+ 498562      498562        0 ACTIVE            5.50      5221.51
+ 247830      247830        0 ACTIVE            3.20      5177.48
+  58805       58805        0 ACTIVE            2.04      2392.45
 
  ---------------------------------------------------------------------------
-Market ID:      1.122998296 
-Matched:        42545.19 
-Available:      8465.49
+Market ID:      1.123020968 
+Matched:        11382.44 
+Available:      12852.19
 
 Runners:     3 
      .id selectionId handicap status lastPriceTraded totalMatched
-  194503      194503        0 ACTIVE            3.25     19648.43
- 5971606     5971606        0 ACTIVE           20.00     17728.77
-   58805       58805        0 ACTIVE            1.78      5167.98
+ 5272256     5272256        0 ACTIVE            1.01     11179.78
+ 5943510     5943510        0 ACTIVE          300.00       120.43
+   58805       58805        0 ACTIVE          130.00        82.22
 
  ---------------------------------------------------------------------------
-Market ID:      1.122998584 
-Matched:        57038.88 
-Available:      7670.74
+Market ID:      1.123022045 
+Matched:        535437.38 
+Available:      12824.62
 
 Runners:     3 
     .id selectionId handicap status lastPriceTraded totalMatched
- 476271      476271        0 ACTIVE          150.00     18526.62
- 194509      194509        0 ACTIVE            1.17     26443.16
-  58805       58805        0 ACTIVE            7.40     12069.09
+  64375       64375        0 ACTIVE            3.65    354277.04
+ 210943      210943        0 ACTIVE           21.00    109884.46
+  58805       58805        0 ACTIVE            1.48     71275.87
 
  ---------------------------------------------------------------------------
-Market ID:      1.122998680 
-Matched:        103897.56 
-Available:      6928.33
+Market ID:      1.123022122 
+Matched:        343235.26 
+Available:      43722.98
 
 Runners:     3 
      .id selectionId handicap status lastPriceTraded totalMatched
- 5174666     5174666        0 ACTIVE            1.14     91393.01
-  453739      453739        0 ACTIVE          560.00      3644.77
-   58805       58805        0 ACTIVE           65.00      8859.77
+   44526       44526        0 ACTIVE          400.00     51209.53
+ 2486890     2486890        0 ACTIVE            1.02    276080.81
+   58805       58805        0 ACTIVE           55.00     15944.91
 
  ---------------------------------------------------------------------------
-Market ID:      1.123001924 
-Matched:        13.83 
-Available:      121.02
+Market ID:      1.123022199 
+Matched:        174567.67 
+Available:      25223.88
 
 Runners:     3 
      .id selectionId handicap status lastPriceTraded totalMatched
- 6279459     6279459        0 ACTIVE            4.20         5.51
- 9342561     9342561        0 ACTIVE            1.75         8.31
-   58805       58805        0 ACTIVE              NA         0.00
+ 5340398     5340398        0 ACTIVE            1.01    156114.57
+   50347       50347        0 ACTIVE         1000.00      7844.49
+   58805       58805        0 ACTIVE          920.00     10608.60
 
  ---------------------------------------------------------------------------
-Market ID:      1.123027380 
-Matched:        0.01 
-Available:      179.35
-
-Runners:     3 
-      .id selectionId handicap status totalMatched lastPriceTraded
- 10703479    10703479        0 ACTIVE         0.00              NA
- 10592350    10592350        0 ACTIVE         0.01            1.15
-    58805       58805        0 ACTIVE         0.00              NA
-
- ---------------------------------------------------------------------------
-Market ID:      1.123028349 
-Matched:        3.99 
-Available:      179.35
-
-Runners:     3 
-      .id selectionId handicap status lastPriceTraded totalMatched
- 10215802    10215802        0 ACTIVE            1.88         2.00
- 10135574    10135574        0 ACTIVE            4.40         0.85
-    58805       58805        0 ACTIVE            4.20         1.14
-
- ---------------------------------------------------------------------------
-Market ID:      1.123033032 
-Matched:        0 
-Available:      0
-
-Runners:     2 (1 removed) 
-      .id selectionId handicap status
-  9216457     9216457        0 WINNER
- 10135672    10135672        0  LOSER
-    58805       58805        0  LOSER
-
- ---------------------------------------------------------------------------
-Market ID:      1.123033089 
-Matched:        324 
-Available:      1118.65
+Market ID:      1.123023279 
+Matched:        50350.66 
+Available:      11202.88
 
 Runners:     3 
      .id selectionId handicap status lastPriceTraded totalMatched
- 4109938     4109938        0 ACTIVE            2.70       222.54
- 2888930     2888930        0 ACTIVE            7.00        51.87
-   58805       58805        0 ACTIVE            1.81        49.58
+ 6553233     6553233        0 ACTIVE            1.36     34735.36
+  508773      508773        0 ACTIVE           18.00      8734.80
+   58805       58805        0 ACTIVE            4.80      6880.49
+
+ ---------------------------------------------------------------------------
+Market ID:      1.123051623 
+Matched:        6452.08 
+Available:      1257.54
+
+Runners:     3 
+    .id selectionId handicap status lastPriceTraded totalMatched
+ 498547      498547        0 ACTIVE            2.18      3069.36
+ 516223      516223        0 ACTIVE            3.60      2316.49
+  58805       58805        0 ACTIVE            3.75      1066.22
+
+ ---------------------------------------------------------------------------
+Market ID:      1.123051735 
+Matched:        2867.88 
+Available:      1040.28
+
+Runners:     3 
+     .id selectionId handicap status lastPriceTraded totalMatched
+ 3235339     3235339        0 ACTIVE           15.50       292.52
+ 1550976     1550976        0 ACTIVE            1.25      2354.62
+   58805       58805        0 ACTIVE            7.20       220.73
+
+ ---------------------------------------------------------------------------
+Market ID:      1.123134757 
+Matched:        2752.24 
+Available:      3004.13
+
+Runners:     3 
+     .id selectionId handicap status lastPriceTraded totalMatched
+  180590      180590        0 ACTIVE            2.52       920.87
+ 5549837     5549837        0 ACTIVE            4.30       476.72
+   58805       58805        0 ACTIVE            2.40      1354.63
+
+ ---------------------------------------------------------------------------
+Market ID:      1.123136096 
+Matched:        1342.95 
+Available:      1174.9
+
+Runners:     3 
+     .id selectionId handicap status lastPriceTraded totalMatched
+ 5253684     5253684        0 ACTIVE            3.05      1280.93
+ 6122226     6122226        0 ACTIVE            4.20         7.96
+   58805       58805        0 ACTIVE            2.40        54.06
 
  ---------------------------------------------------------------------------</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
