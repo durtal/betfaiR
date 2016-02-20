@@ -62,41 +62,23 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -298,32 +280,32 @@ img {
 <div id="find-markets" class="section level2">
 <h2>Find markets</h2>
 <p>First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data. As we are focussing on the Premier League, we need an eventTypeId, a competitionId, which will help us to find the markets we are interested in.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load betfaiR and login</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load betfaiR and login</span>
 <span class="kw">library</span>(betfaiR)
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre>
 <pre><code>Login successful</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correct eventTypeIds</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correct eventTypeIds</span>
 eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
-eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre></div>
+eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre>
 <pre><code>   eventType_id    eventType_name marketCount
-2             1            Soccer       20293
+2             1            Soccer       16771
 26         6423 American Football           2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
 competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
                                                       <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
-competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre></div>
+competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre>
 <pre><code>   competition_id        competition_name marketCount competitionRegion
-4           20351        NIFL Premiership          63               GBR
-6              31 Barclays Premier League         279               GBR
-11         252549    Welsh Premier League          94               GBR
-20            105    Scottish Premiership         145               GBR
-22         820588        Southern Premier          98               GBR
-24         820753        Northern Premier         100               GBR
-26         820582        Isthmian Premier          98               GBR</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
-marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))</code></pre></div>
+6          252549    Welsh Premier League          24               GBR
+15            105    Scottish Premiership          31               GBR
+17          20351        NIFL Premiership          40               GBR
+19         820588        Southern Premier          10               GBR
+20         820753        Northern Premier          52               GBR
+22             31 Barclays Premier League         279               GBR
+23         820582        Isthmian Premier           2               GBR</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
+marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))</code></pre>
 <pre><code>   marketType marketCount
 1      WINNER           1
 20 MATCH_ODDS          18</code></pre>
@@ -376,7 +358,7 @@ Runners:     20
 <div id="r-script" class="section level2">
 <h2>R script</h2>
 <p>A script will need to login, find the correct markets, retreive the relevant data, and then save the data. The process of finding the correct markets needn’t be repeated time after time, so this data can be retrieved once, saved and then loaded every time. Although the script needs to be able to run straight off the bat, so it might look something like the code below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
@@ -401,7 +383,7 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
     <span class="kw">saveRDS</span>(marketIds, <span class="st">&quot;marketIds.RDS&quot;</span>)
 } else {
     marketIds &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;marketIds.RDS&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>The complete R script which will be run each time can be found at the <a href="http://durtal.github.io/betfaiR/vignette_two.html#complete-r-script">bottom of this page</a> or on <a href="https://github.com/durtal/betfaiR/blob/gh-pages/vignette_two/collect_data.R">github</a>, the script is commented so you should be able to follow it.</p>
 </div>
 <div id="schedule-tasks" class="section level2">
@@ -411,7 +393,7 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 <h3>windows</h3>
 <p>Windows does have a GUI to help with Scheduling tasks (read about that <a href="http://windows.microsoft.com/en-gb/windows/schedule-task#1TC=windows-7">here</a>) but some of it is quite restrictive, eg. you can (Windows 8) only schedule a task to run every 5minutes. So we will be using the command line as an administrator, docs about the arguments which can be used can be found <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/bb736357(v=vs.85).aspx">here</a>.</p>
 <p>The command entered for this task will be</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">schtasks</span> /create /sc minute /sd 14/02/2016 /st 10:00 /ed 14/02/2016 /et 19:00 /tn betfairsupersunday /tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat</code></pre></div>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">schtasks</span> /create /sc minute /sd 14/02/2016 /st 10:00 /ed 14/02/2016 /et 19:00 /tn betfairsupersunday /tr C:\Users\TomHeslop\Documents\Github\betfaiR\vignette_two\task.bat</code></pre>
 <p>So walking through that:</p>
 <ol style="list-style-type: decimal">
 <li><code>schtasks /create</code> creates a task, what follows are the arguments or parameters</li>
@@ -422,19 +404,10 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 </ol>
 <p>I used a couple of additional parameters, <code>/ru</code> and <code>/rp</code>, which informs the scheduler to run the task under a certain user (<code>/ru</code>, and their password <code>/rp</code>), this means that the CMD prompt won’t pop up every minute when the task launches, and the task will run quietly.</p>
 </div>
-<div id="cron" class="section level3">
-<h3>cron</h3>
+<div id="linux-and-osx" class="section level3">
+<h3>linux and osx</h3>
 <p><a href="http://crontab.org/">crontab</a> isn’t as familiar to me as windows, so any input/corrections would be very welcome. It involves editing a file with your tasks. For each task there are 6 categories, some examples are below (taken from <a href="https://help.ubuntu.com/community/CronHowto">cronhowto</a>):</p>
-<table style="width:112%;">
-<colgroup>
-<col width="6%" />
-<col width="9%" />
-<col width="8%" />
-<col width="11%" />
-<col width="13%" />
-<col width="13%" />
-<col width="48%" />
-</colgroup>
+<table>
 <thead>
 <tr class="header">
 <th align="left">min</th>
@@ -468,7 +441,7 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 </tbody>
 </table>
 <p>Unlike Windows I don’t believe it’s easy (or more likely I don’t know how) to set a start and end time, nevertheless the task would possibly look something like below</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">*/1</span> 10,11,12,13,14,15,16,17,18,19 14 2 0 Rscript /path/to/collect_data.R</code></pre></div>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">*/1</span> 10,11,12,13,14,15,16,17,18,19 14 2 0 Rscript /path/to/collect_data.R</code></pre>
 <p>Walking through the above (hopefully correctly):</p>
 <ol style="list-style-type: decimal">
 <li><code>*/1</code> informs which minutes the task should be run, I believe this means every minute, * is wildcard for all, and /1 means divisible by 1, so */10 would be minutes 10, 20, 30, 40, 50.</li>
@@ -490,7 +463,7 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 <p>The script below is called every time a task runs. So we first load libraries, set our working environment and log in to betfair via the <a href="http://durtal.github.io/betfaiR/betfair.html"><code>betfair</code></a> function. We then retrieve the files in our current directory, to establish whether there is a marketIds.RDS file we can load, or whether we need to retrieve the marketIds, as discussed above.</p>
 <p>The next steps save the current time - to help with comparing data from the three markets - which will be added to each of the markets’ data. The code then establishes whether the market is still available using the <a href="http://durtal.github.io/betfaiR/methods_marketCatalogue.html"><code>marketCatalogue</code></a> method; Arsenal vs Leicester kics off at 12pm so will be finished and closed before Man City vs Tottenham. So the <code>available_markets</code> variable becomes the markets whose data we will retrieve.</p>
 <p>We then loop through these <code>available_markets</code> and retrieve data via the <a href="http://durtal.github.io/betfaiR/methods_marketBook.html"><code>marketBook</code></a> method. We will read in any existing data for this market, append the newly returned data (gradually building a larger and larger list) to the existing data, and then save our updated list.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 <span class="kw">setwd</span>(<span class="st">&quot;C:/Users/TomHeslop/Documents/Github/betfaiR/vignette_two/&quot;</span>)
 <span class="kw">readRenviron</span>(<span class="st">&quot;~/.Renviron&quot;</span>) <span class="co"># slightly curious why I needed to do this?</span>
 
@@ -558,7 +531,7 @@ plyr::<span class="kw">l_ply</span>(available_markets, function(i, files, curren
 }, <span class="dt">files =</span> files,
     <span class="dt">currentTime =</span> currentTime,
     <span class="dt">bf =</span> bf,
-    <span class="dt">markets =</span> marketIds)</code></pre></div>
+    <span class="dt">markets =</span> marketIds)</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>
