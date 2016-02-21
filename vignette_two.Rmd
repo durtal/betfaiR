@@ -117,7 +117,7 @@ I used a couple of additional parameters, `/ru` and `/rp`, which informs the sch
 
 ### linux and osx
 
-[crontab](http://crontab.org/) isn't as familiar to me as windows, so any input/corrections would be very welcome.  It involves editing a file with your tasks.  For each task there are 6 categories, some examples are below (taken from [cronhowto](https://help.ubuntu.com/community/CronHowto)):
+[crontab](http://crontab.org/) (which may require installation) isn't as familiar to me as windows, so any input/corrections would be very welcome.  It involves editing a file with your tasks.  For each task there are 6 categories, some examples are below (taken from [cronhowto](https://help.ubuntu.com/community/CronHowto)):
 
 min | hour | day | month | weekday | command | task
 ----|------|-----|-------|---------|---------|----------------------------------

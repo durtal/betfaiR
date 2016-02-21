@@ -290,25 +290,23 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
 eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre>
 <pre><code>   eventType_id    eventType_name marketCount
-2             1            Soccer       16771
+2             1            Soccer        7325
 26         6423 American Football           2</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
 competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
                                                       <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre>
 <pre><code>   competition_id        competition_name marketCount competitionRegion
-6          252549    Welsh Premier League          24               GBR
-15            105    Scottish Premiership          31               GBR
-17          20351        NIFL Premiership          40               GBR
-19         820588        Southern Premier          10               GBR
-20         820753        Northern Premier          52               GBR
-22             31 Barclays Premier League         279               GBR
-23         820582        Isthmian Premier           2               GBR</code></pre>
+14            105    Scottish Premiership          33               GBR
+19         820588        Southern Premier          23               GBR
+20         820753        Northern Premier          32               GBR
+22             31 Barclays Premier League         408               GBR
+23         820582        Isthmian Premier          23               GBR</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
 marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))</code></pre>
 <pre><code>   marketType marketCount
 1      WINNER           1
-20 MATCH_ODDS          18</code></pre>
+20 MATCH_ODDS          28</code></pre>
 <p>The marketIds of the two matches (Man City vs Spurs and Arsenal vs Leicester) and the outright winner of the Premier League are shown below:</p>
 <p>The following are the three markets of interest, which were collected and saved sometime on Weds 10th Feb 2016.</p>
 <pre><code>
@@ -406,7 +404,7 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 </div>
 <div id="linux-and-osx" class="section level3">
 <h3>linux and osx</h3>
-<p><a href="http://crontab.org/">crontab</a> isn’t as familiar to me as windows, so any input/corrections would be very welcome. It involves editing a file with your tasks. For each task there are 6 categories, some examples are below (taken from <a href="https://help.ubuntu.com/community/CronHowto">cronhowto</a>):</p>
+<p><a href="http://crontab.org/">crontab</a> (which may require installation) isn’t as familiar to me as windows, so any input/corrections would be very welcome. It involves editing a file with your tasks. For each task there are 6 categories, some examples are below (taken from <a href="https://help.ubuntu.com/community/CronHowto">cronhowto</a>):</p>
 <table>
 <thead>
 <tr class="header">
