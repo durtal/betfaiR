@@ -14,7 +14,18 @@ devtools::install_github("durtal/betfaiR")
 
 #### Help
 
-There are help pages available [here](http://durtal.github.io/betfaiR/), issues can be filed [here](https://github.com/durtal/betfaiR/issues), and a vignette showing how to [login, find a market, place a bet, replace the bet and cancel the bet](http://durtal.github.io/betfaiR/vignette_one.html).  Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
+There are help pages available [here](http://durtal.github.io/betfaiR/), issues can be filed [here](https://github.com/durtal/betfaiR/issues)..
+
+There are a few vignettes and I'll try to add more:
+
+vignette | details
+---------|----------------------------------------------------------------------
+[vignette_one](http://durtal.github.io/betfaiR/vignette_one.html) | walks through login, find a market, place a bet, replace the bet and cancel the bet]
+[vignette_two](http://durtal.github.io/betfaiR/vignette_two.html) | shows how to use `betfaiR` and scheduled tasks to periodically collect betfair data
+[vignette_three](http://durtal.github.io/betfaiR/vignette_three.html) | some simple analysis of the data returned by the code walked through in vignette two
+
+
+Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
 
 #### Usage
 
