@@ -18,11 +18,11 @@ There are help pages available [here](http://durtal.github.io/betfaiR/), issues 
 
 There are a few vignettes and I'll try to add more:
 
-vignette | details
----------|----------------------------------------------------------------------
-[vignette_one](http://durtal.github.io/betfaiR/vignette_one.html) | walks through login, find a market, place a bet, replace the bet and cancel the bet]
-[vignette_two](http://durtal.github.io/betfaiR/vignette_two.html) | shows how to use `betfaiR` and scheduled tasks to periodically collect betfair data
-[vignette_three](http://durtal.github.io/betfaiR/vignette_three.html) | some simple analysis of the data returned by the code walked through in vignette two
+vignette | title | details
+---------|-------|---------------------------------------------------------------
+[vignette one](http://durtal.github.io/betfaiR/vignette_one.html) | place a bet | walks through login, find a market, place a bet, replace the bet and cancel the bet]
+[vignette two](http://durtal.github.io/betfaiR/vignette_two.html) | cron jobs w/ betfaiR | shows how to use `betfaiR` and scheduled tasks to periodically collect betfair data
+[vignette three](http://durtal.github.io/betfaiR/vignette_three.html) | betfair super sunday - 14/02/16 | some simple analysis of the data returned by the code walked through in vignette two
 
 
 Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
