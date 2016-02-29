@@ -24,7 +24,6 @@ vignette | title | details
 [vignette two](http://durtal.github.io/betfaiR/vignette_two.html) | cron jobs w/ betfaiR | shows how to use `betfaiR` and scheduled tasks to periodically collect betfair data
 [vignette three](http://durtal.github.io/betfaiR/vignette_three.html) | betfair super sunday - 14/02/16 | some simple analysis of the data returned by the code walked through in vignette two
 
-
 Help with the package would be welcome, or suggestions on how best to parse the responses from Betfair, what format would _you_ like data to be in when returned from the Exchange, dataframes, lists of dataframes, environments (maybe?) or the raw unparsed response.
 
 #### Usage
