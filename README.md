@@ -76,9 +76,9 @@ Methods available:
     $venues(filter = marketFilter())
 ```
 
-So, if you are familiar with Betfair's API, you will realise the available methods in the package might need a little bit of work.  Each of the methods has its own help page, so to view the help page of the events method, `?events`.
+So, if you are familiar with Betfair's API, that will help, the Betfair API documentation can be found [here](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/API+Overview).  Each of the available methods has its own help page, so to view the help page of the events method, after loading the library type `?events` into the console.
 
-`marketBook` can be used, but because the data returned is often heavily nested, it might not parse the response from betfair as well as other methods.  The response from `marketBook` does include the raw response if required, as an element in a list.
+Each of the methods typically returns a data.frame or a list (usually of data.frames), these responses can usually be passed to `print` or `summary` for a neater display of the data returned.  `marketBook` returns data which is often heavily nested, so the response might not be in the easiest format to print neatly, but `marketBook` does include the raw response if required, as an element in a list.
 
 Some of the available methods have a `filter` parameter, which can be used to filter data, this is then added into the body of the request sent to Betfair.  The `marketFilter` function helps you build a filter object, providing all the available parameters that can be filtered by (this hasn't been tested exhaustively but should work).  For example to find horse racing events:
 
@@ -88,7 +88,7 @@ racing <- bf$events(filter = marketFilter(eventTypeIds = 7))
 
 The `racing` object is now a dataframe of horse racing events, providing data that includes the event Id, event name, countryCode, timezone, venue, date, and the number of markets.
 
-The `account` method returns an environment with 4 methods for accessing data about your account, it requires your password, which will be checked against the password you entered when using `betfair`.  You can also use the `bf_account` function which requires your username, password and api key.  The `account` method can return your account statement, which can be `plot`ed, showing profit/loss over a set time period.
+The `account` method returns an environment with 4 methods for accessing data about your account, it requires your password, which will be checked against the password you entered when using `betfair`.  You can also use the `bf_account` function which requires your username, password and api key (and will return the same environment as the `account` method via `betfair`).  The `account` method can return your account statement, which can be passed to `plot`, showing profit/loss over a set time period, see the help pages about restricting a time period.
 
 ### PASSWORD and KEY
 
