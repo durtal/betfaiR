@@ -1,12 +1,21 @@
+# #' collect data
+# #'
+# #' @description helper function to periodically collect data from betfair
+# #'
+# #' @param bf betfair environment, returned from the \link{betfair} function
+# #' @param marketIds ids of markets to retrieve data for
+# #' @param priceProjection what data to return via the \link{marketBook} function
+# #'
+# #'
+# #' @export
 # collect_data <- function(bf,
 #                          marketIds,
-#                          maxResults = 10,
 #                          priceProjection = c("EX_ALL_OFFERS", "EX_TRADED")) {
 #
 #     files <- list.files()
 #     # ascertain which markets are still live
 #     available_markets <- bf$marketCatalogue(filter = marketFilter(marketIds = marketIds),
-#                                             maxResults = maxResults)
+#                                             maxResults = length(marketIds))
 #     available_markets <- sapply(available_markets, function(i) i$market$marketId)
 #     test <- marketIds %in% available_markets
 #     marketIds <- marketIds[test]
