@@ -1,11 +1,23 @@
 # #' collect data
 # #'
-# #' @description helper function to periodically collect data from betfair
+# #' @description helper function to be used within an R script that is part of a
+# #' scheduled task.
+# #'
+# #' @detail This function will take a \link{betfair} environment, a
+# #' collection of marketIds and priceProjection parameters and retrieve data at
+# #' intervals set up by the task, and keep appending new data returned by the
+# #' \link{marketBook} method to any previous data returned.  The function will also
+# #' add a new variable called \code{collectedAt} to each list, which means cross
+# #' market comparisons are possible.  It is a good idea to also store/save data
+# #' returned by the \link{marketCatalogue} method which will contain data about the
+# #' runners in the markets you are collecting data from.
 # #'
 # #' @param bf betfair environment, returned from the \link{betfair} function
 # #' @param marketIds ids of markets to retrieve data for
 # #' @param priceProjection what data to return via the \link{marketBook} function
 # #'
+# #' @return the function saves data returned from the Betfair API into RDS files
+# #' named after the market, for example market_1.121212121.RDS.
 # #'
 # #' @export
 # collect_data <- function(bf,
@@ -44,4 +56,5 @@
 #        files = files,
 #        currentTime = currentTime)
 #
+#     return(invisible())
 # }
