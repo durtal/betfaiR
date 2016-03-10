@@ -22,9 +22,19 @@
 # #' @export
 # collect_data <- function(bf,
 #                          marketIds,
+#                          marketIds_file = "marketIds",
 #                          priceProjection = c("EX_ALL_OFFERS", "EX_TRADED")) {
 #
+#     # retrieve files from current working directory
 #     files <- list.files()
+#     # create marketIds file name using marketIds_file param
+#     marketIds_file <- paste0(marketIds_file, ".RDS")
+#     if(!(marketIds_file %in% files)) {
+#         out <- bf$marketCatalogue(filter = marketFilter(marketIds = marketIds),
+#                                   maxResults = length(marketIds),
+#                                   marketProjection = c("EVENT", "RUNNER_DESCRIPTION"))
+#         saveRDS(out, marketIds_file)
+#     }
 #     # ascertain which markets are still live
 #     available_markets <- bf$marketCatalogue(filter = marketFilter(marketIds = marketIds),
 #                                             maxResults = length(marketIds))
