@@ -46,7 +46,7 @@ collect_data <- function(bf,
     # save current time, to add to retrieved data
     currentTime <- Sys.time()
     # loop through each market and retrieve data, adding currentTime to enable comparison across markets
-    plyr::l_ply(marketIds, .fun = function(i, bf, files) {
+    plyr::l_ply(marketIds, .fun = function(i, bf, files, currentTime) {
 
         filename <- paste0("market_", i, ".RDS")
         if(filename %in% files) {
