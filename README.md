@@ -95,3 +95,11 @@ The `account` method returns an environment with 4 methods for accessing data ab
 The appendix **_API key best practices_** in the [api packages vignette](https://cran.r-project.org/web/packages/httr/vignettes/api-packages.html) from the [httr](https://github.com/hadley/httr) package provides some pertinent advice for the storing of you PASSWORD and KEY.
 
 The advice is to store your PASSWORD and KEY, or any other variables that should be kept safe, in an environment variable, this is to prevent accidentally sharing your credentials, either by sharing an .Rhistory file, or sharing a workspace.
+
+### example plots with data collected via betfair
+
+A plot of data from the Premier League outright market on 14/2/2016.
+![](https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/prem-outright-early-ko-1.png)
+
+A plot of Match Odds data from Premier League match between the then top two in the table Arsenal and Leicester City, Leicester City went 1-0 up, then had a man sent off, Arsenal equalised and won the game late
+![](https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-price-1.png)
