@@ -1,0 +1,56 @@
+---
+title: "betfair_theme"
+---
+
+`betfair_theme` is a simple `ggplot2` theme that can be used when plotting any betfair data.  The theme is used when plotting the output of the `statement` method found in [`bf_account`](bf_account.html) environment, which will plot your Betfair balance (profit/loss) over a specified time period.
+
+```{r echo=FALSE}
+library(betfaiR)
+```
+
+### arguments
+
+param | details
+------|-------------------------------------------------------------------------
+`base_size` | font size
+`base_family` | font family
+
+### examples
+
+Using some of the data found in [vignette_three](vignette_three.html), rather than posting my Betfair balance :-)
+
+```{r warning=FALSE, message=FALSE, load-and-prepare-data}
+library(ggplot2)
+library(dplyr)
+library(betfaiR)
+markets <- readRDS("vignette_two/marketIds.RDS")
+winner <- readRDS("vignette_two/winner.RDS")
+winner <- plyr::ldply(winner, .fun = function(i) {
+    x <- plyr::ldply(i$runners, .fun = function(j) {
+        j$basic
+    })
+    x$collectedAt <- i$collectedAt
+    return(x)
+})
+winner <- winner %>%
+    left_join(markets$winner[[1]]$runners)
+winner %>%
+    filter(collectedAt == min(collectedAt),
+           runnerName %in% c("Arsenal", "Leicester", "Man City", "Tottenham")) %>%
+    mutate(runnerName = factor(runnerName, levels = c("Arsenal", "Leicester", "Man City", "Tottenham")),
+           prob = 1 / lastPriceTraded) %>%
+    ggplot(aes(x = runnerName,
+               y = prob)) +
+        geom_bar(stat = "identity",
+                 aes(fill = runnerName)) +
+        scale_fill_manual(values = c("Leicester" = "#0053A0",
+                                     "Arsenal" = "#EF0107",
+                                     "Man City" = "#5DBFEB",
+                                     "Tottenham" = "#001C58")) +
+        labs(title = "Outright Market") +
+        betfair_theme() +
+        theme(
+            legend.position = "none",
+            axis.title.x = element_blank()
+        )
+```

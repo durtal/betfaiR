@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>betfair_theme</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<style type="text/css">
+
+	/* padding for bootstrap navbar */
+	body {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	@media (max-width: 979px) {
+		body {
+			padding-top: 0;
+		}
+	}
+
+	/* offset scroll position for anchor links (for fixed navbar) */
+	@media (min-width: 980px) {
+		.section h2 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+		.section h3 {
+			padding-top: 52px;
+			margin-top: -52px;
+		}
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	/* don't use link color in navbar */
+	.dropdown-menu>li>a {
+		color: black;
+	}
+
+	/* some padding for disqus */
+	#disqus_thread {
+		margin-top: 45px;
+	}
+
+</style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img { 
+  max-width:100%; 
+  height: auto; 
+}
+</style>
+<div class="container-fluid main-container">
+
+<h1>betfaiR</h1>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#betfaiR-nav">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://github.com/durtal" class="navbar-brand">durtal@github</a>
+        </div>
+        <div class="collapse navbar-collapse" id="betfaiR-nav">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="index.html">home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Primary" class="dropdown-toggle" data-toggle="dropdown">
+                        functions <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">environment</li>
+                        <li>
+                            <a href="betfair.html">betfair</a>
+                        </li>
+                        <li class="dropdown-header">functions</li>
+                        <li>
+                            <a href="betfair_login.html">bf_login</a>
+                        </li>
+                        <li>
+                            <a href="bf_account.html">bf_account</a>
+                        </li>
+                        <li>
+                            <a href="request_functions.html">bf_request</a>
+                        </li>
+                        <li>
+                            <a href="betfair_POST.html">bf_post</a>
+                        </li>
+                        <li>
+                            <a href="betfair_check.html">bf_check</a>
+                        </li>
+                        <li>
+                            <a href="betfair_parse.html">bf_parse</a>
+                        </li>
+                        <li class="dropdown-header">helpers</li>
+                        <li>
+                            <a href="marketFilter.html">marketFilter</a>
+                        </li>
+                        <li>
+                            <a href="bf_helpers.html">bet instructions</a>
+                        </li>
+                        <li>
+                            <a href="betfair_theme.html">betfair_theme</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="Methods" class="dropdown-toggle" data-toggle="dropdown">
+                        methods <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-header">summary data</li>
+                        <li>
+                            <a href="methods_competitions.html">competitions</a>
+                        </li>
+                        <li>
+                            <a href="methods_countries.html">countries</a>
+                        </li>
+                        <li>
+                            <a href="methods_events.html">events</a>
+                        </li>
+                        <li>
+                            <a href="methods_eventTypes.html">eventTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_venues.html">venues</a>
+                        </li>
+                        <li class="dropdown-header">login</li>
+                        <li>
+                            <a href="login_session.html">login + session</a>
+                        </li>
+                        <li class="dropdown-header">market data</li>
+                        <li>
+                            <a href="methods_marketTypes.html">marketTypes</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketCatalogue.html">marketCatalogue</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketBook.html">marketBook</a>
+                        </li>
+                        <li>
+                            <a href="methods_marketPnL.html">marketPnL</a>
+                        </li>
+                        <li class="dropdown-header">orders</li>
+                        <li>
+                            <a href="cancelOrders.html">cancelOrders</a>
+                        </li>
+                        <li>
+                            <a href="clearedOrders.html">clearedOrders</a>
+                        </li>
+                        <li>
+                            <a href="currentOrders.html">currentOrders</a>
+                        </li>
+                        <li>
+                            <a href="placeOrders.html">placeOrders</a>
+                        </li>
+                        <li>
+                            <a href="replaceOrders.html">replaceOrders</a>
+                        </li>
+                        <li>
+                            <a href="updateOrders.html">updateOrders</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="Misc" class="dropdown-toggle" data-toggle="dropdown">
+                        misc <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="betting_enums.html">Betting Enums</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="vignettes" class="dropdown-toggle" data-toggle="dropdown">
+                        vignettes <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="vignette_one.html">place a bet</a>
+                        </li>
+                        <li>
+                            <a href="vignette_two.html">cron jobs w/ betfaiR (pt.1)</a>
+                        </li>
+                        <li>
+                            <a href="vignette_three.html">betfair super sunday (pt.2)</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="header">
+<h1 class="title">betfair_theme</h1>
+</div>
+
+
+<p><code>betfair_theme</code> is a simple <code>ggplot2</code> theme that can be used when plotting any betfair data. The theme is used when plotting the output of the <code>statement</code> method found in <a href="bf_account.html"><code>bf_account</code></a> environment, which will plot your Betfair balance (profit/loss) over a specified time period.</p>
+<div id="arguments" class="section level3">
+<h3>arguments</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">param</th>
+<th align="left">details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>base_size</code></td>
+<td align="left">font size</td>
+</tr>
+<tr class="even">
+<td align="left"><code>base_family</code></td>
+<td align="left">font family</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples" class="section level3">
+<h3>examples</h3>
+<p>Using some of the data found in <a href="vignette_three.html">vignette_three</a>, rather than posting my Betfair balance :-)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(betfaiR)
+markets &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;vignette_two/marketIds.RDS&quot;</span>)
+winner &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;vignette_two/winner.RDS&quot;</span>)
+winner &lt;-<span class="st"> </span>plyr::<span class="kw">ldply</span>(winner, <span class="dt">.fun =</span> function(i) {
+    x &lt;-<span class="st"> </span>plyr::<span class="kw">ldply</span>(i$runners, <span class="dt">.fun =</span> function(j) {
+        j$basic
+    })
+    x$collectedAt &lt;-<span class="st"> </span>i$collectedAt
+    <span class="kw">return</span>(x)
+})
+winner &lt;-<span class="st"> </span>winner %&gt;%
+<span class="st">    </span><span class="kw">left_join</span>(markets$winner[[<span class="dv">1</span>]]$runners)
+winner %&gt;%
+<span class="st">    </span><span class="kw">filter</span>(collectedAt ==<span class="st"> </span><span class="kw">min</span>(collectedAt),
+           runnerName %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Arsenal&quot;</span>, <span class="st">&quot;Leicester&quot;</span>, <span class="st">&quot;Man City&quot;</span>, <span class="st">&quot;Tottenham&quot;</span>)) %&gt;%
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">runnerName =</span> <span class="kw">factor</span>(runnerName, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Arsenal&quot;</span>, <span class="st">&quot;Leicester&quot;</span>, <span class="st">&quot;Man City&quot;</span>, <span class="st">&quot;Tottenham&quot;</span>)),
+           <span class="dt">prob =</span> <span class="dv">1</span> /<span class="st"> </span>lastPriceTraded) %&gt;%
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> runnerName,
+               <span class="dt">y =</span> prob)) +
+<span class="st">        </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>,
+                 <span class="kw">aes</span>(<span class="dt">fill =</span> runnerName)) +
+<span class="st">        </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;Leicester&quot;</span> =<span class="st"> &quot;#0053A0&quot;</span>,
+                                     <span class="st">&quot;Arsenal&quot;</span> =<span class="st"> &quot;#EF0107&quot;</span>,
+                                     <span class="st">&quot;Man City&quot;</span> =<span class="st"> &quot;#5DBFEB&quot;</span>,
+                                     <span class="st">&quot;Tottenham&quot;</span> =<span class="st"> &quot;#001C58&quot;</span>)) +
+<span class="st">        </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Outright Market&quot;</span>) +
+<span class="st">        </span><span class="kw">betfair_theme</span>() +
+<span class="st">        </span><span class="kw">theme</span>(
+            <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,
+            <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>()
+        )</code></pre></div>
+<p><img src="betfair_theme_files/figure-html/load-and-prepare-data-1.png" title="" alt="" width="672" /></p>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>
