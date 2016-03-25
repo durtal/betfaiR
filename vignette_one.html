@@ -180,6 +180,9 @@ img {
                         <li>
                             <a href="bf_helpers.html">bet instructions</a>
                         </li>
+                        <li>
+                            <a href="betfair_theme.html">betfair_theme</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -324,79 +327,79 @@ Methods available:
                               <span class="dt">sort =</span> <span class="st">&quot;MAXIMUM_TRADED&quot;</span>)
 <span class="kw">summary</span>(markets)</code></pre></div>
 <pre><code>
-Market ID:      1.117674259
-Event ID:       27625527 
-Market Name:    Champion Hrd
-Event Name:     Chelt 15th Mar 
-Matched:        464899.44
- ---------------------------------------------------------------------------
-Market ID:      1.117674262
-Event ID:       27625530 
-Market Name:    Gold Cup
-Event Name:     Chelt 18th Mar 
-Matched:        349534.86
- ---------------------------------------------------------------------------
-Market ID:      1.117674261
-Event ID:       27625529 
-Market Name:    World Hrd
-Event Name:     Chelt 17th Mar 
-Matched:        227410.96
- ---------------------------------------------------------------------------
-Market ID:      1.119301054
-Event ID:       27625527 
-Market Name:    Supreme Nov Hrd
-Event Name:     Chelt 15th Mar 
-Matched:        225619
- ---------------------------------------------------------------------------
 Market ID:      1.118224623
 Event ID:       27639253 
 Market Name:    Grand National
 Event Name:     Aint 9th Apr 
-Matched:        202120.6
+Matched:        436363
+ ---------------------------------------------------------------------------
+Market ID:      1.118987605
+Event ID:       27639254 
+Market Name:    2000 Guineas
+Event Name:     Newm 30th April 
+Matched:        114264.88
+ ---------------------------------------------------------------------------
+Market ID:      1.119468296
+Event ID:       27639255 
+Market Name:    1000 Guineas
+Event Name:     Newm 1st May 
+Matched:        60063.04
+ ---------------------------------------------------------------------------
+Market ID:      1.118474828
+Event ID:       27088631 
+Market Name:    Top GB NH Jockey 2015-16
+Event Name:     Special Bets 
+Matched:        51840.58
+ ---------------------------------------------------------------------------
+Market ID:      1.121975915
+Event ID:       27639253 
+Market Name:    Grand National TBP
+Event Name:     Aint 9th Apr 
+Matched:        29682.84
  ---------------------------------------------------------------------------</code></pre>
-<p>Let’s look at the first market, the market name is <strong>Champion Hrd</strong> while the event name is <strong>Chelt 15th Mar</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
+<p>Let’s look at the first market, the market name is <strong>Grand National</strong> while the event name is <strong>Aint 9th Apr</strong>. Below we query this market, and retrieve additional data about the runners, via the <code>marketProjection</code> parameter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>markets[[<span class="dv">1</span>]]$market$marketId
 market &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">marketIds =</span> marketId),
                              <span class="dt">marketProjection =</span> <span class="st">&quot;RUNNER_DESCRIPTION&quot;</span>)
 <span class="kw">summary</span>(market)</code></pre></div>
 <pre><code>
-Market ID:      1.117674259 
-Market Name:    Champion Hrd 
-Matched:        464899.44
+Market ID:      1.118224623 
+Market Name:    Grand National 
+Matched:        436363
 
-Runners:     39 
- selectionId       runnerName handicap sortPriority
-     6561541      Annie Power        0            1
-     7767260      Arctic Fire        0            2
-     6570387   Nichols Canyon        0            3
-     9037733   Identity Thief        0            4
-     6042342 My Tent Or Yours        0            5
-     5959467      The New One        0            6
+Runners:     249 
+ selectionId        runnerName handicap sortPriority
+     6180526       Many Clouds        0            1
+     5035723  Silviniaco Conti        0            2
+     7860562   The Last Samuri        0            3
+     6066164          Holywell        0            4
+     6018448 The Druids Nephew        0            5
+     5906834   Cause Of Causes        0            6
 
  ---------------------------------------------------------------------------</code></pre>
-<p>Now we know the <code>marketId</code> we can use the <a href="methods_marketBook.html"><code>marketBook</code></a> method to get up to date (well, with a second or so delays) market data. The response of this method can also be passed to <code>summary</code> for pretty printing, before being mined further. One unfortunate thing about the <code>marketBook</code> method is that it only returns selectionIds, rather than runner names, so the likes of <strong>Annie Power</strong> or <strong>Arctic Fire</strong> are not included.</p>
+<p>Now we know the <code>marketId</code> we can use the <a href="methods_marketBook.html"><code>marketBook</code></a> method to get up to date (well, with a second or so delays) market data. The response of this method can also be passed to <code>summary</code> for pretty printing, before being mined further. One unfortunate thing about the <code>marketBook</code> method is that it only returns selectionIds, rather than runner names, so the likes of <strong>Many Clouds</strong> or <strong>Silviniaco Conti</strong> are not included.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">market_data &lt;-<span class="st"> </span>bf$<span class="kw">marketBook</span>(<span class="dt">marketIds =</span> marketId,
                              <span class="dt">priceProjection =</span> <span class="st">&quot;EX_BEST_OFFERS&quot;</span>)
 <span class="kw">summary</span>(market_data)</code></pre></div>
 <pre><code>
-Market ID:      1.117674259 
-Matched:        475441.73 
-Available:      15533.05
+Market ID:      1.118224623 
+Matched:        501928.71 
+Available:      179211.5
 
-Runners:     16 (23 removed) 
+Runners:     96 (153 removed) 
      .id selectionId handicap status lastPriceTraded totalMatched
- 6561541     6561541        0 ACTIVE             5.1     27738.21
- 7767260     7767260        0 ACTIVE             5.7     27340.84
- 6570387     6570387        0 ACTIVE             7.2     18080.39
- 9037733     9037733        0 ACTIVE             8.6      8742.88
- 6042342     6042342        0 ACTIVE            10.5     13191.13
- 5959467     5959467        0 ACTIVE            12.0     15177.23
+ 6180526     6180526        0 ACTIVE               9     64116.65
+ 5035723     5035723        0 ACTIVE              13     35479.56
+ 7860562     7860562        0 ACTIVE              14     24807.32
+ 6066164     6066164        0 ACTIVE              17     19213.27
+ 6018448     6018448        0 ACTIVE              18     24156.23
+ 5906834     5906834        0 ACTIVE              65     14770.91
 
  ---------------------------------------------------------------------------</code></pre>
 </div>
 <div id="placing-a-bet" class="section level3">
 <h3>placing a bet</h3>
-<p>Let’s place a lay bet on the current favourite using the <a href="placeOrders.html"><code>placeOrders</code></a> method, Annie Power, we don’t want this to be matched, so the lay will be at the 1.01 price, and for just ?2. To place a bet, we need the <code>marketId</code> and <code>selectionId</code>:</p>
+<p>Let’s place a lay bet on the current favourite using the <a href="placeOrders.html"><code>placeOrders</code></a> method, Many Clouds, we don’t want this to be matched, so the lay will be at the 1.01 price, and for just ?2. To place a bet, we need the <code>marketId</code> and <code>selectionId</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">marketId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$market$marketId
 selectionId &lt;-<span class="st"> </span>market_data[[<span class="dv">1</span>]]$runners[[<span class="dv">1</span>]]$basic$selectionId
 
@@ -408,21 +411,21 @@ bet &lt;-<span class="st"> </span>bf$<span class="kw">placeOrders</span>(<span c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bet</code></pre></div>
 <pre><code>
 Status:         SUCCESS
-MarketId:       1.117674259</code></pre>
+MarketId:       1.118224623</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(bet)</code></pre></div>
 <pre><code>
 Status:         SUCCESS
-MarketId:       1.117674259
+MarketId:       1.118224623
 
 Order:
   status       betId               placedDate averagePriceMatched
- SUCCESS 62726836916 2016-02-19T19:10:54.000Z                   0
+ SUCCESS 65654736429 2016-03-25T22:34:52.000Z                   0
  sizeMatched
            0
 
 Instructions:
  selectionId handicap size price persistenceType orderType side
-     6561541        0    2  1.01           LAPSE     LIMIT  LAY</code></pre>
+     6180526        0    2  1.01           LAPSE     LIMIT  LAY</code></pre>
 <p>We’ll now change that order using the <a href="replaceOrders.html"><code>replaceOrders</code></a> function, for this we need the betId (which was returned above), and we’ll change the price we wish to be matched at to 1.10.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">betId &lt;-<span class="st"> </span>bet$order$betId
 bet1 &lt;-<span class="st"> </span>bf$<span class="kw">replaceOrders</span>(<span class="kw">replace_inst</span>(<span class="dt">betId =</span> betId,

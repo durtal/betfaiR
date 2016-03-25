@@ -15,8 +15,8 @@ acc <- bf_account(usr = Sys.getenv("BETFAIR_USR"),
 
 ```{r eval=FALSE, comment=""}
 acc <- bf_account(usr = username,
-                 pwd = password,
-                 key = api_key)
+                  pwd = password,
+                  key = api_key)
 ```
 
 If using the `account` method found in the [`betfair`](betfair.html) environment, then only the password is required, which is checked against the previously entered password.

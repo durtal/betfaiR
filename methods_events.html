@@ -180,6 +180,9 @@ img {
                         <li>
                             <a href="bf_helpers.html">bet instructions</a>
                         </li>
+                        <li>
+                            <a href="betfair_theme.html">betfair_theme</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -362,54 +365,54 @@ bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all countries</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <span class="kw">head</span>(tmp)</code></pre></div>
-<pre><code>  event_id                    event_name event_countryCode event_timezone
-1 27696941   Almtuna IS v HC Vita Hasten                SE            UTC
-2 27696942   Asploven HC v VIK Vasteraas                SE            UTC
-3 27696943 BIK Karlskoga v Tingsryds Aif                SE            UTC
-4 27183450       ICC World Twenty20 2016                IN  Asia/Calcutta
-5 27696932 HK 36 Skalica v Dukla Trencin                SK            UTC
-6 27696933    HK Nitra v SHK 37 Piestany                SK            UTC
-            event_openDate marketCount event_venue
-1 2016-02-22T18:00:00.000Z           3        &lt;NA&gt;
-2 2016-02-22T18:00:00.000Z           3        &lt;NA&gt;
-3 2016-02-22T18:00:00.000Z           3        &lt;NA&gt;
-4 2016-03-08T09:30:00.000Z           6        &lt;NA&gt;
-5 2016-02-21T16:00:00.000Z           1        &lt;NA&gt;
-6 2016-02-21T16:00:00.000Z           1        &lt;NA&gt;</code></pre>
+<pre><code>  event_id                           event_name event_timezone
+1 27738472  Sofie Oyen v Kathinka VON Deichmann            UTC
+2 27738473 Elyne Boeykens v Martina DI Giuseppe            UTC
+3 27738475                   Ma Cilic v G Simon            UTC
+4 27183450              ICC World Twenty20 2016  Asia/Calcutta
+5 27738477                               Set 01            UTC
+6 27738478                               Set 02            UTC
+            event_openDate marketCount event_countryCode event_venue
+1 2016-03-26T13:30:00.000Z           1              &lt;NA&gt;        &lt;NA&gt;
+2 2016-03-26T15:00:00.000Z           1              &lt;NA&gt;        &lt;NA&gt;
+3 2016-03-26T16:00:00.000Z          10                US        &lt;NA&gt;
+4 2016-03-08T09:30:00.000Z           7                IN        &lt;NA&gt;
+5 2016-03-26T16:00:00.000Z          13                US        &lt;NA&gt;
+6 2016-03-26T16:00:00.000Z          13                US        &lt;NA&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre></div>
-<pre><code>  event_id              event_name event_countryCode   event_timezone
-1 27695566 Club Hip (CHL) 19th Feb                CL America/Santiago
-2  3453086        Stewards Enquiry                GB    Europe/London
-3 27569474      Long (FRA) 2nd Oct                FR              CET
-4 27697064          Fairy 20th Feb                IE    Europe/London
-5 27697067           Winc 20th Feb                GB    Europe/London
-6 27652269           Newb 14th May                GB    Europe/London
-           event_venue           event_openDate marketCount
-1 Club Hipico Santiago 2016-02-19T17:30:00.000Z          10
-2                 &lt;NA&gt; 2014-01-01T00:00:00.000Z           1
-3                 &lt;NA&gt; 2016-10-02T13:55:00.000Z           1
-4           Fairyhouse 2016-02-20T13:45:00.000Z          26
-5            Wincanton 2016-02-20T13:40:00.000Z          26
-6                 &lt;NA&gt; 2016-05-14T14:00:00.000Z           1</code></pre>
+<pre><code>  event_id            event_name event_countryCode event_timezone
+1 27652586        Ascot 14th Jun                GB  Europe/London
+2 27717904        Fairy 28th Mar                IE  Europe/London
+3 27737367    SunP (US) 25th Mar                US    US/Mountain
+4 27737645 Fairy (Dist) 28th Mar                IE  Europe/London
+5 27734719        Ascot 18th Jun                GB  Europe/London
+6  3453086      Stewards Enquiry                GB  Europe/London
+            event_openDate marketCount  event_venue
+1 2016-01-14T14:30:00.000Z           1         &lt;NA&gt;
+2 2016-03-28T16:00:00.000Z           2         &lt;NA&gt;
+3 2016-03-25T19:30:00.000Z           6 Sunland Park
+4 2016-03-28T16:00:00.000Z           1   Fairyhouse
+5 2016-06-18T13:30:00.000Z           1         &lt;NA&gt;
+6 2014-01-01T00:00:00.000Z           1         &lt;NA&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre></div>
-<pre><code>  event_id            event_name event_countryCode event_timezone
-1 27658096         Curr 21st May                IE  Europe/London
-2 27639255          Newm 1st May                GB  Europe/London
-3 27639254       Newm 30th April                GB  Europe/London
-4 27639253          Aint 9th Apr                GB  Europe/London
-5 27467672 Meydan (UAE) 26th Mar                AE     Asia/Dubai
-6 27677498         Kemp 27th Feb                GB  Europe/London
+<pre><code>  event_id      event_name event_countryCode event_timezone
+1 27658096   Curr 21st May                IE  Europe/London
+2 27639255    Newm 1st May                GB  Europe/London
+3 27639254 Newm 30th April                GB  Europe/London
+4 27652586  Ascot 14th Jun                GB  Europe/London
+5 27639253    Aint 9th Apr                GB  Europe/London
+6 27723912   2017 Antepost                GB  Europe/London
             event_openDate marketCount
 1 2016-05-21T14:20:00.000Z           1
-2 2016-05-01T14:00:00.000Z           1
-3 2016-04-30T14:00:00.000Z           1
-4 2016-04-09T14:00:00.000Z           2
-5 2016-03-26T13:00:00.000Z           7
-6 2016-02-27T15:45:00.000Z           1</code></pre>
+2 2016-05-01T14:00:00.000Z           2
+3 2016-04-30T14:00:00.000Z           2
+4 2016-01-14T14:30:00.000Z           1
+5 2016-04-09T13:25:00.000Z           5
+6 2017-03-14T13:30:00.000Z           4</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>
