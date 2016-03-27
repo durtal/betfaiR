@@ -56,14 +56,13 @@
 #     } else {
 #         marketIds <- readRDS(marketIds_file)
 #         marketIds <- sapply(marketIds, function(i) i$market$marketIds)
+#         # ascertain which markets are still live
+#         available_markets <- bf$marketCatalogue(filter = marketFilter(marketIds = marketIds),
+#                                                 maxResults = length(marketIds))
+#         available_markets <- sapply(available_markets, function(i) i$market$marketId)
+#         test <- marketIds %in% available_markets
+#         marketIds <- marketIds[test]
 #     }
-#     # ascertain which markets are still live
-#     available_markets <- bf$marketCatalogue(filter = marketFilter(marketIds = marketIds),
-#                                             maxResults = length(marketIds))
-#     available_markets <- sapply(available_markets, function(i) i$market$marketId)
-#     test <- marketIds %in% available_markets
-#     marketIds <- marketIds[test]
-#
 #     # save current time, to add to retrieved data
 #     currentTime <- Sys.time()
 #     # loop through each market and retrieve data, adding currentTime to enable comparison across markets
