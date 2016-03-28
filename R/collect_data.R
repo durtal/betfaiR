@@ -72,7 +72,7 @@
 #         if(filename %in% files) {
 #             previous_data <- readRDS(filename)
 #         } else {
-#             previous_data <- list()
+#             previous_data <- structure(list(), class = c("betfaiR_lapse", "list"))
 #         }
 #         # retrieve data from market
 #         current_data <- bf$marketBook(marketIds = i,
