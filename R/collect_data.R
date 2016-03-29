@@ -52,10 +52,10 @@
 #                                   maxResults = maxResults,
 #                                   marketProjection = c("EVENT", "RUNNER_DESCRIPTION"))
 #         saveRDS(out, marketIds_file)
-#         marketIds <- sapply(out, function(i) i$market$marketId)
+#         marketIds <- unlist(lapply(out, function(i) i$market$marketId))
 #     } else {
 #         marketIds <- readRDS(marketIds_file)
-#         marketIds <- sapply(marketIds, function(i) i$market$marketIds)
+#         marketIds <- unlist(lapply(marketIds, function(i) i$market$marketId))
 #         # ascertain which markets are still live
 #         available_markets <- bf$marketCatalogue(filter = marketFilter(marketIds = marketIds),
 #                                                 maxResults = length(marketIds))
@@ -66,7 +66,7 @@
 #     # save current time, to add to retrieved data
 #     currentTime <- Sys.time()
 #     # loop through each market and retrieve data, adding currentTime to enable comparison across markets
-#     plyr::l_ply(marketIds, .fun = function(i, bf, files, currentTime) {
+#     plyr::l_ply(marketIds, .fun = function(i, bf, files, currentTime, priceProjection) {
 #
 #         filename <- paste0("market_", i, ".RDS")
 #         if(filename %in% files) {
