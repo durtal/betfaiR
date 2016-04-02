@@ -92,7 +92,13 @@
 #     return(invisible())
 # }
 
-# #' helper function to convert betfaiR_market object into data.frame'
+# #' @export
 # as.data.frame.betfaiR_market <- function(x, row.names = NULL, optional = FALSE, ...) {
-#
+#     tmp <- plyr::ldply(x, function(i) {
+#         tmp <- plyr::ldply(i, function(j) {
+#             j$basic
+#         })
+#         tmp$collectedAt <- i$collectedAt
+#         return(tmp)
+#     })
 # }
