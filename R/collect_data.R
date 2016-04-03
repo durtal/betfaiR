@@ -81,7 +81,7 @@
 #         current_data[[1]]$collectedAt <- currentTime
 #         # append new current_data to previous_data (which is either empty or previously collected data)
 #         previous_data <- append(previous_data, current_data)
-#         class(previous_data) <- c("betfaiR_market", class(previous_data))
+#         class(previous_data) <- c("betfaiR_market_l", class(previous_data))
 #         # save new data
 #         saveRDS(previous_data, filename)
 #     }, bf = bf,
@@ -93,12 +93,31 @@
 # }
 
 # #' @export
-# as.data.frame.betfaiR_market <- function(x, row.names = NULL, optional = FALSE, ...) {
+# as.data.frame.betfaiR_market_l <- function(x, row.names = NULL, optional = FALSE, ...) {
 #     tmp <- plyr::ldply(x, function(i) {
-#         tmp <- plyr::ldply(i, function(j) {
+#         tmp <- plyr::ldply(i$runners, function(j) {
 #             j$basic
 #         })
 #         tmp$collectedAt <- i$collectedAt
 #         return(tmp)
 #     })
+#     n <- c("selectionId", "lastPriceTraded", "totalMatched", "collectedAt")
+#     n <- n[n %in% names(tmp)]
+#     tmp <- subset(tmp, select = n)
+#     class(tmp) <- c("betfaiR_market_df", class(tmp))
+#     return(tmp)
+# }
+#
+# #' @export
+# plot.betfaiR_market_df <- function(x, ...) {
+#     x$collectedAt <- strptime(x$collectedAt, "%Y-%m-%d %H:%M:%S")
+#     p <- ggplot2::ggplot(data = x,
+#                          ggplot2::aes(x = x$collectedAt,
+#                                       y = 1 / x$lastPriceTraded))
+# }
+#
+# #' @export
+# plot.betfaiR_market_l <- function(x, ...) {
+#     df <- as.data.frame(x)
+#     plot(df)
 # }
