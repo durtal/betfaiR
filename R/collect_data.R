@@ -114,6 +114,10 @@
 #     p <- ggplot2::ggplot(data = x,
 #                          ggplot2::aes(x = x$collectedAt,
 #                                       y = 1 / x$lastPriceTraded))
+#     p <- p +
+#         ggplot2::geom_path(ggplot2::aes(colour = selectionId))
+#     p <- p +
+#         betfair_theme()
 # }
 #
 # #' @export
