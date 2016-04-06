@@ -103,3 +103,10 @@ A plot of data from the Premier League outright market on 14/2/2016.
 
 A plot of Match Odds data from Premier League match between the then top two in the table Arsenal and Leicester City, Leicester City went 1-0 up, then had a man sent off, Arsenal equalised and won the game late
 ![](https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-price-1.png)
+
+### things to work on
+
+* additional S3 methods to convert the lists returned by the various methods to dataframes
+* parameter in `marketBook` to collect data about runners found in `marketCatalogue`
+* plot method for other lists/responses
+* continue work on `collect_data` function to help collect data over a period of time, to be used in conjunction with a task scheduler
