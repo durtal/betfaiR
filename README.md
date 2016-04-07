@@ -1,4 +1,4 @@
-betfaiR v0.6.1
+betfaiR v0.6.2
 =======
 
 `betfaiR` is an R package which provides access to Betfair's API, and allows users to retrieve data (in various amounts of detail) from available markets, to place a bet in those markets, cancel bets, replace bets, etc.  The package possibly needs a little work (it's hard to test a package like this, unless someone has suggestions), so please proceed with caution when placing any bets, and provide feedback with any issues you encounter, or features you want added.
