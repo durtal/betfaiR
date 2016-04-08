@@ -110,3 +110,4 @@ A plot of Match Odds data from Premier League match between the then top two in 
 * parameter in `marketBook` to collect data about runners found in `marketCatalogue`
 * plot method for other lists/responses
 * continue work on `collect_data` function to help collect data over a period of time, to be used in conjunction with a task scheduler
+* work on `marketPnL` which returns an error when market has closed, need to parse the response better.
