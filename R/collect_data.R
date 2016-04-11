@@ -91,7 +91,7 @@
 #
 #     return(invisible())
 # }
-
+#
 # #' @export
 # as.data.frame.betfaiR_market_l <- function(x, row.names = NULL, optional = FALSE, ...) {
 #     tmp <- plyr::ldply(x, function(i) {
