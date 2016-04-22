@@ -62,41 +62,23 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -307,9 +289,10 @@ img {
 <div id="examples" class="section level3">
 <h3>examples</h3>
 <p>Using some of the data found in <a href="vignette_three.html">vignette_three</a>, rather than posting my Betfair balance :-)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(betfaiR)
+arslei &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;vignette_two/arslei.RDS&quot;</span>)
 markets &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;vignette_two/marketIds.RDS&quot;</span>)
 winner &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;vignette_two/winner.RDS&quot;</span>)
 winner &lt;-<span class="st"> </span>plyr::<span class="kw">ldply</span>(winner, <span class="dt">.fun =</span> function(i) {
@@ -321,7 +304,17 @@ winner &lt;-<span class="st"> </span>plyr::<span class="kw">ldply</span>(winner,
 })
 winner &lt;-<span class="st"> </span>winner %&gt;%
 <span class="st">    </span><span class="kw">left_join</span>(markets$winner[[<span class="dv">1</span>]]$runners)
-winner %&gt;%
+
+arslei &lt;-<span class="st"> </span>plyr::<span class="kw">ldply</span>(arslei, <span class="dt">.fun =</span> function(i) {
+    x &lt;-<span class="st"> </span>plyr::<span class="kw">ldply</span>(i$runners, <span class="dt">.fun =</span> function(j) {
+        j$basic
+    })
+    x$collectedAt &lt;-<span class="st"> </span>i$collectedAt
+    <span class="kw">return</span>(x)
+})
+arslei &lt;-<span class="st"> </span>arslei %&gt;%
+<span class="st">    </span><span class="kw">left_join</span>(markets$arslei[[<span class="dv">1</span>]]$runners)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">winner %&gt;%
 <span class="st">    </span><span class="kw">filter</span>(collectedAt ==<span class="st"> </span><span class="kw">min</span>(collectedAt),
            runnerName %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Arsenal&quot;</span>, <span class="st">&quot;Leicester&quot;</span>, <span class="st">&quot;Man City&quot;</span>, <span class="st">&quot;Tottenham&quot;</span>)) %&gt;%
 <span class="st">    </span><span class="kw">mutate</span>(<span class="dt">runnerName =</span> <span class="kw">factor</span>(runnerName, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Arsenal&quot;</span>, <span class="st">&quot;Leicester&quot;</span>, <span class="st">&quot;Man City&quot;</span>, <span class="st">&quot;Tottenham&quot;</span>)),
@@ -339,8 +332,23 @@ winner %&gt;%
 <span class="st">        </span><span class="kw">theme</span>(
             <span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>,
             <span class="dt">axis.title.x =</span> <span class="kw">element_blank</span>()
-        )</code></pre></div>
-<p><img src="betfair_theme_files/figure-html/load-and-prepare-data-1.png" title="" alt="" width="672" /></p>
+        )</code></pre>
+<p><img src="betfair_theme_files/figure-html/plot-winners-data-1.png" title="" alt="" width="672" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">arslei %&gt;%
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> collectedAt,
+               <span class="dt">y =</span> <span class="dv">1</span> /<span class="st"> </span>lastPriceTraded)) +
+<span class="st">        </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="kw">factor</span>(runnerName))) +
+<span class="st">        </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;time&quot;</span>,
+             <span class="dt">y =</span> <span class="st">&quot;prob&quot;</span>) +
+<span class="st">        </span><span class="kw">title_with_subtitle</span>(<span class="dt">title =</span> <span class="st">&quot;Arsenal vs Leicester&quot;</span>,
+                            <span class="dt">subtitle =</span> <span class="st">&quot;minute by minute implied probability&quot;</span>) +
+<span class="st">        </span><span class="kw">scale_colour_manual</span>(<span class="dt">values =</span> betfair_palette) +
+<span class="st">        </span><span class="kw">betfair_theme</span>() +
+<span class="st">        </span><span class="kw">theme</span>(
+            <span class="dt">legend.title =</span> <span class="kw">element_blank</span>()
+        )</code></pre>
+<pre><code>## Warning: Removed 6 rows containing missing values (geom_path).</code></pre>
+<p><img src="betfair_theme_files/figure-html/plot-arslei-data-1.png" title="" alt="" width="672" /></p>
 </div>
 
 

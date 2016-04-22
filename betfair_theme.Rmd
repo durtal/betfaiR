@@ -6,6 +6,7 @@ title: "betfair_theme"
 
 ```{r echo=FALSE}
 library(betfaiR)
+source("vignette_two/theme.R")
 ```
 
 ### arguments
@@ -23,6 +24,7 @@ Using some of the data found in [vignette_three](vignette_three.html), rather th
 library(ggplot2)
 library(dplyr)
 library(betfaiR)
+arslei <- readRDS("vignette_two/arslei.RDS")
 markets <- readRDS("vignette_two/marketIds.RDS")
 winner <- readRDS("vignette_two/winner.RDS")
 winner <- plyr::ldply(winner, .fun = function(i) {
@@ -34,6 +36,19 @@ winner <- plyr::ldply(winner, .fun = function(i) {
 })
 winner <- winner %>%
     left_join(markets$winner[[1]]$runners)
+
+arslei <- plyr::ldply(arslei, .fun = function(i) {
+    x <- plyr::ldply(i$runners, .fun = function(j) {
+        j$basic
+    })
+    x$collectedAt <- i$collectedAt
+    return(x)
+})
+arslei <- arslei %>%
+    left_join(markets$arslei[[1]]$runners)
+```
+
+```{r plot-winners-data}
 winner %>%
     filter(collectedAt == min(collectedAt),
            runnerName %in% c("Arsenal", "Leicester", "Man City", "Tottenham")) %>%
@@ -52,5 +67,21 @@ winner %>%
         theme(
             legend.position = "none",
             axis.title.x = element_blank()
+        )
+```
+
+```{r plot-arslei-data}
+arslei %>%
+    ggplot(aes(x = collectedAt,
+               y = 1 / lastPriceTraded)) +
+        geom_line(aes(colour = factor(runnerName))) +
+        labs(x = "time",
+             y = "prob") +
+        title_with_subtitle(title = "Arsenal vs Leicester",
+                            subtitle = "minute by minute implied probability") +
+        scale_colour_manual(values = betfair_palette) +
+        betfair_theme() +
+        theme(
+            legend.title = element_blank()
         )
 ```
