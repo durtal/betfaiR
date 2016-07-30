@@ -252,8 +252,6 @@ betfair <- function(usr, pwd, key, dom = "uk") {
 
                 getRunners <- intersect(toupper(getRunners), c("RUNNER_DESCRIPTION",
                                                                "RUNNER_METADATA"))
-
-                                                               print(getRunners)
                 if(length(getRunners) == 0) {
                     getRunners <- "RUNNER_DESCRIPTION"
                 }
