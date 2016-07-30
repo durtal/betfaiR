@@ -243,10 +243,8 @@ betfair <- function(usr, pwd, key, dom = "uk") {
             # handle errors
             res <- bf_check(res, method = "marketBook")
             # parse response
-            if(is.list(res)) {
-                res <- bf_parse(res)
-            }
-            
+            res <- bf_parse(res)
+
             return(res)
         }
 
