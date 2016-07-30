@@ -142,7 +142,9 @@ arslei_matched %>%
         ) +
         facet_grid(runnerName ~ .)
 ```
+
 <p style="text-align:right;"><sub><a href="https://raw.githubusercontent.com/durtal/betfaiR/gh-pages/vignette_three_files/figure-html/ars-lei-matched-1.png" target="_new">open in new window</a></sub></p>
+
 </div>
 <div class="col-sm-7">
 
