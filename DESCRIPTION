@@ -1,7 +1,7 @@
 Package: betfaiR
 Type: Package
 Title: R Client for Betfair's API
-Version: 0.6.2
+Version: 0.7.0
 Date: 2016-03-23
 Author: Thomas Heslop
 Maintainer: Thomas Heslop <t_heslop@hotmail.co.uk>
