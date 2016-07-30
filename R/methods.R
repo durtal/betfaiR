@@ -126,6 +126,10 @@ NULL
 #' section \strong{OrderProjection} in \link{BettingEnums}.
 #' @param matchProjection if you ask for orders, specifies the representation of
 #' matches, see section \strong{MatchProjection} in \link{BettingEnums}.
+#' @param getRunners this parameter allows users to retrieve data about the runners
+#' in the market, it does this by making a request using the \link{marketCatalogue}
+#' method, pass in RUNNER_DESCRIPTION or RUNNER_METADATA to retrieve data about
+#' the runners
 #'
 #' @details  Seperate requests should be made for ACTIVE and CLOSED markets.
 #' Requests that include both ACTIVE and CLOSED markets will only return those

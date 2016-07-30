@@ -44,7 +44,7 @@
 #'      \item{\code{session()}}{ Print details about the session, including login
 #'      in details and session token.}
 #'      \item{\code{marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS",
-#'      orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")}}{ Retrieve dynamic
+#'      orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP", getRunners = NULL)}}{ Retrieve dynamic
 #'      data about markets, data includes, prices, status of the market, status of
 #'      selections, the traded volume, and the status of any orders in the market,
 #'      see \link{marketBook}}
@@ -217,7 +217,8 @@ betfair <- function(usr, pwd, key, dom = "uk") {
         marketBook <- function(marketIds = list(),
                                priceProjection = "EX_BEST_OFFERS",
                                orderProjection = "EXECUTABLE",
-                               matchProjection = "NO_ROLLUP") {
+                               matchProjection = "NO_ROLLUP",
+                               getRunners = NULL) {
 
             priceProjection <- intersect(toupper(priceProjection), c("SP_AVAILABLE",
                                                                      "SP_TRADED",
@@ -245,6 +246,26 @@ betfair <- function(usr, pwd, key, dom = "uk") {
             # parse response
             if(is.list(res)) {
                 res <- bf_parse(res)
+            }
+            # getRunners
+            if(!is.null(getRunners)) {
+
+                getRunners <- intersect(toupper(getRunners), c("RUNNER_DESCRIPTION",
+                                                               "RUNNER_METADATA"))
+
+                                                               print(getRunners)
+                if(length(getRunners) == 0) {
+                    getRunners <- "RUNNER_DESCRIPTION"
+                }
+                req1 <- bf_basic_req(filter = marketFilter(marketIds = marketIds), method = "marketCatalogue")
+                req1 <- bf_request(req1, marketProjection = getRunners, maxResults = length(marketIds))
+                res1 <- bf_post(body = req1, headers = ssoid$ssoid, dom = dom)
+                res1 <- httr::content(res1)
+                res1 <- bf_check(res1, method = "marketCatalogue")
+                if(is.list(res1)) {
+                    res1 <- bf_parse(res1)
+                    res <- mBook_mCat_join(res, res1, getRunners)
+                }
             }
 
             return(res)

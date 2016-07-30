@@ -110,14 +110,13 @@ bf_parse.marketBook <- function(res, ...) {
             class(runners) <- "marketBook_runners"
             out$runners <- runners
             names(out$runners) <- sapply(out$runners, function(x) x$basic$selectionId)
+            out$basic <- plyr::ldply(out$runners, function(x) x$basic)
         }
         return(out)
     })
     class(out) <- c("list", "marketBook_list")
     return(out)
 }
-
-
 
 #' @export
 bf_parse.marketCatalogue <- function(res, keepRules = FALSE, ...) {
@@ -317,4 +316,22 @@ tidyRules <- function(rules) {
     rules <- stringr::str_replace_all(rules, "<(.*?)>", "")
     rules <- stringr::str_replace_all(rules, "\n\n\n\n", "\n\n")
     return(rules)
+}
+
+mBook_mCat_join <- function(marketBook, marketCatalogue, getRunners) {
+
+    out <- lapply(marketBook, function(x, marketCatalogue, getRunners) {
+
+        mId <- x$market$marketId
+        mIds <- sapply(marketCatalogue, function(i) i$market$marketId)
+        id <- which(mId == mIds)
+        runners <- marketCatalogue[[id]]$runners
+        x$runners <- runners
+        if(getRunners == "RUNNER_METADATA") {
+            x$runner_metadata <- marketCatalogue[[id]]$metadata
+        }
+        return(x)
+
+    }, marketCatalogue = marketCatalogue, getRunners = getRunners)
+    return(out)
 }

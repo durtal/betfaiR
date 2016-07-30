@@ -16,6 +16,11 @@ section \strong{OrderProjection} in \link{BettingEnums}.}
 
 \item{matchProjection}{if you ask for orders, specifies the representation of
 matches, see section \strong{MatchProjection} in \link{BettingEnums}.}
+
+\item{getRunners}{this parameter allows users to retrieve data about the runners
+in the market, it does this by making a request using the \link{marketCatalogue}
+method, pass in RUNNER_DESCRIPTION or RUNNER_METADATA to retrieve data about
+the runners}
 }
 \description{
 dynamic data about markets. Data includes prices, the status of the

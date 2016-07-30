@@ -56,7 +56,7 @@ building the list.
      \item{\code{session()}}{ Print details about the session, including login
      in details and session token.}
      \item{\code{marketBook(marketIds = list(), priceProjection = "EX_BEST_OFFERS",
-     orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP")}}{ Retrieve dynamic
+     orderProjection = "EXECUTABLE", matchProjection = "NO_ROLLUP", getRunners = NULL)}}{ Retrieve dynamic
      data about markets, data includes, prices, status of the market, status of
      selections, the traded volume, and the status of any orders in the market,
      see \link{marketBook}}
