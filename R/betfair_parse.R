@@ -326,12 +326,13 @@ mBook_mCat_join <- function(marketBook, marketCatalogue, getRunners) {
         mIds <- sapply(marketCatalogue, function(i) i$market$marketId)
         id <- which(mId == mIds)
         runners <- marketCatalogue[[id]]$runners
-        x$runners <- runners
+        x$runner_names <- runners
         if(getRunners == "RUNNER_METADATA") {
             x$runner_metadata <- marketCatalogue[[id]]$metadata
         }
         return(x)
 
     }, marketCatalogue = marketCatalogue, getRunners = getRunners)
+    class(out) <- c("list", "marketBook_list")
     return(out)
 }
