@@ -318,17 +318,16 @@ plot.account_statement <- function(x, ...) {
     title <- "Betfair Balance - Profit/Loss"
     subtitle <- paste0(startDate, " to ", endDate)
     p <- ggplot2::ggplot(data = df) +
-        ggplot2::geom_path(ggplot2::aes(x = df$itemDate,
+        ggplot2::geom_step(ggplot2::aes(x = df$itemDate,
                                         y = df$balance),
                            col = "#D9220F",
-                           size = 1.1)
+                           size = 1.0)
     p <- p +
         ggplot2::labs(x = "Date",
                       y = "Balance",
-                      title = title)
+                      title = title,
+                      subtitle = subtitle)
     p <- p +
         betfair_theme()
-    p <- p +
-        ggplot2::ggtitle(bquote(atop(bold(.(title)), atop(.(subtitle)))))
     p
 }
