@@ -4,7 +4,7 @@
 \alias{betfair}
 \title{betfair - Betfair Environment w/ methods}
 \usage{
-betfair(usr, pwd, key)
+betfair(usr, pwd, key, jurisdiction = "default")
 }
 \arguments{
 \item{usr}{Betfair username}
@@ -12,6 +12,9 @@ betfair(usr, pwd, key)
 \item{pwd}{Betfair password}
 
 \item{key}{Betfair API key see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}}
+
+\item{jurisdiction}{login to different jurisdictions, enter "italy" for Italian
+exchange, "spain" for Spanish, and "romania" for Romanian}
 }
 \value{
 returns environment with functions for the various methods available for
@@ -47,8 +50,8 @@ building the list.
      \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
      see \link{venues}, see \link{competitions}, see
      \link{marketFilter} for filtering data.}
-     \item{\code{login(usr, pwd, key)}}{ Login in, a session token will be
-     returned, over-writing the previous token when \code{betfair(usr, pwd, key)}
+     \item{\code{login(usr, pwd, key, jurisdiction)}}{ Login in, a session token will be
+     returned, over-writing the previous token when \code{betfair(usr, pwd, key, jurisdiction)}
      was used.}
      \item{\code{session()}}{ Print details about the session, including login
      in details and session token.}

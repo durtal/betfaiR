@@ -4,7 +4,7 @@
 \alias{bf_login}
 \title{login to Betfair}
 \usage{
-bf_login(usr, pwd, key)
+bf_login(usr, pwd, key, jurisdiction = "default")
 }
 \arguments{
 \item{usr}{Betfair username}
@@ -12,6 +12,9 @@ bf_login(usr, pwd, key)
 \item{pwd}{Betfair password}
 
 \item{key}{Betfair API Key, see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}}
+
+\item{jurisdiction}{login to different jurisdictions, enter "italy" for Italian
+exchange, "spain" for Spanish, and "romania" for Romanian}
 }
 \value{
 list with class \code{bf_login} which contains the parameters

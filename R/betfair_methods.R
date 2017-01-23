@@ -9,6 +9,8 @@
 #' @param usr Betfair username
 #' @param pwd Betfair password
 #' @param key Betfair API key see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}
+#' @param jurisdiction login to different jurisdictions, enter "italy" for Italian
+#' exchange, "spain" for Spanish, and "romania" for Romanian
 #'
 #' @return returns environment with functions for the various methods available for
 #' Betfair's API
@@ -36,8 +38,8 @@
 #'      \item{\code{venues(filter = marketFilter())}}{ Retrieve data about the venues hosting racing,
 #'      see \link{venues}, see \link{competitions}, see
 #'      \link{marketFilter} for filtering data.}
-#'      \item{\code{login(usr, pwd, key)}}{ Login in, a session token will be
-#'      returned, over-writing the previous token when \code{betfair(usr, pwd, key)}
+#'      \item{\code{login(usr, pwd, key, jurisdiction)}}{ Login in, a session token will be
+#'      returned, over-writing the previous token when \code{betfair(usr, pwd, key, jurisdiction)}
 #'      was used.}
 #'      \item{\code{session()}}{ Print details about the session, including login
 #'      in details and session token.}
@@ -93,10 +95,11 @@
 #' bf$competitions(filter = marketFilter(eventTypeIds = 1))
 #' }
 #' @export
-betfair <- function(usr, pwd, key) {
+betfair <- function(usr, pwd, key, jurisdiction = "default") {
 
     # login for session token
-    ssoid <- bf_login(usr = usr, pwd = pwd, key = key)
+    ssoid <- bf_login(usr = usr, pwd = pwd, key = key, jurisdiction = jurisdiction)
+    jurisdiction <- jurisdiction
 
     self <- local({
 
@@ -201,8 +204,9 @@ betfair <- function(usr, pwd, key) {
             return(res)
         }
 
-        login <- function(usr, pwd, key) {
-            ssoid <<- bf_login(usr = usr, pwd = pwd, key = key)
+        login <- function(usr, pwd, key, jurisdiction = "default") {
+            ssoid <<- bf_login(usr = usr, pwd = pwd, key = key, jurisdiction = jurisdiction)
+            jurisdiction <<- jurisdiction
         }
 
         session <- function() {

@@ -7,6 +7,8 @@
 #' @param usr Betfair username
 #' @param pwd Betfair password
 #' @param key Betfair API Key, see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}
+#' @param jurisdiction login to different jurisdictions, enter "italy" for Italian
+#' exchange, "spain" for Spanish, and "romania" for Romanian
 #'
 #' @details function is invoked when calling \link{betfair}
 #'
@@ -16,8 +18,14 @@
 #' whether login was successful or failed
 #'
 #' @export
-bf_login <- function(usr, pwd, key) {
+bf_login <- function(usr, pwd, key, jurisdiction = "default") {
 
+    url <- switch(jurisdiction,
+                  "default" = "https://identitysso.betfair.com/api/login",
+                  "italy" = "https://identitysso.betfair.it/api/login",
+                  "spain" = "https://identitysso.betfair.es/api/login",
+                  "romania" = "https://identitysso.betfair.ro/api/login")
+    if(is.null(url)) url <- "https://identitysso.betfair.com/api/login"
     # create payload
     cred <- paste0("username=", usr, "&password=", pwd)
     # POST request, expected response is json object with Session Token
