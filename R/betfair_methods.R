@@ -107,7 +107,8 @@ betfair <- function(usr, pwd, key, jurisdiction = "default") {
             if(pwd == ssoid$usr$pwd) {
                 acc <- bf_account(usr = ssoid$usr$usr,
                                   pwd = ssoid$usr$pwd,
-                                  key = ssoid$usr$key)
+                                  key = ssoid$usr$key,
+                                  jurisdiction = jurisdiction)
                 return(acc)
             } else {
                 stop("pass != previously entered password")

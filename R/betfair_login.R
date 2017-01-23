@@ -29,7 +29,7 @@ bf_login <- function(usr, pwd, key, jurisdiction = "default") {
     # create payload
     cred <- paste0("username=", usr, "&password=", pwd)
     # POST request, expected response is json object with Session Token
-    resp <- httr::POST(url = "https://identitysso.betfair.com/api/login",
+    resp <- httr::POST(url = url,
                        query = cred,
                        httr::add_headers("Accept" = "application/json",
                                          "X-Application" = key))

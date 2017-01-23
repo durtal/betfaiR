@@ -9,6 +9,8 @@
 #' @param usr Betfair username
 #' @param pwd Betfair password
 #' @param key Betfair API key see \href{https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys}{developer.betfair.com}
+#' @param jurisdiction login to different jurisdictions, enter "italy" for Italian
+#' exchange, "spain" for Spanish, and "romania" for Romanian
 #'
 #' @return returns environment with functions for various methods available for Betfair's
 #' Account API
@@ -24,10 +26,10 @@
 #'      to another, see \link{transfer}}
 #' }
 #' @export
-bf_account <- function(usr, pwd, key) {
+bf_account <- function(usr, pwd, key, jurisdiction = "default") {
 
     # login for session token
-    ssoid <- bf_login(usr = usr, pwd = pwd, key = key)
+    ssoid <- bf_login(usr = usr, pwd = pwd, key = key, jurisdiction = jurisdiction)
 
     self <- local({
 
