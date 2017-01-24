@@ -23,13 +23,13 @@ betfair_theme <- function(base_size = 10, base_family = "") {
         panel.background = ggplot2::element_rect(fill = "#FFFFFF"),
         plot.background = ggplot2::element_rect(fill = "#FFFFFF"),
         axis.text = ggplot2::element_text(size = ggplot2::rel(0.80)),
-        axis.title = ggplot2::element_text(size = ggplot2::rel(0.90)),
+        axis.title = ggplot2::element_text(size = ggplot2::rel(0.90),
+                                           colour = "#000000",
+                                           face = "bold"),
         plot.title = ggplot2::element_text(size = ggplot2::rel(1.05),
                                            face = "bold",
                                            hjust = 0),
         panel.grid.major = ggplot2::element_line(colour = "#E1E1D0"),
-        axis.ticks = ggplot2::element_line(colour = "#E1E1D0"),
-        axis.title = ggplot2::element_text(colour = "#000000",
-                                           face = "bold")
+        axis.ticks = ggplot2::element_line(colour = "#E1E1D0")
     )
 }
