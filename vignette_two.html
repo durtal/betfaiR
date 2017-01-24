@@ -10,14 +10,16 @@
 
 
 
+
 <title>cron jobs w/ betfaiR</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">cron jobs w/ betfaiR</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">cron jobs w/ betfaiR</h1>
+
 </div>
 
 
@@ -303,33 +358,41 @@ img {
 <p>First, some familiarity with events, competitions, and markets will help with creating an R script to automate the collection of data. As we are focussing on the Premier League, we need an eventTypeId, a competitionId, which will help us to find the markets we are interested in.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load betfaiR and login</span>
 <span class="kw">library</span>(betfaiR)
-bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
-              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_usr&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_pwd&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_key&quot;</span>))</code></pre></div>
 <pre><code>Login successful</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find correct eventTypeIds</span>
 eventTypeIds &lt;-<span class="st"> </span>bf$<span class="kw">eventTypes</span>()
 eventTypeIds[<span class="kw">grepl</span>(<span class="st">&quot;soccer|football&quot;</span>, eventTypeIds$eventType_name, <span class="dt">ignore.case =</span> <span class="ot">TRUE</span>),]</code></pre></div>
 <pre><code>   eventType_id    eventType_name marketCount
-2             1            Soccer       17507
-25         6423 American Football           5</code></pre>
+1             1            Soccer        8078
+20         6423 American Football          23</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># soccer/football has eventTypeId of 1, lets use that along with marketCountries to find the Premier League competition</span>
 competitions &lt;-<span class="st"> </span>bf$<span class="kw">competitions</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">1</span>,
                                                       <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>))
 competitions[<span class="kw">grepl</span>(<span class="st">&quot;premier&quot;</span>, competitions$competition_name, <span class="dt">ignore.case =</span>  <span class="ot">TRUE</span>),]</code></pre></div>
-<pre><code>   competition_id        competition_name marketCount competitionRegion
-6          252549    Welsh Premier League          64               GBR
-13            105    Scottish Premiership          15               GBR
-15          20351        NIFL Premiership         133               GBR
-17         820588        Southern Premier          88               GBR
-18         820753        Northern Premier          96               GBR
-21             31 Barclays Premier League         172               GBR
-22         820582        Isthmian Premier          96               GBR</code></pre>
+<pre><code>   competition_id                           competition_name marketCount
+2         6447264      Northern Premier League Challenge Cup          48
+5         4644737 Northern Premier League Division One South          24
+7        10403285                         Premier League Cup          48
+17             31                     English Premier League         322
+22            105                       Scottish Premiership          99
+23         820582                           Isthmian Premier          24
+29        4644728 Northern Premier League Division One North          72
+   competitionRegion
+2                GBR
+5                GBR
+7                GBR
+17               GBR
+22               GBR
+23               GBR
+29               GBR</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the Premier League has a competition id of 31, we can find the different market types for this competition</span>
 marketTypes &lt;-<span class="st"> </span>bf$<span class="kw">marketTypes</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">competitionIds =</span> <span class="dv">31</span>))</code></pre></div>
 <pre><code>   marketType marketCount
-1      WINNER           1
-10 MATCH_ODDS          10</code></pre>
+3      WINNER           1
+22 MATCH_ODDS          20</code></pre>
 <p>The marketIds of the two matches (Man City vs Spurs and Arsenal vs Leicester) and the outright winner of the Premier League are shown below:</p>
 <p>The following are the three markets of interest, which were collected and saved sometime on Weds 10th Feb 2016.</p>
 <pre><code>
@@ -428,45 +491,45 @@ if(!(<span class="st">&quot;marketIds.RDS&quot;</span> %in%<span class="st"> </s
 <div id="linux-and-osx" class="section level3">
 <h3>linux and osx</h3>
 <p><a href="http://crontab.org/">crontab</a> (which may require installation) isn’t as familiar to me as windows, so any input/corrections would be very welcome. It involves editing a file with your tasks. For each task there are 6 categories, some examples are below (taken from <a href="https://help.ubuntu.com/community/CronHowto">cronhowto</a>):</p>
-<table style="width:112%;">
+<table>
 <colgroup>
 <col width="6%" />
-<col width="9%" />
 <col width="8%" />
-<col width="11%" />
-<col width="13%" />
-<col width="13%" />
-<col width="48%" />
+<col width="7%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+<col width="43%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">min</th>
-<th align="left">hour</th>
-<th align="left">day</th>
-<th align="left">month</th>
-<th align="left">weekday</th>
-<th align="left">command</th>
-<th align="left">task</th>
+<th>min</th>
+<th>hour</th>
+<th>day</th>
+<th>month</th>
+<th>weekday</th>
+<th>command</th>
+<th>task</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">01</td>
-<td align="left">04</td>
-<td align="left">1</td>
-<td align="left">1</td>
-<td align="left">1</td>
-<td align="left">/usr/bin/somedirectory/somecommand</td>
-<td align="left">run on Jan 1st (and every monday in January) at 04:01am</td>
+<td>01</td>
+<td>04</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>/usr/bin/somedirectory/somecommand</td>
+<td>run on Jan 1st (and every monday in January) at 04:01am</td>
 </tr>
 <tr class="even">
-<td align="left">01</td>
-<td align="left">04</td>
-<td align="left">*</td>
-<td align="left">*</td>
-<td align="left">*</td>
-<td align="left">/usr/bin/somedirectory/somecommand</td>
-<td align="left">run every day of every month at 04:01am</td>
+<td>01</td>
+<td>04</td>
+<td>*</td>
+<td>*</td>
+<td>*</td>
+<td>/usr/bin/somedirectory/somecommand</td>
+<td>run every day of every month at 04:01am</td>
 </tr>
 </tbody>
 </table>
@@ -567,14 +630,20 @@ plyr::<span class="kw">l_ply</span>(available_markets, function(i, files, curren
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

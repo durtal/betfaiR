@@ -10,14 +10,16 @@
 
 
 
+
 <title>currentOrders</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">currentOrders</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">currentOrders</h1>
+
 </div>
 
 
@@ -297,53 +352,53 @@ img {
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>betId</code></td>
-<td align="left">retrieve data on a specific bet</td>
+<td><code>betId</code></td>
+<td>retrieve data on a specific bet</td>
 </tr>
 <tr class="even">
-<td align="left"><code>marketId</code></td>
-<td align="left">retrieve data on open orders in a specific market</td>
+<td><code>marketId</code></td>
+<td>retrieve data on open orders in a specific market</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>orderProjection</code></td>
-<td align="left">retrieve data based on whether orders were filled, default of <strong>ALL</strong> returns all open bets, whether fully matched, partially matched or still unmatched. <strong>EXECUTABLE</strong> returns data on orders that have an unmatched portion. <strong>EXECUTION_COMPLETE</strong> returns data on orders which have been filled in</td>
+<td><code>orderProjection</code></td>
+<td>retrieve data based on whether orders were filled, default of <strong>ALL</strong> returns all open bets, whether fully matched, partially matched or still unmatched. <strong>EXECUTABLE</strong> returns data on orders that have an unmatched portion. <strong>EXECUTION_COMPLETE</strong> returns data on orders which have been filled in</td>
 </tr>
 <tr class="even">
-<td align="left"><code>from</code></td>
-<td align="left">date filter, string should be in yyyy-mm-dd format</td>
+<td><code>from</code></td>
+<td>date filter, string should be in yyyy-mm-dd format</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>to</code></td>
-<td align="left">date filter, string should be in yyyy-mm-dd format</td>
+<td><code>to</code></td>
+<td>date filter, string should be in yyyy-mm-dd format</td>
 </tr>
 <tr class="even">
-<td align="left"><code>orderBy</code></td>
-<td align="left">how to order response, default orders by when they were placed, see <a href="betting_enums.html#orderby">orderBy</a> for more details.</td>
+<td><code>orderBy</code></td>
+<td>how to order response, default orders by when they were placed, see <a href="betting_enums.html#orderby">orderBy</a> for more details.</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>sort</code></td>
-<td align="left">how to sort results, see <a href="betting_enums.html#sortdir">sortDir</a> for more details and options.</td>
+<td><code>sort</code></td>
+<td>how to sort results, see <a href="betting_enums.html#sortdir">sortDir</a> for more details and options.</td>
 </tr>
 <tr class="even">
-<td align="left"><code>fromRecord</code></td>
-<td align="left">specifies the first record to be returned, records start at index zero (not one)</td>
+<td><code>fromRecord</code></td>
+<td>specifies the first record to be returned, records start at index zero (not one)</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>count</code></td>
-<td align="left">specifies how many records are returned from the index position set by <code>fromRecord</code>. There is a limit of 1000 records.</td>
+<td><code>count</code></td>
+<td>specifies how many records are returned from the index position set by <code>fromRecord</code>. There is a limit of 1000 records.</td>
 </tr>
 </tbody>
 </table>
@@ -356,14 +411,20 @@ img {
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

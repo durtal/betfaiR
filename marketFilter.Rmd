@@ -45,9 +45,9 @@ param | type | details                                            | example
 ```{r comment=""}
 library(betfaiR)
 # login
-bf <- betfair(usr = Sys.getenv("BETFAIR_USR"),
-              pwd = Sys.getenv("BETFAIR_PWD"),
-              key = Sys.getenv("BETFAIR_KEY"))
+bf <- betfair(usr = Sys.getenv("bf_usr"),
+              pwd = Sys.getenv("bf_pwd"),
+              key = Sys.getenv("bf_key"))
 
 # build filter object, for all football markets
 obj <- marketFilter(eventTypeIds = 1)

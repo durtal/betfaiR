@@ -10,14 +10,16 @@
 
 
 
+
 <title>bf_post</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">bf_post</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">bf_post</h1>
+
 </div>
 
 
@@ -291,29 +346,29 @@ img {
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>body</code></td>
-<td align="left">request body, JSON object containing data about the method and filter params, returned by <a href="bf_basic_req.html"><code>bf_basic_req</code></a> and <a href="betfair_request.html"><code>bf_request</code></a></td>
+<td><code>body</code></td>
+<td>request body, JSON object containing data about the method and filter params, returned by <a href="bf_basic_req.html"><code>bf_basic_req</code></a> and <a href="betfair_request.html"><code>bf_request</code></a></td>
 </tr>
 <tr class="even">
-<td align="left"><code>headers</code></td>
-<td align="left">headers, a list containing the session token, returned by <a href="betfair_login.html"><code>bf_login</code></a>, <code>bf_login</code> returns a list, the element is called <code>ssoid</code></td>
+<td><code>headers</code></td>
+<td>headers, a list containing the session token, returned by <a href="betfair_login.html"><code>bf_login</code></a>, <code>bf_login</code> returns a list, the element is called <code>ssoid</code></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>dom</code></td>
-<td align="left">Exchange domain, default is “uk”, change to “aus” to post requests to Australian Exchange</td>
+<td><code>dom</code></td>
+<td>Exchange domain, default is “uk”, change to “aus” to post requests to Australian Exchange</td>
 </tr>
 </tbody>
 </table>
@@ -339,14 +394,20 @@ img {
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

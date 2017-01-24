@@ -10,14 +10,16 @@
 
 
 
+
 <title>bf_account</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -62,23 +64,41 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
+div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
 table.sourceCode { width: 100%; line-height: 100%; }
 td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
 td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 </style>
 <style type="text/css">
   pre:not([class]) {
@@ -86,6 +106,33 @@ code > span.er { color: #ff0000; font-weight: bold; }
   }
 </style>
 
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -103,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -259,42 +328,53 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">bf_account</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">bf_account</h1>
+
 </div>
 
 
 <p><code>bf_account</code> takes three arguments, your Betfair username, your password and your API key, if entered correctly then the function will return an environment with a few methods for retrieving data and performing actions on your Betfair account.</p>
-<pre><code>## Warning in bf_login(usr = usr, pwd = pwd, key = key): Login failed:
-## INVALID_USERNAME_OR_PASSWORD</code></pre>
 <div id="usage" class="section level3">
 <h3>usage</h3>
-<pre class="sourceCode r"><code class="sourceCode r">acc &lt;-<span class="st"> </span><span class="kw">bf_account</span>(<span class="dt">usr =</span> username,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acc &lt;-<span class="st"> </span><span class="kw">bf_account</span>(<span class="dt">usr =</span> username,
                   <span class="dt">pwd =</span> password,
-                  <span class="dt">key =</span> api_key)</code></pre>
+                  <span class="dt">key =</span> api_key,
+                  <span class="dt">jurisdiction =</span> <span class="st">&quot;default&quot;</span>)</code></pre></div>
 <p>If using the <code>account</code> method found in the <a href="betfair.html"><code>betfair</code></a> environment, then only the password is required, which is checked against the previously entered password.</p>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
 <table>
+<colgroup>
+<col width="8%" />
+<col width="91%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>usr</code></td>
-<td align="left">Betfair username</td>
+<td><code>usr</code></td>
+<td>Betfair username</td>
 </tr>
 <tr class="even">
-<td align="left"><code>pwd</code></td>
-<td align="left">Betfair password</td>
+<td><code>pwd</code></td>
+<td>Betfair password</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>key</code></td>
-<td align="left">Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
+<td><code>key</code></td>
+<td>Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
+</tr>
+<tr class="even">
+<td><code>jurisdiction</code></td>
+<td>Sign into different jurisdictions, the default logs into <em>.com</em>, enter ‘italy’ for the Italian exchange, ‘spain’ for the Spanish and ‘romania’ for the Romanian</td>
 </tr>
 </tbody>
 </table>
@@ -302,7 +382,7 @@ img {
 <div id="return" class="section level3">
 <h3>return</h3>
 <p>The function returns an environment (stored as <code>acc</code> in the usage section) with a few methods for retrieving account data. To view the available methods you can print the environment.</p>
-<pre class="sourceCode r"><code class="sourceCode r">acc</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">acc</code></pre></div>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
     $details() 
@@ -310,28 +390,32 @@ Methods available:
     $statement(after = NULL, before = NULL, n = NULL, wallet = NULL, include = &quot;ALL&quot;) 
     $transfer(from = &quot;UK&quot;, to = &quot;AUSTRALIAN&quot;, amount = 2) </code></pre>
 <table>
+<colgroup>
+<col width="8%" />
+<col width="91%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th align="left">method</th>
-<th align="left">details</th>
+<th>method</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>details</code></td>
-<td align="left">account details, such as first name, last name, etc</td>
+<td><code>details</code></td>
+<td>account details, such as first name, last name, etc</td>
 </tr>
 <tr class="even">
-<td align="left"><code>funds</code></td>
-<td align="left">account funds, available to bet balance, exposure, points balance, etc</td>
+<td><code>funds</code></td>
+<td>account funds, available to bet balance, exposure, points balance, etc</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>statement</code></td>
-<td align="left">account statement, returns a list with transactions, can be filtered according to date, wallet, number of records, etc.</td>
+<td><code>statement</code></td>
+<td>account statement, returns a list with transactions, can be filtered according to date, wallet, number of records, etc.</td>
 </tr>
 <tr class="even">
-<td align="left"><code>transfer</code></td>
-<td align="left">transfer funds from one wallet to another</td>
+<td><code>transfer</code></td>
+<td>transfer funds from one wallet to another</td>
 </tr>
 </tbody>
 </table>
@@ -341,14 +425,20 @@ Methods available:
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

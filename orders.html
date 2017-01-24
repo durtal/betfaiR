@@ -10,14 +10,16 @@
 
 
 
+
 <title>orders</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">orders</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">orders</h1>
+
 </div>
 
 
@@ -293,29 +348,29 @@ img {
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>size</code></td>
-<td align="left">the bet size, <strong>NB</strong> for a market of type <strong>EACH_WAY</strong> the total stake is <code>2 * size</code></td>
+<td><code>size</code></td>
+<td>the bet size, <strong>NB</strong> for a market of type <strong>EACH_WAY</strong> the total stake is <code>2 * size</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>price</code></td>
-<td align="left">the limit price, the price you at which you wish to strike your bet</td>
+<td><code>price</code></td>
+<td>the limit price, the price you at which you wish to strike your bet</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>persistenceType</code></td>
-<td align="left">what to do with the order at turn in play, three choices. <strong>LAPSE</strong> - lapse the order when the market goes in play (ie. cancel bet); <strong>PERSIST</strong> - persist the order at in-play, the bet will be placed automatically into the in-play market at the start of the event; <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at turn in-play</td>
+<td><code>persistenceType</code></td>
+<td>what to do with the order at turn in play, three choices. <strong>LAPSE</strong> - lapse the order when the market goes in play (ie. cancel bet); <strong>PERSIST</strong> - persist the order at in-play, the bet will be placed automatically into the in-play market at the start of the event; <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at turn in-play</td>
 </tr>
 </tbody>
 </table>
@@ -335,25 +390,25 @@ img {
 </div>
 <div id="arguments-1" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>size</code></td>
-<td align="left">the bet size, <strong>NB</strong>, for a market type of <strong>EACH_WAY</strong> the total stake is <code>2 * size</code></td>
+<td><code>size</code></td>
+<td>the bet size, <strong>NB</strong>, for a market type of <strong>EACH_WAY</strong> the total stake is <code>2 * size</code></td>
 </tr>
 <tr class="even">
-<td align="left"><code>price</code></td>
-<td align="left">the limit price, the price you wish to place your bet</td>
+<td><code>price</code></td>
+<td>the limit price, the price you wish to place your bet</td>
 </tr>
 </tbody>
 </table>
@@ -379,49 +434,49 @@ img {
 </div>
 <div id="arguments-2" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>marketId</code></td>
-<td align="left">unique market id into which the bet will be placed</td>
+<td><code>marketId</code></td>
+<td>unique market id into which the bet will be placed</td>
 </tr>
 <tr class="even">
-<td align="left"><code>selectionId</code></td>
-<td align="left">the unique id for the selection in the market, this will be a horse, a team, etc, these ids can be found using the <a href="methods_marketCatalogue.html"><code>marketCatalogue</code></a> and <a href="methods_marketBook.html"><code>marketBook</code></a> methods</td>
+<td><code>selectionId</code></td>
+<td>the unique id for the selection in the market, this will be a horse, a team, etc, these ids can be found using the <a href="methods_marketCatalogue.html"><code>marketCatalogue</code></a> and <a href="methods_marketBook.html"><code>marketBook</code></a> methods</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>orderType</code></td>
-<td align="left">the type of order, <strong>LIMIT</strong> - a normal exchange order for immediate execution, <strong>LIMIT_ON_CLOSE</strong> - limit oder for the auction (SP bet with a price limit), <strong>MARKET_ON_CLOSE</strong> - market order for the auction, SP bet regardless of price.</td>
+<td><code>orderType</code></td>
+<td>the type of order, <strong>LIMIT</strong> - a normal exchange order for immediate execution, <strong>LIMIT_ON_CLOSE</strong> - limit oder for the auction (SP bet with a price limit), <strong>MARKET_ON_CLOSE</strong> - market order for the auction, SP bet regardless of price.</td>
 </tr>
 <tr class="even">
-<td align="left"><code>handicap</code></td>
-<td align="left">for ASIAN handicap markets (I believe!), default is 0</td>
+<td><code>handicap</code></td>
+<td>for ASIAN handicap markets (I believe!), default is 0</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>side</code></td>
-<td align="left"><strong>BACK</strong> or <strong>LAY</strong></td>
+<td><code>side</code></td>
+<td><strong>BACK</strong> or <strong>LAY</strong></td>
 </tr>
 <tr class="even">
-<td align="left"><code>limitOrder</code></td>
-<td align="left">list with details of the bet, required if <code>orderType</code> is <strong>LIMIT</strong>, use <a href="orders.html#limitOrder"><code>limitOrder</code></a> to help construct correct list</td>
+<td><code>limitOrder</code></td>
+<td>list with details of the bet, required if <code>orderType</code> is <strong>LIMIT</strong>, use <a href="orders.html#limitOrder"><code>limitOrder</code></a> to help construct correct list</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>limitOnCloseOrder</code></td>
-<td align="left">list with details of the bet, required if <code>orderType</code> is <strong>LIMIT_ON_CLOSE</strong>, use <a href="orders.html#limitOnCloseOrder"><code>limitOnCloseOrder</code></a> to help construct correct list</td>
+<td><code>limitOnCloseOrder</code></td>
+<td>list with details of the bet, required if <code>orderType</code> is <strong>LIMIT_ON_CLOSE</strong>, use <a href="orders.html#limitOnCloseOrder"><code>limitOnCloseOrder</code></a> to help construct correct list</td>
 </tr>
 <tr class="even">
-<td align="left"><code>marketOnCloseOrder</code></td>
-<td align="left">single number, the size of your bet to be placed at Betfairs SP.</td>
+<td><code>marketOnCloseOrder</code></td>
+<td>single number, the size of your bet to be placed at Betfairs SP.</td>
 </tr>
 </tbody>
 </table>
@@ -435,14 +490,20 @@ img {
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

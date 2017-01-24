@@ -6,9 +6,10 @@ title: "bf_account"
 
 ```{r echo=FALSE, message=FALSE}
 library(betfaiR)
-acc <- bf_account(usr = Sys.getenv("BETFAIR_USR"),
-                  pwd = Sys.getenv("BETFAIR_PWD"),
-                  key = Sys.getenv("BETFAIR_KEY"))
+acc <- bf_account(usr = Sys.getenv("bf_usr"),
+                  pwd = Sys.getenv("bf_pwd"),
+                  key = Sys.getenv("bf_key"),
+                  jurisdiction = "default")
 ```
 
 ### usage
@@ -16,7 +17,8 @@ acc <- bf_account(usr = Sys.getenv("BETFAIR_USR"),
 ```{r eval=FALSE, comment=""}
 acc <- bf_account(usr = username,
                   pwd = password,
-                  key = api_key)
+                  key = api_key,
+                  jurisdiction = "default")
 ```
 
 If using the `account` method found in the [`betfair`](betfair.html) environment, then only the password is required, which is checked against the previously entered password.
@@ -28,6 +30,7 @@ param | details
 `usr` | Betfair username
 `pwd` | Betfair password
 `key` | Betfair API key (see Betfair [documentation](https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys) on how to get an API key)
+`jurisdiction` | Sign into different jurisdictions, the default logs into _.com_, enter 'italy' for the Italian exchange, 'spain' for the Spanish and 'romania' for the Romanian
 
 ### return
 

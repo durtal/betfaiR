@@ -10,14 +10,16 @@
 
 
 
+
 <title>events</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">events</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">events</h1>
+
 </div>
 
 
@@ -289,21 +344,21 @@ img {
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>filter</code></td>
-<td align="left">select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair. If nothing is entered, <strong>all</strong> events are returned</td>
+<td><code>filter</code></td>
+<td>select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair. If nothing is entered, <strong>all</strong> events are returned</td>
 </tr>
 </tbody>
 </table>
@@ -311,45 +366,45 @@ img {
 <div id="return" class="section level3">
 <h3>return</h3>
 <p>The function returns a dataframe of events (eg. Manchester United vs Arsenal), with data about the number of markets, start time, etc, a full list below:</p>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">variable</th>
-<th align="left">details</th>
+<th>variable</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>event_id</code></td>
-<td align="left">the event id</td>
+<td><code>event_id</code></td>
+<td>the event id</td>
 </tr>
 <tr class="even">
-<td align="left"><code>event_name</code></td>
-<td align="left">the event name (eg. Manchester United vs Arsenal)</td>
+<td><code>event_name</code></td>
+<td>the event name (eg. Manchester United vs Arsenal)</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>event_countryCode</code></td>
-<td align="left">the ISO-2 code, ISO-2 codes are available on <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">wiki</a>, examples include <em>GB</em>, <em>IE</em>, <em>US</em>, etc</td>
+<td><code>event_countryCode</code></td>
+<td>the ISO-2 code, ISO-2 codes are available on <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">wiki</a>, examples include <em>GB</em>, <em>IE</em>, <em>US</em>, etc</td>
 </tr>
 <tr class="even">
-<td align="left"><code>event_timezone</code></td>
-<td align="left">the timezone in which the event is happening</td>
+<td><code>event_timezone</code></td>
+<td>the timezone in which the event is happening</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>event_venue</code></td>
-<td align="left">the event venue (if applicable)</td>
+<td><code>event_venue</code></td>
+<td>the event venue (if applicable)</td>
 </tr>
 <tr class="even">
-<td align="left"><code>event_openDate</code></td>
-<td align="left">the scheduled start of the event (format “YYYY-MM-DDT00:00:00.000Z”)</td>
+<td><code>event_openDate</code></td>
+<td>the scheduled start of the event (format “YYYY-MM-DDT00:00:00.000Z”)</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>marketCount</code></td>
-<td align="left">number of markets associated with this country</td>
+<td><code>marketCount</code></td>
+<td>number of markets associated with this country</td>
 </tr>
 </tbody>
 </table>
@@ -358,64 +413,66 @@ img {
 <h3>examples</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 <span class="co"># login</span>
-bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
-              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_usr&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_pwd&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_key&quot;</span>))</code></pre></div>
 <pre><code>Login successful</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all countries</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>()
 <span class="kw">head</span>(tmp)</code></pre></div>
-<pre><code>  event_id                           event_name event_timezone
-1 27738472  Sofie Oyen v Kathinka VON Deichmann            UTC
-2 27738473 Elyne Boeykens v Martina DI Giuseppe            UTC
-3 27738475                   Ma Cilic v G Simon            UTC
-4 27183450              ICC World Twenty20 2016  Asia/Calcutta
-5 27738477                               Set 01            UTC
-6 27738478                               Set 02            UTC
+<pre><code>  event_id                                 event_name event_timezone
+1 28086700                 Hradec Kralove v Prostejov  Europe/London
+2 28086701                          Opava v Vitkovice  Europe/London
+3 28086702                  Vysocina Jihlava v Vlasim  Europe/London
+4 28086703 Vitosha Bistritsa v PFC Hebar (Pazardzhik)  Europe/London
+5 28086698                 Boca Juniors v San Lorenzo  Europe/London
+6 28086699                   Pardubice v Dukla Prague  Europe/London
             event_openDate marketCount event_countryCode event_venue
-1 2016-03-26T13:30:00.000Z           1              &lt;NA&gt;        &lt;NA&gt;
-2 2016-03-26T15:00:00.000Z           1              &lt;NA&gt;        &lt;NA&gt;
-3 2016-03-26T16:00:00.000Z          10                US        &lt;NA&gt;
-4 2016-03-08T09:30:00.000Z           7                IN        &lt;NA&gt;
-5 2016-03-26T16:00:00.000Z          13                US        &lt;NA&gt;
-6 2016-03-26T16:00:00.000Z          13                US        &lt;NA&gt;</code></pre>
+1 2017-01-25T09:00:00.000Z          24              &lt;NA&gt;        &lt;NA&gt;
+2 2017-01-25T10:00:00.000Z          24              &lt;NA&gt;        &lt;NA&gt;
+3 2017-01-25T12:00:00.000Z          24              &lt;NA&gt;        &lt;NA&gt;
+4 2017-01-25T12:00:00.000Z          24              &lt;NA&gt;        &lt;NA&gt;
+5 2017-01-25T01:10:00.000Z          24                AR        &lt;NA&gt;
+6 2017-01-25T10:00:00.000Z          24              &lt;NA&gt;        &lt;NA&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre></div>
-<pre><code>  event_id            event_name event_countryCode event_timezone
-1 27652586        Ascot 14th Jun                GB  Europe/London
-2 27717904        Fairy 28th Mar                IE  Europe/London
-3 27737367    SunP (US) 25th Mar                US    US/Mountain
-4 27737645 Fairy (Dist) 28th Mar                IE  Europe/London
-5 27734719        Ascot 18th Jun                GB  Europe/London
-6  3453086      Stewards Enquiry                GB  Europe/London
-            event_openDate marketCount  event_venue
-1 2016-01-14T14:30:00.000Z           1         &lt;NA&gt;
-2 2016-03-28T16:00:00.000Z           2         &lt;NA&gt;
-3 2016-03-25T19:30:00.000Z           6 Sunland Park
-4 2016-03-28T16:00:00.000Z           1   Fairyhouse
-5 2016-06-18T13:30:00.000Z           1         &lt;NA&gt;
-6 2014-01-01T00:00:00.000Z           1         &lt;NA&gt;</code></pre>
+<pre><code>  event_id           event_name event_countryCode   event_timezone
+1 28073772        Newb 11th Feb                GB    Europe/London
+2 28074030        Donc 28th Jan                GB    Europe/London
+3 28061486       Chelt 14th Mar                GB    Europe/London
+4 28061487       Chelt 15th Mar                GB    Europe/London
+5 28086841  Laun (AUS) 25th Jan                AU Australia/Sydney
+6 27999667 Del Mar (US) 4th Nov                US       US/Eastern
+            event_openDate marketCount event_venue
+1 2017-02-11T15:35:00.000Z           1        &lt;NA&gt;
+2 2017-01-28T15:40:00.000Z           1        &lt;NA&gt;
+3 2017-03-14T13:30:00.000Z          13        &lt;NA&gt;
+4 2017-03-15T13:30:00.000Z          11        &lt;NA&gt;
+5 2017-01-25T06:55:00.000Z          18  Launceston
+6 2017-11-03T04:00:00.000Z           1        &lt;NA&gt;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># return all horse racing events whose start date is beyond next week</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>, <span class="dt">from =</span> <span class="kw">Sys.Date</span>() +<span class="st"> </span><span class="dv">7</span>))
 <span class="kw">head</span>(tmp)</code></pre></div>
-<pre><code>  event_id      event_name event_countryCode event_timezone
-1 27658096   Curr 21st May                IE  Europe/London
-2 27639255    Newm 1st May                GB  Europe/London
-3 27639254 Newm 30th April                GB  Europe/London
-4 27652586  Ascot 14th Jun                GB  Europe/London
-5 27639253    Aint 9th Apr                GB  Europe/London
-6 27723912   2017 Antepost                GB  Europe/London
+<pre><code>  event_id           event_name event_countryCode event_timezone
+1 28073772        Newb 11th Feb                GB  Europe/London
+2 28061486       Chelt 14th Mar                GB  Europe/London
+3 28061487       Chelt 15th Mar                GB  Europe/London
+4 27999667 Del Mar (US) 4th Nov                US     US/Eastern
+5 28074870        Leop 12th Feb                IE  Europe/London
+6 28061488       Chelt 16th Mar                GB  Europe/London
             event_openDate marketCount
-1 2016-05-21T14:20:00.000Z           1
-2 2016-05-01T14:00:00.000Z           2
-3 2016-04-30T14:00:00.000Z           2
-4 2016-01-14T14:30:00.000Z           1
-5 2016-04-09T13:25:00.000Z           5
-6 2017-03-14T13:30:00.000Z           4</code></pre>
+1 2017-02-11T15:35:00.000Z           1
+2 2017-03-14T13:30:00.000Z          13
+3 2017-03-15T13:30:00.000Z          11
+4 2017-11-03T04:00:00.000Z           1
+5 2017-02-12T15:00:00.000Z           1
+6 2017-03-16T13:30:00.000Z          10</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>
+
+
 
 
 </div>
@@ -423,9 +480,13 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">events</span>(<span class=
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

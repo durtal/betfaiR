@@ -10,14 +10,16 @@
 
 
 
+
 <title>bet instructions</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">bet instructions</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">bet instructions</h1>
+
 </div>
 
 
@@ -295,29 +350,29 @@ img {
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">size</td>
-<td align="left">the size of the best. <strong>NB.</strong> for a market type of <strong>EACH_WAY</strong> the total stake is 2 * size.</td>
+<td>size</td>
+<td>the size of the best. <strong>NB.</strong> for a market type of <strong>EACH_WAY</strong> the total stake is 2 * size.</td>
 </tr>
 <tr class="even">
-<td align="left">price</td>
-<td align="left">the limit price</td>
+<td>price</td>
+<td>the limit price</td>
 </tr>
 <tr class="odd">
-<td align="left">persistenceType</td>
-<td align="left">what to do with the order when the market goes in-play. <strong>LAPSE</strong> (default) - lapse the order when the market goes in play. <strong>PERSIST</strong> - persist the order in play, the bet will be placed automatically into the in play market at the start of the event. <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at in-play.</td>
+<td>persistenceType</td>
+<td>what to do with the order when the market goes in-play. <strong>LAPSE</strong> (default) - lapse the order when the market goes in play. <strong>PERSIST</strong> - persist the order in play, the bet will be placed automatically into the in play market at the start of the event. <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at in-play.</td>
 </tr>
 </tbody>
 </table>
@@ -334,25 +389,25 @@ img {
 </div>
 <div id="arguments-1" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">size</td>
-<td align="left">the size of the bet. <strong>NB.</strong> for a market type of <strong>EACH_WAY</strong> the total stake is 2 * size.</td>
+<td>size</td>
+<td>the size of the bet. <strong>NB.</strong> for a market type of <strong>EACH_WAY</strong> the total stake is 2 * size.</td>
 </tr>
 <tr class="even">
-<td align="left">price</td>
-<td align="left">the limit price</td>
+<td>price</td>
+<td>the limit price</td>
 </tr>
 </tbody>
 </table>
@@ -369,25 +424,25 @@ img {
 </div>
 <div id="arguments-2" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">betId</td>
-<td align="left">the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
+<td>betId</td>
+<td>the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
 </tr>
 <tr class="even">
-<td align="left">size</td>
-<td align="left">reduction size</td>
+<td>size</td>
+<td>reduction size</td>
 </tr>
 </tbody>
 </table>
@@ -404,25 +459,25 @@ img {
 </div>
 <div id="arguments-3" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">betId</td>
-<td align="left">the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
+<td>betId</td>
+<td>the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
 </tr>
 <tr class="even">
-<td align="left">newPrice</td>
-<td align="left">new price to strike the bet</td>
+<td>newPrice</td>
+<td>new price to strike the bet</td>
 </tr>
 </tbody>
 </table>
@@ -439,25 +494,25 @@ img {
 </div>
 <div id="arguments-4" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">betId</td>
-<td align="left">the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
+<td>betId</td>
+<td>the unique betId, returned when the bet was placed, these can also be retrieved by the <a href="currentOrders.html"><code>currentOrders</code></a> method.</td>
 </tr>
 <tr class="even">
-<td align="left">persistenceType</td>
-<td align="left">new persistenceType, what to do when the market goes in-play. <strong>LAPSE</strong> - lapse the order when the market is turned in-play. <strong>PERSIST</strong> - persist the order in-play, the bet will be placed automatically into the in-play market at the start of the event. <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at turn in-play.</td>
+<td>persistenceType</td>
+<td>new persistenceType, what to do when the market goes in-play. <strong>LAPSE</strong> - lapse the order when the market is turned in-play. <strong>PERSIST</strong> - persist the order in-play, the bet will be placed automatically into the in-play market at the start of the event. <strong>MARKET_ON_CLOSE</strong> - put the order into the auction (SP) at turn in-play.</td>
 </tr>
 </tbody>
 </table>
@@ -468,14 +523,20 @@ img {
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

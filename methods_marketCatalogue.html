@@ -10,14 +10,16 @@
 
 
 
+
 <title>marketCatalogue</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">marketCatalogue</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">marketCatalogue</h1>
+
 </div>
 
 
@@ -294,37 +349,37 @@ img {
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>filter</code></td>
-<td align="left">select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair.</td>
+<td><code>filter</code></td>
+<td>select desired markets, see <a href="marketFilter.html">marketFilter</a> for various parameters to filter by, or the relevant <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Type+Definitions#BettingTypeDefinitions-MarketFilter">help pages</a> on Betfair.</td>
 </tr>
 <tr class="even">
-<td align="left"><code>marketProjection</code></td>
-<td align="left">the type and amount of data returned about the market, see section <strong>Market Projection</strong> in <a href="betting_enums.html#marketprojection">Betting Enums</a> or visit the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection">help pages</a> for more details. The different options are <strong>COMPETITION</strong>, <strong>EVENT</strong>, <strong>EVENT_TYPE</strong>, <strong>MARKET_START_TIME</strong>, <strong>MARKET_DESCRIPTION</strong>, <strong>RUNNER_DESCRIPTION</strong>, and <strong>RUNNER_METADATA</strong>, these needn’t be entered in caps, however if any are misspelt they will be discarded.</td>
+<td><code>marketProjection</code></td>
+<td>the type and amount of data returned about the market, see section <strong>Market Projection</strong> in <a href="betting_enums.html#marketprojection">Betting Enums</a> or visit the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketProjection">help pages</a> for more details. The different options are <strong>COMPETITION</strong>, <strong>EVENT</strong>, <strong>EVENT_TYPE</strong>, <strong>MARKET_START_TIME</strong>, <strong>MARKET_DESCRIPTION</strong>, <strong>RUNNER_DESCRIPTION</strong>, and <strong>RUNNER_METADATA</strong>, these needn’t be entered in caps, however if any are misspelt they will be discarded.</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>sort</code></td>
-<td align="left">the order of the results, see section <strong>sort</strong> in <a href="betting_enums.html#marketsort">Betting Enums</a> or the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketSort">help pages</a></td>
+<td><code>sort</code></td>
+<td>the order of the results, see section <strong>sort</strong> in <a href="betting_enums.html#marketsort">Betting Enums</a> or the relevant section in the Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Betting+Enums#BettingEnums-MarketSort">help pages</a></td>
 </tr>
 <tr class="even">
-<td align="left"><code>maxResults</code></td>
-<td align="left">limit on the number of results returned, default = 1</td>
+<td><code>maxResults</code></td>
+<td>limit on the number of results returned, default = 1</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>keepRules</code></td>
-<td align="left">when <strong>MARKET_DESCRIPTION</strong> is entered into the <code>marketProjection</code> paramater it returns a large amount of text containing the rules of the market, by default these are discarded, change <code>keepRules = TRUE</code> to return the rules.</td>
+<td><code>keepRules</code></td>
+<td>when <strong>MARKET_DESCRIPTION</strong> is entered into the <code>marketProjection</code> paramater it returns a large amount of text containing the rules of the market, by default these are discarded, change <code>keepRules = TRUE</code> to return the rules.</td>
 </tr>
 </tbody>
 </table>
@@ -332,184 +387,189 @@ img {
 <div id="return" class="section level3">
 <h3>return</h3>
 <p>A list with at least one dataframe about the market(s) filtered using the <code>filter</code> parameter (and the <a href="marketFilter.html"><code>marketFilter</code></a> function) and the <code>maxResults</code> paramater. Each market will have at most 4 dataframes in its list, all the variables are explained below, along with the <code>marketProjection</code> option that sees that variable returned. The list returned can be printed, allowing quick glance at markets before users can drill down into selections etc.</p>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="13%" />
-<col width="30%" />
-<col width="16%" />
-<col width="51%" />
+<col width="12%" />
+<col width="27%" />
+<col width="14%" />
+<col width="45%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">variable</th>
-<th align="left">marketProjection</th>
-<th align="left">dataframe</th>
-<th align="left">details</th>
+<th>variable</th>
+<th>marketProjection</th>
+<th>dataframe</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>marketId</code></td>
-<td align="left">returned by default</td>
-<td align="left">market</td>
-<td align="left">id of the market</td>
+<td><code>marketId</code></td>
+<td>returned by default</td>
+<td>market</td>
+<td>id of the market</td>
 </tr>
 <tr class="even">
-<td align="left"><code>marketName</code></td>
-<td align="left">returned by default</td>
-<td align="left">market</td>
-<td align="left">name of the market</td>
+<td><code>marketName</code></td>
+<td>returned by default</td>
+<td>market</td>
+<td>name of the market</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>totalMatched</code></td>
-<td align="left">returned by default</td>
-<td align="left">market</td>
-<td align="left">amount of money already traded in the market</td>
+<td><code>totalMatched</code></td>
+<td>returned by default</td>
+<td>market</td>
+<td>amount of money already traded in the market</td>
 </tr>
 <tr class="even">
-<td align="left"><code>startTime</code></td>
-<td align="left"><strong>MARKET_START_TIME</strong></td>
-<td align="left">market</td>
-<td align="left">when the market opened</td>
+<td><code>startTime</code></td>
+<td><strong>MARKET_START_TIME</strong></td>
+<td>market</td>
+<td>when the market opened</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>eventTypeId</code></td>
-<td align="left"><strong>EVENT_TYPE</strong></td>
-<td align="left">market</td>
-<td align="left">event type id (eg. 7 = Horse Racing, 1 = Football, etc)</td>
+<td><code>eventTypeId</code></td>
+<td><strong>EVENT_TYPE</strong></td>
+<td>market</td>
+<td>event type id (eg. 7 = Horse Racing, 1 = Football, etc)</td>
 </tr>
 <tr class="even">
-<td align="left"><code>eventTypeName</code></td>
-<td align="left"><strong>EVENT_TYPE</strong></td>
-<td align="left">market</td>
-<td align="left">event type name (eg. Horse Racing, Football, etc)</td>
+<td><code>eventTypeName</code></td>
+<td><strong>EVENT_TYPE</strong></td>
+<td>market</td>
+<td>event type name (eg. Horse Racing, Football, etc)</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>persistenceEnabled</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">can bets be kept after the market goes in play</td>
+<td><code>persistenceEnabled</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>can bets be kept after the market goes in play</td>
 </tr>
 <tr class="even">
-<td align="left"><code>bspMarket</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">does the market offer BSP</td>
+<td><code>bspMarket</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>does the market offer BSP</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>marketTime</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
+<td><code>marketTime</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left"><code>suspendTime</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
+<td><code>suspendTime</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>bettingType</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">type of bet, eg. ODDS</td>
+<td><code>bettingType</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>type of bet, eg. ODDS</td>
 </tr>
 <tr class="even">
-<td align="left"><code>turnInPlayEnabled</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">does the market go in play</td>
+<td><code>turnInPlayEnabled</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>does the market go in play</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>marketType</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">SPORT or NONSPORT</td>
+<td><code>marketType</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>SPORT or NONSPORT</td>
 </tr>
 <tr class="even">
-<td align="left"><code>regulator</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">typically “GILBRALTAR REGULATOR”</td>
+<td><code>regulator</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>typically “GILBRALTAR REGULATOR”</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>marketBaseRate</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
+<td><code>marketBaseRate</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td></td>
 </tr>
 <tr class="even">
-<td align="left"><code>discountAllowed</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
+<td><code>discountAllowed</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>wallet</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
-<td align="left">UK or Aus wallet</td>
+<td><code>wallet</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td>UK or Aus wallet</td>
 </tr>
 <tr class="even">
-<td align="left"><code>rulesHasDate</code></td>
-<td align="left"><strong>MARKET_DESCRIPTION</strong></td>
-<td align="left">description</td>
+<td><code>rulesHasDate</code></td>
+<td><strong>MARKET_DESCRIPTION</strong></td>
+<td>description</td>
+<td></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>id</code></td>
-<td align="left"><strong>EVENT</strong></td>
-<td align="left">event</td>
-<td align="left">event id</td>
+<td><code>id</code></td>
+<td><strong>EVENT</strong></td>
+<td>event</td>
+<td>event id</td>
 </tr>
 <tr class="even">
-<td align="left"><code>name</code></td>
-<td align="left"><strong>EVENT</strong></td>
-<td align="left">event</td>
-<td align="left">event name</td>
+<td><code>name</code></td>
+<td><strong>EVENT</strong></td>
+<td>event</td>
+<td>event name</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>countryCode</code></td>
-<td align="left"><strong>EVENT</strong></td>
-<td align="left">event</td>
-<td align="left">event country code</td>
+<td><code>countryCode</code></td>
+<td><strong>EVENT</strong></td>
+<td>event</td>
+<td>event country code</td>
 </tr>
 <tr class="even">
-<td align="left"><code>timezone</code></td>
-<td align="left"><strong>EVENT</strong></td>
-<td align="left">event</td>
-<td align="left">event timezone</td>
+<td><code>timezone</code></td>
+<td><strong>EVENT</strong></td>
+<td>event</td>
+<td>event timezone</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>openDate</code></td>
-<td align="left"><strong>EVENT</strong></td>
-<td align="left">event</td>
-<td align="left">event opened</td>
+<td><code>openDate</code></td>
+<td><strong>EVENT</strong></td>
+<td>event</td>
+<td>event opened</td>
 </tr>
 <tr class="even">
-<td align="left"><code>selectionId</code></td>
-<td align="left"><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
-<td align="left">runners</td>
-<td align="left">selection id</td>
+<td><code>selectionId</code></td>
+<td><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
+<td>runners</td>
+<td>selection id</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>runnerName</code></td>
-<td align="left"><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
-<td align="left">runners</td>
-<td align="left">runner name</td>
+<td><code>runnerName</code></td>
+<td><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
+<td>runners</td>
+<td>runner name</td>
 </tr>
 <tr class="even">
-<td align="left"><code>handicap</code></td>
-<td align="left"><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
-<td align="left">runners</td>
-<td align="left">handicap of selection</td>
+<td><code>handicap</code></td>
+<td><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
+<td>runners</td>
+<td>handicap of selection</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>sortPriority</code></td>
-<td align="left"><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
-<td align="left">runners</td>
-<td align="left">ordered by amount matched</td>
+<td><code>sortPriority</code></td>
+<td><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
+<td>runners</td>
+<td>ordered by amount matched</td>
 </tr>
 <tr class="even">
-<td align="left"><code>runnerId</code></td>
-<td align="left"><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
-<td align="left">runners</td>
-<td align="left">runner id (same as selection id)</td>
+<td><code>runnerId</code></td>
+<td><strong>RUNNER_DESCRIPTION</strong> or <strong>RUNNER_METADATA</strong></td>
+<td>runners</td>
+<td>runner id (same as selection id)</td>
 </tr>
 </tbody>
 </table>
@@ -519,107 +579,41 @@ img {
 <h3>examples</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(betfaiR)
 <span class="co"># login</span>
-bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
-              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
-              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
+bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_usr&quot;</span>),
+              <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_pwd&quot;</span>),
+              <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;bf_key&quot;</span>))</code></pre></div>
 <pre><code>Login successful</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data on just one market</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>()
 tmp</code></pre></div>
 <pre><code>
-Market ID:       1.105756340
-Market Name:     Prime Minister after Cameron
-Matched:         156971.2
+Market ID:       1.125398889
+Market Name:     Article 50 triggered date
+Matched:         230616.1
  ---------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get market data with details about the event and the runners</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;EVENT&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre></div>
 <pre><code>
-Market ID:      1.105756340
-Event ID:       27155632 
-Market Name:    Prime Minister after Cameron
-Event Name:     Prime Minister after Cameron 
-Matched:        156971.24
+Market ID:      1.125398889
+Event ID:       28051207 
+Market Name:    Article 50 triggered date
+Event Name:     UK - Article 50 
+Matched:        230616.15
 
-Runners:     66 
- selectionId     runnerName handicap sortPriority
-     1138501  Boris Johnson        0            1
-     1138445 George Osborne        0            2
-     9553914  Jeremy Corbyn        0            3
-     4519440   Michael Gove        0            4
-     1136035    Theresa May        0            5
-    10675076  Stephen Crabb        0            6
+Runners:     3 
+ selectionId                     runnerName handicap sortPriority
+    11379705                 Jan - Jun 2017        0            1
+    11379706 Not triggered before July 2017        0            2
+    11379700                    During 2016        0            3
 
  ---------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to access the runners data</span>
 tmp[[<span class="dv">1</span>]]$runners</code></pre></div>
-<pre><code>   selectionId         runnerName handicap sortPriority
-1      1138501      Boris Johnson        0            1
-2      1138445     George Osborne        0            2
-3      9553914      Jeremy Corbyn        0            3
-4      4519440       Michael Gove        0            4
-5      1136035        Theresa May        0            5
-6     10675076      Stephen Crabb        0            6
-7      8498834        Sajid Javid        0            7
-8      4519444        Jeremy Hunt        0            8
-9      1140616        Hilary Benn        0            9
-10     5859546         Lisa Nandy        0           10
-11     2601254     David Miliband        0           11
-12     8498836         Dan Jarvis        0           12
-13     3844358     Philip Hammond        0           13
-14     2601290       Andy Burnham        0           14
-15     1288344      Yvette Cooper        0           15
-16     4758164       Chuka Umunna        0           16
-17     2601255        Ed Miliband        0           17
-18     9084343   Sir Keir Starmer        0           18
-19     4519456      Owen Paterson        0           19
-20     9475671          Liz Truss        0           20
-21     4519445      Zac Goldsmith        0           21
-22     9645423         Tom Watson        0           22
-23     4722753         Sadiq Khan        0           23
-24     4519424       Rory Stewart        0           24
-25     1136034           Liam Fox        0           25
-26     9199693        Liz Kendall        0           26
-27     9653158       Nicky Morgan        0           27
-28     4551186       Priti Patel         0           28
-29     4562764       Nigel Farage        0           29
-30    10578604     Michael Fallon        0           30
-31     1141506   Caroline Spelman        0           31
-32     7853053      Tristram Hunt        0           32
-33     1342129         Nick Clegg        0           33
-34     9343965      Stella Creasy        0           34
-35     1382294        David Lammy        0           35
-36     1527982     John McDonnell        0           36
-37     1140618           Ed Balls        0           37
-38     1382303     Harriet Harman        0           38
-39     1382304      James Purnell        0           39
-40     1136032        David Davis        0           40
-41     5859542      Rachel Reeves        0           41
-42     4519425       Nick Herbert        0           42
-43     4108118         Jim Murphy        0           43
-44     4519443   Justine Greening        0           44
-45     9487470         Ian Lavery        0           45
-46     1138496      William Hague        0           46
-47     1140615   Alistair Darling        0           47
-48     5859541     Michael Dugher        0           48
-49     4615253         Tim Farron        0           49
-50     4519439       Maria Miller        0           50
-51     1143956       Alan Johnson        0           51
-52     1342131        Chris Huhne        0           52
-53    10275264    Stephen Kinnock        0           53
-54     4519457       Grant Shapps        0           54
-55     4519442       Jesse Norman        0           55
-56     7020284       Adam Afriyie        0           56
-57     4519441      Daniel Hannan        0           57
-58    10275266        Clive Lewis        0           58
-59    10275268     Luciana Berger        0           59
-60     5914388    Jacob Rees-Mogg        0           60
-61    10379358   Lilian Greenwood        0           61
-62     3638311     Chris Grayling        0           62
-63     4551169 Iain Duncan Smith         0           63
-64    10570654         Amber Rudd        0           64
-65     5633952        Mark Harper        0           65
-66     9493100       Keir Starmer        0           66</code></pre>
+<pre><code>  selectionId                     runnerName handicap sortPriority
+1    11379705                 Jan - Jun 2017        0            1
+2    11379706 Not triggered before July 2017        0            2
+3    11379700                    During 2016        0            3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># horse racing data</span>
 tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<span class="dt">filter =</span> <span class="kw">marketFilter</span>(<span class="dt">eventTypeIds =</span> <span class="dv">7</span>,
                                                 <span class="dt">marketCountries =</span> <span class="st">&quot;GB&quot;</span>,
@@ -627,55 +621,61 @@ tmp &lt;-<span class="st"> </span>bf$<span class="kw">marketCatalogue</span>(<sp
                           <span class="dt">marketProjection =</span> <span class="kw">c</span>(<span class="st">&quot;event&quot;</span>, <span class="st">&quot;runner_metadata&quot;</span>))
 <span class="kw">summary</span>(tmp)</code></pre></div>
 <pre><code>
-Market ID:      1.123835878
-Event ID:       27737890 
-Market Name:    5f Mdn Stks
-Event Name:     Kemp 26th Mar 
-Matched:        2849.56
+Market ID:      1.129307035
+Event ID:       28087305 
+Market Name:    1m Hcap
+Event Name:     Ling 25th Jan 
+Matched:        3745.83
 
-Runners:     10 
- selectionId        runnerName handicap sortPriority
-       56520            Boater        0            1
-    10959865     Bills Delight        0            2
-    10959866      Fastnet Spin        0            3
-    10959868             Jenji        0            4
-    10959872 Playful Trickster        0            5
-    10959869     Lavender Skye        0            6
+Runners:     8 
+ selectionId      runnerName handicap sortPriority
+    11374273   Sky Ballerina        0            1
+    11990284    African Beat        0            2
+    11333925    Tisbutadream        0            3
+    11799692         Pobbles        0            4
+    11511589 Washington Blue        0            5
+    12162507        Touch Me        0            6
 
  ---------------------------------------------------------------------------</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(tmp[[<span class="dv">1</span>]]$metadata)</code></pre></div>
-<pre><code>&#39;data.frame&#39;:   10 obs. of  28 variables:
- $ weight_units             : chr  &quot;pounds&quot; &quot;pounds&quot; &quot;pounds&quot; &quot;pounds&quot; ...
- $ dam_year_born            : chr  &quot;2003&quot; &quot;2008&quot; &quot;2001&quot; &quot;2009&quot; ...
- $ days_since_last_run      : chr  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; ...
- $ damsire_year_born        : chr  &quot;1983&quot; &quot;1992&quot; &quot;1993&quot; &quot;2000&quot; ...
- $ sire_bred                : chr  &quot;AUS&quot; &quot;UK&quot; &quot;AUS&quot; &quot;IRE&quot; ...
- $ trainer_name             : chr  &quot;Mark Johnston&quot; &quot;Bill Turner&quot; &quot;David Evans&quot; &quot;David Evans&quot; ...
- $ stall_draw               : chr  &quot;5&quot; &quot;6&quot; &quot;4&quot; &quot;1&quot; ...
+<pre><code>&#39;data.frame&#39;:   8 obs. of  32 variables:
+ $ sire_name                : chr  &quot;Makfi&quot; &quot;Cape Cross&quot; &quot;Dream Ahead&quot; &quot;Medicean&quot; ...
+ $ cloth_number_alpha       : chr  &quot;4&quot; &quot;1&quot; &quot;3&quot; &quot;6&quot; ...
+ $ official_rating          : chr  &quot;72&quot; &quot;75&quot; &quot;74&quot; &quot;68&quot; ...
+ $ colours_description      : chr  &quot;White, dark blue star, dark blue sleeves, white stars, white cap, dark blue star&quot; &quot;Royal blue&quot; &quot;White and yellow (halved), sleeves reversed, red and white striped cap&quot; &quot;Royal blue and white diamonds, white sleeves, royal blue armlets, quartered cap&quot; ...
+ $ colours_filename         : chr  &quot;c20170125lin/00830679.jpg&quot; &quot;c20170125lin/00012133.jpg&quot; &quot;c20170125lin/00842067.jpg&quot; &quot;c20170125lin/00001908.jpg&quot; ...
+ $ forecastprice_denominator: chr  &quot;2&quot; &quot;2&quot; &quot;2&quot; &quot;2&quot; ...
+ $ damsire_name             : chr  &quot;Clodovil&quot; &quot;Dubai Destination&quot; &quot;Choisir&quot; &quot;Averti&quot; ...
+ $ weight_value             : chr  &quot;130&quot; &quot;133&quot; &quot;132&quot; &quot;126&quot; ...
  $ sex_type                 : chr  &quot;f&quot; &quot;f&quot; &quot;f&quot; &quot;f&quot; ...
- $ owner_name               : chr  &quot;Sheikh Hamdan Bin Mohammed Al Maktoum&quot; &quot;Mrs A. F. Horsington&quot; &quot;Dukes Head Racing&quot; &quot;Mr W. Clifford&quot; ...
- $ sire_name                : chr  &quot;Helmet&quot; &quot;Compton Place&quot; &quot;Fastnet Rock&quot; &quot;Pour Moi&quot; ...
- $ forecastprice_numerator  : chr  &quot;10&quot; &quot;8&quot; &quot;17&quot; &quot;10&quot; ...
- $ forecastprice_denominator: chr  &quot;3&quot; &quot;1&quot; &quot;2&quot; &quot;1&quot; ...
- $ weight_value             : chr  &quot;126&quot; &quot;126&quot; &quot;126&quot; &quot;126&quot; ...
- $ dam_name                 : chr  &quot;Cercle D&#39;amour&quot; &quot;Sing Alana Sing&quot; &quot;Lucky Spin&quot; &quot;Distant Symphony&quot; ...
- $ age                      : chr  &quot;2&quot; &quot;2&quot; &quot;2&quot; &quot;2&quot; ...
- $ colour_type              : chr  &quot;b&quot; &quot;b&quot; &quot;b&quot; &quot;b&quot; ...
- $ damsire_bred             : chr  &quot;USA&quot; &quot;IRE&quot; &quot;UK&quot; &quot;IRE&quot; ...
- $ damsire_name             : chr  &quot;Storm Cat&quot; &quot;Singspiel&quot; &quot;Pivotal&quot; &quot;Dalakhani&quot; ...
- $ cloth_number_alpha       : chr  &quot;3&quot; &quot;2&quot; &quot;4&quot; &quot;6&quot; ...
- $ sire_year_born           : chr  &quot;2008&quot; &quot;1994&quot; &quot;2001&quot; &quot;2008&quot; ...
- $ bred                     : chr  &quot;IRE&quot; &quot;GB&quot; &quot;IRE&quot; &quot;IRE&quot; ...
- $ jockey_name              : chr  &quot;Joe Fanning&quot; &quot;Ryan While&quot; &quot;Andrew Mullen&quot; &quot;Adam Kirby&quot; ...
- $ runnerid                 : chr  &quot;56520&quot; &quot;10959865&quot; &quot;10959866&quot; &quot;10959868&quot; ...
- $ colours_description      : chr  &quot;Dark green, red cap, dark green diamond.&quot; &quot;Yellow, black chevron, striped sleeves and star on cap.&quot; &quot;Maroon, maroon and white diabolo on sleeves, white cap, maroon star.&quot; &quot;Red, yellow sash, striped sleeves and star on cap.&quot; ...
- $ dam_bred                 : chr  &quot;USA&quot; &quot;UK&quot; &quot;UK&quot; &quot;FR&quot; ...
- $ colours_filename         : chr  &quot;c20160326kem/00077033.jpg&quot; &quot;c20160326kem/00009398.jpg&quot; &quot;c20160326kem/00076416.jpg&quot; &quot;c20160326kem/00006804.jpg&quot; ...
- $ cloth_number             : chr  &quot;3&quot; &quot;2&quot; &quot;4&quot; &quot;6&quot; ...
- $ jockey_claim             : chr  NA &quot;5&quot; NA NA ...</code></pre>
+ $ days_since_last_run      : chr  &quot;15&quot; &quot;36&quot; &quot;12&quot; &quot;7&quot; ...
+ $ owner_name               : chr  &quot;Mr Saeed H. Altayer&quot; &quot;Godolphin&quot; &quot;Mrs Anne Coughlan &amp; Ten Green Bottles&quot; &quot;Mr D. J. Deer&quot; ...
+ $ dam_year_born            : chr  &quot;2007&quot; &quot;2009&quot; &quot;2006&quot; &quot;2004&quot; ...
+ $ sire_bred                : chr  &quot;UK&quot; &quot;IRE&quot; &quot;USA&quot; &quot;UK&quot; ...
+ $ jockey_name              : chr  &quot;Martin Lane&quot; &quot;Robert Tart&quot; &quot;Shane Kelly&quot; &quot;Kieran Shoemark&quot; ...
+ $ dam_bred                 : chr  &quot;IRE&quot; &quot;UK&quot; &quot;IRE&quot; &quot;UK&quot; ...
+ $ adjusted_rating          : chr  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; ...
+ $ runnerid                 : chr  &quot;11374273&quot; &quot;11990284&quot; &quot;11333925&quot; &quot;11799692&quot; ...
+ $ cloth_number             : chr  &quot;4&quot; &quot;1&quot; &quot;3&quot; &quot;6&quot; ...
+ $ sire_year_born           : chr  &quot;2007&quot; &quot;1994&quot; &quot;2008&quot; &quot;1997&quot; ...
+ $ trainer_name             : chr  &quot;Simon Crisford&quot; &quot;John Gosden&quot; &quot;David Elsworth&quot; &quot;Roger Charlton&quot; ...
+ $ colour_type              : chr  &quot;b&quot; &quot;b&quot; &quot;ch&quot; &quot;b&quot; ...
+ $ age                      : chr  &quot;3&quot; &quot;3&quot; &quot;3&quot; &quot;3&quot; ...
+ $ damsire_bred             : chr  &quot;IRE&quot; &quot;USA&quot; &quot;AUS&quot; &quot;IRE&quot; ...
+ $ form                     : chr  &quot;404-1&quot; &quot;4144-&quot; &quot;627-1&quot; &quot;97569-2&quot; ...
+ $ forecastprice_numerator  : chr  &quot;7&quot; &quot;7&quot; &quot;11&quot; &quot;15&quot; ...
+ $ bred                     : chr  &quot;GB&quot; &quot;IRE&quot; &quot;IRE&quot; &quot;GB&quot; ...
+ $ dam_name                 : chr  &quot;Maid In Heaven&quot; &quot;Rythmic&quot; &quot;Choose Me&quot; &quot;Oystermouth&quot; ...
+ $ damsire_year_born        : chr  &quot;2000&quot; &quot;1999&quot; &quot;1999&quot; &quot;1991&quot; ...
+ $ stall_draw               : chr  &quot;7&quot; &quot;3&quot; &quot;6&quot; &quot;5&quot; ...
+ $ weight_units             : chr  &quot;pounds&quot; &quot;pounds&quot; &quot;pounds&quot; &quot;pounds&quot; ...
+ $ wearing                  : chr  NA NA NA &quot;cheekpieces&quot; ...
+ $ jockey_claim             : chr  NA NA NA &quot;3&quot; ...</code></pre>
 <a href="https://github.com/durtal/betfaiR" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#d9230f; color:#fcfcfc; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 </div>
+
+
 
 
 </div>
@@ -683,9 +683,13 @@ Runners:     10
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 

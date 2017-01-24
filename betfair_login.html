@@ -10,14 +10,16 @@
 
 
 
+
 <title>bf_login</title>
 
-<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.1/css/united.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.1/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.1/shim/respond.min.js"></script>
+<link href="libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
 <style type="text/css">
 
 	/* padding for bootstrap navbar */
@@ -105,6 +107,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </style>
 
 
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 </head>
@@ -121,12 +150,34 @@ code {
   color: inherit;
   background-color: rgba(0, 0, 0, 0.04);
 }
-img { 
-  max-width:100%; 
-  height: auto; 
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
 }
 </style>
+
+
+
 <div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 
 <h1>betfaiR</h1>
 <nav class="navbar navbar-inverse">
@@ -277,8 +328,12 @@ img {
     </div>
 </nav>
 
-<div id="header">
-<h1 class="title">bf_login</h1>
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">bf_login</h1>
+
 </div>
 
 
@@ -287,33 +342,38 @@ img {
 <h3>usage</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bf &lt;-<span class="st"> </span><span class="kw">bf_login</span>(<span class="dt">usr =</span> username,
                <span class="dt">pwd =</span> password,
-               <span class="dt">key =</span> api_key)</code></pre></div>
+               <span class="dt">key =</span> api_key,
+               <span class="dt">jurisdiction =</span> <span class="st">&quot;default&quot;</span>)</code></pre></div>
 </div>
 <div id="arguments" class="section level3">
 <h3>arguments</h3>
-<table style="width:112%;">
+<table>
 <colgroup>
-<col width="9%" />
-<col width="102%" />
+<col width="8%" />
+<col width="91%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">param</th>
-<th align="left">details</th>
+<th>param</th>
+<th>details</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>usr</code></td>
-<td align="left">Betfair username</td>
+<td><code>usr</code></td>
+<td>Betfair username</td>
 </tr>
 <tr class="even">
-<td align="left"><code>pwd</code></td>
-<td align="left">Betfair password</td>
+<td><code>pwd</code></td>
+<td>Betfair password</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>key</code></td>
-<td align="left">Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
+<td><code>key</code></td>
+<td>Betfair API key (see Betfair <a href="https://api.developer.betfair.com/services/webapps/docs/display/1smk3cen4v3lu3yomq5qye0ni/Application+Keys">documentation</a> on how to get an API key)</td>
+</tr>
+<tr class="even">
+<td><code>jurisdiction</code></td>
+<td>Sign into different jurisdictions, the default logs into <em>.com</em>, enter ‘italy’ for the Italian exchange, ‘spain’ for the Spanish and ‘romania’ for the Romanian</td>
 </tr>
 </tbody>
 </table>
@@ -361,7 +421,8 @@ BETFAIR_KEY=yourAPIkey</code></pre></li>
 bf &lt;-<span class="st"> </span><span class="kw">betfair</span>(<span class="dt">usr =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_USR&quot;</span>),
               <span class="dt">pwd =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_PWD&quot;</span>),
               <span class="dt">key =</span> <span class="kw">Sys.getenv</span>(<span class="st">&quot;BETFAIR_KEY&quot;</span>))</code></pre></div>
-<pre><code>Login successful</code></pre>
+<pre><code>Warning in bf_login(usr = usr, pwd = pwd, key = key, jurisdiction =
+jurisdiction): Login failed: INPUT_VALIDATION_ERROR</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bf</code></pre></div>
 <pre><code>&lt;betfaiR API&gt;
 Methods available: 
@@ -375,8 +436,9 @@ Methods available:
    sort = &quot;EARLIEST_TO_LATEST&quot;, fromRecord = NULL, count = NULL) 
     $events(filter = marketFilter()) 
     $eventTypes(filter = marketFilter()) 
-    $login(usr, pwd, key, dom) 
-    $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;) 
+    $login(usr, pwd, key, jurisdiction = &quot;default&quot;) 
+    $marketBook(marketIds = list(), priceProjection = &quot;EX_BEST_OFFERS&quot;, orderProjection = &quot;EXECUTABLE&quot;, matchProjection = &quot;NO_ROLLUP&quot;, 
+   getRunners = NULL) 
     $marketCatalogue(filter = marketFilter(), marketProjection = &quot;EVENT&quot;, sort = NULL, maxResults = 1, keepRules = FALSE) 
     $marketPnL(marketIds, settled = NULL, bsp = NULL, NET = NULL) 
     $marketTypes(filter = marketFilter()) 
@@ -393,14 +455,20 @@ Methods available:
 </div>
 
 
+
+
 </div>
 
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
+
 
 </script>
 
