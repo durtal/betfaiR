@@ -241,11 +241,11 @@ bf_cleared <- function(betStatus = "SETTLED", eventTypeIds = NULL, eventIds = NU
 
     if(!is.null(from)) {
         orderList$from <- NULL
-        orderList$dateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
+        orderList$settledDateRange$from <- format(as.POSIXct(from), "%Y-%m-%dT%TZ")
     }
     if(!is.null(to)) {
         orderList$to <- NULL
-        orderList$dateRange$from <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
+        orderList$settledDateRange$to <-format(as.POSIXct(to), "%Y-%m-%dT%TZ")
     }
 
     if(!is.null(orderList$eventTypeIds)) orderList$eventTypeIds <- as.list(orderList$eventTypeIds)
