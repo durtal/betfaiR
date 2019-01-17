@@ -24,7 +24,8 @@ bf_login <- function(usr, pwd, key, jurisdiction = "default") {
                   "default" = "https://identitysso.betfair.com/api/login",
                   "italy" = "https://identitysso.betfair.it/api/login",
                   "spain" = "https://identitysso.betfair.es/api/login",
-                  "romania" = "https://identitysso.betfair.ro/api/login")
+                  "romania" = "https://identitysso.betfair.ro/api/login",
+                  "sweden" = "https://identitysso.betfair.se/api/login")
     if(is.null(url)) url <- "https://identitysso.betfair.com/api/login"
     # create payload
     cred <- paste0("username=", usr, "&password=", pwd)
