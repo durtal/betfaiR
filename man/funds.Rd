@@ -11,4 +11,3 @@ dataframe with the following variables, \code{availableToBetBalance},
 \description{
 get available funds in your account
 }
-

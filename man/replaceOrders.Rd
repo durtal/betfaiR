@@ -17,4 +17,3 @@ list with details about the replaced bets, whether operation was successful
 \code{replaceOrders} function replaces specific bets that are waiting to
 be matched
 }
-

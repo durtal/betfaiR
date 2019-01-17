@@ -20,4 +20,3 @@ parameter, with the following variables:
 \description{
 countries associated with markets
 }
-

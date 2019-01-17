@@ -21,4 +21,3 @@ zero results, otherwise return the results with a class that corresponds to
 the method (see \link{betfair}) that can then be parsed into a dataframe by
 \link{bf_parse}.
 }
-

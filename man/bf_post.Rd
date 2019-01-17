@@ -17,4 +17,3 @@ POST request to Betfair's Exchange API, requires users to prepare
 a request using \link{bf_basic_req}, \link{bf_request} and to have login
 credentials from \link{bf_login}.
 }
-

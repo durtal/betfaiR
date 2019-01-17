@@ -16,4 +16,3 @@ transaction id
 \description{
 transfer funds between UK and Australian wallets
 }
-

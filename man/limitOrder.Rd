@@ -25,4 +25,3 @@ list with bet order
 \description{
 helper function to prepare a bet, used in conjunction with \link{placeOrders}
 }
-

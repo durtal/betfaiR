@@ -38,4 +38,3 @@ events_df <- bf$events()
 football <- bf$events(filter = marketFilter(eventTypeIds = 1))
 }
 }
-

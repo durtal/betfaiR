@@ -36,4 +36,3 @@ You use \code{marketCatalogue} to retrieve the name of the market, the
 names of selections and other information about markets.  Market Data Request
 Limits apply to requests.
 }
-

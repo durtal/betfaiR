@@ -22,4 +22,3 @@ by the \code{filter} parameter, with the following variables:
 competitions (ie. World Cup 2014) associated with the markets
 selected by the \code{filter} parameter.
 }
-

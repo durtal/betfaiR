@@ -17,4 +17,3 @@ list with details about the cancel bets, whether the cancellation was successful
 \code{cancelOrders} function cancels all or specific bets waiting to
 be matched
 }
-

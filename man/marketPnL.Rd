@@ -19,4 +19,3 @@ list with data about the market and any profit and loss for selections
 \code{marketPnL} function returns data about the specified market
 and the current profit and/or loss for each of the selections in that market
 }
-

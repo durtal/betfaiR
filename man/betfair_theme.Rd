@@ -15,4 +15,3 @@ betfair_theme(base_size = 10, base_family = "")
 ggplot2 theme for betfaiR package plots, theme is used to plot the
 output of the \link{statement} method
 }
-

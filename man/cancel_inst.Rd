@@ -17,4 +17,3 @@ list with cancel instructions
 \description{
 cancel individual orders using betIds
 }
-

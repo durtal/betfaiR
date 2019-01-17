@@ -6,9 +6,10 @@
 \usage{
 marketFilter(bspOnly = NULL, competitionIds = NULL, eventIds = NULL,
   eventTypeIds = NULL, exchangeIds = NULL, inPlayOnly = NULL,
-  marketBettingTypes = NULL, marketCountries = NULL, marketIds = NULL,
-  from = NULL, to = NULL, marketTypeCodes = NULL, textQuery = NULL,
-  turnInPlayEnabled = NULL, venues = NULL, withOrders = NULL)
+  marketBettingTypes = NULL, marketCountries = NULL,
+  marketIds = NULL, from = NULL, to = NULL, marketTypeCodes = NULL,
+  textQuery = NULL, turnInPlayEnabled = NULL, venues = NULL,
+  withOrders = NULL)
 }
 \arguments{
 \item{bspOnly}{\code{(boolean)} Restrict to BSP (Betfair Starting Price)
@@ -71,4 +72,3 @@ build a market filter object given the parameters available, this
 object can be used in the following methods \link{competitions}, \link{countries},
 \link{events}, \link{eventTypes}, \link{marketCatalogue}, and \link{marketTypes}
 }
-

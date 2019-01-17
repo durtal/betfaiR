@@ -46,4 +46,3 @@ former being preferred. This provides a single call in which you can track price
 traded volume, unmatched orders, and your evolving matched position with a reasonably
 fixed, minimally sized response.
 }
-

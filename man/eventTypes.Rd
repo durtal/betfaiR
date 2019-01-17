@@ -20,4 +20,3 @@ a dataframe of event types associated with markets selected by the
 \description{
 event types associated with markets
 }
-

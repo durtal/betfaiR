@@ -21,4 +21,3 @@ to use this function, the object should have one of the following classes,
 \strong{competitions}, \strong{countries}, \strong{events}, \strong{eventTypes},
 \strong{marketCatalogue}, \strong{marketTypes} and \strong{venues}.
 }
-

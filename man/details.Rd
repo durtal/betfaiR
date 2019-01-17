@@ -11,4 +11,3 @@ dataframe with the following variables, \code{currencyCode}, \code{firstName},
 \description{
 get data about the account you have signed into
 }
-

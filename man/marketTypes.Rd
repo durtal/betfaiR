@@ -19,4 +19,3 @@ with markets selected by the \code{filter} parameter, with the following variabl
 \description{
 marketTypes associated with markets
 }
-

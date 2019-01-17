@@ -18,4 +18,3 @@ list with update instructions
 update individual orders with new instructions for what to do when
 the market goes in play
 }
-

@@ -93,6 +93,7 @@ building the list.
      specific bets}
 }
 }
+
 \examples{
 \dontrun{
 bf <- betfair(usr = "username", pwd = "password", key = "API_key")
@@ -107,4 +108,3 @@ bf$competitions(filter = list())
 bf$competitions(filter = marketFilter(eventTypeIds = 1))
 }
 }
-

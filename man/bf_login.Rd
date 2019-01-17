@@ -28,4 +28,3 @@ login to Betfair to receive a session token
 \details{
 function is invoked when calling \link{betfair}
 }
-

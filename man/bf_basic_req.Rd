@@ -18,4 +18,3 @@ creates a list with a different class, according to the desired
 API method the request will be sent to, the returned value will then be passed
 to \link{bf_request} to convert to valid JSON.
 }
-

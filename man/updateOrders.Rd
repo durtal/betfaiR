@@ -17,4 +17,3 @@ list with details about the updated bets
 \code{updateOrders} function updates instructions for specific bets
 and how they are handled when the market goes in play
 }
-

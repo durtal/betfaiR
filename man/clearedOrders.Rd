@@ -30,4 +30,3 @@ list with parameters to filter cleared bets
 \code{clearedOrders} function allows users to retrieve data about
 settled/voided/lapsed/cancelled bets.  These can be filtered by various parameters
 }
-

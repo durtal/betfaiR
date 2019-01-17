@@ -23,4 +23,3 @@ passed to \code{print}, \code{summary} or \code{plot}
 return account statement with all or filtered transactions,
 including deposits, withdrawals, bets, transfers, etc
 }
-

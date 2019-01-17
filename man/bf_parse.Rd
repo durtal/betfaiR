@@ -22,4 +22,3 @@ due to the various methods returning different responses varying in
 detail and complexity (testing all combinations is tricky), so this function
 may not be that reliable at the moment
 }
-

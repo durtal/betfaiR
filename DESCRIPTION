@@ -21,4 +21,4 @@ Imports:
     ggplot2
 Suggests:
     testthat
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1

@@ -38,4 +38,3 @@ list with data about individual orders
 any unsettled bets they have open.  Use the parameters to filter to specific
 markets, or leave the function empty to return \strong{all} open positions
 }
-

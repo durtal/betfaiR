@@ -32,4 +32,3 @@ attained, whether it was successful or failed
 \description{
 placeOrders function allows bets to be placed.
 }
-
