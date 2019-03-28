@@ -116,12 +116,12 @@ bf_cancel <- function(..., marketId = NA) {
 #' @description cancel individual orders using betIds
 #'
 #' @param betId unique betId
-#' @param size reduction size
+#' @param sizeReduction reduction size
 #'
 #' @export
 #'
 #' @return list with cancel instructions
-cancel_inst <- function(betId = NA, size = NA) {
+cancel_inst <- function(betId = NA, sizeReduction = NA) {
     inst <- as.list(environment())
     return(inst)
 }

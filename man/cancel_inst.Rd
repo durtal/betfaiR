@@ -4,12 +4,12 @@
 \alias{cancel_inst}
 \title{cancel bet instructions}
 \usage{
-cancel_inst(betId = NA, size = NA)
+cancel_inst(betId = NA, sizeReduction = NA)
 }
 \arguments{
 \item{betId}{unique betId}
 
-\item{size}{reduction size}
+\item{sizeReduction}{reduction size}
 }
 \value{
 list with cancel instructions
