@@ -32,9 +32,9 @@ If you wish to target a specific market then add the relevant marketId to the ma
 
 ```{r eval=FALSE}
 bf$cancelOrders(cancel_inst(betId = bet_id_1,
-                            size = 20),
+                            sizeReduction = 20),
                 cancel_inst(betId = bet_id_4,
-                            size = 10),
+                            sizeReduction = 10),
                 marketId = marketId)
 ```
 
